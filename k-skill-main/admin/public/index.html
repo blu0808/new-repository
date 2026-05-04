@@ -8,228 +8,438 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
-  --danger: #ef4444;
-  --danger-dark: #dc2626;
-  --success: #10b981;
-  --bg: #f8fafc;
-  --surface: #ffffff;
-  --border: #e2e8f0;
-  --text: #0f172a;
-  --muted: #64748b;
-  --radius: 8px;
+  --blue:        #0066cc;
+  --blue-focus:  #0071e3;
+  --blue-dark:   #2997ff;
+  --ink:         #1d1d1f;
+  --ink-80:      #333333;
+  --ink-48:      #6e6e73;
+  --canvas:      #ffffff;
+  --parchment:   #f5f5f7;
+  --pearl:       #fafafc;
+  --surface-black: #000000;
+  --hairline:    #d2d2d7;
+  --divider:     #e8e8ed;
+  --danger:      #ff3b30;
 }
 
+html { -webkit-font-smoothing: antialiased; }
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display',
+               system-ui, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.47;
+  letter-spacing: -0.374px;
+  color: var(--ink);
+  background: var(--parchment);
   min-height: 100vh;
 }
 
-/* ── nav ── */
+/* ── global nav ── */
 nav {
-  background: #0f172a;
-  color: white;
-  padding: 0 28px;
-  height: 56px;
+  background: var(--surface-black);
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 22px;
   position: sticky;
   top: 0;
-  z-index: 100;
-  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+  z-index: 200;
 }
-.nav-brand { font-size: 17px; font-weight: 700; letter-spacing: -.3px; }
-.nav-brand em { color: #818cf8; font-style: normal; }
-.nav-sub { font-size: 13px; color: #475569; }
+.nav-brand {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.12px;
+  color: rgba(255,255,255,.84);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-dot {
+  width: 5px; height: 5px;
+  background: rgba(255,255,255,.3);
+  border-radius: 50%;
+}
+.nav-section {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.12px;
+  color: rgba(255,255,255,.42);
+}
+
+/* ── page header ── */
+.page-header {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 48px 24px 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.page-title {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.47;
+  letter-spacing: -0.374px;
+  color: var(--ink);
+}
+.page-sub {
+  font-size: 14px;
+  letter-spacing: -0.224px;
+  color: var(--ink-48);
+  margin-top: 2px;
+}
 
 /* ── main ── */
-main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+main {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px 64px;
+}
 
 /* ── toolbar ── */
 .toolbar {
   display: flex;
   gap: 12px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   align-items: center;
 }
 .search-wrap { position: relative; flex: 1; }
 .search-wrap svg {
-  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
-  width: 16px; height: 16px; color: var(--muted); pointer-events: none;
+  position: absolute; left: 16px; top: 50%;
+  transform: translateY(-50%); width: 15px; height: 15px;
+  color: var(--ink-48); pointer-events: none;
 }
 .search-input {
-  width: 100%; padding: 10px 12px 10px 38px;
-  border: 1px solid var(--border); border-radius: var(--radius);
-  font-size: 14px; background: var(--surface); outline: none;
+  width: 100%; height: 44px;
+  padding: 12px 20px 12px 42px;
+  background: var(--canvas);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 9999px;
+  font-family: inherit;
+  font-size: 17px;
+  letter-spacing: -0.374px;
+  color: var(--ink);
+  outline: none;
   transition: border-color .15s;
 }
-.search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,.1); }
-.count { font-size: 13px; color: var(--muted); white-space: nowrap; }
+.search-input::placeholder { color: var(--ink-48); }
+.search-input:focus {
+  border-color: var(--blue-focus);
+  box-shadow: 0 0 0 3px rgba(0,102,204,.15);
+}
+.count {
+  font-size: 14px;
+  letter-spacing: -0.224px;
+  color: var(--ink-48);
+  white-space: nowrap;
+}
 
 /* ── buttons ── */
 .btn {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 9px 16px; border: none; border-radius: var(--radius);
-  font-size: 14px; font-weight: 500; cursor: pointer;
-  transition: background .15s, opacity .15s; white-space: nowrap;
+  border: none; cursor: pointer; font-family: inherit;
+  transition: opacity .15s;
 }
-.btn:disabled { opacity: .5; cursor: not-allowed; }
-.btn-primary { background: var(--primary); color: white; }
-.btn-primary:hover:not(:disabled) { background: var(--primary-dark); }
-.btn-danger  { background: var(--danger);  color: white; }
-.btn-danger:hover:not(:disabled)  { background: var(--danger-dark); }
-.btn-ghost   { background: transparent; color: var(--muted); border: 1px solid var(--border); }
-.btn-ghost:hover:not(:disabled)   { background: var(--bg); }
-.btn-sm { padding: 5px 11px; font-size: 13px; }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+.btn:active:not(:disabled) { transform: scale(0.97); }
 
-/* ── table ── */
-.table-wrap {
-  background: var(--surface); border-radius: 12px;
-  border: 1px solid var(--border); overflow: hidden;
+.btn-primary {
+  background: var(--blue);
+  color: #fff;
+  font-size: 17px; font-weight: 400; letter-spacing: -0.374px;
+  border-radius: 9999px;
+  padding: 11px 22px;
+  line-height: 1;
 }
+.btn-primary:hover:not(:disabled) { background: var(--blue-focus); }
+
+.btn-utility {
+  background: var(--ink);
+  color: #fff;
+  font-size: 14px; letter-spacing: -0.224px;
+  border-radius: 8px;
+  padding: 7px 14px;
+  line-height: 1;
+}
+
+.btn-ghost-blue {
+  background: transparent;
+  color: var(--blue);
+  font-size: 14px; letter-spacing: -0.224px;
+  border-radius: 9999px;
+  padding: 7px 14px;
+  border: 1px solid var(--blue);
+  line-height: 1;
+}
+.btn-ghost-blue:hover:not(:disabled) { background: rgba(0,102,204,.06); }
+
+.btn-danger-ghost {
+  background: transparent;
+  color: var(--danger);
+  font-size: 14px; letter-spacing: -0.224px;
+  border-radius: 8px;
+  padding: 7px 14px;
+  border: 1px solid var(--danger);
+  line-height: 1;
+}
+.btn-danger-ghost:hover:not(:disabled) { background: rgba(255,59,48,.06); }
+
+.btn-plain {
+  background: transparent;
+  color: var(--ink-48);
+  font-size: 14px; letter-spacing: -0.224px;
+  border-radius: 8px;
+  padding: 7px 14px;
+  border: 1px solid var(--hairline);
+}
+.btn-plain:hover:not(:disabled) { background: var(--parchment); }
+
+/* ── table card ── */
+.card {
+  background: var(--canvas);
+  border-radius: 18px;
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+}
+
 table { width: 100%; border-collapse: collapse; }
-thead { background: #f1f5f9; border-bottom: 1px solid var(--border); }
-th {
-  text-align: left; padding: 11px 16px;
-  font-size: 11px; font-weight: 700; color: var(--muted);
-  text-transform: uppercase; letter-spacing: .6px;
+thead {
+  border-bottom: 1px solid var(--divider);
 }
-td { padding: 14px 16px; font-size: 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+th {
+  text-align: left;
+  padding: 12px 20px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -0.12px;
+  color: var(--ink-48);
+  text-transform: uppercase;
+}
+td {
+  padding: 18px 20px;
+  font-size: 15px;
+  letter-spacing: -0.24px;
+  border-bottom: 1px solid var(--divider);
+  vertical-align: middle;
+}
 tr:last-child td { border-bottom: none; }
-tr:hover td { background: #f8fafc; }
-.td-name { font-weight: 600; }
-.td-folder { font-size: 12px; color: var(--muted); font-family: 'SF Mono', 'Fira Code', monospace; margin-top: 2px; }
-.td-desc { color: var(--muted); max-width: 320px; line-height: 1.5; }
+tr:hover td { background: rgba(0,0,0,.018); }
+
+.td-name { font-weight: 600; font-size: 15px; color: var(--ink); letter-spacing: -0.24px; }
+.td-folder {
+  font-size: 12px; letter-spacing: -0.12px;
+  color: var(--ink-48);
+  font-family: 'SF Mono', 'Menlo', monospace;
+  margin-top: 3px;
+}
+.td-desc { color: var(--ink-80); max-width: 280px; font-size: 14px; letter-spacing: -0.224px; line-height: 1.43; }
 .td-actions { display: flex; gap: 8px; }
 
-/* ── badges ── */
-.badge {
-  display: inline-block; padding: 3px 9px; border-radius: 999px;
-  font-size: 11px; font-weight: 600;
+/* ── category chips ── */
+.chip {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: -0.12px;
+  border: 1px solid var(--hairline);
+  color: var(--ink-80);
+  background: var(--pearl);
 }
-.b-utility    { background: #ede9fe; color: #7c3aed; }
-.b-transport  { background: #dbeafe; color: #1d4ed8; }
-.b-finance    { background: #dcfce7; color: #15803d; }
-.b-sports     { background: #fef3c7; color: #b45309; }
-.b-shopping   { background: #fce7f3; color: #be185d; }
-.b-government { background: #f1f5f9; color: #475569; }
-.b-media      { background: #ffedd5; color: #c2410c; }
-.b-local      { background: #cffafe; color: #0e7490; }
-.b-default    { background: #f1f5f9; color: var(--muted); }
+.chip-blue     { background: rgba(0,102,204,.08); border-color: rgba(0,102,204,.2); color: var(--blue); }
+.chip-green    { background: rgba(52,199,89,.1);  border-color: rgba(52,199,89,.25); color: #1c7c37; }
+.chip-orange   { background: rgba(255,149,0,.1);  border-color: rgba(255,149,0,.25); color: #8a4c00; }
+.chip-pink     { background: rgba(255,45,85,.08); border-color: rgba(255,45,85,.2); color: #c0002f; }
+.chip-purple   { background: rgba(175,82,222,.1); border-color: rgba(175,82,222,.25); color: #7a24bd; }
+.chip-teal     { background: rgba(90,200,250,.12);border-color: rgba(90,200,250,.3); color: #0a6e8a; }
+.chip-red      { background: rgba(255,59,48,.08); border-color: rgba(255,59,48,.2); color: #c0271e; }
 
 /* ── empty / loading ── */
-.empty-row td { text-align: center; padding: 56px 20px; color: var(--muted); }
-.empty-icon { font-size: 36px; margin-bottom: 10px; }
+.empty-row td {
+  text-align: center;
+  padding: 64px 20px;
+  color: var(--ink-48);
+  font-size: 15px;
+  border: none;
+}
+.empty-icon { font-size: 32px; display: block; margin-bottom: 10px; }
 
-/* ── modal ── */
+/* ── backdrop ── */
 .backdrop {
-  position: fixed; inset: 0; background: rgba(0,0,0,.45);
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.36);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   display: flex; align-items: center; justify-content: center;
-  z-index: 200; padding: 20px;
-  animation: fadeIn .15s;
+  z-index: 300; padding: 20px;
+  animation: fadeIn .18s;
 }
 .backdrop.hidden { display: none; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+/* ── modal ── */
 .modal {
-  background: var(--surface); border-radius: 14px;
-  width: 100%; max-width: 660px; max-height: 92vh;
-  overflow-y: auto; animation: slideUp .2s;
+  background: var(--canvas);
+  border-radius: 18px;
+  width: 100%; max-width: 640px; max-height: 92vh;
+  overflow-y: auto;
+  border: 1px solid var(--hairline);
+  animation: slideUp .22s cubic-bezier(.4,0,.2,1);
 }
-.modal-sm { max-width: 420px; }
+.modal-sm { max-width: 400px; }
 @keyframes slideUp {
-  from { transform: translateY(18px); opacity: 0; }
+  from { transform: translateY(16px); opacity: 0; }
   to   { transform: none; opacity: 1; }
 }
+
 .modal-head {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 20px 24px; border-bottom: 1px solid var(--border);
-  position: sticky; top: 0; background: var(--surface); z-index: 1;
+  padding: 20px 24px; border-bottom: 1px solid var(--divider);
+  position: sticky; top: 0; background: var(--canvas); z-index: 1;
 }
-.modal-title { font-size: 17px; font-weight: 700; }
+.modal-title {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  font-size: 21px; font-weight: 600; letter-spacing: 0.231px;
+}
 .modal-close {
-  background: none; border: none; cursor: pointer;
-  color: var(--muted); padding: 4px; border-radius: 6px; display: flex;
+  background: rgba(0,0,0,.06); border: none; cursor: pointer;
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-48); transition: background .15s;
 }
-.modal-close:hover { background: var(--bg); }
+.modal-close:hover { background: rgba(0,0,0,.1); }
+
 .modal-body { padding: 24px; }
 .modal-foot {
-  display: flex; justify-content: flex-end; gap: 8px;
-  padding: 16px 24px; border-top: 1px solid var(--border);
-  background: var(--surface);
-  position: sticky; bottom: 0;
+  display: flex; justify-content: flex-end; gap: 10px;
+  padding: 16px 24px; border-top: 1px solid var(--divider);
+  background: var(--canvas); position: sticky; bottom: 0;
 }
 
 /* ── form ── */
-.form-group { margin-bottom: 18px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
-.hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.form-group { margin-bottom: 20px; }
+.form-row   { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+label {
+  display: block;
+  font-size: 14px; font-weight: 600;
+  letter-spacing: -0.224px;
+  color: var(--ink); margin-bottom: 7px;
+}
+.hint { font-size: 12px; letter-spacing: -0.12px; color: var(--ink-48); margin-top: 5px; }
+
 input, select, textarea {
-  width: 100%; padding: 9px 12px;
-  border: 1px solid var(--border); border-radius: var(--radius);
-  font-size: 14px; font-family: inherit; outline: none;
-  background: var(--surface); transition: border-color .15s;
+  width: 100%;
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: 11px;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 15px;
+  letter-spacing: -0.24px;
+  color: var(--ink);
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+  -webkit-appearance: none;
+  appearance: none;
 }
 input:focus, select:focus, textarea:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(99,102,241,.1);
+  border-color: var(--blue-focus);
+  box-shadow: 0 0 0 3px rgba(0,102,204,.15);
 }
-input:disabled { background: var(--bg); color: var(--muted); }
-textarea { resize: vertical; min-height: 200px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px; line-height: 1.6; }
+input:disabled { background: var(--parchment); color: var(--ink-48); }
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236e6e73' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+textarea {
+  resize: vertical; min-height: 200px;
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+  font-size: 13px; line-height: 1.6; letter-spacing: 0;
+}
 
 /* ── toast ── */
 .toast-wrap {
-  position: fixed; bottom: 24px; right: 24px;
-  z-index: 300; display: flex; flex-direction: column; gap: 8px;
+  position: fixed; bottom: 28px; right: 28px;
+  z-index: 400; display: flex; flex-direction: column; gap: 8px;
 }
 .toast {
-  padding: 12px 18px; border-radius: 10px;
-  font-size: 14px; font-weight: 500; min-width: 220px;
+  padding: 13px 18px;
+  background: rgba(29,29,31,.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 14px;
+  color: #fff;
+  font-size: 14px; letter-spacing: -0.224px;
   display: flex; align-items: center; gap: 8px;
-  animation: toastIn .2s; box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  min-width: 200px;
+  animation: toastIn .2s cubic-bezier(.4,0,.2,1);
 }
+.toast-err { background: rgba(255,59,48,.92); }
 @keyframes toastIn {
-  from { transform: translateX(110%); opacity: 0; }
+  from { transform: translateY(10px) scale(.96); opacity: 0; }
   to   { transform: none; opacity: 1; }
 }
-.toast-ok  { background: #0f172a; color: white; }
-.toast-err { background: var(--danger); color: white; }
 
 /* ── delete confirm ── */
-.del-msg { font-size: 15px; color: var(--muted); line-height: 1.65; }
-.del-name { color: var(--text); font-weight: 600; }
+.del-msg {
+  font-size: 15px; line-height: 1.6; letter-spacing: -0.24px;
+  color: var(--ink-80);
+}
+.del-name { color: var(--ink); font-weight: 600; }
 </style>
 </head>
 <body>
 
+<!-- 글로벌 네비게이션 -->
 <nav>
-  <div class="nav-brand">k-skill <em>어드민</em></div>
-  <div class="nav-sub">SKILL.md 관리</div>
+  <div class="nav-brand">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".7">
+      <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
+      <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
+    </svg>
+    k-skill
+    <div class="nav-dot"></div>
+    <span class="nav-section">어드민</span>
+  </div>
 </nav>
 
+<!-- 페이지 헤더 -->
+<div class="page-header">
+  <div>
+    <div class="page-title">스킬 관리</div>
+    <div class="page-sub">SKILL.md 파일을 웹에서 추가·수정·삭제합니다</div>
+  </div>
+  <button class="btn btn-primary" onclick="openCreate()">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+      <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+    </svg>
+    새 스킬
+  </button>
+</div>
+
 <main>
+  <!-- 툴바 -->
   <div class="toolbar">
     <div class="search-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
-      <input class="search-input" id="q" type="search" placeholder="스킬 이름, 설명, 카테고리로 검색...">
+      <input class="search-input" id="q" type="search" placeholder="스킬 이름, 설명, 카테고리...">
     </div>
     <span class="count" id="cnt"></span>
-    <button class="btn btn-primary" onclick="openCreate()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-      </svg>
-      새 스킬
-    </button>
   </div>
 
-  <div class="table-wrap">
+  <!-- 테이블 -->
+  <div class="card">
     <table>
       <thead>
         <tr>
@@ -237,13 +447,13 @@ textarea { resize: vertical; min-height: 200px; font-family: 'SF Mono', 'Fira Co
           <th>설명</th>
           <th>카테고리</th>
           <th>단계</th>
-          <th>액션</th>
+          <th></th>
         </tr>
       </thead>
       <tbody id="tbody">
         <tr class="empty-row">
           <td colspan="5">
-            <div class="empty-icon">⏳</div>
+            <span class="empty-icon">⏳</span>
             불러오는 중...
           </td>
         </tr>
@@ -257,8 +467,8 @@ textarea { resize: vertical; min-height: 200px; font-family: 'SF Mono', 'Fira Co
   <div class="modal">
     <div class="modal-head">
       <span class="modal-title" id="editTitle">새 스킬 추가</span>
-      <button class="modal-close" onclick="closeEdit()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <button class="modal-close" onclick="closeEdit()" aria-label="닫기">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </button>
@@ -267,14 +477,14 @@ textarea { resize: vertical; min-height: 200px; font-family: 'SF Mono', 'Fira Co
       <div class="modal-body">
 
         <div class="form-group">
-          <label>폴더 이름 *</label>
+          <label>폴더 이름</label>
           <input type="text" id="fFolder" placeholder="예: my-new-skill" pattern="[a-z0-9][a-z0-9\-]*" required>
-          <div class="hint">소문자, 숫자, 하이픈(-)만 사용 가능</div>
+          <div class="hint">소문자, 숫자, 하이픈(-)만 사용</div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label>스킬 이름 *</label>
+            <label>스킬 이름</label>
             <input type="text" id="fName" placeholder="예: my-new-skill" required>
           </div>
           <div class="form-group">
@@ -288,8 +498,8 @@ textarea { resize: vertical; min-height: 200px; font-family: 'SF Mono', 'Fira Co
         </div>
 
         <div class="form-group">
-          <label>설명 *</label>
-          <textarea id="fDesc" rows="3" placeholder="이 스킬이 무엇을 하는지 설명해주세요..." required style="min-height:80px;font-family:inherit;font-size:14px;"></textarea>
+          <label>설명</label>
+          <textarea id="fDesc" rows="3" style="min-height:80px;font-family:inherit;font-size:15px;letter-spacing:-0.24px;" placeholder="이 스킬이 무엇을 하는지 간단히 설명해주세요..." required></textarea>
         </div>
 
         <div class="form-row">
@@ -304,6 +514,7 @@ textarea { resize: vertical; min-height: 200px; font-family: 'SF Mono', 'Fira Co
               <option value="government">government — 정부/법</option>
               <option value="media">media — 미디어</option>
               <option value="local">local — 생활</option>
+              <option value="food">food — 음식</option>
             </select>
           </div>
           <div class="form-group">
@@ -323,8 +534,8 @@ textarea { resize: vertical; min-height: 200px; font-family: 'SF Mono', 'Fira Co
 
       </div>
       <div class="modal-foot">
-        <button type="button" class="btn btn-ghost" onclick="closeEdit()">취소</button>
-        <button type="submit" class="btn btn-primary" id="submitBtn">저장</button>
+        <button type="button" class="btn btn-plain" onclick="closeEdit()">취소</button>
+        <button type="submit" class="btn btn-primary" id="submitBtn">추가</button>
       </div>
     </form>
   </div>
@@ -336,7 +547,7 @@ textarea { resize: vertical; min-height: 200px; font-family: 'SF Mono', 'Fira Co
     <div class="modal-head">
       <span class="modal-title">스킬 삭제</span>
       <button class="modal-close" onclick="closeDel()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
           <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </button>
@@ -345,8 +556,8 @@ textarea { resize: vertical; min-height: 200px; font-family: 'SF Mono', 'Fira Co
       <p class="del-msg" id="delMsg"></p>
     </div>
     <div class="modal-foot">
-      <button type="button" class="btn btn-ghost" onclick="closeDel()">취소</button>
-      <button type="button" class="btn btn-danger" id="delConfirm">삭제</button>
+      <button type="button" class="btn btn-plain" onclick="closeDel()">취소</button>
+      <button type="button" class="btn btn-danger-ghost" id="delConfirm">삭제</button>
     </div>
   </div>
 </div>
@@ -357,7 +568,7 @@ textarea { resize: vertical; min-height: 200px; font-family: 'SF Mono', 'Fira Co
 <script>
 // ── state ────────────────────────────────────────────────────────────────
 let skills = [];
-let editing = null; // null = create, string = folder being edited
+let editing = null;
 
 // ── api ──────────────────────────────────────────────────────────────────
 async function api(path, opts = {}) {
@@ -372,53 +583,55 @@ async function api(path, opts = {}) {
   return data;
 }
 
-// ── render ───────────────────────────────────────────────────────────────
-const BADGE = {
-  utility:'b-utility', transport:'b-transport', finance:'b-finance',
-  sports:'b-sports', shopping:'b-shopping', government:'b-government',
-  media:'b-media', local:'b-local',
+// ── chip ─────────────────────────────────────────────────────────────────
+const CAT_CLS = {
+  utility: 'chip-blue', transport: 'chip-teal', finance: 'chip-green',
+  sports: 'chip-orange', shopping: 'chip-pink', government: '',
+  media: 'chip-purple', local: 'chip-teal', food: 'chip-red',
 };
 
-function badge(val, cls) {
-  return `<span class="badge ${cls || 'b-default'}">${esc(val || '-')}</span>`;
+function chip(val) {
+  const cls = CAT_CLS[val] ?? '';
+  return `<span class="chip ${cls}">${esc(val || '기타')}</span>`;
 }
 
+// ── render ────────────────────────────────────────────────────────────────
 function render(list) {
-  document.getElementById('cnt').textContent = `총 ${list.length}개`;
+  document.getElementById('cnt').textContent = `${list.length}개`;
   const tbody = document.getElementById('tbody');
 
   if (!list.length) {
     tbody.innerHTML = `<tr class="empty-row"><td colspan="5">
-      <div class="empty-icon">🔍</div>검색 결과가 없습니다.
+      <span class="empty-icon">🔍</span>검색 결과가 없습니다
     </td></tr>`;
     return;
   }
 
   tbody.innerHTML = list.map(s => {
-    const name = esc(s.name || s.folder);
+    const name   = esc(s.name || s.folder);
     const folder = esc(s.folder);
-    const desc = esc(trunc(s.description, 90));
-    const cat = s.metadata?.category;
-    const phase = s.metadata?.phase;
+    const desc   = esc(trunc(s.description, 85));
+    const cat    = s.metadata?.category;
+    const phase  = esc(s.metadata?.phase ?? '');
     return `<tr>
       <td>
         <div class="td-name">${name}</div>
         <div class="td-folder">${folder}</div>
       </td>
       <td class="td-desc">${desc}</td>
-      <td>${badge(cat, BADGE[cat])}</td>
-      <td>${badge(phase, 'b-default')}</td>
+      <td>${chip(cat)}</td>
+      <td><span class="chip">${phase || '-'}</span></td>
       <td>
         <div class="td-actions">
-          <button class="btn btn-ghost btn-sm" onclick="openEdit('${folder}')">수정</button>
-          <button class="btn btn-danger btn-sm" onclick="openDel('${folder}','${name}')">삭제</button>
+          <button class="btn btn-ghost-blue" onclick="openEdit('${folder}')">수정</button>
+          <button class="btn btn-danger-ghost" onclick="openDel('${folder}','${name}')">삭제</button>
         </div>
       </td>
     </tr>`;
   }).join('');
 }
 
-// ── search ───────────────────────────────────────────────────────────────
+// ── search ────────────────────────────────────────────────────────────────
 document.getElementById('q').addEventListener('input', e => {
   const q = e.target.value.toLowerCase().trim();
   render(q ? skills.filter(s =>
@@ -429,17 +642,15 @@ document.getElementById('q').addEventListener('input', e => {
   ) : skills);
 });
 
-// ── load ─────────────────────────────────────────────────────────────────
+// ── load ──────────────────────────────────────────────────────────────────
 async function load() {
   try {
     skills = await api('/api/skills');
     render(skills);
-  } catch (e) {
-    toast(e.message, 'err');
-  }
+  } catch (e) { toast(e.message, 'err'); }
 }
 
-// ── create / edit modal ──────────────────────────────────────────────────
+// ── create / edit modal ───────────────────────────────────────────────────
 function openCreate() {
   editing = null;
   document.getElementById('editTitle').textContent = '새 스킬 추가';
@@ -457,16 +668,14 @@ async function openEdit(folder) {
     document.getElementById('submitBtn').textContent = '저장';
     document.getElementById('fFolder').value = s.folder;
     document.getElementById('fFolder').disabled = true;
-    document.getElementById('fName').value = s.name ?? '';
-    document.getElementById('fLicense').value = s.license ?? 'MIT';
-    document.getElementById('fDesc').value = s.description ?? '';
-    document.getElementById('fCat').value = s.metadata?.category ?? 'utility';
-    document.getElementById('fPhase').value = s.metadata?.phase ?? 'v1';
-    document.getElementById('fBody').value = s.body ?? '';
+    document.getElementById('fName').value     = s.name ?? '';
+    document.getElementById('fLicense').value  = s.license ?? 'MIT';
+    document.getElementById('fDesc').value     = s.description ?? '';
+    document.getElementById('fCat').value      = s.metadata?.category ?? 'utility';
+    document.getElementById('fPhase').value    = s.metadata?.phase ?? 'v1';
+    document.getElementById('fBody').value     = s.body ?? '';
     show('editBackdrop');
-  } catch (e) {
-    toast(e.message, 'err');
-  }
+  } catch (e) { toast(e.message, 'err'); }
 }
 
 function closeEdit() { hide('editBackdrop'); }
@@ -477,14 +686,14 @@ async function submitForm(e) {
   btn.disabled = true;
 
   const payload = {
-    folder: document.getElementById('fFolder').value.trim(),
-    name:   document.getElementById('fName').value.trim(),
-    license: document.getElementById('fLicense').value,
+    folder:      document.getElementById('fFolder').value.trim(),
+    name:        document.getElementById('fName').value.trim(),
+    license:     document.getElementById('fLicense').value,
     description: document.getElementById('fDesc').value.trim(),
     metadata: {
       category: document.getElementById('fCat').value,
-      locale: 'ko-KR',
-      phase: document.getElementById('fPhase').value,
+      locale:   'ko-KR',
+      phase:    document.getElementById('fPhase').value,
     },
     body: document.getElementById('fBody').value,
   };
@@ -513,7 +722,7 @@ function openDel(folder, name) {
   delTarget = folder;
   document.getElementById('delMsg').innerHTML =
     `<span class="del-name">${name}</span> 스킬을 삭제하시겠습니까?<br><br>` +
-    `<code style="font-size:13px;color:var(--muted)">${folder}/</code> 폴더 전체가 삭제되며 복구할 수 없습니다.`;
+    `<code style="font-size:13px;font-family:'SF Mono',monospace;color:var(--ink-48)">${folder}/</code> 폴더가 완전히 삭제되며 복구할 수 없습니다.`;
   document.getElementById('delConfirm').onclick = confirmDel;
   show('delBackdrop');
 }
@@ -527,26 +736,30 @@ async function confirmDel() {
     toast('삭제되었습니다.');
     closeDel();
     await load();
-  } catch (err) {
-    toast(err.message, 'err');
-  }
+  } catch (err) { toast(err.message, 'err'); }
 }
 
 // ── toast ─────────────────────────────────────────────────────────────────
 function toast(msg, type = 'ok') {
   const el = document.createElement('div');
-  el.className = `toast toast-${type}`;
-  el.textContent = (type === 'ok' ? '✓  ' : '✕  ') + msg;
+  el.className = `toast${type === 'err' ? ' toast-err' : ''}`;
+  el.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+    ${type === 'ok'
+      ? '<polyline points="20 6 9 17 4 12"/>'
+      : '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'}
+  </svg>${esc(msg)}`;
   document.getElementById('toasts').appendChild(el);
-  setTimeout(() => el.remove(), 3200);
+  setTimeout(() => el.remove(), 3000);
 }
 
-// ── helpers ───────────────────────────────────────────────────────────────
+// ── utils ─────────────────────────────────────────────────────────────────
 function show(id) { document.getElementById(id).classList.remove('hidden'); }
 function hide(id) { document.getElementById(id).classList.add('hidden'); }
 function bgClick(e, id) { if (e.target === document.getElementById(id)) hide(id); }
 function esc(s) {
-  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s ?? '')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 function trunc(s, n) { return s && s.length > n ? s.slice(0, n) + '…' : (s ?? ''); }
 
@@ -554,7 +767,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') { closeEdit(); closeDel(); }
 });
 
-// ── init ──────────────────────────────────────────────────────────────────
 load();
 </script>
 </body>
