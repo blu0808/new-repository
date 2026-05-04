@@ -4,282 +4,297 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>k-skill 어드민</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&family=IBM+Plex+Mono:wght@400&display=swap">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --blue:        #0066cc;
-  --blue-focus:  #0071e3;
-  --blue-dark:   #2997ff;
-  --ink:         #1d1d1f;
-  --ink-80:      #333333;
-  --ink-48:      #6e6e73;
-  --canvas:      #ffffff;
-  --parchment:   #f5f5f7;
-  --pearl:       #fafafc;
-  --surface-black: #000000;
-  --hairline:    #d2d2d7;
-  --divider:     #e8e8ed;
-  --danger:      #ff3b30;
+  --blue:       #0f62fe;
+  --blue-hover: #0050e6;
+  --blue-80:    #002d9c;
+  --ink:        #161616;
+  --ink-muted:  #525252;
+  --ink-subtle: #8c8c8c;
+  --canvas:     #ffffff;
+  --surface-1:  #f4f4f4;
+  --surface-2:  #e0e0e0;
+  --inverse:    #161616;
+  --inv-muted:  #c6c6c6;
+  --hairline:   #e0e0e0;
+  --error:      #da1e28;
+  --success:    #24a148;
+  --warning:    #f1c21b;
 }
 
 html { -webkit-font-smoothing: antialiased; }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display',
-               system-ui, sans-serif;
-  font-size: 17px;
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 1.47;
-  letter-spacing: -0.374px;
+  line-height: 1.5;
+  letter-spacing: 0.16px;
   color: var(--ink);
-  background: var(--parchment);
+  background: var(--surface-1);
   min-height: 100vh;
 }
 
-/* ── global nav ── */
-nav {
-  background: var(--surface-black);
-  height: 44px;
+/* ── utility bar ── */
+.utility-bar {
+  background: var(--surface-1);
+  border-bottom: 1px solid var(--hairline);
+  height: 32px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 22px;
+  padding: 0 16px;
+  font-size: 12px;
+  letter-spacing: 0.32px;
+  color: var(--ink-muted);
+  gap: 16px;
+}
+
+/* ── top nav ── */
+nav {
+  background: var(--inverse);
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-bottom: 1px solid #393939;
   position: sticky;
   top: 0;
   z-index: 200;
+  gap: 0;
 }
 .nav-brand {
-  font-size: 12px;
-  font-weight: 400;
-  letter-spacing: -0.12px;
-  color: rgba(255,255,255,.84);
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-.nav-dot {
-  width: 5px; height: 5px;
-  background: rgba(255,255,255,.3);
-  border-radius: 50%;
-}
-.nav-section {
-  font-size: 12px;
+  gap: 12px;
+  color: #ffffff;
+  font-size: 14px;
   font-weight: 400;
-  letter-spacing: -0.12px;
-  color: rgba(255,255,255,.42);
+  letter-spacing: 0.16px;
+  padding-right: 16px;
+  border-right: 1px solid #393939;
+  margin-right: 16px;
+  white-space: nowrap;
 }
+.nav-logo {
+  font-weight: 600;
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 0;
+}
+.nav-divider { color: #525252; }
+.nav-section { color: #c6c6c6; font-size: 14px; }
 
 /* ── page header ── */
 .page-header {
-  max-width: 980px;
+  background: var(--canvas);
+  border-bottom: 1px solid var(--hairline);
+  padding: 32px 16px 24px;
+  max-width: 1056px;
   margin: 0 auto;
-  padding: 48px 24px 24px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
   gap: 16px;
 }
 .page-title {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
-  font-size: 34px;
-  font-weight: 600;
-  line-height: 1.47;
-  letter-spacing: -0.374px;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0;
   color: var(--ink);
 }
 .page-sub {
   font-size: 14px;
-  letter-spacing: -0.224px;
-  color: var(--ink-48);
-  margin-top: 2px;
+  letter-spacing: 0.16px;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+
+/* wrapper that applies max-width + white bg */
+.page-wrap {
+  max-width: 1056px;
+  margin: 0 auto;
+  background: var(--canvas);
+  border-left: 1px solid var(--hairline);
+  border-right: 1px solid var(--hairline);
+  min-height: calc(100vh - 80px);
 }
 
 /* ── main ── */
-main {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 0 24px 64px;
-}
+main { padding: 24px 16px 64px; }
 
 /* ── toolbar ── */
 .toolbar {
   display: flex;
-  gap: 12px;
-  margin-bottom: 16px;
-  align-items: center;
+  gap: 0;
+  margin-bottom: 24px;
+  align-items: stretch;
+  border: 1px solid var(--hairline);
 }
 .search-wrap { position: relative; flex: 1; }
 .search-wrap svg {
   position: absolute; left: 16px; top: 50%;
-  transform: translateY(-50%); width: 15px; height: 15px;
-  color: var(--ink-48); pointer-events: none;
+  transform: translateY(-50%); width: 16px; height: 16px;
+  color: var(--ink-subtle); pointer-events: none;
 }
 .search-input {
-  width: 100%; height: 44px;
-  padding: 12px 20px 12px 42px;
-  background: var(--canvas);
-  border: 1px solid rgba(0,0,0,.08);
-  border-radius: 9999px;
+  width: 100%; height: 48px;
+  padding: 11px 16px 11px 44px;
+  background: var(--surface-1);
+  border: none;
+  border-right: 1px solid var(--hairline);
   font-family: inherit;
-  font-size: 17px;
-  letter-spacing: -0.374px;
+  font-size: 16px;
+  letter-spacing: 0.16px;
   color: var(--ink);
   outline: none;
-  transition: border-color .15s;
 }
-.search-input::placeholder { color: var(--ink-48); }
+.search-input::placeholder { color: var(--ink-subtle); }
 .search-input:focus {
-  border-color: var(--blue-focus);
-  box-shadow: 0 0 0 3px rgba(0,102,204,.15);
+  background: var(--canvas);
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
+}
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 16px;
+  background: var(--surface-1);
 }
 .count {
-  font-size: 14px;
-  letter-spacing: -0.224px;
-  color: var(--ink-48);
+  font-size: 12px;
+  letter-spacing: 0.32px;
+  color: var(--ink-subtle);
   white-space: nowrap;
 }
 
 /* ── buttons ── */
 .btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  border: none; cursor: pointer; font-family: inherit;
-  transition: opacity .15s;
+  display: inline-flex; align-items: center; gap: 8px;
+  border: none; cursor: pointer;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px; font-weight: 400;
+  letter-spacing: 0.16px; line-height: 1.29;
+  padding: 12px 16px;
+  border-radius: 0;
+  transition: background .1s;
 }
 .btn:disabled { opacity: .4; cursor: not-allowed; }
-.btn:active:not(:disabled) { transform: scale(0.97); }
 
 .btn-primary {
   background: var(--blue);
   color: #fff;
-  font-size: 17px; font-weight: 400; letter-spacing: -0.374px;
-  border-radius: 9999px;
-  padding: 11px 22px;
-  line-height: 1;
 }
-.btn-primary:hover:not(:disabled) { background: var(--blue-focus); }
+.btn-primary:hover:not(:disabled) { background: var(--blue-hover); }
+.btn-primary:active:not(:disabled) { background: var(--blue-80); }
 
-.btn-utility {
+.btn-secondary {
   background: var(--ink);
   color: #fff;
-  font-size: 14px; letter-spacing: -0.224px;
-  border-radius: 8px;
-  padding: 7px 14px;
-  line-height: 1;
 }
+.btn-secondary:hover:not(:disabled) { background: #393939; }
 
-.btn-ghost-blue {
+.btn-tertiary {
   background: transparent;
   color: var(--blue);
-  font-size: 14px; letter-spacing: -0.224px;
-  border-radius: 9999px;
-  padding: 7px 14px;
   border: 1px solid var(--blue);
-  line-height: 1;
 }
-.btn-ghost-blue:hover:not(:disabled) { background: rgba(0,102,204,.06); }
+.btn-tertiary:hover:not(:disabled) { background: rgba(15,98,254,.08); }
 
-.btn-danger-ghost {
+.btn-ghost {
   background: transparent;
-  color: var(--danger);
-  font-size: 14px; letter-spacing: -0.224px;
-  border-radius: 8px;
-  padding: 7px 14px;
-  border: 1px solid var(--danger);
-  line-height: 1;
+  color: var(--blue);
 }
-.btn-danger-ghost:hover:not(:disabled) { background: rgba(255,59,48,.06); }
+.btn-ghost:hover:not(:disabled) { background: var(--surface-1); }
 
-.btn-plain {
-  background: transparent;
-  color: var(--ink-48);
-  font-size: 14px; letter-spacing: -0.224px;
-  border-radius: 8px;
-  padding: 7px 14px;
-  border: 1px solid var(--hairline);
+.btn-danger {
+  background: var(--error);
+  color: #fff;
 }
-.btn-plain:hover:not(:disabled) { background: var(--parchment); }
+.btn-danger:hover:not(:disabled) { background: #b81922; }
 
-/* ── table card ── */
-.card {
-  background: var(--canvas);
-  border-radius: 18px;
+.btn-sm { padding: 7px 12px; font-size: 14px; }
+
+/* ── table ── */
+.table-wrap {
   border: 1px solid var(--hairline);
   overflow: hidden;
 }
-
 table { width: 100%; border-collapse: collapse; }
 thead {
-  border-bottom: 1px solid var(--divider);
+  background: var(--surface-1);
+  border-bottom: 1px solid var(--hairline);
 }
 th {
   text-align: left;
-  padding: 12px 20px;
+  padding: 12px 16px;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: -0.12px;
-  color: var(--ink-48);
+  letter-spacing: 0.32px;
+  color: var(--ink-muted);
   text-transform: uppercase;
 }
 td {
-  padding: 18px 20px;
-  font-size: 15px;
-  letter-spacing: -0.24px;
-  border-bottom: 1px solid var(--divider);
+  padding: 16px;
+  font-size: 14px;
+  letter-spacing: 0.16px;
+  border-bottom: 1px solid var(--hairline);
   vertical-align: middle;
 }
 tr:last-child td { border-bottom: none; }
-tr:hover td { background: rgba(0,0,0,.018); }
+tr:hover td { background: var(--surface-1); }
 
-.td-name { font-weight: 600; font-size: 15px; color: var(--ink); letter-spacing: -0.24px; }
+.td-name { font-weight: 600; font-size: 14px; color: var(--ink); letter-spacing: 0.16px; }
 .td-folder {
-  font-size: 12px; letter-spacing: -0.12px;
-  color: var(--ink-48);
-  font-family: 'SF Mono', 'Menlo', monospace;
-  margin-top: 3px;
+  font-size: 12px; letter-spacing: 0.32px;
+  color: var(--ink-subtle);
+  font-family: 'IBM Plex Mono', 'Menlo', monospace;
+  margin-top: 2px;
 }
-.td-desc { color: var(--ink-80); max-width: 280px; font-size: 14px; letter-spacing: -0.224px; line-height: 1.43; }
-.td-actions { display: flex; gap: 8px; }
+.td-desc { color: var(--ink-muted); max-width: 300px; font-size: 14px; line-height: 1.29; }
+.td-actions { display: flex; gap: 0; }
 
-/* ── category chips ── */
-.chip {
+/* ── tags ── */
+.tag {
   display: inline-block;
-  padding: 3px 10px;
-  border-radius: 9999px;
+  padding: 2px 8px;
+  border-radius: 0;
   font-size: 12px;
   font-weight: 400;
-  letter-spacing: -0.12px;
-  border: 1px solid var(--hairline);
-  color: var(--ink-80);
-  background: var(--pearl);
+  letter-spacing: 0.32px;
+  border: 1px solid transparent;
 }
-.chip-blue     { background: rgba(0,102,204,.08); border-color: rgba(0,102,204,.2); color: var(--blue); }
-.chip-green    { background: rgba(52,199,89,.1);  border-color: rgba(52,199,89,.25); color: #1c7c37; }
-.chip-orange   { background: rgba(255,149,0,.1);  border-color: rgba(255,149,0,.25); color: #8a4c00; }
-.chip-pink     { background: rgba(255,45,85,.08); border-color: rgba(255,45,85,.2); color: #c0002f; }
-.chip-purple   { background: rgba(175,82,222,.1); border-color: rgba(175,82,222,.25); color: #7a24bd; }
-.chip-teal     { background: rgba(90,200,250,.12);border-color: rgba(90,200,250,.3); color: #0a6e8a; }
-.chip-red      { background: rgba(255,59,48,.08); border-color: rgba(255,59,48,.2); color: #c0271e; }
+.tag-blue    { background: rgba(15,98,254,.1);  border-color: rgba(15,98,254,.3); color: #0043ce; }
+.tag-green   { background: rgba(36,161,72,.1);  border-color: rgba(36,161,72,.3); color: #0e6027; }
+.tag-orange  { background: rgba(255,131,0,.12); border-color: rgba(255,131,0,.3); color: #8a4c00; }
+.tag-purple  { background: rgba(120,82,230,.1); border-color: rgba(120,82,230,.3); color: #5a3285; }
+.tag-red     { background: rgba(218,30,40,.1);  border-color: rgba(218,30,40,.3); color: #a2191f; }
+.tag-teal    { background: rgba(0,131,130,.1);  border-color: rgba(0,131,130,.3); color: #005d5d; }
+.tag-default { background: var(--surface-1); border-color: var(--hairline); color: var(--ink-muted); }
 
 /* ── empty / loading ── */
 .empty-row td {
   text-align: center;
   padding: 64px 20px;
-  color: var(--ink-48);
-  font-size: 15px;
+  color: var(--ink-subtle);
+  font-size: 14px;
   border: none;
 }
-.empty-icon { font-size: 32px; display: block; margin-bottom: 10px; }
+.empty-icon { font-size: 28px; display: block; margin-bottom: 12px; opacity: .5; }
 
 /* ── backdrop ── */
 .backdrop {
   position: fixed; inset: 0;
-  background: rgba(0,0,0,.36);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  background: rgba(22,22,22,.6);
   display: flex; align-items: center; justify-content: center;
   z-index: 300; padding: 20px;
-  animation: fadeIn .18s;
+  animation: fadeIn .15s;
 }
 .backdrop.hidden { display: none; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -287,189 +302,205 @@ tr:hover td { background: rgba(0,0,0,.018); }
 /* ── modal ── */
 .modal {
   background: var(--canvas);
-  border-radius: 18px;
+  border: 1px solid var(--hairline);
+  border-radius: 0;
   width: 100%; max-width: 640px; max-height: 92vh;
   overflow-y: auto;
-  border: 1px solid var(--hairline);
-  animation: slideUp .22s cubic-bezier(.4,0,.2,1);
+  animation: slideUp .18s ease-out;
 }
 .modal-sm { max-width: 400px; }
 @keyframes slideUp {
-  from { transform: translateY(16px); opacity: 0; }
+  from { transform: translateY(12px); opacity: 0; }
   to   { transform: none; opacity: 1; }
 }
 
 .modal-head {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 20px 24px; border-bottom: 1px solid var(--divider);
-  position: sticky; top: 0; background: var(--canvas); z-index: 1;
+  padding: 16px;
+  border-bottom: 1px solid var(--hairline);
+  position: sticky; top: 0;
+  background: var(--canvas); z-index: 1;
 }
 .modal-title {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
-  font-size: 21px; font-weight: 600; letter-spacing: 0.231px;
+  font-size: 20px; font-weight: 400; line-height: 1.4;
+  letter-spacing: 0; color: var(--ink);
 }
 .modal-close {
-  background: rgba(0,0,0,.06); border: none; cursor: pointer;
-  width: 28px; height: 28px; border-radius: 50%;
+  background: none; border: none; cursor: pointer;
+  width: 40px; height: 40px;
   display: flex; align-items: center; justify-content: center;
-  color: var(--ink-48); transition: background .15s;
+  color: var(--ink-subtle);
+  transition: background .1s;
 }
-.modal-close:hover { background: rgba(0,0,0,.1); }
+.modal-close:hover { background: var(--surface-1); color: var(--ink); }
 
-.modal-body { padding: 24px; }
+.modal-body { padding: 24px 16px; }
 .modal-foot {
-  display: flex; justify-content: flex-end; gap: 10px;
-  padding: 16px 24px; border-top: 1px solid var(--divider);
+  display: flex; justify-content: flex-end; gap: 0;
+  border-top: 1px solid var(--hairline);
   background: var(--canvas); position: sticky; bottom: 0;
 }
+.modal-foot .btn { border-left: 1px solid var(--hairline); }
 
 /* ── form ── */
-.form-group { margin-bottom: 20px; }
+.form-group { margin-bottom: 24px; }
 .form-row   { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
 label {
   display: block;
-  font-size: 14px; font-weight: 600;
-  letter-spacing: -0.224px;
-  color: var(--ink); margin-bottom: 7px;
+  font-size: 12px; font-weight: 400;
+  letter-spacing: 0.32px;
+  color: var(--ink-muted); margin-bottom: 8px;
+  text-transform: uppercase;
 }
-.hint { font-size: 12px; letter-spacing: -0.12px; color: var(--ink-48); margin-top: 5px; }
+.hint { font-size: 12px; letter-spacing: 0.32px; color: var(--ink-subtle); margin-top: 4px; }
 
 input, select, textarea {
   width: 100%;
-  background: var(--canvas);
-  border: 1px solid var(--hairline);
-  border-radius: 11px;
-  padding: 10px 14px;
-  font-family: inherit;
-  font-size: 15px;
-  letter-spacing: -0.24px;
+  background: var(--surface-1);
+  border: none;
+  border-bottom: 1px solid var(--hairline);
+  border-radius: 0;
+  padding: 11px 16px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.16px;
   color: var(--ink);
   outline: none;
-  transition: border-color .15s, box-shadow .15s;
+  transition: border-color .1s;
   -webkit-appearance: none;
   appearance: none;
 }
 input:focus, select:focus, textarea:focus {
-  border-color: var(--blue-focus);
-  box-shadow: 0 0 0 3px rgba(0,102,204,.15);
+  border-bottom: 2px solid var(--blue);
+  outline: none;
 }
-input:disabled { background: var(--parchment); color: var(--ink-48); }
+input:disabled { background: var(--surface-2); color: var(--ink-subtle); }
+
 select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236e6e73' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23525252' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 14px center;
-  padding-right: 36px;
+  background-position: right 16px center;
+  padding-right: 40px;
+  cursor: pointer;
 }
+
 textarea {
   resize: vertical; min-height: 200px;
-  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+  font-family: 'IBM Plex Mono', 'Menlo', monospace;
   font-size: 13px; line-height: 1.6; letter-spacing: 0;
 }
 
-/* ── toast ── */
+/* ── notification toast ── */
 .toast-wrap {
-  position: fixed; bottom: 28px; right: 28px;
-  z-index: 400; display: flex; flex-direction: column; gap: 8px;
+  position: fixed; bottom: 0; right: 0;
+  z-index: 400; display: flex; flex-direction: column; gap: 0;
+  width: 320px;
 }
 .toast {
-  padding: 13px 18px;
-  background: rgba(29,29,31,.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 14px;
-  color: #fff;
-  font-size: 14px; letter-spacing: -0.224px;
-  display: flex; align-items: center; gap: 8px;
-  min-width: 200px;
-  animation: toastIn .2s cubic-bezier(.4,0,.2,1);
+  padding: 16px;
+  font-size: 14px; letter-spacing: 0.16px;
+  display: flex; align-items: flex-start; gap: 12px;
+  border-left: 3px solid var(--blue);
+  background: var(--inverse); color: #ffffff;
+  animation: toastIn .2s ease-out;
 }
-.toast-err { background: rgba(255,59,48,.92); }
+.toast-err { border-color: var(--error); }
+.toast svg { flex-shrink: 0; margin-top: 1px; }
 @keyframes toastIn {
-  from { transform: translateY(10px) scale(.96); opacity: 0; }
+  from { transform: translateX(100%); opacity: 0; }
   to   { transform: none; opacity: 1; }
 }
 
-/* ── delete confirm ── */
-.del-msg {
-  font-size: 15px; line-height: 1.6; letter-spacing: -0.24px;
-  color: var(--ink-80);
-}
+/* ── delete ── */
+.del-msg { font-size: 14px; line-height: 1.5; letter-spacing: 0.16px; color: var(--ink-muted); }
 .del-name { color: var(--ink); font-weight: 600; }
 </style>
 </head>
 <body>
 
-<!-- 글로벌 네비게이션 -->
+<!-- utility bar -->
+<div class="utility-bar">
+  <span>k-skill</span>
+  <span style="color:var(--hairline)">|</span>
+  <span>스킬 관리 시스템</span>
+</div>
+
+<!-- top nav -->
 <nav>
   <div class="nav-brand">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".7">
-      <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
-      <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
+    <svg width="20" height="20" viewBox="0 0 32 32" fill="#ffffff">
+      <rect x="2" y="2" width="13" height="13"/><rect x="17" y="2" width="13" height="13"/>
+      <rect x="2" y="17" width="13" height="13"/><rect x="17" y="17" width="13" height="13"/>
     </svg>
-    k-skill
-    <div class="nav-dot"></div>
+    <span class="nav-logo">k-skill</span>
+    <span class="nav-divider">/</span>
     <span class="nav-section">어드민</span>
   </div>
 </nav>
 
-<!-- 페이지 헤더 -->
-<div class="page-header">
-  <div>
-    <div class="page-title">스킬 관리</div>
-    <div class="page-sub">SKILL.md 파일을 웹에서 추가·수정·삭제합니다</div>
-  </div>
-  <button class="btn btn-primary" onclick="openCreate()">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-      <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-    </svg>
-    새 스킬
-  </button>
-</div>
-
-<main>
-  <!-- 툴바 -->
-  <div class="toolbar">
-    <div class="search-wrap">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-      </svg>
-      <input class="search-input" id="q" type="search" placeholder="스킬 이름, 설명, 카테고리...">
+<!-- page header -->
+<div class="page-wrap">
+  <div class="page-header">
+    <div>
+      <div class="page-title">스킬 관리</div>
+      <div class="page-sub">SKILL.md 파일을 추가·수정·삭제합니다</div>
     </div>
-    <span class="count" id="cnt"></span>
+    <button class="btn btn-primary" onclick="openCreate()">
+      <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor">
+        <polygon points="17,15 17,8 15,8 15,15 8,15 8,17 15,17 15,24 17,24 17,17 24,17 24,15"/>
+      </svg>
+      새 스킬 추가
+    </button>
   </div>
 
-  <!-- 테이블 -->
-  <div class="card">
-    <table>
-      <thead>
-        <tr>
-          <th>스킬</th>
-          <th>설명</th>
-          <th>카테고리</th>
-          <th>단계</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="tbody">
-        <tr class="empty-row">
-          <td colspan="5">
-            <span class="empty-icon">⏳</span>
-            불러오는 중...
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</main>
+  <main>
+    <!-- toolbar -->
+    <div class="toolbar">
+      <div class="search-wrap">
+        <svg viewBox="0 0 32 32" fill="currentColor">
+          <path d="M29 27.586L21.26 19.846a11.018 11.018 0 10-1.413 1.414L27.585 29zM4 13a9 9 0 119 9 9.01 9.01 0 01-9-9z"/>
+        </svg>
+        <input class="search-input" id="q" type="search" placeholder="스킬 이름, 설명, 카테고리로 검색...">
+      </div>
+      <div class="toolbar-right">
+        <span class="count" id="cnt">-</span>
+      </div>
+    </div>
+
+    <!-- table -->
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>스킬</th>
+            <th>설명</th>
+            <th>카테고리</th>
+            <th>단계</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr class="empty-row">
+            <td colspan="5">
+              <span class="empty-icon">◫</span>
+              불러오는 중...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
 
 <!-- 편집 모달 -->
 <div class="backdrop hidden" id="editBackdrop" onclick="bgClick(event,'editBackdrop')">
   <div class="modal">
     <div class="modal-head">
       <span class="modal-title" id="editTitle">새 스킬 추가</span>
-      <button class="modal-close" onclick="closeEdit()" aria-label="닫기">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      <button class="modal-close" onclick="closeEdit()">
+        <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor">
+          <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16z"/>
         </svg>
       </button>
     </div>
@@ -479,7 +510,7 @@ textarea {
         <div class="form-group">
           <label>폴더 이름</label>
           <input type="text" id="fFolder" placeholder="예: my-new-skill" pattern="[a-z0-9][a-z0-9\-]*" required>
-          <div class="hint">소문자, 숫자, 하이픈(-)만 사용</div>
+          <div class="hint">소문자, 숫자, 하이픈(-)만 사용 가능합니다</div>
         </div>
 
         <div class="form-row">
@@ -499,7 +530,7 @@ textarea {
 
         <div class="form-group">
           <label>설명</label>
-          <textarea id="fDesc" rows="3" style="min-height:80px;font-family:inherit;font-size:15px;letter-spacing:-0.24px;" placeholder="이 스킬이 무엇을 하는지 간단히 설명해주세요..." required></textarea>
+          <textarea id="fDesc" rows="3" style="min-height:80px;font-family:'IBM Plex Sans',sans-serif;font-size:16px;" placeholder="이 스킬이 무엇을 하는지 간단히 설명해주세요..." required></textarea>
         </div>
 
         <div class="form-row">
@@ -534,7 +565,7 @@ textarea {
 
       </div>
       <div class="modal-foot">
-        <button type="button" class="btn btn-plain" onclick="closeEdit()">취소</button>
+        <button type="button" class="btn btn-ghost" onclick="closeEdit()">취소</button>
         <button type="submit" class="btn btn-primary" id="submitBtn">추가</button>
       </div>
     </form>
@@ -547,8 +578,8 @@ textarea {
     <div class="modal-head">
       <span class="modal-title">스킬 삭제</span>
       <button class="modal-close" onclick="closeDel()">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        <svg width="16" height="16" viewBox="0 0 32 32" fill="currentColor">
+          <path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16z"/>
         </svg>
       </button>
     </div>
@@ -556,8 +587,8 @@ textarea {
       <p class="del-msg" id="delMsg"></p>
     </div>
     <div class="modal-foot">
-      <button type="button" class="btn btn-plain" onclick="closeDel()">취소</button>
-      <button type="button" class="btn btn-danger-ghost" id="delConfirm">삭제</button>
+      <button type="button" class="btn btn-ghost" onclick="closeDel()">취소</button>
+      <button type="button" class="btn btn-danger" id="delConfirm">삭제</button>
     </div>
   </div>
 </div>
@@ -583,26 +614,25 @@ async function api(path, opts = {}) {
   return data;
 }
 
-// ── chip ─────────────────────────────────────────────────────────────────
+// ── tag ──────────────────────────────────────────────────────────────────
 const CAT_CLS = {
-  utility: 'chip-blue', transport: 'chip-teal', finance: 'chip-green',
-  sports: 'chip-orange', shopping: 'chip-pink', government: '',
-  media: 'chip-purple', local: 'chip-teal', food: 'chip-red',
+  utility: 'tag-blue', transport: 'tag-teal', finance: 'tag-green',
+  sports: 'tag-orange', shopping: 'tag-purple', government: 'tag-default',
+  media: 'tag-purple', local: 'tag-teal', food: 'tag-red',
 };
 
-function chip(val) {
-  const cls = CAT_CLS[val] ?? '';
-  return `<span class="chip ${cls}">${esc(val || '기타')}</span>`;
+function tag(val) {
+  return `<span class="tag ${CAT_CLS[val] ?? 'tag-default'}">${esc(val || '기타')}</span>`;
 }
 
 // ── render ────────────────────────────────────────────────────────────────
 function render(list) {
-  document.getElementById('cnt').textContent = `${list.length}개`;
+  document.getElementById('cnt').textContent = `${list.length}개 스킬`;
   const tbody = document.getElementById('tbody');
 
   if (!list.length) {
     tbody.innerHTML = `<tr class="empty-row"><td colspan="5">
-      <span class="empty-icon">🔍</span>검색 결과가 없습니다
+      <span class="empty-icon">◫</span>검색 결과가 없습니다
     </td></tr>`;
     return;
   }
@@ -610,7 +640,7 @@ function render(list) {
   tbody.innerHTML = list.map(s => {
     const name   = esc(s.name || s.folder);
     const folder = esc(s.folder);
-    const desc   = esc(trunc(s.description, 85));
+    const desc   = esc(trunc(s.description, 90));
     const cat    = s.metadata?.category;
     const phase  = esc(s.metadata?.phase ?? '');
     return `<tr>
@@ -619,12 +649,12 @@ function render(list) {
         <div class="td-folder">${folder}</div>
       </td>
       <td class="td-desc">${desc}</td>
-      <td>${chip(cat)}</td>
-      <td><span class="chip">${phase || '-'}</span></td>
+      <td>${tag(cat)}</td>
+      <td><span class="tag tag-default">${phase || '-'}</span></td>
       <td>
         <div class="td-actions">
-          <button class="btn btn-ghost-blue" onclick="openEdit('${folder}')">수정</button>
-          <button class="btn btn-danger-ghost" onclick="openDel('${folder}','${name}')">삭제</button>
+          <button class="btn btn-ghost btn-sm" onclick="openEdit('${folder}')">수정</button>
+          <button class="btn btn-sm" style="color:var(--error);border-left:1px solid var(--hairline);" onclick="openDel('${folder}','${name}')">삭제</button>
         </div>
       </td>
     </tr>`;
@@ -722,7 +752,7 @@ function openDel(folder, name) {
   delTarget = folder;
   document.getElementById('delMsg').innerHTML =
     `<span class="del-name">${name}</span> 스킬을 삭제하시겠습니까?<br><br>` +
-    `<code style="font-size:13px;font-family:'SF Mono',monospace;color:var(--ink-48)">${folder}/</code> 폴더가 완전히 삭제되며 복구할 수 없습니다.`;
+    `<code style="font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink-subtle)">${folder}/</code> 폴더 전체가 삭제되며 복구할 수 없습니다.`;
   document.getElementById('delConfirm').onclick = confirmDel;
   show('delBackdrop');
 }
@@ -741,15 +771,14 @@ async function confirmDel() {
 
 // ── toast ─────────────────────────────────────────────────────────────────
 function toast(msg, type = 'ok') {
+  const icon = type === 'ok'
+    ? `<svg width="16" height="16" viewBox="0 0 32 32" fill="#24a148"><path d="M14 21.414L9 16.413 10.413 15l3.587 3.585L21.585 11 23 12.415z"/><path d="M16 2a14 14 0 100 28A14 14 0 0016 2zm0 26A12 12 0 114 16 12.013 12.013 0 0116 2z"/></svg>`
+    : `<svg width="16" height="16" viewBox="0 0 32 32" fill="#da1e28"><path d="M16 2a14 14 0 100 28A14 14 0 0016 2zm0 26A12 12 0 114 16 12.013 12.013 0 0116 2z"/><path d="M15 8h2v11h-2zm0 13h2v2h-2z"/></svg>`;
   const el = document.createElement('div');
   el.className = `toast${type === 'err' ? ' toast-err' : ''}`;
-  el.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-    ${type === 'ok'
-      ? '<polyline points="20 6 9 17 4 12"/>'
-      : '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>'}
-  </svg>${esc(msg)}`;
+  el.innerHTML = `${icon}<span>${esc(msg)}</span>`;
   document.getElementById('toasts').appendChild(el);
-  setTimeout(() => el.remove(), 3000);
+  setTimeout(() => el.remove(), 3500);
 }
 
 // ── utils ─────────────────────────────────────────────────────────────────
