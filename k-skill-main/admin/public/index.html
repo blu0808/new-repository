@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>k-skill 어드민</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --danger: #ef4444;
+  --danger-dark: #dc2626;
+  --success: #10b981;
+  --bg: #f8fafc;
+  --surface: #ffffff;
+  --border: #e2e8f0;
+  --text: #0f172a;
+  --muted: #64748b;
+  --radius: 8px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* ── nav ── */
+nav {
+  background: #0f172a;
+  color: white;
+  padding: 0 28px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 1px 3px rgba(0,0,0,.3);
+}
+.nav-brand { font-size: 17px; font-weight: 700; letter-spacing: -.3px; }
+.nav-brand em { color: #818cf8; font-style: normal; }
+.nav-sub { font-size: 13px; color: #475569; }
+
+/* ── main ── */
+main { max-width: 1200px; margin: 0 auto; padding: 32px 24px; }
+
+/* ── toolbar ── */
+.toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+.search-wrap { position: relative; flex: 1; }
+.search-wrap svg {
+  position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+  width: 16px; height: 16px; color: var(--muted); pointer-events: none;
+}
+.search-input {
+  width: 100%; padding: 10px 12px 10px 38px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  font-size: 14px; background: var(--surface); outline: none;
+  transition: border-color .15s;
+}
+.search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,.1); }
+.count { font-size: 13px; color: var(--muted); white-space: nowrap; }
+
+/* ── buttons ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 16px; border: none; border-radius: var(--radius);
+  font-size: 14px; font-weight: 500; cursor: pointer;
+  transition: background .15s, opacity .15s; white-space: nowrap;
+}
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-primary { background: var(--primary); color: white; }
+.btn-primary:hover:not(:disabled) { background: var(--primary-dark); }
+.btn-danger  { background: var(--danger);  color: white; }
+.btn-danger:hover:not(:disabled)  { background: var(--danger-dark); }
+.btn-ghost   { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+.btn-ghost:hover:not(:disabled)   { background: var(--bg); }
+.btn-sm { padding: 5px 11px; font-size: 13px; }
+
+/* ── table ── */
+.table-wrap {
+  background: var(--surface); border-radius: 12px;
+  border: 1px solid var(--border); overflow: hidden;
+}
+table { width: 100%; border-collapse: collapse; }
+thead { background: #f1f5f9; border-bottom: 1px solid var(--border); }
+th {
+  text-align: left; padding: 11px 16px;
+  font-size: 11px; font-weight: 700; color: var(--muted);
+  text-transform: uppercase; letter-spacing: .6px;
+}
+td { padding: 14px 16px; font-size: 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8fafc; }
+.td-name { font-weight: 600; }
+.td-folder { font-size: 12px; color: var(--muted); font-family: 'SF Mono', 'Fira Code', monospace; margin-top: 2px; }
+.td-desc { color: var(--muted); max-width: 320px; line-height: 1.5; }
+.td-actions { display: flex; gap: 8px; }
+
+/* ── badges ── */
+.badge {
+  display: inline-block; padding: 3px 9px; border-radius: 999px;
+  font-size: 11px; font-weight: 600;
+}
+.b-utility    { background: #ede9fe; color: #7c3aed; }
+.b-transport  { background: #dbeafe; color: #1d4ed8; }
+.b-finance    { background: #dcfce7; color: #15803d; }
+.b-sports     { background: #fef3c7; color: #b45309; }
+.b-shopping   { background: #fce7f3; color: #be185d; }
+.b-government { background: #f1f5f9; color: #475569; }
+.b-media      { background: #ffedd5; color: #c2410c; }
+.b-local      { background: #cffafe; color: #0e7490; }
+.b-default    { background: #f1f5f9; color: var(--muted); }
+
+/* ── empty / loading ── */
+.empty-row td { text-align: center; padding: 56px 20px; color: var(--muted); }
+.empty-icon { font-size: 36px; margin-bottom: 10px; }
+
+/* ── modal ── */
+.backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,.45);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200; padding: 20px;
+  animation: fadeIn .15s;
+}
+.backdrop.hidden { display: none; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+  background: var(--surface); border-radius: 14px;
+  width: 100%; max-width: 660px; max-height: 92vh;
+  overflow-y: auto; animation: slideUp .2s;
+}
+.modal-sm { max-width: 420px; }
+@keyframes slideUp {
+  from { transform: translateY(18px); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+.modal-head {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 24px; border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; background: var(--surface); z-index: 1;
+}
+.modal-title { font-size: 17px; font-weight: 700; }
+.modal-close {
+  background: none; border: none; cursor: pointer;
+  color: var(--muted); padding: 4px; border-radius: 6px; display: flex;
+}
+.modal-close:hover { background: var(--bg); }
+.modal-body { padding: 24px; }
+.modal-foot {
+  display: flex; justify-content: flex-end; gap: 8px;
+  padding: 16px 24px; border-top: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky; bottom: 0;
+}
+
+/* ── form ── */
+.form-group { margin-bottom: 18px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; }
+.hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+input, select, textarea {
+  width: 100%; padding: 9px 12px;
+  border: 1px solid var(--border); border-radius: var(--radius);
+  font-size: 14px; font-family: inherit; outline: none;
+  background: var(--surface); transition: border-color .15s;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99,102,241,.1);
+}
+input:disabled { background: var(--bg); color: var(--muted); }
+textarea { resize: vertical; min-height: 200px; font-family: 'SF Mono', 'Fira Code', monospace; font-size: 13px; line-height: 1.6; }
+
+/* ── toast ── */
+.toast-wrap {
+  position: fixed; bottom: 24px; right: 24px;
+  z-index: 300; display: flex; flex-direction: column; gap: 8px;
+}
+.toast {
+  padding: 12px 18px; border-radius: 10px;
+  font-size: 14px; font-weight: 500; min-width: 220px;
+  display: flex; align-items: center; gap: 8px;
+  animation: toastIn .2s; box-shadow: 0 4px 12px rgba(0,0,0,.15);
+}
+@keyframes toastIn {
+  from { transform: translateX(110%); opacity: 0; }
+  to   { transform: none; opacity: 1; }
+}
+.toast-ok  { background: #0f172a; color: white; }
+.toast-err { background: var(--danger); color: white; }
+
+/* ── delete confirm ── */
+.del-msg { font-size: 15px; color: var(--muted); line-height: 1.65; }
+.del-name { color: var(--text); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">k-skill <em>어드민</em></div>
+  <div class="nav-sub">SKILL.md 관리</div>
+</nav>
+
+<main>
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input class="search-input" id="q" type="search" placeholder="스킬 이름, 설명, 카테고리로 검색...">
+    </div>
+    <span class="count" id="cnt"></span>
+    <button class="btn btn-primary" onclick="openCreate()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+      </svg>
+      새 스킬
+    </button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>스킬</th>
+          <th>설명</th>
+          <th>카테고리</th>
+          <th>단계</th>
+          <th>액션</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr class="empty-row">
+          <td colspan="5">
+            <div class="empty-icon">⏳</div>
+            불러오는 중...
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+<!-- 편집 모달 -->
+<div class="backdrop hidden" id="editBackdrop" onclick="bgClick(event,'editBackdrop')">
+  <div class="modal">
+    <div class="modal-head">
+      <span class="modal-title" id="editTitle">새 스킬 추가</span>
+      <button class="modal-close" onclick="closeEdit()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <form id="skillForm" onsubmit="submitForm(event)">
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label>폴더 이름 *</label>
+          <input type="text" id="fFolder" placeholder="예: my-new-skill" pattern="[a-z0-9][a-z0-9\-]*" required>
+          <div class="hint">소문자, 숫자, 하이픈(-)만 사용 가능</div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>스킬 이름 *</label>
+            <input type="text" id="fName" placeholder="예: my-new-skill" required>
+          </div>
+          <div class="form-group">
+            <label>라이선스</label>
+            <select id="fLicense">
+              <option value="MIT">MIT</option>
+              <option value="Apache-2.0">Apache-2.0</option>
+              <option value="ISC">ISC</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>설명 *</label>
+          <textarea id="fDesc" rows="3" placeholder="이 스킬이 무엇을 하는지 설명해주세요..." required style="min-height:80px;font-family:inherit;font-size:14px;"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>카테고리</label>
+            <select id="fCat">
+              <option value="utility">utility — 유틸리티</option>
+              <option value="transport">transport — 교통</option>
+              <option value="finance">finance — 금융</option>
+              <option value="shopping">shopping — 쇼핑</option>
+              <option value="sports">sports — 스포츠</option>
+              <option value="government">government — 정부/법</option>
+              <option value="media">media — 미디어</option>
+              <option value="local">local — 생활</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>단계</label>
+            <select id="fPhase">
+              <option value="v1">v1</option>
+              <option value="v2">v2</option>
+              <option value="beta">beta</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>SKILL.md 내용</label>
+          <textarea id="fBody" placeholder="# 스킬 이름&#10;&#10;## What this skill does&#10;&#10;..."></textarea>
+        </div>
+
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn btn-ghost" onclick="closeEdit()">취소</button>
+        <button type="submit" class="btn btn-primary" id="submitBtn">저장</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 삭제 확인 모달 -->
+<div class="backdrop hidden" id="delBackdrop" onclick="bgClick(event,'delBackdrop')">
+  <div class="modal modal-sm">
+    <div class="modal-head">
+      <span class="modal-title">스킬 삭제</span>
+      <button class="modal-close" onclick="closeDel()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p class="del-msg" id="delMsg"></p>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn btn-ghost" onclick="closeDel()">취소</button>
+      <button type="button" class="btn btn-danger" id="delConfirm">삭제</button>
+    </div>
+  </div>
+</div>
+
+<!-- 토스트 -->
+<div class="toast-wrap" id="toasts"></div>
+
+<script>
+// ── state ────────────────────────────────────────────────────────────────
+let skills = [];
+let editing = null; // null = create, string = folder being edited
+
+// ── api ──────────────────────────────────────────────────────────────────
+async function api(path, opts = {}) {
+  const r = await fetch(path, {
+    headers: opts.body ? { 'Content-Type': 'application/json' } : {},
+    ...opts,
+    body: opts.body ? JSON.stringify(opts.body) : undefined,
+  });
+  if (r.status === 204) return null;
+  const data = await r.json();
+  if (!r.ok) throw new Error(data.error || '오류 발생');
+  return data;
+}
+
+// ── render ───────────────────────────────────────────────────────────────
+const BADGE = {
+  utility:'b-utility', transport:'b-transport', finance:'b-finance',
+  sports:'b-sports', shopping:'b-shopping', government:'b-government',
+  media:'b-media', local:'b-local',
+};
+
+function badge(val, cls) {
+  return `<span class="badge ${cls || 'b-default'}">${esc(val || '-')}</span>`;
+}
+
+function render(list) {
+  document.getElementById('cnt').textContent = `총 ${list.length}개`;
+  const tbody = document.getElementById('tbody');
+
+  if (!list.length) {
+    tbody.innerHTML = `<tr class="empty-row"><td colspan="5">
+      <div class="empty-icon">🔍</div>검색 결과가 없습니다.
+    </td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = list.map(s => {
+    const name = esc(s.name || s.folder);
+    const folder = esc(s.folder);
+    const desc = esc(trunc(s.description, 90));
+    const cat = s.metadata?.category;
+    const phase = s.metadata?.phase;
+    return `<tr>
+      <td>
+        <div class="td-name">${name}</div>
+        <div class="td-folder">${folder}</div>
+      </td>
+      <td class="td-desc">${desc}</td>
+      <td>${badge(cat, BADGE[cat])}</td>
+      <td>${badge(phase, 'b-default')}</td>
+      <td>
+        <div class="td-actions">
+          <button class="btn btn-ghost btn-sm" onclick="openEdit('${folder}')">수정</button>
+          <button class="btn btn-danger btn-sm" onclick="openDel('${folder}','${name}')">삭제</button>
+        </div>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+// ── search ───────────────────────────────────────────────────────────────
+document.getElementById('q').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase().trim();
+  render(q ? skills.filter(s =>
+    s.folder.includes(q) ||
+    (s.name || '').toLowerCase().includes(q) ||
+    (s.description || '').toLowerCase().includes(q) ||
+    (s.metadata?.category || '').includes(q)
+  ) : skills);
+});
+
+// ── load ─────────────────────────────────────────────────────────────────
+async function load() {
+  try {
+    skills = await api('/api/skills');
+    render(skills);
+  } catch (e) {
+    toast(e.message, 'err');
+  }
+}
+
+// ── create / edit modal ──────────────────────────────────────────────────
+function openCreate() {
+  editing = null;
+  document.getElementById('editTitle').textContent = '새 스킬 추가';
+  document.getElementById('submitBtn').textContent = '추가';
+  document.getElementById('skillForm').reset();
+  document.getElementById('fFolder').disabled = false;
+  show('editBackdrop');
+}
+
+async function openEdit(folder) {
+  try {
+    const s = await api(`/api/skills/${encodeURIComponent(folder)}`);
+    editing = folder;
+    document.getElementById('editTitle').textContent = '스킬 수정';
+    document.getElementById('submitBtn').textContent = '저장';
+    document.getElementById('fFolder').value = s.folder;
+    document.getElementById('fFolder').disabled = true;
+    document.getElementById('fName').value = s.name ?? '';
+    document.getElementById('fLicense').value = s.license ?? 'MIT';
+    document.getElementById('fDesc').value = s.description ?? '';
+    document.getElementById('fCat').value = s.metadata?.category ?? 'utility';
+    document.getElementById('fPhase').value = s.metadata?.phase ?? 'v1';
+    document.getElementById('fBody').value = s.body ?? '';
+    show('editBackdrop');
+  } catch (e) {
+    toast(e.message, 'err');
+  }
+}
+
+function closeEdit() { hide('editBackdrop'); }
+
+async function submitForm(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+
+  const payload = {
+    folder: document.getElementById('fFolder').value.trim(),
+    name:   document.getElementById('fName').value.trim(),
+    license: document.getElementById('fLicense').value,
+    description: document.getElementById('fDesc').value.trim(),
+    metadata: {
+      category: document.getElementById('fCat').value,
+      locale: 'ko-KR',
+      phase: document.getElementById('fPhase').value,
+    },
+    body: document.getElementById('fBody').value,
+  };
+
+  try {
+    if (editing) {
+      await api(`/api/skills/${encodeURIComponent(editing)}`, { method: 'PUT', body: payload });
+      toast('수정되었습니다.');
+    } else {
+      await api('/api/skills', { method: 'POST', body: payload });
+      toast('새 스킬이 추가되었습니다.');
+    }
+    closeEdit();
+    await load();
+  } catch (err) {
+    toast(err.message, 'err');
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+// ── delete modal ──────────────────────────────────────────────────────────
+let delTarget = null;
+
+function openDel(folder, name) {
+  delTarget = folder;
+  document.getElementById('delMsg').innerHTML =
+    `<span class="del-name">${name}</span> 스킬을 삭제하시겠습니까?<br><br>` +
+    `<code style="font-size:13px;color:var(--muted)">${folder}/</code> 폴더 전체가 삭제되며 복구할 수 없습니다.`;
+  document.getElementById('delConfirm').onclick = confirmDel;
+  show('delBackdrop');
+}
+
+function closeDel() { hide('delBackdrop'); delTarget = null; }
+
+async function confirmDel() {
+  if (!delTarget) return;
+  try {
+    await api(`/api/skills/${encodeURIComponent(delTarget)}`, { method: 'DELETE' });
+    toast('삭제되었습니다.');
+    closeDel();
+    await load();
+  } catch (err) {
+    toast(err.message, 'err');
+  }
+}
+
+// ── toast ─────────────────────────────────────────────────────────────────
+function toast(msg, type = 'ok') {
+  const el = document.createElement('div');
+  el.className = `toast toast-${type}`;
+  el.textContent = (type === 'ok' ? '✓  ' : '✕  ') + msg;
+  document.getElementById('toasts').appendChild(el);
+  setTimeout(() => el.remove(), 3200);
+}
+
+// ── helpers ───────────────────────────────────────────────────────────────
+function show(id) { document.getElementById(id).classList.remove('hidden'); }
+function hide(id) { document.getElementById(id).classList.add('hidden'); }
+function bgClick(e, id) { if (e.target === document.getElementById(id)) hide(id); }
+function esc(s) {
+  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+function trunc(s, n) { return s && s.length > n ? s.slice(0, n) + '…' : (s ?? ''); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeEdit(); closeDel(); }
+});
+
+// ── init ──────────────────────────────────────────────────────────────────
+load();
+</script>
+</body>
+</html>
