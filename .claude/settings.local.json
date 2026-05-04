@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pkill -f \"Electron.*clawd\\\\|clawd-on-desk\")",
+      "Read(//Users/chigi/Downloads/clawd-on-desk-main/**)",
+      "Bash(npm start *)",
+      "Bash(echo \"PID: $!\")",
+      "Bash(python3)",
+      "Bash(python3 -c ' *)",
+      "Read(//Users/chigi/Documents/Obsidian Vault/**)",
+      "Read(//Users/chigi/Documents/Obsidian Vault/Templates/**)",
+      "Bash(mv \"/Users/chigi/Documents/Obsidian Vault/01_Tasks/\"*.md \"/Users/chigi/Documents/Obsidian Vault/07_Life/\")",
+      "Bash(mv \"/Users/chigi/Documents/Obsidian Vault/04_Content/치기의 연도별 성과.md\" \"/Users/chigi/Documents/Obsidian Vault/07_Life/\")",
+      "Bash(grep -rn '<aside>\\\\|</aside>\\\\|최종 편집 일시\\\\|작성일시\\\\|담당자\\\\|에픽\\\\s*:' '/Users/chigi/Documents/Obsidian Vault/' '--include=*.md' '--exclude-path=*/아카이브/*' -l)",
+      "Bash(grep -rn https://www.notion.so/ '/Users/chigi/Documents/Obsidian Vault/' '--include=*.md' '--exclude-path=*/아카이브/*' -l)",
+      "Bash(rm -rf \"/Users/chigi/Desktop/claude/hjjj3782_2022회고_업무일지\")",
+      "Bash(rm -rf \"/Users/chigi/Desktop/claude/hjjjj3782_2022_연말회고\")",
+      "Bash(rm -rf \"/Users/chigi/Desktop/claude/hjjj3782_2023회고_주간:월간\")",
+      "Bash(rm -rf \"/Users/chigi/Desktop/claude/hjjjj3782_2024 치기의 세계_종합\")",
+      "Bash(rm -rf \"/Users/chigi/Desktop/claude/hjjj3782_2025회고_주간:월간\")"
+    ]
+  }
+}

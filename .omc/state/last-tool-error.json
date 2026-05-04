@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"ssh-keyscan github.com >> ~/.ssh/known_hosts 2>/dev/null && ssh -T git@github.com 2>&1\",\"description\":\"Add GitHub to known_hosts and test SSH connection\"}",
+  "error": "Exit code 1\nHi blu0808! You've successfully authenticated, but GitHub does not provide shell access.",
+  "timestamp": "2026-05-04T07:08:07.558Z",
+  "retry_count": 2
+}
