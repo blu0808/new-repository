@@ -23,6 +23,11 @@ const dict = {
     'cat.all': '전체',
     'cat.albumCover': '앨범커버',
     'works.more': '더보기',
+    'nav.projects': 'Projects',
+    'projects.tagline': '춤추는 독백의 세계 — 책, 사진전, 유튜브',
+    'ptag.book': '독립출판',
+    'ptag.exhibition': '사진전',
+    'proj.book.desc': '100일간 홀로 유럽을 여행하며 쓴 단상집. 진정한 자유는 이방인의 삶이 아닌 내면으로부터 온다고 믿습니다.',
   },
   en: {
     'nav.works':   'Works',
@@ -47,6 +52,11 @@ const dict = {
     'cat.all': 'All',
     'cat.albumCover': 'Album Cover',
     'works.more': 'Load More',
+    'nav.projects': 'Projects',
+    'projects.tagline': 'The Universe of Dancing Monologue — Book, Exhibitions, YouTube',
+    'ptag.book': 'Self-Published',
+    'ptag.exhibition': 'Exhibition',
+    'proj.book.desc': 'A collection of solitary reflections written while traveling Europe alone for 100 days. True freedom comes not from living as a stranger, but from exploring what lies within.',
   },
 };
 
@@ -102,7 +112,7 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.12 });
 
-document.querySelectorAll('.section-title, .work-card, .about-text, .about-img-wrap, .media-block, .contact-body')
+document.querySelectorAll('.section-title, .work-card, .about-text, .about-img-wrap, .proj-item, .proj-hero, .media-block, .contact-body')
   .forEach(el => {
     el.classList.add('fade-up');
     observer.observe(el);

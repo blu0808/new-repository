@@ -319,6 +319,169 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
   opacity: .18;
 }
 
+/* ─── PROJECTS ─────────────────────────────────────────── */
+.section--projects {
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+
+.proj-tagline {
+  font-size: clamp(11px, 1.1vw, 13px);
+  font-weight: 300;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+  margin-top: -2.5rem;
+  margin-bottom: clamp(4rem, 8vw, 7rem);
+}
+
+.proj-item {
+  position: relative;
+  padding: clamp(4rem, 7vw, 6rem) 0;
+  border-top: 1px solid rgba(255,255,255,.07);
+}
+
+.proj-num {
+  position: absolute;
+  top: 2rem;
+  right: 0;
+  font-size: clamp(5rem, 13vw, 11rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -.04em;
+  color: rgba(255,255,255,.04);
+  pointer-events: none;
+  user-select: none;
+}
+
+.proj-tag {
+  display: inline-block;
+  font-size: .62rem;
+  font-weight: 500;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,.2);
+  padding: .3em .85em;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 1.1rem;
+}
+
+.proj-title {
+  font-size: clamp(1.7rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -.03em;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: .5rem;
+}
+
+.proj-meta {
+  font-size: .78rem;
+  font-weight: 300;
+  letter-spacing: .07em;
+  color: rgba(255,255,255,.35);
+  margin-bottom: 0;
+}
+
+.proj-desc {
+  font-size: clamp(14px, 1.3vw, 17px);
+  font-weight: 300;
+  line-height: 2;
+  color: rgba(255,255,255,.6);
+  max-width: 40ch;
+}
+
+/* ─── 01 책 레이아웃 */
+.proj-book {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(3rem, 7vw, 8rem);
+  align-items: center;
+}
+
+.proj-book-img {
+  overflow: hidden;
+}
+.proj-book-img img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  transition: transform .7s cubic-bezier(.25,.46,.45,.94);
+}
+.proj-book-img:hover img { transform: scale(1.03); }
+
+.proj-book-text {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+.proj-book-text .proj-desc { margin-top: 1rem; }
+
+/* ─── 사진전 헤더 */
+.proj-header {
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+.proj-header .proj-meta { margin-top: .5rem; }
+
+/* ─── 3열 사진 그리드 */
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+}
+
+.proj-photo {
+  overflow: hidden;
+}
+.proj-photo img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s cubic-bezier(.25,.46,.45,.94), opacity .3s;
+}
+.proj-photo:hover img {
+  transform: scale(1.04);
+  opacity: .88;
+}
+
+/* ─── 03 일상의 여름 히어로 이미지 */
+.proj-hero {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 3px;
+}
+.proj-hero img {
+  width: 100%;
+  height: clamp(300px, 65vh, 680px);
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  transition: transform .8s cubic-bezier(.25,.46,.45,.94);
+}
+.proj-hero:hover img { transform: scale(1.02); }
+
+/* strip 그리드: 히어로 아래 3장 */
+.proj-grid--strip .proj-photo img {
+  aspect-ratio: 4 / 3;
+}
+
+/* ─── 반응형 */
+@media (max-width: 900px) {
+  .proj-book {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .proj-book-img { max-width: 55%; }
+}
+
+@media (max-width: 600px) {
+  .proj-num { font-size: 4rem; top: 1.5rem; }
+  .proj-grid { grid-template-columns: repeat(2, 1fr); }
+  .proj-grid--strip { grid-template-columns: repeat(2, 1fr); }
+  .proj-book-img { max-width: 70%; }
+}
+
 /* ─── MEDIA ─────────────────────────────────────────── */
 .media-layout {
   max-width: 640px;
