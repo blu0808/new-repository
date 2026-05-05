@@ -20,6 +20,8 @@ const dict = {
     'ig.toon':  '툰',
     'ig.photo': '사진 & 개인',
     'ig.art':   '아트워크',
+    'cat.all': '전체',
+    'cat.albumCover': '앨범커버',
   },
   en: {
     'nav.works':   'Works',
@@ -41,6 +43,8 @@ const dict = {
     'ig.toon':  'Toon',
     'ig.photo': 'Photo & Personal',
     'ig.art':   'Artwork',
+    'cat.all': 'All',
+    'cat.albumCover': 'Album Cover',
   },
 };
 
@@ -120,4 +124,16 @@ document.head.appendChild(style);
 
 document.querySelectorAll('.work-card').forEach((el, i) => {
   el.style.setProperty('--i', i);
+});
+
+/* ─── Works 카테고리 필터 ─────────────────────────────────── */
+document.querySelectorAll('.works-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.works-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const filter = tab.dataset.filter;
+    document.querySelectorAll('.work-card').forEach(card => {
+      card.classList.toggle('hidden', filter !== 'all' && card.dataset.category !== filter);
+    });
+  });
 });
