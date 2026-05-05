@@ -134,7 +134,7 @@ const worksData = [
   { title: '너를 기다리고 있어', artist: '예례밴드',          year: '2026', desc: '', link: '' },
   { title: 'End(And)',           artist: 'Grace',             year: '2025', desc: '', link: '' },
   { title: '시큰',                artist: '조에',              year: '2025', desc: '', link: '' },
-  { title: 'Hiraki',             artist: 'Gonhee',            year: '2025', desc: '', link: '' },
+  { title: 'hikari.',            artist: 'Gonhee',            year: '2025', desc: '', link: '' },
   { title: 'Joy of the Moment ver.2', artist: '한바탕 & KIMTAE', year: '2025', desc: '', link: '' },
   { title: 'Joy of the Moment ver.1', artist: '한바탕 & KIMTAE', year: '2025', desc: '', link: '' },
   { title: '야호',                artist: '아루단테',           year: '2025', desc: '', link: '' },
