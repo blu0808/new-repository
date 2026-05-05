@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="chigi — Visual Artist · Graphic Designer">
+  <title>chigi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ─── NAV ─────────────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo">chigi</a>
+
+    <div class="nav-menu" id="navMenu">
+      <a href="#works"   class="nav-link" data-i18n="nav.works">Works</a>
+      <a href="#about"   class="nav-link" data-i18n="nav.about">About</a>
+      <a href="#media"   class="nav-link" data-i18n="nav.media">Media</a>
+      <a href="#contact" class="nav-link" data-i18n="nav.contact">Contact</a>
+    </div>
+
+    <div class="nav-right">
+      <button class="lang-btn" id="langToggle">EN</button>
+      <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
+        <span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ─── HERO ─────────────────────────────────────────── -->
+  <section class="hero" id="hero">
+    <h1 class="hero-name">chigi</h1>
+    <p class="hero-sub" data-i18n="hero.sub">시각예술가 · 그래픽 디자이너</p>
+    <a href="#works" class="hero-cta" data-i18n="hero.cta">작업물 보기</a>
+  </section>
+
+  <!-- ─── WORKS ─────────────────────────────────────────── -->
+  <section class="section" id="works">
+    <div class="container">
+      <h2 class="section-title" data-i18n="nav.works">Works</h2>
+
+      <div class="works-grid">
+
+        <article class="work-card">
+          <div class="work-thumb" style="background:#EBEBEB;"></div>
+          <div class="work-overlay">
+            <span class="work-tag" data-i18n="cat.graphic">Graphic Design</span>
+            <p class="work-name" data-i18n="work.placeholder">작업명 추가 예정</p>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <div class="work-thumb" style="background:#DEDEDE;"></div>
+          <div class="work-overlay">
+            <span class="work-tag" data-i18n="cat.art">Visual Art</span>
+            <p class="work-name" data-i18n="work.placeholder">작업명 추가 예정</p>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <div class="work-thumb" style="background:#D0D0D0;"></div>
+          <div class="work-overlay">
+            <span class="work-tag" data-i18n="cat.graphic">Graphic Design</span>
+            <p class="work-name" data-i18n="work.placeholder">작업명 추가 예정</p>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <div class="work-thumb" style="background:#C4C4C4;"></div>
+          <div class="work-overlay">
+            <span class="work-tag" data-i18n="cat.art">Visual Art</span>
+            <p class="work-name" data-i18n="work.placeholder">작업명 추가 예정</p>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <div class="work-thumb" style="background:#B8B8B8;"></div>
+          <div class="work-overlay">
+            <span class="work-tag" data-i18n="cat.graphic">Graphic Design</span>
+            <p class="work-name" data-i18n="work.placeholder">작업명 추가 예정</p>
+          </div>
+        </article>
+
+        <article class="work-card">
+          <div class="work-thumb" style="background:#ABABAB;"></div>
+          <div class="work-overlay">
+            <span class="work-tag" data-i18n="cat.art">Visual Art</span>
+            <p class="work-name" data-i18n="work.placeholder">작업명 추가 예정</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── ABOUT ─────────────────────────────────────────── -->
+  <section class="section section--dark" id="about">
+    <div class="container">
+      <h2 class="section-title" data-i18n="nav.about">About</h2>
+
+      <div class="about-layout">
+        <div class="about-text">
+          <p data-i18n="about.p1">치기는 시각예술가이자 그래픽 디자이너입니다.</p>
+          <p data-i18n="about.p2">이미지와 언어 사이, 서로 다른 미디어의 문법을 넘나들며 자신만의 시각 언어를 구축합니다.</p>
+          <p data-i18n="about.p3">사진, 타이포그래피, 영상, 인쇄물 — 매체의 경계를 질문하는 방식으로 작업합니다.</p>
+        </div>
+        <div class="about-img-wrap">
+          <!-- 사진 추가: <img src="photo.jpg" alt="chigi"> -->
+          <div class="about-img-placeholder">
+            <span data-i18n="about.imgNote">사진 추가 예정</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── MEDIA ─────────────────────────────────────────── -->
+  <section class="section" id="media">
+    <div class="container">
+      <h2 class="section-title">Media</h2>
+
+      <div class="media-layout">
+
+        <div class="media-block">
+          <p class="media-platform">YouTube</p>
+          <div class="yt-wrap">
+            <!--
+              YouTube 설정:
+              YOUTUBE_VIDEO_ID 를 최신 영상 ID로 교체하세요.
+              예) https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID
+            -->
+            <div class="yt-placeholder">
+              <span class="yt-icon">▶</span>
+              <span data-i18n="media.ytHint">YouTube 연동 예정</span>
+            </div>
+            <!--
+            실제 영상 임베드 예시:
+            <iframe
+              src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID"
+              title="chigi YouTube"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+            -->
+          </div>
+          <a href="https://youtube.com/@YOUTUBE_USERNAME"
+             target="_blank" rel="noopener"
+             class="media-link" data-i18n="media.ytCta">채널 바로가기 →</a>
+        </div>
+
+        <div class="media-block">
+          <p class="media-platform">Instagram</p>
+          <div class="ig-grid">
+            <!--
+              Instagram 설정:
+              INSTAGRAM_USERNAME 을 실제 계정명으로 교체하세요.
+              이미지는 <img src="..."> 태그로 추가하거나
+              서드파티 위젯으로 대체 가능합니다.
+            -->
+            <div class="ig-cell"></div>
+            <div class="ig-cell"></div>
+            <div class="ig-cell"></div>
+            <div class="ig-cell"></div>
+            <div class="ig-cell"></div>
+            <div class="ig-cell"></div>
+          </div>
+          <a href="https://instagram.com/INSTAGRAM_USERNAME"
+             target="_blank" rel="noopener"
+             class="media-link" data-i18n="media.igCta">팔로우하기 →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ─────────────────────────────────────────── -->
+  <section class="section section--contact" id="contact">
+    <div class="container">
+      <h2 class="section-title" data-i18n="nav.contact">Contact</h2>
+
+      <div class="contact-body">
+        <!-- 이메일 주소를 실제 이메일로 교체하세요 -->
+        <a href="mailto:contact@chigi.kr" class="contact-email">contact@chigi.kr</a>
+
+        <div class="contact-socials">
+          <a href="https://instagram.com/INSTAGRAM_USERNAME" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://youtube.com/@YOUTUBE_USERNAME"    target="_blank" rel="noopener">YouTube</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FOOTER ─────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span>© 2026 chigi</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
