@@ -17,6 +17,9 @@ const dict = {
     'media.ytHint': 'YouTube 연동 예정',
     'media.ytCta':  '채널 바로가기 →',
     'media.igCta':  '팔로우하기 →',
+    'ig.toon':  '툰',
+    'ig.photo': '사진 & 개인',
+    'ig.art':   '아트워크',
   },
   en: {
     'nav.works':   'Works',
@@ -35,6 +38,9 @@ const dict = {
     'media.ytHint': 'YouTube coming soon',
     'media.ytCta':  'Visit Channel →',
     'media.igCta':  'Follow →',
+    'ig.toon':  'Toon',
+    'ig.photo': 'Photo & Personal',
+    'ig.art':   'Artwork',
   },
 };
 

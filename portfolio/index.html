@@ -125,52 +125,65 @@
 
       <div class="media-layout">
 
-        <div class="media-block">
+        <div class="media-block media-block--yt">
           <p class="media-platform">YouTube</p>
           <div class="yt-wrap">
             <!--
-              YouTube 설정:
-              YOUTUBE_VIDEO_ID 를 최신 영상 ID로 교체하세요.
+              최신 영상 ID로 교체:
               예) https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID
+              → src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID"
             -->
             <div class="yt-placeholder">
               <span class="yt-icon">▶</span>
               <span data-i18n="media.ytHint">YouTube 연동 예정</span>
             </div>
-            <!--
-            실제 영상 임베드 예시:
-            <iframe
-              src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID"
-              title="chigi YouTube"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-            -->
           </div>
-          <a href="https://youtube.com/@YOUTUBE_USERNAME"
+          <a href="https://www.youtube.com/@jeongjyojyo"
              target="_blank" rel="noopener"
              class="media-link" data-i18n="media.ytCta">채널 바로가기 →</a>
         </div>
 
-        <div class="media-block">
+        <div class="media-block media-block--ig">
           <p class="media-platform">Instagram</p>
-          <div class="ig-grid">
-            <!--
-              Instagram 설정:
-              INSTAGRAM_USERNAME 을 실제 계정명으로 교체하세요.
-              이미지는 <img src="..."> 태그로 추가하거나
-              서드파티 위젯으로 대체 가능합니다.
-            -->
-            <div class="ig-cell"></div>
-            <div class="ig-cell"></div>
-            <div class="ig-cell"></div>
-            <div class="ig-cell"></div>
-            <div class="ig-cell"></div>
-            <div class="ig-cell"></div>
+          <div class="ig-accounts">
+
+            <div class="ig-account">
+              <span class="ig-account-label" data-i18n="ig.toon">툰</span>
+              <div class="ig-grid">
+                <div class="ig-cell"></div>
+                <div class="ig-cell"></div>
+                <div class="ig-cell"></div>
+              </div>
+              <a href="https://www.instagram.com/chigi_toon"
+                 target="_blank" rel="noopener"
+                 class="media-link">@chigi_toon →</a>
+            </div>
+
+            <div class="ig-account">
+              <span class="ig-account-label" data-i18n="ig.photo">사진 &amp; 개인</span>
+              <div class="ig-grid">
+                <div class="ig-cell"></div>
+                <div class="ig-cell"></div>
+                <div class="ig-cell"></div>
+              </div>
+              <a href="https://www.instagram.com/chigiverses"
+                 target="_blank" rel="noopener"
+                 class="media-link">@chigiverses →</a>
+            </div>
+
+            <div class="ig-account">
+              <span class="ig-account-label" data-i18n="ig.art">아트워크</span>
+              <div class="ig-grid">
+                <div class="ig-cell"></div>
+                <div class="ig-cell"></div>
+                <div class="ig-cell"></div>
+              </div>
+              <a href="https://www.instagram.com/chigiartworks"
+                 target="_blank" rel="noopener"
+                 class="media-link">@chigiartworks →</a>
+            </div>
+
           </div>
-          <a href="https://instagram.com/INSTAGRAM_USERNAME"
-             target="_blank" rel="noopener"
-             class="media-link" data-i18n="media.igCta">팔로우하기 →</a>
         </div>
 
       </div>
@@ -187,8 +200,10 @@
         <a href="mailto:contact@chigi.kr" class="contact-email">contact@chigi.kr</a>
 
         <div class="contact-socials">
-          <a href="https://instagram.com/INSTAGRAM_USERNAME" target="_blank" rel="noopener">Instagram</a>
-          <a href="https://youtube.com/@YOUTUBE_USERNAME"    target="_blank" rel="noopener">YouTube</a>
+          <a href="https://www.youtube.com/@jeongjyojyo"         target="_blank" rel="noopener">YouTube</a>
+          <a href="https://www.instagram.com/chigi_toon"         target="_blank" rel="noopener">@chigi_toon</a>
+          <a href="https://www.instagram.com/chigiverses"        target="_blank" rel="noopener">@chigiverses</a>
+          <a href="https://www.instagram.com/chigiartworks"      target="_blank" rel="noopener">@chigiartworks</a>
         </div>
       </div>
     </div>

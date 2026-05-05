@@ -1,12 +1,13 @@
 /* ─── VARIABLES ─────────────────────────────────────────── */
 :root {
-  /* 포인트 컬러 — 여기 한 곳만 바꾸면 전체 적용됩니다 */
-  --accent: #FF3B52;
+  /* 주조색 — 여기 한 곳만 바꾸면 전체 적용됩니다 */
+  --accent: #1A4DFF;   /* 블루 (주조색) */
+  --warn:   #FF6B2B;   /* 주황 (경고/강조) */
 
   --black:  #0A0A0A;
-  --white:  #FAFAFA;
-  --gray-1: #F2F2F2;
-  --gray-2: #E0E0E0;
+  --white:  #FFFFFF;
+  --gray-1: #F5F5F5;
+  --gray-2: #E8E8E8;
   --gray-3: #AAAAAA;
   --gray-4: #666666;
 
@@ -314,11 +315,28 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 }
 .yt-placeholder span:last-child { font-size: .75rem; letter-spacing: .06em; }
 
+/* Instagram — 3계정 레이아웃 */
+.ig-accounts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.ig-account-label {
+  display: block;
+  font-size: .65rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gray-3);
+  margin-bottom: 8px;
+}
+
 .ig-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2px;
-  margin-bottom: 14px;
+  margin-bottom: 10px;
 }
 .ig-cell {
   aspect-ratio: 1;
@@ -328,6 +346,13 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 }
 .ig-cell:hover { opacity: .8; }
 .ig-cell img  { width: 100%; height: 100%; object-fit: cover; }
+
+@media (max-width: 900px) {
+  .ig-accounts { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+}
+@media (max-width: 480px) {
+  .ig-accounts { grid-template-columns: 1fr; }
+}
 
 .media-link {
   display: inline-block;
