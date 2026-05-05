@@ -144,7 +144,7 @@ const worksData = [
   { title: '그 여름',             artist: '이미블루',           year: '2024', desc: '', link: '' },
   { title: '낮잠',                artist: '이미블루',           year: '2024', desc: '', link: '' },
   { title: 'Dark of Fantasy',    artist: '윤혜문',             year: '2024', desc: '', link: '' },
-  { title: '애국가',              artist: '박미자, 겅경',        year: '2024', desc: '', link: '' },
+  { title: '애국가',              artist: '박미자, 정경',        year: '2024', desc: '', link: '' },
   { title: 'Cinema',             artist: '조주현',             year: '2023', desc: '', link: '' },
   { title: 'JUMP',               artist: '밴드기린',           year: '2023', desc: '', link: '' },
   { title: 'SICK',               artist: '정재승',             year: '2023', desc: '', link: '' },
