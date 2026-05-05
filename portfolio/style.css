@@ -321,9 +321,7 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 
 /* ─── MEDIA ─────────────────────────────────────────── */
 .media-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(32px, 6vw, 96px);
+  max-width: 640px;
 }
 
 .media-platform {
