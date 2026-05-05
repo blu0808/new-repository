@@ -124,14 +124,15 @@
 
         <div class="media-block media-block--yt">
           <p class="media-platform">YouTube</p>
-          <div class="yt-wrap">
-            <iframe
-              src="https://www.youtube.com/embed/jtGzPOLjvGg?start=19"
-              title="CHIGI YouTube"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen>
-            </iframe>
-          </div>
+          <a class="yt-wrap yt-thumb-link"
+             href="https://www.youtube.com/watch?v=jtGzPOLjvGg"
+             target="_blank" rel="noopener"
+             aria-label="YouTube에서 영상 보기">
+            <img src="https://img.youtube.com/vi/jtGzPOLjvGg/maxresdefault.jpg"
+                 alt="CHIGI YouTube 영상 썸네일"
+                 onerror="this.src='https://img.youtube.com/vi/jtGzPOLjvGg/hqdefault.jpg'">
+            <div class="yt-play-btn" aria-hidden="true">▶</div>
+          </a>
           <a href="https://www.youtube.com/@jeongjyojyo"
              target="_blank" rel="noopener"
              class="media-link" data-i18n="media.ytCta">채널 바로가기 →</a>

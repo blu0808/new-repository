@@ -299,21 +299,31 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 }
 .yt-wrap iframe { width: 100%; height: 100%; border: none; }
 
-.yt-placeholder {
+.yt-thumb-link {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.yt-thumb-link img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+.yt-thumb-link:hover img { transform: scale(1.03); }
+
+.yt-play-btn {
+  position: absolute;
+  inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  color: var(--gray-3);
-}
-.yt-icon {
   font-size: 2rem;
-  color: var(--gray-2);
+  color: var(--white);
+  background: rgba(10,10,10,.32);
+  transition: background .2s;
 }
-.yt-placeholder span:last-child { font-size: .75rem; letter-spacing: .06em; }
+.yt-thumb-link:hover .yt-play-btn { background: rgba(10,10,10,.5); }
 
 /* Instagram — 계정별 분리 레이아웃 */
 .ig-account {
