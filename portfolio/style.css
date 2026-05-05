@@ -247,22 +247,22 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 }
 .about-text p:last-child { margin-bottom: 0; }
 
-.about-img-wrap {
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  background: #1A1A1A;
-}
-.about-img-placeholder {
-  width: 100%;
-  height: 100%;
+.about-graphic {
   display: flex;
   align-items: center;
   justify-content: center;
+  aspect-ratio: 3 / 4;
 }
-.about-img-placeholder span {
-  font-size: .75rem;
-  letter-spacing: .08em;
-  color: #444;
+
+.about-initial {
+  font-size: clamp(160px, 22vw, 320px);
+  font-weight: 900;
+  letter-spacing: -.06em;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--accent);
+  user-select: none;
+  opacity: .18;
 }
 
 /* ─── MEDIA ─────────────────────────────────────────── */
