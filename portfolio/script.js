@@ -27,7 +27,13 @@ const dict = {
     'projects.tagline': '춤추는 독백의 세계 — 책, 사진전, 유튜브',
     'ptag.book': '독립출판',
     'ptag.exhibition': '사진전',
-    'proj.book.desc': '100일간 홀로 유럽을 여행하며 쓴 단상집. 진정한 자유는 이방인의 삶이 아닌 내면으로부터 온다고 믿습니다.',
+    'proj.book.quote': '"홀로 있다는 것이 외롭지 않을 때, 비로소 쓸 수 있는 말들이 있었다."',
+    'proj.book.desc': '그림일기를 쓰듯 매일 썼다. 낯선 도시의 카페에서, 기차 안에서, 길모퉁이에서 멈춰 서서. 100일간 홀로 유럽을 여행하며 쓴 단상집. 진정한 자유는 이방인의 삶이 아닌 내면으로부터 온다고 믿습니다.',
+    'proj.ex1.desc': '내가 없었던 자리의 여름을 모았다. 누군가의 여름이 지나간 곳을 오래 바라보다, 작은 액자에 담았다.',
+    'proj.ex2.desc': '반투명 천에 여름 사진을 인쇄해 공중에 매달았다. 빛이 통과하며 이미지가 섞이고, 공간 전체가 하나의 여름이 됐다.',
+    'cat.poster': '포스터',
+    'cat.toon': '치기툰',
+    'works.empty': '업로드 예정입니다.',
   },
   en: {
     'nav.works':   'Works',
@@ -56,7 +62,13 @@ const dict = {
     'projects.tagline': 'The Universe of Dancing Monologue — Book, Exhibitions, YouTube',
     'ptag.book': 'Self-Published',
     'ptag.exhibition': 'Exhibition',
-    'proj.book.desc': 'A collection of solitary reflections written while traveling Europe alone for 100 days. True freedom comes not from living as a stranger, but from exploring what lies within.',
+    'proj.book.quote': '"There are words that can only be written when solitude stops feeling lonely."',
+    'proj.book.desc': 'Written daily like a picture diary — in café corners of unfamiliar cities, on trains, pausing at street corners. A collection of solitary reflections from 100 days traveling Europe alone. True freedom comes not from living as a stranger, but from exploring what lies within.',
+    'proj.ex1.desc': 'A collection of summers I wasn\'t there for. I lingered in places where someone else\'s summer had passed, and put them in small frames.',
+    'proj.ex2.desc': 'Summer photographs printed on translucent fabric, hung in the air. As light passed through, images blended — the whole space became a single summer.',
+    'cat.poster': 'Poster',
+    'cat.toon': 'Toon',
+    'works.empty': 'Coming soon.',
   },
 };
 
@@ -228,8 +240,15 @@ document.querySelectorAll('.works-tab').forEach(tab => {
     document.querySelectorAll('.works-tab').forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
     const filter = tab.dataset.filter;
+    let visible = 0;
     document.querySelectorAll('.work-card').forEach(card => {
-      card.classList.toggle('hidden', filter !== 'all' && card.dataset.category !== filter);
+      const hide = filter !== 'all' && card.dataset.category !== filter;
+      card.classList.toggle('hidden', hide);
+      if (!hide) visible++;
     });
+    const emptyEl = document.getElementById('worksEmpty');
+    const moreWrap = document.getElementById('worksMoreWrap');
+    if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+    if (moreWrap) moreWrap.style.display = visible === 0 ? 'none' : '';
   });
 });
