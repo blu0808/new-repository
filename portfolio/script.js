@@ -128,6 +128,75 @@ document.querySelectorAll('.work-card').forEach((el, i) => {
   el.style.setProperty('--i', i);
 });
 
+/* ─── Works 모달 데이터 ─────────────────────────────────────── */
+/* 나중에 desc(설명)와 link(음악 링크)를 여기서 채워넣으세요 */
+const worksData = [
+  { title: '너를 기다리고 있어', artist: '예례밴드',          year: '2026', desc: '', link: '' },
+  { title: 'End(And)',           artist: 'Grace',             year: '2025', desc: '', link: '' },
+  { title: '시큰',                artist: '조에',              year: '2025', desc: '', link: '' },
+  { title: 'Hiraki',             artist: 'gonhee',            year: '2025', desc: '', link: '' },
+  { title: 'Joy of the Moment ver.2', artist: '한바탕 & KIMTAE', year: '2025', desc: '', link: '' },
+  { title: 'Joy of the Moment ver.1', artist: '한바탕 & KIMTAE', year: '2025', desc: '', link: '' },
+  { title: 'Hidden Things',      artist: 'NG',                year: '2025', desc: '', link: '' },
+  { title: '야호',                artist: '아루단테',           year: '2025', desc: '', link: '' },
+  { title: '말해줘',              artist: '이미블루',           year: '2024', desc: '', link: '' },
+  { title: '못났어',              artist: '이미블루',           year: '2024', desc: '', link: '' },
+  { title: '그 여름',             artist: '이미블루',           year: '2024', desc: '', link: '' },
+  { title: '낮잠',                artist: '이미블루',           year: '2024', desc: '', link: '' },
+  { title: 'Dark of Fantasy',    artist: '윤혜문',             year: '2024', desc: '', link: '' },
+  { title: '애국가',              artist: '',                  year: '2024', desc: '', link: '' },
+  { title: 'Cinema',             artist: '조주현',             year: '2023', desc: '', link: '' },
+  { title: 'JUMP',               artist: '밴드기린',           year: '2023', desc: '', link: '' },
+  { title: 'SICK',               artist: '',                  year: '2023', desc: '', link: '' },
+  { title: 'Wave',               artist: '',                  year: '2022', desc: '', link: '' },
+];
+
+const modal       = document.getElementById('workModal');
+const modalImg    = document.getElementById('modalImg');
+const modalTitle  = document.getElementById('modalTitle');
+const modalArtist = document.getElementById('modalArtist');
+const modalYear   = document.getElementById('modalYear');
+const modalDesc   = document.getElementById('modalDesc');
+const modalLink   = document.getElementById('modalLink');
+
+function openModal(index) {
+  const data = worksData[index];
+  const card = document.querySelectorAll('.work-card')[index];
+  if (!data || !card) return;
+
+  modalImg.src = card.querySelector('img').src;
+  modalImg.alt = data.title;
+  modalTitle.textContent  = data.title;
+  modalArtist.textContent = data.artist;
+  modalYear.textContent   = data.year;
+  modalDesc.textContent   = data.desc;
+  modalDesc.style.display = data.desc ? '' : 'none';
+
+  if (data.link) {
+    modalLink.href         = data.link;
+    modalLink.textContent  = '음악 듣기 →';
+    modalLink.style.display = '';
+  } else {
+    modalLink.style.display = 'none';
+  }
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.work-card').forEach((card, i) => {
+  card.addEventListener('click', () => openModal(i));
+});
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalBackdrop').addEventListener('click', closeModal);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
 /* ─── Works 더보기 ─────────────────────────────────────────── */
 document.querySelectorAll('.work-card').forEach((card, i) => {
   if (i >= 6) card.classList.add('extra-card');

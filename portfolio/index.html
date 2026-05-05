@@ -324,6 +324,27 @@
     </div>
   </footer>
 
+  <!-- ─── MODAL ─────────────────────────────────────────── -->
+  <div class="modal" id="workModal" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-panel">
+      <button class="modal-close" id="modalClose" aria-label="닫기">&#10005;</button>
+      <div class="modal-body">
+        <div class="modal-img-wrap">
+          <img id="modalImg" src="" alt="">
+        </div>
+        <div class="modal-info">
+          <span class="modal-tag" data-i18n="cat.albumCover">앨범커버</span>
+          <h3 class="modal-title" id="modalTitle"></h3>
+          <p class="modal-artist" id="modalArtist"></p>
+          <p class="modal-year" id="modalYear"></p>
+          <p class="modal-desc" id="modalDesc"></p>
+          <a class="modal-link" id="modalLink" target="_blank" rel="noopener" style="display:none"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
