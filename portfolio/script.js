@@ -138,17 +138,17 @@ const worksData = [
   { title: 'Joy of the Moment ver.2', artist: '한바탕 & KIMTAE', year: '2025', desc: '', link: '' },
   { title: 'Joy of the Moment ver.1', artist: '한바탕 & KIMTAE', year: '2025', desc: '', link: '' },
   { title: '야호',                artist: '아루단테',           year: '2025', desc: '', link: '' },
-  { title: 'Hidden Things',      artist: 'NG',                year: '2025', desc: '', link: '' },
+  { title: 'Hidden Things',      artist: '김소연',             year: '2025', desc: '', link: '' },
   { title: '말해줘',              artist: '이미블루',           year: '2024', desc: '', link: '' },
   { title: '못났어',              artist: '이미블루',           year: '2024', desc: '', link: '' },
   { title: '그 여름',             artist: '이미블루',           year: '2024', desc: '', link: '' },
   { title: '낮잠',                artist: '이미블루',           year: '2024', desc: '', link: '' },
   { title: 'Dark of Fantasy',    artist: '윤혜문',             year: '2024', desc: '', link: '' },
-  { title: '애국가',              artist: '',                  year: '2024', desc: '', link: '' },
+  { title: '애국가',              artist: '박미자, 겅경',        year: '2024', desc: '', link: '' },
   { title: 'Cinema',             artist: '조주현',             year: '2023', desc: '', link: '' },
   { title: 'JUMP',               artist: '밴드기린',           year: '2023', desc: '', link: '' },
-  { title: 'SICK',               artist: '',                  year: '2023', desc: '', link: '' },
-  { title: 'Wave',               artist: '',                  year: '2022', desc: '', link: '' },
+  { title: 'SICK',               artist: '정재승',             year: '2023', desc: '', link: '' },
+  { title: 'Wave',               artist: 'Sayma',             year: '2022', desc: '', link: '' },
 ];
 
 const modal       = document.getElementById('workModal');
