@@ -31,7 +31,7 @@ const dict = {
     'cat.graphic': 'Graphic Design',
     'cat.art':     'Visual Art',
     'work.placeholder': 'Title coming soon',
-    'about.p1': 'chigi is a visual artist and graphic designer.',
+    'about.p1': 'CHIGI is a visual artist and graphic designer.',
     'about.p2': 'Working in the space between image and language, she moves across media to build a visual language uniquely her own.',
     'about.p3': 'Photography, typography, moving image, print — her practice questions the boundaries between mediums.',
     'about.imgNote': 'Photo coming soon',
