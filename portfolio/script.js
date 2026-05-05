@@ -22,6 +22,7 @@ const dict = {
     'ig.art':   '아트워크',
     'cat.all': '전체',
     'cat.albumCover': '앨범커버',
+    'works.more': '더보기',
   },
   en: {
     'nav.works':   'Works',
@@ -45,6 +46,7 @@ const dict = {
     'ig.art':   'Artwork',
     'cat.all': 'All',
     'cat.albumCover': 'Album Cover',
+    'works.more': 'Load More',
   },
 };
 
@@ -125,6 +127,21 @@ document.head.appendChild(style);
 document.querySelectorAll('.work-card').forEach((el, i) => {
   el.style.setProperty('--i', i);
 });
+
+/* ─── Works 더보기 ─────────────────────────────────────────── */
+document.querySelectorAll('.work-card').forEach((card, i) => {
+  if (i >= 6) card.classList.add('extra-card');
+});
+
+const worksMoreBtn = document.getElementById('worksMoreBtn');
+if (worksMoreBtn) {
+  worksMoreBtn.addEventListener('click', () => {
+    document.querySelectorAll('.work-card.extra-card').forEach(card => {
+      card.classList.remove('extra-card');
+    });
+    document.getElementById('worksMoreWrap').style.display = 'none';
+  });
+}
 
 /* ─── Works 카테고리 필터 ─────────────────────────────────── */
 document.querySelectorAll('.works-tab').forEach(tab => {

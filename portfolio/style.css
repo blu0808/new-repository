@@ -178,14 +178,14 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 /* ─── WORKS ─────────────────────────────────────────── */
 .works-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 2px;
 }
 
 .work-card {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1;
   cursor: pointer;
 }
 
@@ -259,6 +259,25 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 }
 
 .work-card.hidden { display: none; }
+.work-card.extra-card { display: none; }
+
+.works-more-wrap {
+  text-align: center;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.works-more-btn {
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gray-4);
+  border: 1px solid var(--gray-2);
+  padding: 12px 40px;
+  border-radius: 2px;
+  transition: color .2s, border-color .2s;
+}
+.works-more-btn:hover { color: var(--black); border-color: var(--black); }
 
 /* ─── ABOUT ─────────────────────────────────────────── */
 .section--dark {
@@ -467,7 +486,6 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
 @media (max-width: 900px) {
-  .works-grid    { grid-template-columns: repeat(2, 1fr); }
   .about-layout  { grid-template-columns: 1fr; }
   .about-img-wrap { aspect-ratio: 16/9; }
   .media-layout  { grid-template-columns: 1fr; }
