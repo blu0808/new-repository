@@ -600,9 +600,8 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 }
 .modal-link:hover { color: var(--accent); border-color: var(--accent); }
 
-@media (max-width: 600px) {
+@media (max-width: 720px) {
   .modal-body { grid-template-columns: 1fr; }
-  .modal-img-wrap { aspect-ratio: 1; max-height: 50vw; }
 }
 
 /* ─── RESPONSIVE ─────────────────────────────────────────── */
