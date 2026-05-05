@@ -211,12 +211,16 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 .work-card:hover .work-thumb   { transform: scale(1.04); }
 
 .work-tag {
+  display: inline-block;
   font-size: .58rem;
   font-weight: 400;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.45);
-  margin-bottom: 6px;
+  color: rgba(255,255,255,.55);
+  background: rgba(255,255,255,.08);
+  padding: .28em .8em;
+  border-radius: 3px;
+  margin-bottom: 8px;
 }
 
 .work-name {
@@ -354,13 +358,16 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 }
 
 .proj-tag {
-  display: block;
+  display: inline-block;
   font-size: .58rem;
   font-weight: 400;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.3);
-  margin-bottom: .9rem;
+  color: rgba(255,255,255,.55);
+  background: rgba(255,255,255,.08);
+  padding: .28em .8em;
+  border-radius: 3px;
+  margin-bottom: 1rem;
 }
 
 .proj-title {
@@ -524,11 +531,15 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 }
 
 .media-platform {
+  display: inline-block;
   font-size: .58rem;
   font-weight: 400;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--gray-3);
+  color: rgba(255,255,255,.55);
+  background: rgba(255,255,255,.08);
+  padding: .28em .8em;
+  border-radius: 3px;
   margin-bottom: 20px;
 }
 
@@ -739,11 +750,15 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 }
 
 .modal-tag {
+  display: inline-block;
   font-size: .58rem;
   font-weight: 400;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--gray-3);
+  color: rgba(255,255,255,.55);
+  background: rgba(255,255,255,.08);
+  padding: .28em .8em;
+  border-radius: 3px;
 }
 
 .modal-title {
