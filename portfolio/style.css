@@ -522,7 +522,7 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 
 /* ─── MEDIA ─────────────────────────────────────────── */
 .media-layout {
-  max-width: 640px;
+  max-width: 900px;
 }
 
 .media-platform {
