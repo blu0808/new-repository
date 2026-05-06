@@ -232,11 +232,20 @@ function openEmailPanel() {
   setTimeout(() => epFrom.focus(), 420);
 }
 
+const epActions = document.getElementById('epSend').parentElement;
+const epConfirm = document.getElementById('epConfirm');
+
+function resetConfirm() {
+  epConfirm.classList.remove('show');
+  epActions.style.display = '';
+  epStatus.textContent = '';
+}
+
 function closeEmailPanel() {
   emailPanel.classList.remove('open');
   emailPanel.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
-  epStatus.textContent = '';
+  resetConfirm();
 }
 
 document.getElementById('emailTrigger').addEventListener('click', openEmailPanel);
@@ -248,14 +257,25 @@ document.getElementById('navContact').addEventListener('click', () => {
 });
 document.getElementById('epCancel').addEventListener('click', closeEmailPanel);
 document.getElementById('epBackdrop').addEventListener('click', closeEmailPanel);
+document.getElementById('epConfirmBack').addEventListener('click', resetConfirm);
 
-document.getElementById('epSend').addEventListener('click', async () => {
+document.getElementById('epSend').addEventListener('click', () => {
   const from = epFrom.value.trim();
   const msg  = epMessage.value.trim();
   if (!from || !msg) {
     epStatus.textContent = lang === 'ko' ? '이메일과 메시지를 입력해주세요.' : 'Please fill in all fields.';
     return;
   }
+  epActions.style.display = 'none';
+  epConfirm.classList.add('show');
+  epStatus.textContent = '';
+});
+
+document.getElementById('epConfirmSend').addEventListener('click', async () => {
+  const from = epFrom.value.trim();
+  const msg  = epMessage.value.trim();
+  epConfirm.classList.remove('show');
+  epActions.style.display = '';
   epStatus.textContent = lang === 'ko' ? '보내는 중...' : 'Sending...';
   try {
     const res = await fetch('https://formspree.io/f/xgodzyjr', {
