@@ -254,6 +254,7 @@ document.querySelectorAll('.works-tab').forEach(tab => {
       if (!hide) visible++;
     });
     worksGrid.classList.toggle('poster-view', filter === 'poster');
+    document.getElementById('works').classList.toggle('poster-active', filter === 'poster');
     const emptyEl = document.getElementById('worksEmpty');
     const moreWrap = document.getElementById('worksMoreWrap');
     if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
