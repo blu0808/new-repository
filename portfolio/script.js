@@ -249,18 +249,30 @@ document.getElementById('navContact').addEventListener('click', () => {
 document.getElementById('epCancel').addEventListener('click', closeEmailPanel);
 document.getElementById('epBackdrop').addEventListener('click', closeEmailPanel);
 
-document.getElementById('epSend').addEventListener('click', () => {
+document.getElementById('epSend').addEventListener('click', async () => {
   const from = epFrom.value.trim();
   const msg  = epMessage.value.trim();
   if (!from || !msg) {
     epStatus.textContent = lang === 'ko' ? '이메일과 메시지를 입력해주세요.' : 'Please fill in all fields.';
     return;
   }
-  const body = `From: ${from}\n\n${msg}`;
-  window.open(`mailto:chigi225@gmail.com?body=${encodeURIComponent(body)}`, '_blank');
-  epStatus.textContent = lang === 'ko' ? '메일 앱이 열렸어요 :)' : 'Mail app opened :)';
-  epFrom.value = '';
-  epMessage.value = '';
+  epStatus.textContent = lang === 'ko' ? '보내는 중...' : 'Sending...';
+  try {
+    const res = await fetch('https://formspree.io/f/xgodzyjr', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ _replyto: from, message: msg }),
+    });
+    if (res.ok) {
+      epStatus.textContent = lang === 'ko' ? '보내졌어요! 감사합니다 :)' : 'Sent! Thank you :)';
+      epFrom.value = '';
+      epMessage.value = '';
+    } else { throw new Error(); }
+  } catch {
+    epStatus.textContent = lang === 'ko'
+      ? '오류가 발생했어요. chigi225@gmail.com으로 직접 보내주세요.'
+      : 'Something went wrong. Please email chigi225@gmail.com directly.';
+  }
 });
 
 /* ─── Works 더보기 ─────────────────────────────────────────── */
