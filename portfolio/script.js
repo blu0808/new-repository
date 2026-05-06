@@ -240,6 +240,12 @@ function closeEmailPanel() {
 }
 
 document.getElementById('emailTrigger').addEventListener('click', openEmailPanel);
+document.getElementById('navContact').addEventListener('click', () => {
+  navMenu.classList.remove('open');
+  hamburger.classList.remove('open');
+  document.body.style.overflow = '';
+  openEmailPanel();
+});
 document.getElementById('epCancel').addEventListener('click', closeEmailPanel);
 document.getElementById('epBackdrop').addEventListener('click', closeEmailPanel);
 

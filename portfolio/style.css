@@ -79,6 +79,13 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
   transition: color .2s;
 }
 .nav-link:hover { color: var(--black); }
+.nav-link--contact {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font);
+}
 
 .nav-right {
   display: flex;
