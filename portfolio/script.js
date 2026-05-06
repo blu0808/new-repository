@@ -235,6 +235,8 @@ if (worksMoreBtn) {
 }
 
 /* ─── Works 카테고리 필터 ─────────────────────────────────── */
+const worksGrid = document.querySelector('.works-grid');
+
 document.querySelectorAll('.works-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.works-tab').forEach(t => t.classList.remove('active'));
@@ -251,6 +253,7 @@ document.querySelectorAll('.works-tab').forEach(tab => {
       }
       if (!hide) visible++;
     });
+    worksGrid.classList.toggle('poster-view', filter === 'poster');
     const emptyEl = document.getElementById('worksEmpty');
     const moreWrap = document.getElementById('worksMoreWrap');
     if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';

@@ -265,6 +265,51 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 .work-card.hidden { display: none; }
 .work-card.extra-card { display: none; }
 
+/* ─── POSTER VIEW (포스터 탭 전용 레이아웃) ─────────────── */
+.works-grid.poster-view {
+  display: block;
+  columns: 3;
+  column-gap: clamp(20px, 2.5vw, 36px);
+}
+.works-grid.poster-view .work-card {
+  break-inside: avoid;
+  aspect-ratio: auto;
+  overflow: visible;
+  margin-bottom: clamp(20px, 2.5vw, 36px);
+  cursor: pointer;
+}
+.works-grid.poster-view .work-card .work-thumb {
+  height: auto;
+  background: transparent;
+  overflow: visible;
+  transform: none !important;
+}
+.works-grid.poster-view .work-card .work-thumb img {
+  height: auto;
+  box-shadow: 0 10px 36px rgba(0,0,0,.38), 0 3px 10px rgba(0,0,0,.18);
+  transition: transform .4s ease, box-shadow .4s ease;
+}
+.works-grid.poster-view .work-card:hover .work-thumb img {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0,0,0,.5), 0 6px 16px rgba(0,0,0,.25);
+}
+.works-grid.poster-view .work-overlay {
+  position: static;
+  background: none;
+  opacity: 1;
+  padding: 10px 0 0;
+}
+.works-grid.poster-view .work-tag { display: none; }
+.works-grid.poster-view .work-name {
+  color: rgba(255,255,255,.45);
+  font-size: clamp(11px, 0.85vw, 13px);
+  font-weight: 300;
+  letter-spacing: .07em;
+}
+@media (max-width: 600px) {
+  .works-grid.poster-view { columns: 2; }
+}
+
 .works-more-wrap {
   text-align: center;
   margin-top: clamp(28px, 4vw, 48px);
