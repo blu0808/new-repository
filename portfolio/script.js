@@ -263,12 +263,14 @@ document.getElementById('epSend').addEventListener('click', () => {
   const from = epFrom.value.trim();
   const msg  = epMessage.value.trim();
   if (!from || !msg) {
+    epStatus.classList.add('error');
     epStatus.textContent = lang === 'ko' ? '이메일과 메시지를 입력해주세요.' : 'Please fill in all fields.';
     return;
   }
   epActions.style.display = 'none';
   epConfirm.classList.add('show');
   epStatus.textContent = '';
+  epStatus.classList.remove('error');
 });
 
 document.getElementById('epConfirmSend').addEventListener('click', async () => {
@@ -276,6 +278,7 @@ document.getElementById('epConfirmSend').addEventListener('click', async () => {
   const msg  = epMessage.value.trim();
   epConfirm.classList.remove('show');
   epActions.style.display = '';
+  epStatus.classList.remove('error');
   epStatus.textContent = lang === 'ko' ? '보내는 중...' : 'Sending...';
   try {
     const res = await fetch('https://formspree.io/f/xgodzyjr', {
@@ -289,6 +292,7 @@ document.getElementById('epConfirmSend').addEventListener('click', async () => {
       epMessage.value = '';
     } else { throw new Error(); }
   } catch {
+    epStatus.classList.add('error');
     epStatus.textContent = lang === 'ko'
       ? '오류가 발생했어요. chigi225@gmail.com으로 직접 보내주세요.'
       : 'Something went wrong. Please email chigi225@gmail.com directly.';

@@ -861,6 +861,7 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
   min-height: 20px;
   text-align: center;
 }
+.ep-status.error { color: var(--warn); }
 
 .contact-socials {
   display: flex;
