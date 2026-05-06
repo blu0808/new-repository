@@ -241,14 +241,19 @@ document.querySelectorAll('.works-tab').forEach(tab => {
     tab.classList.add('active');
     const filter = tab.dataset.filter;
     let visible = 0;
-    document.querySelectorAll('.work-card').forEach(card => {
+    document.querySelectorAll('.work-card').forEach((card, i) => {
       const hide = filter !== 'all' && card.dataset.category !== filter;
       card.classList.toggle('hidden', hide);
+      if (filter === 'all') {
+        card.classList.toggle('extra-card', i >= 6);
+      } else {
+        card.classList.remove('extra-card');
+      }
       if (!hide) visible++;
     });
     const emptyEl = document.getElementById('worksEmpty');
     const moreWrap = document.getElementById('worksMoreWrap');
     if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
-    if (moreWrap) moreWrap.style.display = visible === 0 ? 'none' : '';
+    if (moreWrap) moreWrap.style.display = (filter === 'all' && visible > 6) ? '' : 'none';
   });
 });
