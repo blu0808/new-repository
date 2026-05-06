@@ -217,7 +217,45 @@ document.querySelectorAll('.work-card').forEach((card, i) => {
 
 document.getElementById('modalClose').addEventListener('click', closeModal);
 document.getElementById('modalBackdrop').addEventListener('click', closeModal);
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeEmailPanel(); } });
+
+/* ─── Email Panel ───────────────────────────────────────── */
+const emailPanel = document.getElementById('emailPanel');
+const epFrom     = document.getElementById('epFrom');
+const epMessage  = document.getElementById('epMessage');
+const epStatus   = document.getElementById('epStatus');
+
+function openEmailPanel() {
+  emailPanel.classList.add('open');
+  emailPanel.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => epFrom.focus(), 420);
+}
+
+function closeEmailPanel() {
+  emailPanel.classList.remove('open');
+  emailPanel.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  epStatus.textContent = '';
+}
+
+document.getElementById('emailTrigger').addEventListener('click', openEmailPanel);
+document.getElementById('epCancel').addEventListener('click', closeEmailPanel);
+document.getElementById('epBackdrop').addEventListener('click', closeEmailPanel);
+
+document.getElementById('epSend').addEventListener('click', () => {
+  const from = epFrom.value.trim();
+  const msg  = epMessage.value.trim();
+  if (!from || !msg) {
+    epStatus.textContent = lang === 'ko' ? '이메일과 메시지를 입력해주세요.' : 'Please fill in all fields.';
+    return;
+  }
+  const body = `From: ${from}\n\n${msg}`;
+  window.open(`mailto:chigi225@gmail.com?body=${encodeURIComponent(body)}`, '_blank');
+  epStatus.textContent = lang === 'ko' ? '메일 앱이 열렸어요 :)' : 'Mail app opened :)';
+  epFrom.value = '';
+  epMessage.value = '';
+});
 
 /* ─── Works 더보기 ─────────────────────────────────────────── */
 document.querySelectorAll('.work-card').forEach((card, i) => {

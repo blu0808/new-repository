@@ -387,7 +387,7 @@
 
       <div class="contact-body">
         <!-- 이메일 주소를 실제 이메일로 교체하세요 -->
-        <a href="mailto:chigi225@gmail.com" class="contact-email">chigi225@gmail.com</a>
+        <button class="contact-email" id="emailTrigger">chigi225@gmail.com</button>
 
         <div class="contact-socials">
           <a href="https://www.youtube.com/@jeongjyojyo"  target="_blank" rel="noopener">YouTube</a>
@@ -403,6 +403,30 @@
       <span>© 2026 CHIGI</span>
     </div>
   </footer>
+
+  <!-- ─── EMAIL PANEL ──────────────────────────────────────── -->
+  <div class="email-panel" id="emailPanel" aria-hidden="true">
+    <div class="ep-backdrop" id="epBackdrop"></div>
+    <div class="ep-drawer" role="dialog" aria-modal="true" aria-label="이메일 보내기">
+      <div class="ep-row">
+        <span class="ep-label">To:</span>
+        <span class="ep-val">CHIGI</span>
+      </div>
+      <div class="ep-row">
+        <span class="ep-label">From:</span>
+        <input type="email" id="epFrom" class="ep-input" placeholder="Enter Your Email Address" autocomplete="email">
+      </div>
+      <div class="ep-row ep-row--msg">
+        <span class="ep-label">Message:</span>
+        <textarea id="epMessage" class="ep-textarea"></textarea>
+      </div>
+      <div class="ep-actions">
+        <button class="ep-btn ep-btn--send" id="epSend">Send Email</button>
+        <button class="ep-btn ep-btn--cancel" id="epCancel">Cancel</button>
+      </div>
+      <p class="ep-status" id="epStatus"></p>
+    </div>
+  </div>
 
   <!-- ─── MODAL ─────────────────────────────────────────── -->
   <div class="modal" id="workModal" role="dialog" aria-modal="true">
