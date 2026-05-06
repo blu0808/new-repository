@@ -224,7 +224,7 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 }
 
 .work-name {
-  font-size: .95rem;
+  font-size: clamp(13px, 1.1vw, 15px);
   font-weight: 400;
   color: var(--white);
 }
@@ -380,7 +380,7 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 }
 
 .proj-meta {
-  font-size: .78rem;
+  font-size: clamp(11px, 0.85vw, 13px);
   font-weight: 300;
   letter-spacing: .07em;
   color: rgba(255,255,255,.35);
@@ -504,7 +504,7 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 .works-empty {
   padding: clamp(40px, 8vw, 80px) 0;
   text-align: center;
-  font-size: .8rem;
+  font-size: clamp(12px, 0.9vw, 14px);
   letter-spacing: .12em;
   color: var(--gray-3);
 }
@@ -624,7 +624,7 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 
 .media-link {
   display: inline-block;
-  font-size: .8rem;
+  font-size: clamp(12px, 0.9vw, 14px);
   font-weight: 500;
   letter-spacing: .04em;
   color: var(--black);
@@ -659,7 +659,7 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
   gap: 28px;
 }
 .contact-socials a {
-  font-size: .8rem;
+  font-size: clamp(12px, 0.9vw, 14px);
   font-weight: 400;
   letter-spacing: .06em;
   color: var(--gray-3);
@@ -770,18 +770,18 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
 }
 
 .modal-artist {
-  font-size: .9rem;
+  font-size: clamp(13px, 1vw, 15px);
   color: var(--gray-4);
 }
 
 .modal-year {
-  font-size: .75rem;
+  font-size: clamp(11px, 0.8vw, 13px);
   color: var(--gray-3);
   letter-spacing: .06em;
 }
 
 .modal-desc {
-  font-size: .9rem;
+  font-size: clamp(13px, 1vw, 15px);
   line-height: 1.85;
   color: var(--gray-4);
   margin-top: 8px;
@@ -791,7 +791,7 @@ button { font-family: var(--font); cursor: pointer; background: none; border: no
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: .8rem;
+  font-size: clamp(11px, 0.85vw, 13px);
   font-weight: 500;
   letter-spacing: .04em;
   color: var(--black);
