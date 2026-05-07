@@ -49,10 +49,16 @@ button { font-family: var(--font); cursor: pointer; }
   color: var(--accent);
   line-height: 1.5;
 }
-.sb-nav, .sb-links {
+.sb-bio {
+  font-size: .75rem;
+  color: var(--accent);
+  line-height: 1.7;
+  opacity: .75;
+}
+.sb-links {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 8px;
 }
 .sb-link {
   font-size: .8rem;

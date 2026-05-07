@@ -34,6 +34,7 @@ const dict = {
     'cat.poster': '포스터',
     'cat.toon': '치기툰',
     'works.empty': '업로드 예정입니다.',
+    'sb.bio': '일상의 작고 여린 감정들을 이미지와 언어로 붙잡습니다. 독립출판 《춤추는 독백》 저자.',
   },
   en: {
     'nav.works':   'Works',
@@ -69,6 +70,7 @@ const dict = {
     'cat.poster': 'Poster',
     'cat.toon': 'Toon',
     'works.empty': 'Coming soon.',
+    'sb.bio': 'Visual artist capturing small, tender emotions through image and language. Author of self-published 《Dancing Monologue》.',
   },
 };
 
