@@ -629,16 +629,19 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
     top: 56px; left: 0; right: 0; bottom: 0;
     background: var(--white);
     flex-direction: column;
-    padding: 36px 24px;
-    gap: 24px;
+    padding: 40px 32px;
+    gap: 8px;
     overflow-y: auto;
   }
   .nav-menu.open { display: flex; }
   .nav-link {
-    font-size: 1.1rem; letter-spacing: .04em;
+    font-size: 1.25rem; letter-spacing: .04em;
     color: var(--black); background: none; border: none;
-    text-align: left; padding: 0;
+    text-align: left; padding: 14px 0;
+    border-bottom: 1px solid var(--gray-2);
+    width: 100%;
   }
+  .nav-link:last-child { border-bottom: none; }
   .nav-link--contact { color: var(--accent); }
 
   .main { padding-top: 56px; }
