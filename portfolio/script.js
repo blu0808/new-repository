@@ -386,11 +386,11 @@ if (zoomOverlay) {
   });
 }
 
-/* hero video cover — 썸네일이 바로 보이다가 영상 재생 후 걷힘 */
+/* hero video cover — 썸네일로 초기 로딩 숨기고 1.2초 후 페이드아웃, 이후 쉴드로 유지 */
 const heroCover = document.getElementById('heroVideoCover');
 if (heroCover) {
   setTimeout(() => {
     heroCover.style.opacity = '0';
-    setTimeout(() => { heroCover.style.display = 'none'; }, 600);
-  }, 1800);
+    heroCover.style.pointerEvents = 'none';
+  }, 1200);
 }
