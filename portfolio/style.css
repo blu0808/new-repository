@@ -225,18 +225,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   transform: translateY(-4px);
   box-shadow: 0 16px 44px rgba(0,0,0,.45);
 }
-.works-grid.poster-view .work-overlay {
-  position: static;
-  background: none;
-  opacity: 1;
-  padding: 8px 0 0;
-}
-.works-grid.poster-view .work-tag { display: none; }
-.works-grid.poster-view .work-name {
-  color: var(--gray-4);
-  font-size: clamp(11px, .8vw, 12px);
-  font-weight: 300;
-}
+.works-grid.poster-view .work-overlay { display: none; }
 
 #works { transition: background .5s ease; }
 #works.poster-active { background: #1626CC; }

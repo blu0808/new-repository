@@ -310,20 +310,6 @@ document.getElementById('epConfirmSend').addEventListener('click', async () => {
   }
 });
 
-/* ─── Works 더보기 ─────────────────────────────────────────── */
-document.querySelectorAll('.work-card').forEach((card, i) => {
-  if (i >= 6) card.classList.add('extra-card');
-});
-
-const worksMoreBtn = document.getElementById('worksMoreBtn');
-if (worksMoreBtn) {
-  worksMoreBtn.addEventListener('click', () => {
-    document.querySelectorAll('.work-card.extra-card').forEach(card => {
-      card.classList.remove('extra-card');
-    });
-    document.getElementById('worksMoreWrap').style.display = 'none';
-  });
-}
 
 /* ─── Works 카테고리 필터 ─────────────────────────────────── */
 const worksGrid = document.querySelector('.works-grid');
@@ -337,19 +323,12 @@ document.querySelectorAll('.works-tab').forEach(tab => {
     document.querySelectorAll('.work-card').forEach((card, i) => {
       const hide = filter !== 'all' && card.dataset.category !== filter;
       card.classList.toggle('hidden', hide);
-      if (filter === 'all') {
-        card.classList.toggle('extra-card', i >= 6);
-      } else {
-        card.classList.remove('extra-card');
-      }
       if (!hide) visible++;
     });
     worksGrid.classList.toggle('poster-view', filter === 'poster');
     document.getElementById('works').classList.toggle('poster-active', filter === 'poster');
     const emptyEl = document.getElementById('worksEmpty');
-    const moreWrap = document.getElementById('worksMoreWrap');
     if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
-    if (moreWrap) moreWrap.style.display = (filter === 'all' && visible > 6) ? '' : 'none';
   });
 });
 
