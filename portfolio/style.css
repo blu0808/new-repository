@@ -111,6 +111,11 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   height: 100%;
   border: 0;
 }
+.hero-video-shield {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
 
 .container {
   max-width: 1100px;
