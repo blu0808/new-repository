@@ -603,6 +603,79 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 .zoom-overlay.open .zoom-img { transform: scale(1); }
 
+/* ─── Album Play Button ───────────────────────────────────── */
+.work-card[data-yt] { cursor: pointer; }
+.work-card[data-yt] .work-overlay::after {
+  content: '▶';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) scale(.7);
+  width: 52px; height: 52px;
+  background: rgba(255,255,255,.92);
+  color: var(--accent);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  padding-left: 4px;
+  line-height: 52px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity .2s, transform .2s;
+  pointer-events: none;
+}
+.work-card[data-yt]:hover .work-overlay::after {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* ─── YouTube Modal ───────────────────────────────────────── */
+.yt-modal {
+  position: fixed; inset: 0; z-index: 900;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s;
+}
+.yt-modal.open { opacity: 1; pointer-events: all; }
+.yt-modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.88);
+  cursor: pointer;
+}
+.yt-modal-wrap {
+  position: relative; z-index: 1;
+  width: min(860px, 92vw);
+}
+.yt-modal-close {
+  position: absolute;
+  top: -40px; right: 0;
+  background: none; border: none;
+  color: var(--white);
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: .7;
+  transition: opacity .2s;
+}
+.yt-modal-close:hover { opacity: 1; }
+.yt-modal-player {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  background: var(--black);
+}
+.yt-modal-player iframe {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  border: 0;
+}
+.yt-modal-title {
+  color: var(--white);
+  font-size: .85rem;
+  letter-spacing: .04em;
+  margin-top: 14px;
+  opacity: .7;
+  text-align: center;
+}
+
 /* ─── Hamburger (mobile) ──────────────────────────────────── */
 .hamburger {
   background: none; border: none;

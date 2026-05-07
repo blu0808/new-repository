@@ -227,6 +227,7 @@ document.addEventListener('keydown', e => {
     closeModal();
     closeEmailPanel();
     if (zoomOverlay) { zoomOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+    if (typeof closeYtModal === 'function') closeYtModal();
   }
 });
 
@@ -385,6 +386,38 @@ if (zoomOverlay) {
     document.body.style.overflow = '';
   });
 }
+
+/* ─── YouTube Modal ─────────────────────────────────────── */
+const ytModal = document.getElementById('ytModal');
+const ytModalPlayer = document.getElementById('ytModalPlayer');
+const ytModalTitle = document.getElementById('ytModalTitle');
+const ytModalClose = document.getElementById('ytModalClose');
+const ytModalBackdrop = document.getElementById('ytModalBackdrop');
+
+function openYtModal(videoId, title) {
+  ytModalPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+  ytModalTitle.textContent = title;
+  ytModal.classList.add('open');
+  ytModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeYtModal() {
+  if (!ytModal.classList.contains('open')) return;
+  ytModal.classList.remove('open');
+  ytModal.setAttribute('aria-hidden', 'true');
+  ytModalPlayer.innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.work-card[data-yt]').forEach(card => {
+  card.addEventListener('click', () => {
+    openYtModal(card.dataset.yt, card.querySelector('.work-name')?.textContent || '');
+  });
+});
+
+if (ytModalClose) ytModalClose.addEventListener('click', closeYtModal);
+if (ytModalBackdrop) ytModalBackdrop.addEventListener('click', closeYtModal);
 
 /* hero video cover — 썸네일로 초기 로딩 숨기고 1.2초 후 페이드아웃, 이후 쉴드로 유지 */
 const heroCover = document.getElementById('heroVideoCover');
