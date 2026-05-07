@@ -12,397 +12,294 @@
 </head>
 <body>
 
-  <!-- ─── NAV ─────────────────────────────────────────── -->
-  <nav class="nav" id="nav">
-    <a href="#hero" class="nav-logo">CHIGI</a>
+  <!-- ─── SIDEBAR (desktop) ──────────────────────────────── -->
+  <aside class="sidebar">
+    <div class="sb-top">
+      <a class="sb-logo" href="#">CHIGI</a>
+      <p class="sb-tagline" data-i18n="hero.sub">시각예술가 · 그래픽 디자이너</p>
+    </div>
+    <nav class="sb-nav">
+      <a class="sb-link" href="#works"    data-i18n="nav.works">Works</a>
+      <a class="sb-link" href="#projects" data-i18n="nav.projects">Projects</a>
+      <a class="sb-link" href="#about"    data-i18n="nav.about">About</a>
+      <a class="sb-link" href="#media"    data-i18n="nav.media">Media</a>
+    </nav>
+    <div class="sb-links">
+      <button class="sb-link sb-contact" id="emailTrigger" data-i18n="nav.contact">Contact</button>
+      <a class="sb-link" href="https://www.instagram.com/chigiverses" target="_blank" rel="noopener">Instagram</a>
+      <a class="sb-link" href="https://www.youtube.com/@jeongjyojyo"  target="_blank" rel="noopener">YouTube</a>
+    </div>
+    <div class="sb-footer">
+      <button class="lang-btn" id="langToggle">EN</button>
+    </div>
+  </aside>
 
+  <!-- ─── MOBILE NAV ──────────────────────────────────────── -->
+  <nav class="nav" id="nav">
+    <a class="nav-logo" href="#">CHIGI</a>
     <div class="nav-menu" id="navMenu">
-      <a href="#works"    class="nav-link" data-i18n="nav.works">Works</a>
-      <a href="#about"    class="nav-link" data-i18n="nav.about">About</a>
-      <a href="#projects" class="nav-link" data-i18n="nav.projects">Projects</a>
-      <a href="#media"    class="nav-link" data-i18n="nav.media">Media</a>
+      <a class="nav-link" href="#works"    data-i18n="nav.works">Works</a>
+      <a class="nav-link" href="#projects" data-i18n="nav.projects">Projects</a>
+      <a class="nav-link" href="#about"    data-i18n="nav.about">About</a>
+      <a class="nav-link" href="#media"    data-i18n="nav.media">Media</a>
       <button class="nav-link nav-link--contact" id="navContact" data-i18n="nav.contact">Contact</button>
     </div>
-
     <div class="nav-right">
-      <button class="lang-btn" id="langToggle">EN</button>
+      <button class="lang-btn" id="langToggleMobile">EN</button>
       <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
         <span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- ─── HERO ─────────────────────────────────────────── -->
-  <section class="hero" id="hero">
-    <h1 class="hero-name">CHIGI</h1>
-    <p class="hero-sub" data-i18n="hero.sub">시각예술가 · 그래픽 디자이너</p>
-    <a href="#works" class="hero-cta" data-i18n="hero.cta">작업물 보기</a>
-  </section>
+  <!-- ─── MAIN ────────────────────────────────────────────── -->
+  <main class="main">
 
-  <!-- ─── WORKS ─────────────────────────────────────────── -->
-  <section class="section" id="works">
-    <div class="container">
-      <h2 class="section-title" data-i18n="nav.works">Works</h2>
+    <!-- ─── WORKS ────────────────────────────────────────── -->
+    <section class="section" id="works">
+      <div class="container">
+        <h2 class="section-title" data-i18n="nav.works">Works</h2>
 
-      <div class="works-tabs">
-        <button class="works-tab active" data-filter="all"         data-i18n="cat.all">전체</button>
-        <button class="works-tab" data-filter="album-cover" data-i18n="cat.albumCover">앨범커버</button>
-        <button class="works-tab" data-filter="poster"     data-i18n="cat.poster">포스터</button>
-        <button class="works-tab" data-filter="toon"       data-i18n="cat.toon">치기툰</button>
+        <div class="works-tabs">
+          <button class="works-tab active" data-filter="all"         data-i18n="cat.all">전체</button>
+          <button class="works-tab"        data-filter="album-cover" data-i18n="cat.albumCover">앨범커버</button>
+          <button class="works-tab"        data-filter="poster"      data-i18n="cat.poster">포스터</button>
+          <button class="works-tab"        data-filter="toon"        data-i18n="cat.toon">치기툰</button>
+        </div>
+
+        <div class="works-grid">
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/260116_yeryeband.jpg" alt="너를 기다리고 있어"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">너를 기다리고 있어</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/251010_End(And)_Grace.jpg" alt="End(And)"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">End(And)</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/250414_sikeun.jpg" alt="시큰"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">시큰</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/250321_hikari._gonhee.jpg" alt="hikari."></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">hikari.</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/250214_Hanbatang&Kimtae_Joyofthemomoment_ver2.jpg" alt="Joy of the Moment ver.2"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">Joy of the Moment ver.2</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/250214_Joyofthemomoment_Hanbatang&Kimtae_ver1.jpg" alt="Joy of the Moment ver.1"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">Joy of the Moment ver.1</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/250110_yaho.jpg" alt="야호"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">야호</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/250116_hidden-things.jpg" alt="Hidden Things"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">Hidden Things</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/240713_malhaejwo.jpg" alt="말해줘"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">말해줘</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/240629_mosnasseo.jpg" alt="못났어"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">못났어</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/240623_geuyeoreum.jpg" alt="그 여름"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">그 여름</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/240527_najjam.jpg" alt="낮잠"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">낮잠</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/240226_dark-of-fantasy.jpg" alt="Dark of Fantasy"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">Dark of Fantasy</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/240222_aegukga.jpg" alt="애국가"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">애국가</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/231214_cinema.jpg" alt="Cinema"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">Cinema</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/231013_JUMP.jpg" alt="JUMP"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">JUMP</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/230521_sick.jpg" alt="SICK"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">SICK</p></div>
+          </article>
+
+          <article class="work-card" data-category="album-cover">
+            <div class="work-thumb"><img src="images/works/album-covers/221015_Wave_Sayma.JPG" alt="Wave"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.albumCover">앨범커버</span><p class="work-name">Wave</p></div>
+          </article>
+
+          <article class="work-card" data-category="poster">
+            <div class="work-thumb"><img src="images/artwork/260426_miari.jpg" alt="미아리텍사스골목"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.poster">포스터</span><p class="work-name">미아리텍사스골목</p></div>
+          </article>
+
+          <article class="work-card" data-category="poster">
+            <div class="work-thumb"><img src="images/artwork/yuhyuna.jpg" alt="시인 유현아 전시"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.poster">포스터</span><p class="work-name">시인 유현아 전시</p></div>
+          </article>
+
+          <article class="work-card" data-category="poster">
+            <div class="work-thumb"><img src="images/artwork/0824_mulgyeol-seosa.jpg" alt="물결서사 유성원전"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.poster">포스터</span><p class="work-name">물결서사 유성원전</p></div>
+          </article>
+
+          <article class="work-card" data-category="poster">
+            <div class="work-thumb"><img src="images/artwork/mulgyeol-3days-1.jpg" alt="물결 3일"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.poster">포스터</span><p class="work-name">물결 3일</p></div>
+          </article>
+
+          <article class="work-card" data-category="poster">
+            <div class="work-thumb"><img src="images/artwork/mulgyeol-3days-2.jpg" alt="물결 3일"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.poster">포스터</span><p class="work-name">물결 3일</p></div>
+          </article>
+
+          <article class="work-card" data-category="poster">
+            <div class="work-thumb"><img src="images/artwork/mulgyeol-3days-3.jpg" alt="물결 3일"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.poster">포스터</span><p class="work-name">물결 3일</p></div>
+          </article>
+
+          <article class="work-card" data-category="poster">
+            <div class="work-thumb"><img src="images/artwork/1025_reilin.jpg" alt="레이린 연주와 시"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.poster">포스터</span><p class="work-name">레이린 연주와 시</p></div>
+          </article>
+
+          <article class="work-card" data-category="poster">
+            <div class="work-thumb"><img src="images/artwork/1031_anmiok.jpg" alt="안미옥 시인 북토크"></div>
+            <div class="work-overlay"><span class="work-tag" data-i18n="cat.poster">포스터</span><p class="work-name">안미옥 시인 북토크</p></div>
+          </article>
+
+        </div>
+
+        <p class="works-empty" id="worksEmpty" style="display:none" data-i18n="works.empty">업로드 예정입니다.</p>
+        <div class="works-more-wrap" id="worksMoreWrap">
+          <button class="works-more-btn" id="worksMoreBtn" data-i18n="works.more">더보기</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PROJECTS (mikiperse rows) ──────────────────────── -->
+    <section class="section section--projects" id="projects">
+      <div class="proj-section-header">
+        <h2 class="section-title" data-i18n="nav.projects">Projects</h2>
+        <p class="proj-tagline" data-i18n="projects.tagline">춤추는 독백의 세계 — 책, 사진전, 유튜브</p>
       </div>
 
-      <div class="works-grid">
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/260116_yeryeband.jpg" alt="너를 기다리고 있어"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">너를 기다리고 있어</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/251010_End(And)_Grace.jpg" alt="End(And)"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">End(And)</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/250414_sikeun.jpg" alt="시큰"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">시큰</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/250321_hikari._gonhee.jpg" alt="hikari."></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">hikari.</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/250214_Hanbatang&Kimtae_Joyofthemomoment_ver2.jpg" alt="Joy of the Moment ver.2"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">Joy of the Moment ver.2</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/250214_Joyofthemomoment_Hanbatang&Kimtae_ver1.jpg" alt="Joy of the Moment ver.1"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">Joy of the Moment ver.1</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/250110_yaho.jpg" alt="야호"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">야호</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/250116_hidden-things.jpg" alt="Hidden Things"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">Hidden Things</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/240713_malhaejwo.jpg" alt="말해줘"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">말해줘</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/240629_mosnasseo.jpg" alt="못났어"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">못났어</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/240623_geuyeoreum.jpg" alt="그 여름"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">그 여름</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/240527_najjam.jpg" alt="낮잠"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">낮잠</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/240226_dark-of-fantasy.jpg" alt="Dark of Fantasy"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">Dark of Fantasy</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/240222_aegukga.jpg" alt="애국가"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">애국가</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/231214_cinema.jpg" alt="Cinema"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">Cinema</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/231013_JUMP.jpg" alt="JUMP"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">JUMP</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/230521_sick.jpg" alt="SICK"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">SICK</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="album-cover">
-          <div class="work-thumb"><img src="images/works/album-covers/221015_Wave_Sayma.JPG" alt="Wave"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.albumCover">앨범커버</span>
-            <p class="work-name">Wave</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="poster">
-          <div class="work-thumb"><img src="images/artwork/260426_miari.jpg" alt="미아리텍사스골목"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.poster">포스터</span>
-            <p class="work-name">미아리텍사스골목</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="poster">
-          <div class="work-thumb"><img src="images/artwork/yuhyuna.jpg" alt="시인 유현아 전시"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.poster">포스터</span>
-            <p class="work-name">시인 유현아 전시</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="poster">
-          <div class="work-thumb"><img src="images/artwork/0824_mulgyeol-seosa.jpg" alt="물결서사 유성원전"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.poster">포스터</span>
-            <p class="work-name">물결서사 유성원전</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="poster">
-          <div class="work-thumb"><img src="images/artwork/mulgyeol-3days-1.jpg" alt="물결 3일"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.poster">포스터</span>
-            <p class="work-name">물결 3일</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="poster">
-          <div class="work-thumb"><img src="images/artwork/mulgyeol-3days-2.jpg" alt="물결 3일"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.poster">포스터</span>
-            <p class="work-name">물결 3일</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="poster">
-          <div class="work-thumb"><img src="images/artwork/mulgyeol-3days-3.jpg" alt="물결 3일"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.poster">포스터</span>
-            <p class="work-name">물결 3일</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="poster">
-          <div class="work-thumb"><img src="images/artwork/1025_reilin.jpg" alt="레이린 연주와 시"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.poster">포스터</span>
-            <p class="work-name">레이린 연주와 시</p>
-          </div>
-        </article>
-
-        <article class="work-card" data-category="poster">
-          <div class="work-thumb"><img src="images/artwork/1031_anmiok.jpg" alt="안미옥 시인 북토크"></div>
-          <div class="work-overlay">
-            <span class="work-tag" data-i18n="cat.poster">포스터</span>
-            <p class="work-name">안미옥 시인 북토크</p>
-          </div>
-        </article>
-
+      <div class="proj-row">
+        <div class="proj-row-text">
+          <span class="proj-tag" data-i18n="ptag.book">독립출판</span>
+          <h3 class="proj-row-title">춤추는 독백</h3>
+          <p class="proj-row-meta">2024 · Dancing Monologue</p>
+          <blockquote class="proj-row-quote" data-i18n="proj.book.quote">"홀로 있다는 것이 외롭지 않을 때, 비로소 쓸 수 있는 말들이 있었다."</blockquote>
+          <p class="proj-row-desc" data-i18n="proj.book.desc">그림일기를 쓰듯 매일 썼다. 낯선 도시의 카페에서, 기차 안에서, 길모퉁이에서 멈춰 서서. 100일간 홀로 유럽을 여행하며 쓴 단상집. 진정한 자유는 이방인의 삶이 아닌 내면으로부터 온다고 믿습니다.</p>
+        </div>
+        <div class="proj-row-visual">
+          <img src="images/projects/book-cover.jpg" alt="춤추는 독백" class="zoomable">
+        </div>
       </div>
 
-      <p class="works-empty" id="worksEmpty" style="display:none" data-i18n="works.empty">업로드 예정입니다.</p>
-
-      <div class="works-more-wrap" id="worksMoreWrap">
-        <button class="works-more-btn" id="worksMoreBtn" data-i18n="works.more">더보기</button>
+      <div class="proj-row">
+        <div class="proj-row-text">
+          <span class="proj-tag" data-i18n="ptag.exhibition">사진전</span>
+          <h3 class="proj-row-title">여름을 준비하는 마음</h3>
+          <p class="proj-row-meta">2025.05 – 2025.06 · 원두서점 가산점</p>
+          <p class="proj-row-desc" data-i18n="proj.ex1.desc">여름이 막 시작되려는 계절, 서점 한 켠에 작게 자리를 빌렸습니다. 특별한 이야기를 하려던 것은 아니었습니다. 다만 — 어떤 계절을 제대로 맞이하기 위해서는, 먼저 마음을 준비해두는 시간이 필요하다고 느꼈습니다. 아직 덥지 않지만 이미 여름의 기운이 스며드는 그 사이의 감각을, 여러분과 함께 천천히 느끼고 싶었습니다. 이 전시는 그 '준비하는 마음'을 사진으로 담은 것이고, 두 번째 전시 '일상의 여름'으로 이어지는 첫 번째 계절 이야기이기도 합니다.</p>
+        </div>
+        <div class="proj-row-visual proj-row-visual--grid">
+          <img src="images/projects/ex1-cafe.jpg"    alt="여름을 준비하는 마음" class="zoomable">
+          <img src="images/projects/ex1-shelves.jpg" alt="여름을 준비하는 마음" class="zoomable">
+          <img src="images/projects/ex1-lamp.jpg"    alt="여름을 준비하는 마음" class="zoomable">
+          <img src="images/projects/ex1-print.jpg"   alt="여름을 준비하는 마음" class="zoomable">
+        </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ─── ABOUT ─────────────────────────────────────────── -->
-  <section class="section section--dark" id="about">
-    <div class="container">
-      <h2 class="section-title" data-i18n="nav.about">About</h2>
+      <div class="proj-row">
+        <div class="proj-row-text">
+          <span class="proj-tag" data-i18n="ptag.exhibition">사진전</span>
+          <h3 class="proj-row-title">일상의 여름</h3>
+          <p class="proj-row-meta">2025.07 – 2025.08 · 원두서점 2호점</p>
+          <p class="proj-row-desc" data-i18n="proj.ex2.desc">'여름을 준비하는 마음'에서 계절을 기다렸다면, 이번엔 그 여름 안으로 걸어 들어갔습니다. 2024년, 혼자 유럽을 여행하던 중 베를린의 작은 동네 공원에서 발걸음을 멈췄습니다. 현지 사람들이 특별한 계획도 없이 — 그냥 집 근처 공원에서 나무 그늘 아래 드러누워 완전한 여름을 누리고 있었습니다. 그 장면이 오래 머릿속에 남았습니다. 휴식은 '어디'에 있느냐의 문제가 아니었습니다. '어떻게 바라보느냐'의 문제였습니다. 멀리 떠나지 않아도, 지금 이 일상 안에 이미 여름이 있습니다. 두 번째 전시는 그 단순한 발견을 여러분과 나누고 싶었습니다.</p>
+        </div>
+        <div class="proj-row-visual proj-row-visual--grid">
+          <img src="images/projects/ex2-hero.jpg"    alt="일상의 여름" class="zoomable">
+          <img src="images/projects/ex2-artist.jpg"  alt="일상의 여름" class="zoomable">
+          <img src="images/projects/ex2-fabric.jpg"  alt="일상의 여름" class="zoomable">
+          <img src="images/projects/ex2-room.jpg"    alt="일상의 여름" class="zoomable">
+        </div>
+      </div>
+    </section>
 
-      <div class="about-layout">
+    <!-- ─── ABOUT ───────────────────────────────────────────── -->
+    <section class="section section--about" id="about">
+      <div class="container">
+        <h2 class="section-title" data-i18n="nav.about">About</h2>
         <div class="about-text">
           <p data-i18n="about.p1">CHIGI는 시각예술가이자 그래픽 디자이너입니다.</p>
           <p data-i18n="about.p2">그림일기를 그리듯 — 일상의 작고 여린 감정들을 이미지와 언어로 붙잡습니다. 내면을 들여다보는 방식으로 작업합니다.</p>
           <p data-i18n="about.p3">2024년, 100일간 홀로 유럽을 여행하며 쓴 단상집 《춤추는 독백》을 독립출판했습니다. 진정한 자유는 이방인의 삶이 아닌 내면으로부터 온다고 믿습니다.</p>
         </div>
-        <div class="about-graphic">
-          <span class="about-initial">C</span>
-        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ─── PROJECTS ─────────────────────────────────────────── -->
-  <section class="section section--dark section--projects" id="projects">
-    <div class="container">
-      <h2 class="section-title" data-i18n="nav.projects">Projects</h2>
-      <p class="proj-tagline" data-i18n="projects.tagline">춤추는 독백의 세계 — 책, 사진전, 유튜브</p>
-
-      <!-- 01 책 -->
-      <div class="proj-item">
-        <span class="proj-num" aria-hidden="true">01</span>
-        <div class="proj-book">
-          <div class="proj-book-img">
-            <img src="images/projects/book-cover.jpg" alt="춤추는 독백">
-          </div>
-          <div class="proj-book-text">
-            <span class="proj-tag" data-i18n="ptag.book">독립출판</span>
-            <h3 class="proj-title">춤추는 독백</h3>
-            <p class="proj-meta">2024 · Dancing Monologue</p>
-            <p class="proj-book-quote" data-i18n="proj.book.quote">"홀로 있다는 것이 외롭지 않을 때, 비로소 쓸 수 있는 말들이 있었다."</p>
-            <p class="proj-desc" data-i18n="proj.book.desc">그림일기를 쓰듯 매일 썼다. 낯선 도시의 카페에서, 기차 안에서, 길모퉁이에서 멈춰 서서. 100일간 홀로 유럽을 여행하며 쓴 단상집. 진정한 자유는 이방인의 삶이 아닌 내면으로부터 온다고 믿습니다.</p>
+    <!-- ─── MEDIA ────────────────────────────────────────────── -->
+    <section class="section" id="media">
+      <div class="container">
+        <h2 class="section-title">Media</h2>
+        <div class="media-layout">
+          <div class="media-block media-block--yt">
+            <p class="media-platform">YouTube</p>
+            <a class="yt-wrap yt-thumb-link"
+               href="https://www.youtube.com/watch?v=jtGzPOLjvGg"
+               target="_blank" rel="noopener" aria-label="YouTube에서 영상 보기">
+              <img src="https://img.youtube.com/vi/jtGzPOLjvGg/maxresdefault.jpg"
+                   alt="CHIGI YouTube 영상 썸네일"
+                   onerror="this.src='https://img.youtube.com/vi/jtGzPOLjvGg/hqdefault.jpg'">
+              <div class="yt-play-btn" aria-hidden="true">▶</div>
+            </a>
+            <a href="https://www.youtube.com/@jeongjyojyo" target="_blank" rel="noopener"
+               class="media-link" data-i18n="media.ytCta">채널 바로가기 →</a>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- 02 사진전 1 -->
-      <div class="proj-item">
-        <span class="proj-num" aria-hidden="true">02</span>
-        <div class="proj-header">
-          <span class="proj-tag" data-i18n="ptag.exhibition">사진전</span>
-          <h3 class="proj-title">여름을 준비하는 마음</h3>
-          <p class="proj-meta">2025.05 – 2025.06 · 원두서점 가산점</p>
-          <p class="proj-desc-short" data-i18n="proj.ex1.desc">여름이 막 시작되려는 계절, 서점 한 켠에 작게 자리를 빌렸습니다. 특별한 이야기를 하려던 것은 아니었습니다. 다만 — 어떤 계절을 제대로 맞이하기 위해서는, 먼저 마음을 준비해두는 시간이 필요하다고 느꼈습니다. 아직 덥지 않지만 이미 여름의 기운이 스며드는 그 사이의 감각을, 여러분과 함께 천천히 느끼고 싶었습니다. 이 전시는 그 '준비하는 마음'을 사진으로 담은 것이고, 두 번째 전시 '일상의 여름'으로 이어지는 첫 번째 계절 이야기이기도 합니다.</p>
-        </div>
-        <div class="proj-grid proj-grid--2x2">
-          <div class="proj-photo"><img src="images/projects/ex1-cafe.jpg"    alt="여름을 준비하는 마음"></div>
-          <div class="proj-photo"><img src="images/projects/ex1-shelves.jpg" alt="여름을 준비하는 마음"></div>
-          <div class="proj-photo"><img src="images/projects/ex1-lamp.jpg"    alt="여름을 준비하는 마음"></div>
-          <div class="proj-photo"><img src="images/projects/ex1-print.jpg"   alt="여름을 준비하는 마음"></div>
-        </div>
+    <footer class="footer">
+      <div class="container footer-inner">
+        <span>© 2026 CHIGI</span>
       </div>
+    </footer>
 
-      <!-- 03 사진전 2 -->
-      <div class="proj-item">
-        <span class="proj-num" aria-hidden="true">03</span>
-        <div class="proj-header">
-          <span class="proj-tag" data-i18n="ptag.exhibition">사진전</span>
-          <h3 class="proj-title">일상의 여름</h3>
-          <p class="proj-meta">2025.07 – 2025.08 · 원두서점 2호점</p>
-          <p class="proj-desc-short" data-i18n="proj.ex2.desc">'여름을 준비하는 마음'에서 계절을 기다렸다면, 이번엔 그 여름 안으로 걸어 들어갔습니다. 2024년, 혼자 유럽을 여행하던 중 베를린의 작은 동네 공원에서 발걸음을 멈췄습니다. 현지 사람들이 특별한 계획도 없이 — 그냥 집 근처 공원에서 나무 그늘 아래 드러누워 완전한 여름을 누리고 있었습니다. 그 장면이 오래 머릿속에 남았습니다. 휴식은 '어디'에 있느냐의 문제가 아니었습니다. '어떻게 바라보느냐'의 문제였습니다. 멀리 떠나지 않아도, 지금 이 일상 안에 이미 여름이 있습니다. 두 번째 전시는 그 단순한 발견을 여러분과 나누고 싶었습니다.</p>
-        </div>
-        <div class="proj-hero">
-          <img src="images/projects/ex2-hero.jpg" alt="일상의 여름 전시 전경">
-        </div>
-        <div class="proj-grid proj-grid--2x2 proj-grid--strip">
-          <div class="proj-photo"><img src="images/projects/ex2-artist.jpg" alt="일상의 여름"></div>
-          <div class="proj-photo"><img src="images/projects/ex2-fabric.jpg" alt="일상의 여름"></div>
-          <div class="proj-photo"><img src="images/projects/ex2-room.jpg"   alt="일상의 여름"></div>
-          <div class="proj-photo"><img src="images/projects/ex2-through.jpg" alt="일상의 여름"></div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ─── MEDIA ─────────────────────────────────────────── -->
-  <section class="section" id="media">
-    <div class="container">
-      <h2 class="section-title">Media</h2>
-
-      <div class="media-layout">
-
-        <div class="media-block media-block--yt">
-          <p class="media-platform">YouTube</p>
-          <a class="yt-wrap yt-thumb-link"
-             href="https://www.youtube.com/watch?v=jtGzPOLjvGg"
-             target="_blank" rel="noopener"
-             aria-label="YouTube에서 영상 보기">
-            <img src="https://img.youtube.com/vi/jtGzPOLjvGg/maxresdefault.jpg"
-                 alt="CHIGI YouTube 영상 썸네일"
-                 onerror="this.src='https://img.youtube.com/vi/jtGzPOLjvGg/hqdefault.jpg'">
-            <div class="yt-play-btn" aria-hidden="true">▶</div>
-          </a>
-          <a href="https://www.youtube.com/@jeongjyojyo"
-             target="_blank" rel="noopener"
-             class="media-link" data-i18n="media.ytCta">채널 바로가기 →</a>
-        </div>
-
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── CONTACT ─────────────────────────────────────────── -->
-  <section class="section section--contact" id="contact">
-    <div class="container">
-      <h2 class="section-title" data-i18n="nav.contact">Contact</h2>
-
-      <div class="contact-body">
-        <!-- 이메일 주소를 실제 이메일로 교체하세요 -->
-        <button class="contact-email" id="emailTrigger">chigi225@gmail.com</button>
-
-        <div class="contact-socials">
-          <a href="https://www.youtube.com/@jeongjyojyo"  target="_blank" rel="noopener">YouTube</a>
-          <a href="https://www.instagram.com/chigiverses" target="_blank" rel="noopener">@chigiverses</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── FOOTER ─────────────────────────────────────────── -->
-  <footer class="footer">
-    <div class="container footer-inner">
-      <span>© 2026 CHIGI</span>
-    </div>
-  </footer>
+  </main>
 
   <!-- ─── EMAIL PANEL ──────────────────────────────────────── -->
   <div class="email-panel" id="emailPanel" aria-hidden="true">
@@ -420,7 +317,7 @@
         <span class="ep-label">Message:</span>
         <textarea id="epMessage" class="ep-textarea"></textarea>
       </div>
-      <div class="ep-actions">
+      <div class="ep-actions" id="epActions">
         <button class="ep-btn ep-btn--send" id="epSend">Send Email</button>
         <button class="ep-btn ep-btn--cancel" id="epCancel">Cancel</button>
       </div>
@@ -435,7 +332,7 @@
     </div>
   </div>
 
-  <!-- ─── MODAL ─────────────────────────────────────────── -->
+  <!-- ─── WORKS MODAL ──────────────────────────────────────── -->
   <div class="modal" id="workModal" role="dialog" aria-modal="true">
     <div class="modal-backdrop" id="modalBackdrop"></div>
     <div class="modal-panel">
@@ -448,12 +345,17 @@
           <span class="modal-tag" data-i18n="cat.albumCover">앨범커버</span>
           <h3 class="modal-title" id="modalTitle"></h3>
           <p class="modal-artist" id="modalArtist"></p>
-          <p class="modal-year" id="modalYear"></p>
-          <p class="modal-desc" id="modalDesc"></p>
-          <a class="modal-link" id="modalLink" target="_blank" rel="noopener" style="display:none"></a>
+          <p class="modal-year"   id="modalYear"></p>
+          <p class="modal-desc"   id="modalDesc"></p>
+          <a class="modal-link"   id="modalLink" href="#" target="_blank" rel="noopener"></a>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- ─── IMAGE ZOOM ───────────────────────────────────────── -->
+  <div class="zoom-overlay" id="zoomOverlay">
+    <img class="zoom-img" id="zoomImg" src="" alt="">
   </div>
 
   <script src="script.js"></script>

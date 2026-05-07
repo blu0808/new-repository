@@ -81,12 +81,15 @@ function applyLang() {
     if (dict[lang][key] !== undefined) el.textContent = dict[lang][key];
   });
   document.documentElement.lang = lang;
-  document.getElementById('langToggle').textContent = lang === 'ko' ? 'EN' : 'KO';
+  const label = lang === 'ko' ? 'EN' : 'KO';
+  document.querySelectorAll('.lang-btn').forEach(btn => btn.textContent = label);
 }
 
-document.getElementById('langToggle').addEventListener('click', () => {
-  lang = lang === 'ko' ? 'en' : 'ko';
-  applyLang();
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    lang = lang === 'ko' ? 'en' : 'ko';
+    applyLang();
+  });
 });
 
 /* ─── 내비게이션 스크롤 효과 ─────────────────────────────── */
@@ -217,7 +220,13 @@ document.querySelectorAll('.work-card').forEach((card, i) => {
 
 document.getElementById('modalClose').addEventListener('click', closeModal);
 document.getElementById('modalBackdrop').addEventListener('click', closeModal);
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeEmailPanel(); } });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModal();
+    closeEmailPanel();
+    if (zoomOverlay) { zoomOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+  }
+});
 
 /* ─── Email Panel ───────────────────────────────────────── */
 const emailPanel = document.getElementById('emailPanel');
@@ -341,3 +350,24 @@ document.querySelectorAll('.works-tab').forEach(tab => {
     if (moreWrap) moreWrap.style.display = (filter === 'all' && visible > 6) ? '' : 'none';
   });
 });
+
+/* ─── Image Zoom ────────────────────────────────────────────── */
+const zoomOverlay = document.getElementById('zoomOverlay');
+const zoomImg     = document.getElementById('zoomImg');
+
+if (zoomOverlay) {
+  document.querySelectorAll('.zoomable').forEach(img => {
+    img.addEventListener('click', e => {
+      e.stopPropagation();
+      zoomImg.src = img.src;
+      zoomImg.alt = img.alt;
+      zoomOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  zoomOverlay.addEventListener('click', () => {
+    zoomOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+}
