@@ -615,21 +615,23 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
     height: 56px;
     align-items: center; justify-content: space-between;
     padding: 0 20px;
-    background: rgba(255,255,255,.95);
+    background: rgba(255,255,255,.97);
     backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--gray-2);
+    box-shadow: 0 2px 16px rgba(0,0,0,.10);
     transition: box-shadow .3s;
   }
-  .nav.scrolled { box-shadow: 0 2px 12px rgba(0,0,0,.07); }
+  .nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.13); }
   .nav-logo { font-size: .95rem; font-weight: 700; letter-spacing: .04em; color: var(--accent); }
   .nav-right { display: flex; align-items: center; gap: 12px; }
   .nav-menu {
     display: none;
     position: fixed;
-    top: 56px; left: 0; right: 0; bottom: 0;
+    top: 56px; left: 0; right: 0;
+    height: calc(100dvh - 56px);
     background: var(--white);
     flex-direction: column;
     padding: 40px 32px;
+    padding-bottom: max(40px, env(safe-area-inset-bottom));
     gap: 8px;
     overflow-y: auto;
   }
