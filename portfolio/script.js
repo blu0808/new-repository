@@ -386,8 +386,11 @@ if (zoomOverlay) {
   });
 }
 
-/* hero video fade-in */
-const heroIframe = document.querySelector('.hero-video-wrap iframe');
-if (heroIframe) {
-  setTimeout(() => { heroIframe.style.opacity = '1'; }, 1500);
+/* hero video cover — 썸네일이 바로 보이다가 영상 재생 후 걷힘 */
+const heroCover = document.getElementById('heroVideoCover');
+if (heroCover) {
+  setTimeout(() => {
+    heroCover.style.opacity = '0';
+    setTimeout(() => { heroCover.style.display = 'none'; }, 600);
+  }, 1800);
 }
