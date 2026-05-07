@@ -351,6 +351,39 @@ document.querySelectorAll('.works-tab').forEach(tab => {
   });
 });
 
+/* ─── Carousel ──────────────────────────────────────────────── */
+document.querySelectorAll('.proj-carousel').forEach(carousel => {
+  const track  = carousel.querySelector('.proj-carousel-track');
+  const imgs   = track.querySelectorAll('img');
+  const dotsEl = carousel.querySelector('.proj-carousel-dots');
+  let cur = 0;
+
+  imgs.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'proj-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', `${i + 1}번 사진`);
+    d.addEventListener('click', () => go(i));
+    dotsEl.appendChild(d);
+  });
+
+  function go(n) {
+    cur = (n + imgs.length) % imgs.length;
+    track.style.transform = `translateX(-${cur * 100}%)`;
+    carousel.querySelectorAll('.proj-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+  }
+
+  carousel.querySelector('.proj-carousel-prev').addEventListener('click', () => go(cur - 1));
+  carousel.querySelector('.proj-carousel-next').addEventListener('click', () => go(cur + 1));
+
+  /* swipe */
+  let sx = 0;
+  track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 48) go(dx < 0 ? cur + 1 : cur - 1);
+  });
+});
+
 /* ─── Image Zoom ────────────────────────────────────────────── */
 const zoomOverlay = document.getElementById('zoomOverlay');
 const zoomImg     = document.getElementById('zoomImg');
