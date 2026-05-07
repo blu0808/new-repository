@@ -385,3 +385,9 @@ if (zoomOverlay) {
     document.body.style.overflow = '';
   });
 }
+
+/* hero video fade-in */
+const heroIframe = document.querySelector('.hero-video-wrap iframe');
+if (heroIframe) {
+  setTimeout(() => { heroIframe.style.opacity = '1'; }, 1500);
+}
