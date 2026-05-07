@@ -94,6 +94,24 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 /* ─── Main ─────────────────────────────────────────────────── */
 .main { margin-left: var(--sb-w); }
 
+/* ─── Hero Video ────────────────────────────────────────────── */
+.hero-video {
+  width: 100%;
+  background: var(--black);
+}
+.hero-video-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+}
+.hero-video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 .container {
   max-width: 1100px;
   padding: clamp(48px, 6vw, 80px) clamp(28px, 5vw, 72px);
