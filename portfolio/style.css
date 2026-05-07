@@ -34,7 +34,6 @@ button { font-family: var(--font); cursor: pointer; }
   display: flex;
   flex-direction: column;
   gap: 40px;
-  border-right: 1px solid var(--gray-2);
   background: var(--white);
   z-index: 200;
 }
@@ -47,7 +46,7 @@ button { font-family: var(--font); cursor: pointer; }
 }
 .sb-tagline {
   font-size: .75rem;
-  color: var(--gray-4);
+  color: var(--accent);
   line-height: 1.5;
 }
 .sb-nav, .sb-links {
@@ -94,14 +93,14 @@ button { font-family: var(--font); cursor: pointer; }
   padding: clamp(48px, 6vw, 80px) clamp(28px, 5vw, 72px);
 }
 
-.section { border-top: 1px solid var(--gray-2); }
+.section { padding-top: clamp(60px, 8vw, 120px); }
 
 .section-title {
   font-size: clamp(11px, .85vw, 13px);
   font-weight: 400;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--gray-3);
+  color: var(--accent);
   margin-bottom: 40px;
 }
 
@@ -247,16 +246,16 @@ button { font-family: var(--font); cursor: pointer; }
 }
 .proj-tagline {
   font-size: clamp(13px, 1vw, 14px);
-  color: var(--gray-3);
+  color: var(--accent);
+  opacity: .55;
   margin-top: 8px;
 }
 .proj-row {
   display: grid;
   grid-template-columns: 1fr 1.4fr;
   min-height: 440px;
-  border-top: 1px solid var(--gray-2);
+  margin-bottom: clamp(48px, 6vw, 80px);
 }
-.proj-row:first-of-type { border-top: none; }
 
 .proj-row-text {
   padding: clamp(40px, 5vw, 72px) clamp(28px, 4vw, 60px);
@@ -284,20 +283,22 @@ button { font-family: var(--font); cursor: pointer; }
 }
 .proj-row-meta {
   font-size: clamp(11px, .85vw, 13px);
-  color: var(--gray-3);
+  color: var(--accent);
+  opacity: .55;
   letter-spacing: .04em;
 }
 .proj-row-quote {
   font-size: clamp(13px, 1vw, 15px);
   font-style: italic;
-  color: var(--gray-4);
+  color: var(--accent);
+  opacity: .75;
   line-height: 1.7;
   padding-left: 16px;
-  border-left: 2px solid var(--gray-2);
 }
 .proj-row-desc {
   font-size: clamp(13px, 1vw, 14px);
-  color: var(--gray-4);
+  color: var(--accent);
+  opacity: .8;
   line-height: 1.8;
 }
 
@@ -380,7 +381,8 @@ button { font-family: var(--font); cursor: pointer; }
 .section--about .about-text p {
   font-size: clamp(14px, 1.1vw, 16px);
   line-height: 1.9;
-  color: var(--gray-4);
+  color: var(--accent);
+  opacity: .85;
 }
 
 /* ─── Media ───────────────────────────────────────────────── */
@@ -391,7 +393,8 @@ button { font-family: var(--font); cursor: pointer; }
   font-size: clamp(10px, .8vw, 11px);
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--gray-3);
+  color: var(--accent);
+  opacity: .6;
 }
 .yt-wrap {
   position: relative;
@@ -422,8 +425,7 @@ button { font-family: var(--font); cursor: pointer; }
 
 /* ─── Footer ──────────────────────────────────────────────── */
 .footer {
-  border-top: 1px solid var(--gray-2);
-  padding: 28px 0;
+  padding: 48px 0 28px;
 }
 .footer-inner {
   display: flex;
