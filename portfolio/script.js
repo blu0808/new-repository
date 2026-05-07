@@ -391,6 +391,5 @@ const heroCover = document.getElementById('heroVideoCover');
 if (heroCover) {
   setTimeout(() => {
     heroCover.style.opacity = '0';
-    heroCover.style.pointerEvents = 'none';
   }, 1200);
 }
