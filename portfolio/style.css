@@ -226,39 +226,131 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .works-more-btn:hover { border-color: var(--black); color: var(--black); }
 
 /* poster view */
+/* ─── Poster Editorial Grid ───────────────────────────────── */
 .works-grid.poster-view {
-  display: block;
-  columns: 3;
-  column-gap: clamp(16px, 2vw, 28px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 44px);
+  row-gap: clamp(40px, 6vw, 80px);
 }
 .works-grid.poster-view .work-card {
-  break-inside: avoid;
   aspect-ratio: auto;
   overflow: visible;
-  margin-bottom: clamp(16px, 2vw, 28px);
+  cursor: pointer;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
 }
+.works-grid.poster-view [data-pg-idx="1"] { grid-column: span 2; }
+.works-grid.poster-view [data-pg-idx="4"] { grid-column: span 2; }
+.works-grid.poster-view [data-pg-idx="8"] { grid-column: span 2; }
 .works-grid.poster-view .work-thumb {
   height: auto;
   background: transparent;
 }
 .works-grid.poster-view .work-thumb img {
   height: auto;
-  box-shadow: 0 8px 28px rgba(0,0,0,.32);
-  transition: transform .4s ease, box-shadow .4s ease;
+  width: 100%;
+  object-fit: cover;
+  box-shadow: 0 16px 48px rgba(0,0,0,.55);
+  transition: transform .5s cubic-bezier(.25,.46,.45,.94),
+              box-shadow .5s ease;
 }
 .works-grid.poster-view .work-card:hover .work-thumb img {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 44px rgba(0,0,0,.45);
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 28px 64px rgba(0,0,0,.7);
 }
-.works-grid.poster-view .work-overlay { display: none; }
+.works-grid.poster-view .work-overlay {
+  position: static;
+  background: none;
+  opacity: 1;
+  padding: 12px 2px 0;
+  justify-content: flex-start;
+}
+.works-grid.poster-view .work-tag { display: none; }
+.works-grid.poster-view .work-name {
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.38);
+}
 
 #works { transition: background .5s ease; }
-#works.poster-active { background: #1626CC; }
-#works.poster-active .works-tab { color: rgba(255,255,255,.55); border-color: rgba(255,255,255,.25); }
-#works.poster-active .works-tab:hover { color: var(--white); border-color: rgba(255,255,255,.6); background: none; }
-#works.poster-active .works-tab.active { color: #1626CC; background: var(--white); border-color: var(--white); }
-#works.poster-active .section-title { color: rgba(255,255,255,.35); }
-#works.poster-active .works-grid.poster-view .work-name { color: rgba(255,255,255,.45); }
+#works.poster-active { background: #0c0c0c; }
+#works.poster-active .works-tab { color: rgba(255,255,255,.45); border-color: rgba(255,255,255,.18); }
+#works.poster-active .works-tab:hover { color: var(--white); border-color: rgba(255,255,255,.55); background: none; }
+#works.poster-active .works-tab.active { color: #0c0c0c; background: var(--white); border-color: var(--white); }
+#works.poster-active .section-title { color: rgba(255,255,255,.28); }
+
+/* ─── Poster Gallery Overlay ─────────────────────────────── */
+.pg-overlay {
+  position: fixed; inset: 0; z-index: 950;
+  display: flex; flex-direction: column;
+  align-items: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity .45s ease;
+}
+.pg-overlay.open { opacity: 1; pointer-events: all; }
+.pg-bg {
+  position: absolute; inset: 0;
+  background: rgba(6,6,6,.97);
+  cursor: pointer;
+}
+.pg-close {
+  position: absolute; top: 24px; right: 28px; z-index: 2;
+  background: none; border: none;
+  color: rgba(255,255,255,.4);
+  font-size: .9rem; cursor: pointer;
+  transition: color .2s;
+  letter-spacing: .04em;
+}
+.pg-close:hover { color: var(--white); }
+.pg-stage {
+  flex: 1; position: relative; z-index: 1;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 72px 80px 0;
+  width: 100%; max-width: 1000px;
+  margin: 0 auto;
+}
+.pg-img {
+  max-height: calc(100vh - 210px);
+  max-width: min(100%, 660px);
+  width: auto; height: auto;
+  object-fit: contain;
+  transition: opacity .4s cubic-bezier(.4,0,.2,1),
+              transform .4s cubic-bezier(.4,0,.2,1);
+  will-change: opacity, transform;
+}
+.pg-img.out { opacity: 0; transform: scale(1.04); }
+.pg-img.in  { opacity: 0; transform: scale(0.96); }
+.pg-meta { margin-top: 18px; text-align: center; }
+.pg-label {
+  font-size: 10px; letter-spacing: .15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+}
+.pg-count {
+  font-size: 9px; letter-spacing: .1em;
+  color: rgba(255,255,255,.22);
+  margin-top: 6px;
+}
+.pg-strip {
+  position: relative; z-index: 1;
+  display: flex; gap: 6px;
+  padding: 20px 24px 32px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.pg-strip::-webkit-scrollbar { display: none; }
+.pg-thumb {
+  width: 42px; height: 58px;
+  object-fit: cover; flex-shrink: 0;
+  opacity: .28; cursor: pointer;
+  outline: 1.5px solid transparent; outline-offset: 3px;
+  transition: opacity .25s, outline-color .25s;
+}
+.pg-thumb.active { opacity: 1; outline-color: rgba(255,255,255,.7); }
+.pg-thumb:hover:not(.active) { opacity: .55; }
 
 /* ─── Projects (mikiperse rows) ───────────────────────────── */
 .proj-section-header {
@@ -744,11 +836,20 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   .modal-img-wrap { max-height: 40vh; }
 
   .works-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
-  .works-grid.poster-view { columns: 2; }
+  .works-grid.poster-view {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: clamp(28px, 5vw, 48px);
+  }
+  .works-grid.poster-view [data-pg-idx="1"],
+  .works-grid.poster-view [data-pg-idx="4"],
+  .works-grid.poster-view [data-pg-idx="8"] { grid-column: span 1; }
+  .pg-stage { padding: 60px 24px 0; }
+  .pg-img { max-width: 92vw; max-height: calc(100vh - 180px); }
 }
 
 @media (max-width: 500px) {
   .works-grid { grid-template-columns: repeat(2, 1fr); }
+  .works-grid.poster-view { grid-template-columns: 1fr; }
   .proj-row-visual--grid { grid-template-columns: 1fr; }
   .proj-row-visual--grid img { height: 200px; }
 }

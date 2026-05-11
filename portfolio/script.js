@@ -228,6 +228,11 @@ document.addEventListener('keydown', e => {
     closeEmailPanel();
     if (zoomOverlay) { zoomOverlay.classList.remove('open'); document.body.style.overflow = ''; }
     if (typeof closeYtModal === 'function') closeYtModal();
+    if (typeof closePg === 'function') closePg();
+  }
+  if (pgOverlay?.classList.contains('open')) {
+    if (e.key === 'ArrowRight') pgGo(pgCur + 1);
+    if (e.key === 'ArrowLeft')  pgGo(pgCur - 1);
   }
 });
 
@@ -386,6 +391,115 @@ if (zoomOverlay) {
     document.body.style.overflow = '';
   });
 }
+
+/* ─── Poster data-pg-idx 할당 ───────────────────────────── */
+document.querySelectorAll('.work-card[data-category="poster"]').forEach((card, i) => {
+  card.setAttribute('data-pg-idx', i + 1);
+});
+
+/* ─── Poster Gallery ─────────────────────────────────────── */
+const pgOverlay = document.getElementById('pgOverlay');
+const pgImg     = document.getElementById('pgImg');
+const pgLabel   = document.getElementById('pgLabel');
+const pgCount   = document.getElementById('pgCount');
+const pgStrip   = document.getElementById('pgStrip');
+const pgClosBtn = document.getElementById('pgClose');
+const pgBg      = document.getElementById('pgBg');
+
+let pgItems = [];
+let pgCur   = 0;
+let pgBusy  = false;
+
+function pgBuild() {
+  pgItems = [];
+  document.querySelectorAll('.work-card[data-category="poster"]').forEach(card => {
+    const img = card.querySelector('.work-thumb img');
+    if (img) pgItems.push({ src: img.src, alt: img.alt, name: card.querySelector('.work-name')?.textContent || '' });
+  });
+}
+
+function pgRenderStrip() {
+  pgStrip.innerHTML = '';
+  pgItems.forEach((item, i) => {
+    const t = document.createElement('img');
+    t.src = item.src; t.alt = item.alt;
+    t.className = 'pg-thumb' + (i === pgCur ? ' active' : '');
+    t.addEventListener('click', () => pgGo(i));
+    pgStrip.appendChild(t);
+  });
+}
+
+function pgSyncStrip() {
+  pgStrip.querySelectorAll('.pg-thumb').forEach((t, i) => t.classList.toggle('active', i === pgCur));
+  pgStrip.querySelector('.pg-thumb.active')?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+}
+
+function pgSet(index, animate) {
+  pgCur = ((index % pgItems.length) + pgItems.length) % pgItems.length;
+  pgImg.src = pgItems[pgCur].src;
+  pgImg.alt = pgItems[pgCur].alt;
+  pgLabel.textContent = pgItems[pgCur].name;
+  pgCount.textContent = `${pgCur + 1} / ${pgItems.length}`;
+  pgSyncStrip();
+}
+
+function pgGo(index) {
+  if (pgBusy) return;
+  const next = ((index % pgItems.length) + pgItems.length) % pgItems.length;
+  if (next === pgCur) return;
+  pgBusy = true;
+  pgImg.classList.add('out');
+  setTimeout(() => {
+    pgCur = next;
+    pgImg.src  = pgItems[next].src;
+    pgImg.alt  = pgItems[next].alt;
+    pgLabel.textContent = pgItems[next].name;
+    pgCount.textContent = `${next + 1} / ${pgItems.length}`;
+    pgImg.classList.remove('out');
+    pgImg.classList.add('in');
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      pgImg.classList.remove('in');
+      pgBusy = false;
+    }));
+    pgSyncStrip();
+  }, 380);
+}
+
+function openPg(index) {
+  pgBuild();
+  pgCur = index;
+  pgRenderStrip();
+  pgSet(index, false);
+  pgOverlay.classList.add('open');
+  pgOverlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePg() {
+  if (!pgOverlay?.classList.contains('open')) return;
+  pgOverlay.classList.remove('open');
+  pgOverlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.work-card[data-category="poster"]').forEach((card, i) => {
+  card.addEventListener('click', () => openPg(i));
+});
+
+if (pgClosBtn) pgClosBtn.addEventListener('click', closePg);
+if (pgBg)      pgBg.addEventListener('click', closePg);
+
+pgOverlay?.addEventListener('wheel', e => {
+  e.preventDefault();
+  pgGo(e.deltaY > 0 ? pgCur + 1 : pgCur - 1);
+}, { passive: false });
+
+let pgTx = 0;
+pgOverlay?.addEventListener('touchstart', e => { pgTx = e.touches[0].clientX; }, { passive: true });
+pgOverlay?.addEventListener('touchend',   e => {
+  const dx = e.changedTouches[0].clientX - pgTx;
+  if (Math.abs(dx) > 50) pgGo(dx < 0 ? pgCur + 1 : pgCur - 1);
+});
 
 /* ─── YouTube Modal ─────────────────────────────────────── */
 const ytModal = document.getElementById('ytModal');
