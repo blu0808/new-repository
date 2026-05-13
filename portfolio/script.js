@@ -17,7 +17,6 @@ const dict = {
     'media.ytHint': 'YouTube 연동 예정',
     'media.ytCta':  '채널 바로가기 →',
     'media.igCta':  '팔로우하기 →',
-    'ig.toon':  '툰',
     'ig.photo': '사진 & 개인',
     'ig.art':   '아트워크',
     'cat.all': '전체',
@@ -32,7 +31,6 @@ const dict = {
     'proj.ex1.desc': '여름이 막 시작되려는 계절, 서점 한 켠에 작게 자리를 빌렸습니다. 특별한 이야기를 하려던 것은 아니었습니다. 다만 — 어떤 계절을 제대로 맞이하기 위해서는, 먼저 마음을 준비해두는 시간이 필요하다고 느꼈습니다. 아직 덥지 않지만 이미 여름의 기운이 스며드는 그 사이의 감각을, 여러분과 함께 천천히 느끼고 싶었습니다. 이 전시는 그 \'준비하는 마음\'을 사진으로 담은 것이고, 두 번째 전시 \'일상의 여름\'으로 이어지는 첫 번째 계절 이야기이기도 합니다.',
     'proj.ex2.desc': '\'여름을 준비하는 마음\'에서 계절을 기다렸다면, 이번엔 그 여름 안으로 걸어 들어갔습니다. 2024년, 혼자 유럽을 여행하던 중 베를린의 작은 동네 공원에서 발걸음을 멈췄습니다. 현지 사람들이 특별한 계획도 없이 — 그냥 집 근처 공원에서 나무 그늘 아래 드러누워 완전한 여름을 누리고 있었습니다. 그 장면이 오래 머릿속에 남았습니다. 휴식은 \'어디\'에 있느냐의 문제가 아니었습니다. \'어떻게 바라보느냐\'의 문제였습니다. 멀리 떠나지 않아도, 지금 이 일상 안에 이미 여름이 있습니다. 두 번째 전시는 그 단순한 발견을 여러분과 나누고 싶었습니다.',
     'cat.poster': '포스터',
-    'cat.toon': '치기툰',
     'works.empty': '업로드 예정입니다.',
     'sb.bio': '일상의 작고 여린 감정들을 이미지와 언어로 붙잡습니다. 독립출판 《춤추는 독백》 저자.',
   },
@@ -53,7 +51,6 @@ const dict = {
     'media.ytHint': 'YouTube coming soon',
     'media.ytCta':  'Visit Channel →',
     'media.igCta':  'Follow →',
-    'ig.toon':  'Toon',
     'ig.photo': 'Photo & Personal',
     'ig.art':   'Artwork',
     'cat.all': 'All',
@@ -68,7 +65,6 @@ const dict = {
     'proj.ex1.desc': 'It was May — just as summer was about to begin — and I borrowed a quiet corner of a bookstore. I wasn\'t trying to say anything grand. I simply felt that to truly welcome a season, you first need time to prepare your heart for it. That in-between feeling — not quite hot yet, but already touched by summer\'s warmth — is what I wanted to sit with, alongside you. This exhibition captures that act of preparing, and is also the first chapter in a two-part series leading into \'Summer in Everyday Life.\'',
     'proj.ex2.desc': 'If the first exhibition was about waiting for summer, this one is about walking into it. In 2024, traveling alone through Europe, I stopped at a small neighbourhood park in Berlin. People there were having a perfectly complete summer — no plans, no grand destinations — just lying under the shade of a tree, right near home. That image stayed with me. Rest isn\'t about where you are. It\'s about how you see. You don\'t have to go far. Summer is already here, inside everyday life. This second exhibition is my way of sharing that simple discovery with you.',
     'cat.poster': 'Poster',
-    'cat.toon': 'Toon',
     'works.empty': 'Coming soon.',
     'sb.bio': 'Visual artist capturing small, tender emotions through image and language. Author of self-published 《Dancing Monologue》.',
   },
@@ -226,6 +222,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     closeModal();
     closeEmailPanel();
+    closeAboutPanel();
     if (zoomOverlay) { zoomOverlay.classList.remove('open'); document.body.style.overflow = ''; }
     if (typeof closeYtModal === 'function') closeYtModal();
     if (typeof closePg === 'function') closePg();
@@ -235,6 +232,32 @@ document.addEventListener('keydown', e => {
     if (e.key === 'ArrowLeft')  pgGo(pgCur - 1);
   }
 });
+
+/* ─── About Panel ───────────────────────────────────────── */
+const aboutPanel = document.getElementById('aboutPanel');
+
+function openAboutPanel() {
+  aboutPanel.classList.add('open');
+  aboutPanel.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAboutPanel() {
+  if (!aboutPanel?.classList.contains('open')) return;
+  aboutPanel.classList.remove('open');
+  aboutPanel.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('aboutTrigger')?.addEventListener('click', openAboutPanel);
+document.getElementById('navAbout')?.addEventListener('click', () => {
+  navMenu.classList.remove('open');
+  hamburger.classList.remove('open');
+  document.body.style.overflow = '';
+  openAboutPanel();
+});
+document.getElementById('apClose')?.addEventListener('click', closeAboutPanel);
+document.getElementById('apBackdrop')?.addEventListener('click', closeAboutPanel);
 
 /* ─── Email Panel ───────────────────────────────────────── */
 const emailPanel = document.getElementById('emailPanel');

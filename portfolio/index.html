@@ -20,6 +20,7 @@
     </div>
     <p class="sb-bio" data-i18n="sb.bio">일상의 작고 여린 감정들을 이미지와 언어로 붙잡습니다. 독립출판 《춤추는 독백》 저자.</p>
     <div class="sb-links">
+      <button class="sb-link sb-about" id="aboutTrigger" data-i18n="nav.about">About</button>
       <button class="sb-link sb-contact" id="emailTrigger" data-i18n="nav.contact">Contact</button>
       <a class="sb-link" href="https://www.instagram.com/chigiverses" target="_blank" rel="noopener">Instagram</a>
     </div>
@@ -34,7 +35,7 @@
     <div class="nav-menu" id="navMenu">
       <a class="nav-link" href="#works"    data-i18n="nav.works">Works</a>
       <a class="nav-link" href="#projects" data-i18n="nav.projects">Projects</a>
-      <a class="nav-link" href="#about"    data-i18n="nav.about">About</a>
+      <button class="nav-link nav-link--about" id="navAbout" data-i18n="nav.about">About</button>
       <a class="nav-link" href="#media"    data-i18n="nav.media">Media</a>
       <button class="nav-link nav-link--contact" id="navContact" data-i18n="nav.contact">Contact</button>
     </div>
@@ -62,6 +63,70 @@
       </div>
     </section>
 
+  <!-- ─── PROJECTS (mikiperse rows) ──────────────────────── -->
+    <section class="section section--projects" id="projects">
+      <div class="proj-section-header">
+        <h2 class="section-title" data-i18n="nav.projects">Projects</h2>
+      </div>
+
+      <div class="proj-row">
+        <div class="proj-row-text">
+          <span class="proj-tag" data-i18n="ptag.book">독립출판</span>
+          <h3 class="proj-row-title">춤추는 독백</h3>
+          <p class="proj-row-meta">2024 · Dancing Monologue</p>
+          <blockquote class="proj-row-quote" data-i18n="proj.book.quote">"홀로 있다는 것이 외롭지 않을 때, 비로소 쓸 수 있는 말들이 있었다."</blockquote>
+          <p class="proj-row-desc" data-i18n="proj.book.desc">그림일기를 쓰듯 매일 썼다. 낯선 도시의 카페에서, 기차 안에서, 길모퉁이에서 멈춰 서서. 100일간 홀로 유럽을 여행하며 쓴 단상집. 진정한 자유는 이방인의 삶이 아닌 내면으로부터 온다고 믿습니다.</p>
+        </div>
+        <div class="proj-row-visual">
+          <img src="images/projects/book-cover.jpg" alt="춤추는 독백" class="zoomable">
+        </div>
+      </div>
+
+      <div class="proj-row">
+        <div class="proj-row-text">
+          <span class="proj-tag" data-i18n="ptag.exhibition">사진전</span>
+          <h3 class="proj-row-title">여름을 준비하는 마음</h3>
+          <p class="proj-row-meta">2025.05 – 2025.06 · 원두서점 가산점</p>
+          <p class="proj-row-desc" data-i18n="proj.ex1.desc">여름이 막 시작되려는 계절, 서점 한 켠에 작게 자리를 빌렸습니다. 특별한 이야기를 하려던 것은 아니었습니다. 다만 — 어떤 계절을 제대로 맞이하기 위해서는, 먼저 마음을 준비해두는 시간이 필요하다고 느꼈습니다. 아직 덥지 않지만 이미 여름의 기운이 스며드는 그 사이의 감각을, 여러분과 함께 천천히 느끼고 싶었습니다. 이 전시는 그 '준비하는 마음'을 사진으로 담은 것이고, 두 번째 전시 '일상의 여름'으로 이어지는 첫 번째 계절 이야기이기도 합니다.</p>
+        </div>
+        <div class="proj-row-visual">
+          <div class="proj-carousel">
+            <div class="proj-carousel-track">
+              <img src="images/projects/ex1-shelves.jpg" alt="여름을 준비하는 마음" class="zoomable">
+              <img src="images/projects/ex1-cafe.jpg"    alt="여름을 준비하는 마음" class="zoomable">
+              <img src="images/projects/ex1-lamp.jpg"    alt="여름을 준비하는 마음" class="zoomable">
+              <img src="images/projects/ex1-print.jpg"   alt="여름을 준비하는 마음" class="zoomable">
+            </div>
+            <button class="proj-carousel-btn proj-carousel-prev" aria-label="이전">&#8249;</button>
+            <button class="proj-carousel-btn proj-carousel-next" aria-label="다음">&#8250;</button>
+            <div class="proj-carousel-dots"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-row">
+        <div class="proj-row-text">
+          <span class="proj-tag" data-i18n="ptag.exhibition">사진전</span>
+          <h3 class="proj-row-title">일상의 여름</h3>
+          <p class="proj-row-meta">2025.07 – 2025.08 · 원두서점 2호점</p>
+          <p class="proj-row-desc" data-i18n="proj.ex2.desc">'여름을 준비하는 마음'에서 계절을 기다렸다면, 이번엔 그 여름 안으로 걸어 들어갔습니다. 2024년, 혼자 유럽을 여행하던 중 베를린의 작은 동네 공원에서 발걸음을 멈췄습니다. 현지 사람들이 특별한 계획도 없이 — 그냥 집 근처 공원에서 나무 그늘 아래 드러누워 완전한 여름을 누리고 있었습니다. 그 장면이 오래 머릿속에 남았습니다. 휴식은 '어디'에 있느냐의 문제가 아니었습니다. '어떻게 바라보느냐'의 문제였습니다. 멀리 떠나지 않아도, 지금 이 일상 안에 이미 여름이 있습니다. 두 번째 전시는 그 단순한 발견을 여러분과 나누고 싶었습니다.</p>
+        </div>
+        <div class="proj-row-visual">
+          <div class="proj-carousel">
+            <div class="proj-carousel-track">
+              <img src="images/projects/ex2-hero.jpg"    alt="일상의 여름" class="zoomable">
+              <img src="images/projects/ex2-artist.jpg"  alt="일상의 여름" class="zoomable">
+              <img src="images/projects/ex2-fabric.jpg"  alt="일상의 여름" class="zoomable">
+              <img src="images/projects/ex2-room.jpg"    alt="일상의 여름" class="zoomable">
+            </div>
+            <button class="proj-carousel-btn proj-carousel-prev" aria-label="이전">&#8249;</button>
+            <button class="proj-carousel-btn proj-carousel-next" aria-label="다음">&#8250;</button>
+            <div class="proj-carousel-dots"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   <!-- ─── WORKS ────────────────────────────────────────── -->
     <section class="section" id="works">
       <div class="container">
@@ -71,7 +136,6 @@
           <button class="works-tab active" data-filter="all"         data-i18n="cat.all">전체</button>
           <button class="works-tab"        data-filter="album-cover" data-i18n="cat.albumCover">앨범커버</button>
           <button class="works-tab"        data-filter="poster"      data-i18n="cat.poster">포스터</button>
-          <button class="works-tab"        data-filter="toon"        data-i18n="cat.toon">치기툰</button>
         </div>
 
         <div class="works-grid">
@@ -212,101 +276,17 @@
       </div>
     </section>
 
-    <!-- ─── PROJECTS (mikiperse rows) ──────────────────────── -->
-    <section class="section section--projects" id="projects">
-      <div class="proj-section-header">
-        <h2 class="section-title" data-i18n="nav.projects">Projects</h2>
-      </div>
-
-      <div class="proj-row">
-        <div class="proj-row-text">
-          <span class="proj-tag" data-i18n="ptag.book">독립출판</span>
-          <h3 class="proj-row-title">춤추는 독백</h3>
-          <p class="proj-row-meta">2024 · Dancing Monologue</p>
-          <blockquote class="proj-row-quote" data-i18n="proj.book.quote">"홀로 있다는 것이 외롭지 않을 때, 비로소 쓸 수 있는 말들이 있었다."</blockquote>
-          <p class="proj-row-desc" data-i18n="proj.book.desc">그림일기를 쓰듯 매일 썼다. 낯선 도시의 카페에서, 기차 안에서, 길모퉁이에서 멈춰 서서. 100일간 홀로 유럽을 여행하며 쓴 단상집. 진정한 자유는 이방인의 삶이 아닌 내면으로부터 온다고 믿습니다.</p>
-        </div>
-        <div class="proj-row-visual">
-          <img src="images/projects/book-cover.jpg" alt="춤추는 독백" class="zoomable">
-        </div>
-      </div>
-
-      <div class="proj-row">
-        <div class="proj-row-text">
-          <span class="proj-tag" data-i18n="ptag.exhibition">사진전</span>
-          <h3 class="proj-row-title">여름을 준비하는 마음</h3>
-          <p class="proj-row-meta">2025.05 – 2025.06 · 원두서점 가산점</p>
-          <p class="proj-row-desc" data-i18n="proj.ex1.desc">여름이 막 시작되려는 계절, 서점 한 켠에 작게 자리를 빌렸습니다. 특별한 이야기를 하려던 것은 아니었습니다. 다만 — 어떤 계절을 제대로 맞이하기 위해서는, 먼저 마음을 준비해두는 시간이 필요하다고 느꼈습니다. 아직 덥지 않지만 이미 여름의 기운이 스며드는 그 사이의 감각을, 여러분과 함께 천천히 느끼고 싶었습니다. 이 전시는 그 '준비하는 마음'을 사진으로 담은 것이고, 두 번째 전시 '일상의 여름'으로 이어지는 첫 번째 계절 이야기이기도 합니다.</p>
-        </div>
-        <div class="proj-row-visual">
-          <div class="proj-carousel">
-            <div class="proj-carousel-track">
-              <img src="images/projects/ex1-shelves.jpg" alt="여름을 준비하는 마음" class="zoomable">
-              <img src="images/projects/ex1-cafe.jpg"    alt="여름을 준비하는 마음" class="zoomable">
-              <img src="images/projects/ex1-lamp.jpg"    alt="여름을 준비하는 마음" class="zoomable">
-              <img src="images/projects/ex1-print.jpg"   alt="여름을 준비하는 마음" class="zoomable">
-            </div>
-            <button class="proj-carousel-btn proj-carousel-prev" aria-label="이전">&#8249;</button>
-            <button class="proj-carousel-btn proj-carousel-next" aria-label="다음">&#8250;</button>
-            <div class="proj-carousel-dots"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="proj-row">
-        <div class="proj-row-text">
-          <span class="proj-tag" data-i18n="ptag.exhibition">사진전</span>
-          <h3 class="proj-row-title">일상의 여름</h3>
-          <p class="proj-row-meta">2025.07 – 2025.08 · 원두서점 2호점</p>
-          <p class="proj-row-desc" data-i18n="proj.ex2.desc">'여름을 준비하는 마음'에서 계절을 기다렸다면, 이번엔 그 여름 안으로 걸어 들어갔습니다. 2024년, 혼자 유럽을 여행하던 중 베를린의 작은 동네 공원에서 발걸음을 멈췄습니다. 현지 사람들이 특별한 계획도 없이 — 그냥 집 근처 공원에서 나무 그늘 아래 드러누워 완전한 여름을 누리고 있었습니다. 그 장면이 오래 머릿속에 남았습니다. 휴식은 '어디'에 있느냐의 문제가 아니었습니다. '어떻게 바라보느냐'의 문제였습니다. 멀리 떠나지 않아도, 지금 이 일상 안에 이미 여름이 있습니다. 두 번째 전시는 그 단순한 발견을 여러분과 나누고 싶었습니다.</p>
-        </div>
-        <div class="proj-row-visual">
-          <div class="proj-carousel">
-            <div class="proj-carousel-track">
-              <img src="images/projects/ex2-hero.jpg"    alt="일상의 여름" class="zoomable">
-              <img src="images/projects/ex2-artist.jpg"  alt="일상의 여름" class="zoomable">
-              <img src="images/projects/ex2-fabric.jpg"  alt="일상의 여름" class="zoomable">
-              <img src="images/projects/ex2-room.jpg"    alt="일상의 여름" class="zoomable">
-            </div>
-            <button class="proj-carousel-btn proj-carousel-prev" aria-label="이전">&#8249;</button>
-            <button class="proj-carousel-btn proj-carousel-next" aria-label="다음">&#8250;</button>
-            <div class="proj-carousel-dots"></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ─── ABOUT ───────────────────────────────────────────── -->
-    <section class="section section--about" id="about">
-      <div class="container">
-        <h2 class="section-title" data-i18n="nav.about">About</h2>
-        <div class="about-text">
-          <p data-i18n="about.p1">CHIGI는 시각예술가이자 그래픽 디자이너입니다.</p>
-          <p data-i18n="about.p2">그림일기를 그리듯 — 일상의 작고 여린 감정들을 이미지와 언어로 붙잡습니다. 내면을 들여다보는 방식으로 작업합니다.</p>
-          <p data-i18n="about.p3">2024년, 100일간 홀로 유럽을 여행하며 쓴 단상집 《춤추는 독백》을 독립출판했습니다. 진정한 자유는 이방인의 삶이 아닌 내면으로부터 온다고 믿습니다.</p>
-        </div>
-      </div>
-    </section>
-
     <!-- ─── MEDIA ────────────────────────────────────────────── -->
-    <section class="section" id="media">
+    <section class="section section--media" id="media">
       <div class="container">
-        <h2 class="section-title">Media</h2>
-        <div class="media-layout">
-          <div class="media-block media-block--yt">
-            <p class="media-platform">YouTube</p>
-            <a class="yt-wrap yt-thumb-link"
-               href="https://www.youtube.com/watch?v=jtGzPOLjvGg"
-               target="_blank" rel="noopener" aria-label="YouTube에서 영상 보기">
-              <img src="https://img.youtube.com/vi/jtGzPOLjvGg/maxresdefault.jpg"
-                   alt="CHIGI YouTube 영상 썸네일"
-                   onerror="this.src='https://img.youtube.com/vi/jtGzPOLjvGg/hqdefault.jpg'">
-              <div class="yt-play-btn" aria-hidden="true">▶</div>
-            </a>
-            <a href="https://www.youtube.com/@jeongjyojyo" target="_blank" rel="noopener"
-               class="media-link" data-i18n="media.ytCta">채널 바로가기 →</a>
-          </div>
-        </div>
+        <a class="yt-wrap yt-thumb-link"
+           href="https://www.youtube.com/watch?v=jtGzPOLjvGg"
+           target="_blank" rel="noopener" aria-label="YouTube에서 영상 보기">
+          <img src="https://img.youtube.com/vi/jtGzPOLjvGg/maxresdefault.jpg"
+               alt="CHIGI YouTube 영상 썸네일"
+               onerror="this.src='https://img.youtube.com/vi/jtGzPOLjvGg/hqdefault.jpg'">
+          <div class="yt-play-btn" aria-hidden="true">▶</div>
+        </a>
       </div>
     </section>
 
@@ -317,6 +297,19 @@
     </footer>
 
   </main>
+
+  <!-- ─── ABOUT PANEL ─────────────────────────────────────── -->
+  <div class="about-panel" id="aboutPanel" aria-hidden="true">
+    <div class="ap-backdrop" id="apBackdrop"></div>
+    <div class="ap-body">
+      <button class="ap-close" id="apClose">✕</button>
+      <div class="ap-content">
+        <p data-i18n="about.p1">CHIGI는 시각예술가이자 그래픽 디자이너입니다.</p>
+        <p data-i18n="about.p2">그림일기를 그리듯 — 일상의 작고 여린 감정들을 이미지와 언어로 붙잡습니다. 내면을 들여다보는 방식으로 작업합니다.</p>
+        <p data-i18n="about.p3">2024년, 100일간 홀로 유럽을 여행하며 쓴 단상집 《춤추는 독백》을 독립출판했습니다. 진정한 자유는 이방인의 삶이 아닌 내면으로부터 온다고 믿습니다.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- ─── EMAIL PANEL ──────────────────────────────────────── -->
   <div class="email-panel" id="emailPanel" aria-hidden="true">
