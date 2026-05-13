@@ -241,6 +241,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   display: flex;
   flex-direction: column;
 }
+.works-grid.poster-view .work-card.hidden { display: none; }
 .works-grid.poster-view [data-pg-idx="1"] { grid-column: span 2; }
 .works-grid.poster-view [data-pg-idx="4"] { grid-column: span 2; }
 .works-grid.poster-view [data-pg-idx="8"] { grid-column: span 2; }
