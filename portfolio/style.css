@@ -510,13 +510,10 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   overflow: hidden;
   background: var(--black);
 }
-.yt-wrap img { width: 100%; height: 100%; object-fit: cover; transition: opacity .3s; }
-.yt-wrap:hover img { opacity: .75; }
-.yt-play-btn {
+.yt-iframe {
   position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2rem; color: var(--white);
-  pointer-events: none;
+  width: 100%; height: 100%;
+  border: none;
 }
 
 /* ─── Footer ──────────────────────────────────────────────── */
