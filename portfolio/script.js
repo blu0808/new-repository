@@ -2,7 +2,6 @@
 const dict = {
   ko: {
     'nav.works':   'Works',
-    'nav.about':   'About',
     'nav.media':   'Media',
     'nav.contact': 'Contact',
     'hero.sub':    '시각예술가 · 그래픽 디자이너',
@@ -10,16 +9,6 @@ const dict = {
     'cat.graphic': '그래픽 디자인',
     'cat.art':     '시각예술',
     'work.placeholder': '작업명 추가 예정',
-    'about.p1': 'CHIGI는 시각예술가이자 그래픽 디자이너입니다.',
-    'about.p2': '그림일기를 그리듯 — 일상의 작고 여린 감정들을 이미지와 언어로 붙잡습니다. 내면을 들여다보는 방식으로 작업합니다.',
-    'about.p3': '2024년, 100일간 홀로 유럽을 여행하며 쓴 단상집 《춤추는 독백》을 독립출판했습니다. 진정한 자유는 이방인의 삶이 아닌 내면으로부터 온다고 믿습니다.',
-    'about.imgNote': '사진 추가 예정',
-    'media.ytHint': 'YouTube 연동 예정',
-    'media.ytCta':  '채널 바로가기 →',
-    'media.igCta':  '팔로우하기 →',
-    'ig.photo': '사진 & 개인',
-    'ig.art':   '아트워크',
-    'cat.all': '전체',
     'cat.albumCover': '앨범커버',
     'works.more': '더보기',
     'nav.projects': 'Projects',
@@ -36,7 +25,6 @@ const dict = {
   },
   en: {
     'nav.works':   'Works',
-    'nav.about':   'About',
     'nav.media':   'Media',
     'nav.contact': 'Contact',
     'hero.sub':    'Visual Artist · Graphic Designer',
@@ -44,16 +32,6 @@ const dict = {
     'cat.graphic': 'Graphic Design',
     'cat.art':     'Visual Art',
     'work.placeholder': 'Title coming soon',
-    'about.p1': 'CHIGI is a visual artist and graphic designer.',
-    'about.p2': 'Working like keeping a picture diary — she captures small, tender emotions from everyday life in image and language, always looking inward.',
-    'about.p3': 'In 2024, she traveled Europe alone for 100 days and self-published 《Dancing Monologue》, a collection of solitary reflections. She believes true freedom comes not from living as a stranger in foreign places, but from exploring what lies within.',
-    'about.imgNote': 'Photo coming soon',
-    'media.ytHint': 'YouTube coming soon',
-    'media.ytCta':  'Visit Channel →',
-    'media.igCta':  'Follow →',
-    'ig.photo': 'Photo & Personal',
-    'ig.art':   'Artwork',
-    'cat.all': 'All',
     'cat.albumCover': 'Album Cover',
     'works.more': 'Load More',
     'nav.projects': 'Projects',
@@ -222,7 +200,6 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     closeModal();
     closeEmailPanel();
-    closeAboutPanel();
     if (zoomOverlay) { zoomOverlay.classList.remove('open'); document.body.style.overflow = ''; }
     if (typeof closeYtModal === 'function') closeYtModal();
     if (typeof closePg === 'function') closePg();
@@ -232,32 +209,6 @@ document.addEventListener('keydown', e => {
     if (e.key === 'ArrowLeft')  pgGo(pgCur - 1);
   }
 });
-
-/* ─── About Panel ───────────────────────────────────────── */
-const aboutPanel = document.getElementById('aboutPanel');
-
-function openAboutPanel() {
-  aboutPanel.classList.add('open');
-  aboutPanel.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeAboutPanel() {
-  if (!aboutPanel?.classList.contains('open')) return;
-  aboutPanel.classList.remove('open');
-  aboutPanel.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-}
-
-document.getElementById('aboutTrigger')?.addEventListener('click', openAboutPanel);
-document.getElementById('navAbout')?.addEventListener('click', () => {
-  navMenu.classList.remove('open');
-  hamburger.classList.remove('open');
-  document.body.style.overflow = '';
-  openAboutPanel();
-});
-document.getElementById('apClose')?.addEventListener('click', closeAboutPanel);
-document.getElementById('apBackdrop')?.addEventListener('click', closeAboutPanel);
 
 /* ─── Email Panel ───────────────────────────────────────── */
 const emailPanel = document.getElementById('emailPanel');
@@ -343,23 +294,29 @@ document.getElementById('epConfirmSend').addEventListener('click', async () => {
 /* ─── Works 카테고리 필터 ─────────────────────────────────── */
 const worksGrid = document.querySelector('.works-grid');
 
+function applyWorksFilter(filter) {
+  let visible = 0;
+  document.querySelectorAll('.work-card').forEach(card => {
+    const hide = card.dataset.category !== filter;
+    card.classList.toggle('hidden', hide);
+    if (!hide) visible++;
+  });
+  worksGrid.classList.toggle('poster-view', filter === 'poster');
+  document.getElementById('works').classList.toggle('poster-active', filter === 'poster');
+  const emptyEl = document.getElementById('worksEmpty');
+  if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+}
+
 document.querySelectorAll('.works-tab').forEach(tab => {
   tab.addEventListener('click', () => {
     document.querySelectorAll('.works-tab').forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
-    const filter = tab.dataset.filter;
-    let visible = 0;
-    document.querySelectorAll('.work-card').forEach((card, i) => {
-      const hide = filter !== 'all' && card.dataset.category !== filter;
-      card.classList.toggle('hidden', hide);
-      if (!hide) visible++;
-    });
-    worksGrid.classList.toggle('poster-view', filter === 'poster');
-    document.getElementById('works').classList.toggle('poster-active', filter === 'poster');
-    const emptyEl = document.getElementById('worksEmpty');
-    if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+    applyWorksFilter(tab.dataset.filter);
   });
 });
+
+const activeTab = document.querySelector('.works-tab.active');
+if (activeTab) applyWorksFilter(activeTab.dataset.filter);
 
 /* ─── Carousel ──────────────────────────────────────────────── */
 document.querySelectorAll('.proj-carousel').forEach(carousel => {

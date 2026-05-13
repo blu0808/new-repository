@@ -496,45 +496,6 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 .proj-dot.active { background: var(--accent); }
 
-/* ─── About Panel ─────────────────────────────────────────── */
-.about-panel {
-  position: fixed; inset: 0; z-index: 850;
-  opacity: 0; pointer-events: none;
-  transition: opacity .35s ease;
-}
-.about-panel.open { opacity: 1; pointer-events: all; }
-.ap-backdrop {
-  position: absolute; inset: 0;
-  background: rgba(255,255,255,.97);
-  backdrop-filter: blur(6px);
-  cursor: pointer;
-}
-.ap-body {
-  position: absolute; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  padding: clamp(48px, 8vw, 120px);
-  pointer-events: none;
-}
-.ap-close {
-  position: absolute; top: 28px; right: 32px;
-  background: none; border: none;
-  font-size: 1rem; color: var(--accent);
-  opacity: .5; cursor: pointer;
-  transition: opacity .2s;
-  pointer-events: all;
-}
-.ap-close:hover { opacity: 1; }
-.ap-content {
-  max-width: 560px;
-  display: flex; flex-direction: column; gap: 22px;
-  pointer-events: all;
-}
-.ap-content p {
-  font-size: clamp(15px, 1.2vw, 17px);
-  line-height: 1.95;
-  color: var(--accent);
-}
-
 /* ─── Media ───────────────────────────────────────────────── */
 .section--media .container {
   display: flex;
