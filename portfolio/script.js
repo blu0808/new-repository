@@ -11,9 +11,17 @@ const dict = {
     'work.placeholder': '작업명 추가 예정',
     'cat.albumCover': '앨범커버',
     'works.more': '더보기',
+    'nav.projects': 'Projects',
+    'projects.tagline': '춤추는 독백의 세계 — 책, 사진전, 유튜브',
+    'ptag.book': '독립출판',
+    'ptag.exhibition': '사진전',
+    'proj.book.quote': '"홀로 있다는 것이 외롭지 않을 때, 비로소 쓸 수 있는 말들이 있었다."',
+    'proj.book.desc': '그림일기를 쓰듯 매일 썼다. 낯선 도시의 카페에서, 기차 안에서, 길모퉁이에서 멈춰 서서. 100일간 홀로 유럽을 여행하며 쓴 단상집. 진정한 자유는 이방인의 삶이 아닌 내면으로부터 온다고 믿습니다.',
+    'proj.ex1.desc': '여름이 막 시작되려는 계절, 서점 한 켠에 작게 자리를 빌렸습니다. 특별한 이야기를 하려던 것은 아니었습니다. 다만 — 어떤 계절을 제대로 맞이하기 위해서는, 먼저 마음을 준비해두는 시간이 필요하다고 느꼈습니다. 아직 덥지 않지만 이미 여름의 기운이 스며드는 그 사이의 감각을, 여러분과 함께 천천히 느끼고 싶었습니다. 이 전시는 그 \'준비하는 마음\'을 사진으로 담은 것이고, 두 번째 전시 \'일상의 여름\'으로 이어지는 첫 번째 계절 이야기이기도 합니다.',
+    'proj.ex2.desc': '\'여름을 준비하는 마음\'에서 계절을 기다렸다면, 이번엔 그 여름 안으로 걸어 들어갔습니다. 2024년, 혼자 유럽을 여행하던 중 베를린의 작은 동네 공원에서 발걸음을 멈췄습니다. 현지 사람들이 특별한 계획도 없이 — 그냥 집 근처 공원에서 나무 그늘 아래 드러누워 완전한 여름을 누리고 있었습니다. 그 장면이 오래 머릿속에 남았습니다. 휴식은 \'어디\'에 있느냐의 문제가 아니었습니다. \'어떻게 바라보느냐\'의 문제였습니다. 멀리 떠나지 않아도, 지금 이 일상 안에 이미 여름이 있습니다. 두 번째 전시는 그 단순한 발견을 여러분과 나누고 싶었습니다.',
     'cat.poster': '포스터',
     'works.empty': '업로드 예정입니다.',
-    'sb.bio': '앨범커버·포스터를 만드는 그래픽 디자이너. 일상의 작고 여린 감정들을 이미지와 언어로 담습니다. 독립출판 《춤추는 독백》 저자.',
+    'sb.bio': '일상의 작고 여린 감정들을 이미지와 언어로 붙잡습니다. 독립출판 《춤추는 독백》 저자.',
   },
   en: {
     'nav.works':   'Works',
@@ -26,11 +34,17 @@ const dict = {
     'work.placeholder': 'Title coming soon',
     'cat.albumCover': 'Album Cover',
     'works.more': 'Load More',
+    'nav.projects': 'Projects',
+    'projects.tagline': 'The Universe of Dancing Monologue — Book, Exhibitions, YouTube',
     'ptag.book': 'Self-Published',
     'ptag.exhibition': 'Exhibition',
+    'proj.book.quote': '"There are words that can only be written when solitude stops feeling lonely."',
+    'proj.book.desc': 'Written daily like a picture diary — in café corners of unfamiliar cities, on trains, pausing at street corners. A collection of solitary reflections from 100 days traveling Europe alone. True freedom comes not from living as a stranger, but from exploring what lies within.',
+    'proj.ex1.desc': 'It was May — just as summer was about to begin — and I borrowed a quiet corner of a bookstore. I wasn\'t trying to say anything grand. I simply felt that to truly welcome a season, you first need time to prepare your heart for it. That in-between feeling — not quite hot yet, but already touched by summer\'s warmth — is what I wanted to sit with, alongside you. This exhibition captures that act of preparing, and is also the first chapter in a two-part series leading into \'Summer in Everyday Life.\'',
+    'proj.ex2.desc': 'If the first exhibition was about waiting for summer, this one is about walking into it. In 2024, traveling alone through Europe, I stopped at a small neighbourhood park in Berlin. People there were having a perfectly complete summer — no plans, no grand destinations — just lying under the shade of a tree, right near home. That image stayed with me. Rest isn\'t about where you are. It\'s about how you see. You don\'t have to go far. Summer is already here, inside everyday life. This second exhibition is my way of sharing that simple discovery with you.',
     'cat.poster': 'Poster',
     'works.empty': 'Coming soon.',
-    'sb.bio': 'Visual artist capturing small, tender emotions through image and language. Author of self-published 《Dancing Soliloquy》.',
+    'sb.bio': 'Visual artist capturing small, tender emotions through image and language. Author of self-published 《Dancing Monologue》.',
   },
 };
 
@@ -89,7 +103,7 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.12 });
 
-document.querySelectorAll('.section-title, .work-entry, .proj-row, .proj-item, .proj-hero, .media-block, .contact-body')
+document.querySelectorAll('.section-title, .work-card, .about-text, .about-img-wrap, .proj-item, .proj-hero, .media-block, .contact-body')
   .forEach(el => {
     el.classList.add('fade-up');
     observer.observe(el);
@@ -107,18 +121,84 @@ style.textContent = `
     opacity: 1;
     transform: none;
   }
-  .work-entry.fade-up { transition-delay: calc(var(--i, 0) * 80ms); }
+  .work-card.fade-up { transition-delay: calc(var(--i, 0) * 80ms); }
 `;
 document.head.appendChild(style);
 
-document.querySelectorAll('.work-entry').forEach((el, i) => {
+document.querySelectorAll('.work-card').forEach((el, i) => {
   el.style.setProperty('--i', i);
 });
 
+/* ─── Works 모달 데이터 ─────────────────────────────────────── */
+/* 나중에 desc(설명)와 link(음악 링크)를 여기서 채워넣으세요 */
+const worksData = [
+  { title: '너를 기다리고 있어', artist: '예례밴드',          year: '2026', desc: '', link: '' },
+  { title: 'End(And)',           artist: 'Grace',             year: '2025', desc: '', link: '' },
+  { title: '시큰',                artist: '조에',              year: '2025', desc: '', link: '' },
+  { title: 'hikari.',            artist: 'Gonhee',            year: '2025', desc: '', link: '' },
+  { title: 'Joy of the Moment ver.2', artist: '한바탕 & KIMTAE', year: '2025', desc: '', link: '' },
+  { title: 'Joy of the Moment ver.1', artist: '한바탕 & KIMTAE', year: '2025', desc: '', link: '' },
+  { title: '야호',                artist: '아루단테',           year: '2025', desc: '', link: '' },
+  { title: 'Hidden Things',      artist: '김소연',             year: '2025', desc: '', link: '' },
+  { title: '말해줘',              artist: '이미블루',           year: '2024', desc: '', link: '' },
+  { title: '못났어',              artist: '이미블루',           year: '2024', desc: '', link: '' },
+  { title: '그 여름',             artist: '이미블루',           year: '2024', desc: '', link: '' },
+  { title: '낮잠',                artist: '이미블루',           year: '2024', desc: '', link: '' },
+  { title: 'Dark of Fantasy',    artist: '윤혜문',             year: '2024', desc: '', link: '' },
+  { title: '애국가',              artist: '박미자, 정경',        year: '2024', desc: '', link: '' },
+  { title: 'Cinema',             artist: '조주현',             year: '2023', desc: '', link: '' },
+  { title: 'JUMP',               artist: '밴드기린',           year: '2023', desc: '', link: '' },
+  { title: 'SICK',               artist: '정재승',             year: '2023', desc: '', link: '' },
+  { title: 'Wave',               artist: 'Sayma',             year: '2022', desc: '', link: '' },
+];
 
+const modal       = document.getElementById('workModal');
+const modalImg    = document.getElementById('modalImg');
+const modalTitle  = document.getElementById('modalTitle');
+const modalArtist = document.getElementById('modalArtist');
+const modalYear   = document.getElementById('modalYear');
+const modalDesc   = document.getElementById('modalDesc');
+const modalLink   = document.getElementById('modalLink');
+
+function openModal(index) {
+  const data = worksData[index];
+  const card = document.querySelectorAll('.work-card')[index];
+  if (!data || !card) return;
+
+  modalImg.src = card.querySelector('img').src;
+  modalImg.alt = data.title;
+  modalTitle.textContent  = data.title;
+  modalArtist.textContent = data.artist;
+  modalYear.textContent   = data.year;
+  modalDesc.textContent   = data.desc;
+  modalDesc.style.display = data.desc ? '' : 'none';
+
+  if (data.link) {
+    modalLink.href         = data.link;
+    modalLink.textContent  = '음악 듣기 →';
+    modalLink.style.display = '';
+  } else {
+    modalLink.style.display = 'none';
+  }
+
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.work-card').forEach((card, i) => {
+  card.addEventListener('click', () => openModal(i));
+});
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
 document.getElementById('modalBackdrop').addEventListener('click', closeModal);
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
+    closeModal();
     closeEmailPanel();
     if (zoomOverlay) { zoomOverlay.classList.remove('open'); document.body.style.overflow = ''; }
     if (typeof closeYtModal === 'function') closeYtModal();
@@ -211,7 +291,65 @@ document.getElementById('epConfirmSend').addEventListener('click', async () => {
 });
 
 
+/* ─── Works 카테고리 필터 ─────────────────────────────────── */
+const worksGrid = document.querySelector('.works-grid');
 
+function applyWorksFilter(filter) {
+  let visible = 0;
+  document.querySelectorAll('.work-card').forEach(card => {
+    const hide = card.dataset.category !== filter;
+    card.classList.toggle('hidden', hide);
+    if (!hide) visible++;
+  });
+  worksGrid.classList.toggle('poster-view', filter === 'poster');
+  document.getElementById('works').classList.toggle('poster-active', filter === 'poster');
+  const emptyEl = document.getElementById('worksEmpty');
+  if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+}
+
+document.querySelectorAll('.works-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.works-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    applyWorksFilter(tab.dataset.filter);
+  });
+});
+
+const activeTab = document.querySelector('.works-tab.active');
+if (activeTab) applyWorksFilter(activeTab.dataset.filter);
+
+/* ─── Carousel ──────────────────────────────────────────────── */
+document.querySelectorAll('.proj-carousel').forEach(carousel => {
+  const track  = carousel.querySelector('.proj-carousel-track');
+  const imgs   = track.querySelectorAll('img');
+  const dotsEl = carousel.querySelector('.proj-carousel-dots');
+  let cur = 0;
+
+  imgs.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'proj-dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('aria-label', `${i + 1}번 사진`);
+    d.addEventListener('click', () => go(i));
+    dotsEl.appendChild(d);
+  });
+
+  function go(n) {
+    cur = (n + imgs.length) % imgs.length;
+    track.style.transform = `translateX(-${cur * 100}%)`;
+    carousel.querySelectorAll('.proj-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+  }
+
+  carousel.querySelector('.proj-carousel-prev').addEventListener('click', () => go(cur - 1));
+  carousel.querySelector('.proj-carousel-next').addEventListener('click', () => go(cur + 1));
+
+  /* swipe */
+  let sx = 0;
+  track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 48) go(dx < 0 ? cur + 1 : cur - 1);
+  });
+});
 
 /* ─── Image Zoom ────────────────────────────────────────────── */
 const zoomOverlay = document.getElementById('zoomOverlay');
@@ -234,7 +372,10 @@ if (zoomOverlay) {
   });
 }
 
-
+/* ─── Poster data-pg-idx 할당 ───────────────────────────── */
+document.querySelectorAll('.work-card[data-category="poster"]').forEach((card, i) => {
+  card.setAttribute('data-pg-idx', i + 1);
+});
 
 /* ─── Poster Gallery ─────────────────────────────────────── */
 const pgOverlay = document.getElementById('pgOverlay');
@@ -251,9 +392,9 @@ let pgBusy  = false;
 
 function pgBuild() {
   pgItems = [];
-  document.querySelectorAll('.we-poster-item').forEach(item => {
-    const img = item.querySelector('img');
-    if (img) pgItems.push({ src: img.src, alt: img.alt, name: item.querySelector('.we-poster-label')?.textContent || '' });
+  document.querySelectorAll('.work-card[data-category="poster"]').forEach(card => {
+    const img = card.querySelector('.work-thumb img');
+    if (img) pgItems.push({ src: img.src, alt: img.alt, name: card.querySelector('.work-name')?.textContent || '' });
   });
 }
 
@@ -321,8 +462,8 @@ function closePg() {
   document.body.style.overflow = '';
 }
 
-document.querySelectorAll('.we-poster-item').forEach((item, i) => {
-  item.addEventListener('click', () => openPg(i));
+document.querySelectorAll('.work-card[data-category="poster"]').forEach((card, i) => {
+  card.addEventListener('click', () => openPg(i));
 });
 
 if (pgClosBtn) pgClosBtn.addEventListener('click', closePg);
@@ -363,11 +504,19 @@ function closeYtModal() {
   document.body.style.overflow = '';
 }
 
-document.querySelectorAll('.we-grid-item[data-yt]').forEach(item => {
-  item.addEventListener('click', () => {
-    openYtModal(item.dataset.yt, item.querySelector('.we-grid-label')?.textContent || '');
+document.querySelectorAll('.work-card[data-yt]').forEach(card => {
+  card.addEventListener('click', () => {
+    openYtModal(card.dataset.yt, card.querySelector('.work-name')?.textContent || '');
   });
 });
 
 if (ytModalClose) ytModalClose.addEventListener('click', closeYtModal);
 if (ytModalBackdrop) ytModalBackdrop.addEventListener('click', closeYtModal);
+
+/* hero video cover — 썸네일로 초기 로딩 숨기고 1.2초 후 페이드아웃, 이후 쉴드로 유지 */
+const heroCover = document.getElementById('heroVideoCover');
+if (heroCover) {
+  setTimeout(() => {
+    heroCover.style.opacity = '0';
+  }, 1200);
+}

@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"find /Users/chigi/Desktop/claude -name \\\".gitignore\\\" -maxdepth 3 2>/dev/null && git check-ignore -v \\\"portfolio/images/works/album-covers/250414_시큰_조에.jpg\\\"\",\"description\":\"Find all gitig...",
+  "error": "Exit code 1\n/Users/chigi/Desktop/claude/ttudun/.gitignore\n/Users/chigi/Desktop/claude/k-skill-main/.gitignore\n/Users/chigi/Desktop/claude/portfolio/.gitignore\n/Users/chigi/Desktop/claude/k-skill-main/admin/.gitignore\n/Users/chigi/Desktop/claude/k-skill-main/naver-blog-research/.gitignore",
+  "timestamp": "2026-05-06T03:24:28.088Z",
+  "retry_count": 2
+}

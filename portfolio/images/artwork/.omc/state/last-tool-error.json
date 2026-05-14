@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"git add portfolio/images/artwork/ portfolio/index.html portfolio/script.js && git commit -m \\\"$(cat <<'EOF'\\n포스터 카테고리 8개 추가 및 필터 버그 수정\\n\\n- 포스터 이미지 8개 추가 (미아리텍사스골목, 시인유현아, 물결서사, 물결3일×3, 레이...",
+  "error": "Exit code 128\nwarning: could not open directory 'portfolio/images/artwork/portfolio/': No such file or directory\nfatal: pathspec 'portfolio/images/artwork/' did not match any files",
+  "timestamp": "2026-05-06T21:37:03.195Z",
+  "retry_count": 1
+}
