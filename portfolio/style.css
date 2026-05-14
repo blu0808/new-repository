@@ -838,3 +838,94 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   .proj-row-visual--grid { grid-template-columns: 1fr; }
   .proj-row-visual--grid img { height: 200px; }
 }
+
+/* ─── Journal Page ────────────────────────────────────────── */
+.journal-page {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  font-size: 13px;
+}
+
+.journal-main {
+  padding: clamp(48px, 6vw, 80px) clamp(28px, 4vw, 56px);
+}
+
+.journal-grid {
+  columns: 2;
+  column-gap: 28px;
+}
+
+.journal-item {
+  break-inside: avoid;
+  margin-bottom: 28px;
+}
+
+.journal-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.journal-img { cursor: zoom-in; }
+
+/* ─── Journal Carousel ────────────────────────────────────── */
+.jc-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.jc-track {
+  display: flex;
+  transition: transform .4s ease;
+}
+
+.jc-track img {
+  flex: 0 0 100%;
+  cursor: default;
+}
+
+.jc-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,.85);
+  border: none;
+  font-size: .85rem;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: background .2s;
+  font-family: inherit;
+}
+
+.jc-btn:hover { background: rgba(255,255,255,1); }
+.jc-prev { left: 8px; }
+.jc-next { right: 8px; }
+
+.jc-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+}
+
+.jc-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.5);
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.jc-dot.active { background: rgba(255,255,255,.9); }
+
+/* ─── Journal Mobile ──────────────────────────────────────── */
+@media (max-width: 640px) {
+  .journal-grid { columns: 1; }
+}
