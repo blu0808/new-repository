@@ -103,7 +103,7 @@ const observer = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.12 });
 
-document.querySelectorAll('.section-title, .work-card, .about-text, .about-img-wrap, .proj-item, .proj-hero, .media-block, .contact-body')
+document.querySelectorAll('.section-title, .work-entry, .proj-row, .proj-item, .proj-hero, .media-block, .contact-body')
   .forEach(el => {
     el.classList.add('fade-up');
     observer.observe(el);
@@ -121,84 +121,18 @@ style.textContent = `
     opacity: 1;
     transform: none;
   }
-  .work-card.fade-up { transition-delay: calc(var(--i, 0) * 80ms); }
+  .work-entry.fade-up { transition-delay: calc(var(--i, 0) * 80ms); }
 `;
 document.head.appendChild(style);
 
-document.querySelectorAll('.work-card').forEach((el, i) => {
+document.querySelectorAll('.work-entry').forEach((el, i) => {
   el.style.setProperty('--i', i);
 });
 
-/* ─── Works 모달 데이터 ─────────────────────────────────────── */
-/* 나중에 desc(설명)와 link(음악 링크)를 여기서 채워넣으세요 */
-const worksData = [
-  { title: '너를 기다리고 있어', artist: '예례밴드',          year: '2026', desc: '', link: '' },
-  { title: 'End(And)',           artist: 'Grace',             year: '2025', desc: '', link: '' },
-  { title: '시큰',                artist: '조에',              year: '2025', desc: '', link: '' },
-  { title: 'hikari.',            artist: 'Gonhee',            year: '2025', desc: '', link: '' },
-  { title: 'Joy of the Moment ver.2', artist: '한바탕 & KIMTAE', year: '2025', desc: '', link: '' },
-  { title: 'Joy of the Moment ver.1', artist: '한바탕 & KIMTAE', year: '2025', desc: '', link: '' },
-  { title: '야호',                artist: '아루단테',           year: '2025', desc: '', link: '' },
-  { title: 'Hidden Things',      artist: '김소연',             year: '2025', desc: '', link: '' },
-  { title: '말해줘',              artist: '이미블루',           year: '2024', desc: '', link: '' },
-  { title: '못났어',              artist: '이미블루',           year: '2024', desc: '', link: '' },
-  { title: '그 여름',             artist: '이미블루',           year: '2024', desc: '', link: '' },
-  { title: '낮잠',                artist: '이미블루',           year: '2024', desc: '', link: '' },
-  { title: 'Dark of Fantasy',    artist: '윤혜문',             year: '2024', desc: '', link: '' },
-  { title: '애국가',              artist: '박미자, 정경',        year: '2024', desc: '', link: '' },
-  { title: 'Cinema',             artist: '조주현',             year: '2023', desc: '', link: '' },
-  { title: 'JUMP',               artist: '밴드기린',           year: '2023', desc: '', link: '' },
-  { title: 'SICK',               artist: '정재승',             year: '2023', desc: '', link: '' },
-  { title: 'Wave',               artist: 'Sayma',             year: '2022', desc: '', link: '' },
-];
 
-const modal       = document.getElementById('workModal');
-const modalImg    = document.getElementById('modalImg');
-const modalTitle  = document.getElementById('modalTitle');
-const modalArtist = document.getElementById('modalArtist');
-const modalYear   = document.getElementById('modalYear');
-const modalDesc   = document.getElementById('modalDesc');
-const modalLink   = document.getElementById('modalLink');
-
-function openModal(index) {
-  const data = worksData[index];
-  const card = document.querySelectorAll('.work-card')[index];
-  if (!data || !card) return;
-
-  modalImg.src = card.querySelector('img').src;
-  modalImg.alt = data.title;
-  modalTitle.textContent  = data.title;
-  modalArtist.textContent = data.artist;
-  modalYear.textContent   = data.year;
-  modalDesc.textContent   = data.desc;
-  modalDesc.style.display = data.desc ? '' : 'none';
-
-  if (data.link) {
-    modalLink.href         = data.link;
-    modalLink.textContent  = '음악 듣기 →';
-    modalLink.style.display = '';
-  } else {
-    modalLink.style.display = 'none';
-  }
-
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-  modal.classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.querySelectorAll('.work-card').forEach((card, i) => {
-  card.addEventListener('click', () => openModal(i));
-});
-
-document.getElementById('modalClose').addEventListener('click', closeModal);
 document.getElementById('modalBackdrop').addEventListener('click', closeModal);
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    closeModal();
     closeEmailPanel();
     if (zoomOverlay) { zoomOverlay.classList.remove('open'); document.body.style.overflow = ''; }
     if (typeof closeYtModal === 'function') closeYtModal();
@@ -291,32 +225,7 @@ document.getElementById('epConfirmSend').addEventListener('click', async () => {
 });
 
 
-/* ─── Works 카테고리 필터 ─────────────────────────────────── */
-const worksGrid = document.querySelector('.works-grid');
 
-function applyWorksFilter(filter) {
-  let visible = 0;
-  document.querySelectorAll('.work-card').forEach(card => {
-    const hide = card.dataset.category !== filter;
-    card.classList.toggle('hidden', hide);
-    if (!hide) visible++;
-  });
-  worksGrid.classList.toggle('poster-view', filter === 'poster');
-  document.getElementById('works').classList.toggle('poster-active', filter === 'poster');
-  const emptyEl = document.getElementById('worksEmpty');
-  if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
-}
-
-document.querySelectorAll('.works-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.works-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    applyWorksFilter(tab.dataset.filter);
-  });
-});
-
-const activeTab = document.querySelector('.works-tab.active');
-if (activeTab) applyWorksFilter(activeTab.dataset.filter);
 
 /* ─── Carousel ──────────────────────────────────────────────── */
 document.querySelectorAll('.proj-carousel').forEach(carousel => {
@@ -372,10 +281,7 @@ if (zoomOverlay) {
   });
 }
 
-/* ─── Poster data-pg-idx 할당 ───────────────────────────── */
-document.querySelectorAll('.work-card[data-category="poster"]').forEach((card, i) => {
-  card.setAttribute('data-pg-idx', i + 1);
-});
+
 
 /* ─── Poster Gallery ─────────────────────────────────────── */
 const pgOverlay = document.getElementById('pgOverlay');
@@ -392,9 +298,9 @@ let pgBusy  = false;
 
 function pgBuild() {
   pgItems = [];
-  document.querySelectorAll('.work-card[data-category="poster"]').forEach(card => {
-    const img = card.querySelector('.work-thumb img');
-    if (img) pgItems.push({ src: img.src, alt: img.alt, name: card.querySelector('.work-name')?.textContent || '' });
+  document.querySelectorAll('.we-poster-item').forEach(item => {
+    const img = item.querySelector('img');
+    if (img) pgItems.push({ src: img.src, alt: img.alt, name: item.querySelector('.we-poster-label')?.textContent || '' });
   });
 }
 
@@ -462,8 +368,8 @@ function closePg() {
   document.body.style.overflow = '';
 }
 
-document.querySelectorAll('.work-card[data-category="poster"]').forEach((card, i) => {
-  card.addEventListener('click', () => openPg(i));
+document.querySelectorAll('.we-poster-item').forEach((item, i) => {
+  item.addEventListener('click', () => openPg(i));
 });
 
 if (pgClosBtn) pgClosBtn.addEventListener('click', closePg);
@@ -504,9 +410,9 @@ function closeYtModal() {
   document.body.style.overflow = '';
 }
 
-document.querySelectorAll('.work-card[data-yt]').forEach(card => {
-  card.addEventListener('click', () => {
-    openYtModal(card.dataset.yt, card.querySelector('.work-name')?.textContent || '');
+document.querySelectorAll('.we-grid-item[data-yt]').forEach(item => {
+  item.addEventListener('click', () => {
+    openYtModal(item.dataset.yt, item.querySelector('.we-grid-label')?.textContent || '');
   });
 });
 
