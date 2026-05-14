@@ -229,7 +229,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 /* ─── 사진 가로스크롤 ─────────────────────────────────────── */
 .we-media--scroll {
   display: flex;
-  gap: 8px;
+  gap: 0;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
@@ -239,9 +239,10 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .we-media--scroll::-webkit-scrollbar { display: none; }
 .we-media--scroll:active { cursor: grabbing; }
 .we-media--scroll img {
-  flex: 0 0 auto;
-  max-height: 300px;
-  width: auto;
+  flex: 0 0 100%;
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
   scroll-snap-align: start;
   transition: opacity .25s;
 }
