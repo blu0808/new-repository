@@ -512,11 +512,3 @@ document.querySelectorAll('.work-card[data-yt]').forEach(card => {
 
 if (ytModalClose) ytModalClose.addEventListener('click', closeYtModal);
 if (ytModalBackdrop) ytModalBackdrop.addEventListener('click', closeYtModal);
-
-/* hero video cover — 썸네일로 초기 로딩 숨기고 1.2초 후 페이드아웃, 이후 쉴드로 유지 */
-const heroCover = document.getElementById('heroVideoCover');
-if (heroCover) {
-  setTimeout(() => {
-    heroCover.style.opacity = '0';
-  }, 1200);
-}
