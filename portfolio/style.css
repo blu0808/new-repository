@@ -82,19 +82,13 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   gap: 10px;
 }
 .sb-journey {
-  display: inline-block;
-  font-size: .75rem;
-  font-weight: 500;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--white);
-  background: var(--accent);
-  border: 1px solid var(--accent);
-  padding: 5px 16px;
-  text-align: center;
-  transition: all .2s;
+  font-size: .8rem;
+  font-weight: 400;
+  letter-spacing: .05em;
+  color: var(--accent);
+  transition: opacity .2s;
 }
-.sb-journey:hover { opacity: .8; }
+.sb-journey:hover { opacity: .6; }
 .lang-btn {
   font-size: .75rem;
   font-weight: 500;
