@@ -3,7 +3,7 @@ const dict = {
   ko: {
     'nav.works':   'Works',
     'nav.media':   'Media',
-    'nav.contact': 'Contact',
+    'nav.contact': 'Email',
     'hero.sub':    '시각예술가 · 그래픽 디자이너',
     'hero.cta':    '작업물 보기',
     'cat.graphic': '그래픽 디자인',
@@ -26,7 +26,7 @@ const dict = {
   en: {
     'nav.works':   'Works',
     'nav.media':   'Media',
-    'nav.contact': 'Contact',
+    'nav.contact': 'Email',
     'hero.sub':    'Visual Artist · Graphic Designer',
     'hero.cta':    'View Works',
     'cat.graphic': 'Graphic Design',
@@ -35,7 +35,7 @@ const dict = {
     'cat.albumCover': 'Album Cover',
     'works.more': 'Load More',
     'nav.projects': 'Projects',
-    'projects.tagline': 'The Universe of Dancing Monologue — Book, Exhibitions, YouTube',
+    'projects.tagline': 'The Universe of Dancing Soliloquy — Book, Exhibitions, YouTube',
     'ptag.book': 'Self-Published',
     'ptag.exhibition': 'Exhibition',
     'proj.book.quote': '"There are words that can only be written when solitude stops feeling lonely."',
@@ -44,7 +44,7 @@ const dict = {
     'proj.ex2.desc': 'If the first exhibition was about waiting for summer, this one is about walking into it. In 2024, traveling alone through Europe, I stopped at a small neighbourhood park in Berlin. People there were having a perfectly complete summer — no plans, no grand destinations — just lying under the shade of a tree, right near home. That image stayed with me. Rest isn\'t about where you are. It\'s about how you see. You don\'t have to go far. Summer is already here, inside everyday life. This second exhibition is my way of sharing that simple discovery with you.',
     'cat.poster': 'Poster',
     'works.empty': 'Coming soon.',
-    'sb.bio': 'Visual artist capturing small, tender emotions through image and language. Author of self-published 《Dancing Monologue》.',
+    'sb.bio': 'Visual artist capturing small, tender emotions through image and language. Author of self-published 《Dancing Soliloquy》.',
   },
 };
 

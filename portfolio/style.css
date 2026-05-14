@@ -75,18 +75,37 @@ button { font-family: var(--font); cursor: pointer; }
 a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .sb-link:hover { opacity: .6; }
 .sb-contact { font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
-.sb-footer { margin-top: auto; }
+.sb-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sb-journey {
+  display: inline-block;
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 5px 16px;
+  text-align: center;
+  transition: all .2s;
+}
+.sb-journey:hover { opacity: .8; }
 .lang-btn {
   font-size: .75rem;
   font-weight: 500;
   letter-spacing: .08em;
-  color: var(--gray-4);
+  color: var(--accent);
   background: none;
-  border: 1px solid var(--gray-2);
+  border: 1px solid var(--accent);
   padding: 5px 12px;
   transition: all .2s;
 }
-.lang-btn:hover { border-color: var(--black); color: var(--black); }
+.lang-btn:hover { background: var(--accent); color: var(--white); }
 
 /* ─── Mobile Nav (hidden on desktop) ──────────────────────── */
 .nav { display: none; }
@@ -146,14 +165,14 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   font-size: .75rem;
   letter-spacing: .06em;
   text-transform: uppercase;
-  color: var(--gray-4);
+  color: var(--accent);
   background: none;
-  border: 1px solid var(--gray-2);
+  border: 1px solid var(--accent);
   padding: 6px 16px;
   transition: all .2s;
 }
-.works-tab:hover   { border-color: var(--gray-3); color: var(--black); }
-.works-tab.active  { color: var(--white); background: var(--black); border-color: var(--black); }
+.works-tab:hover   { background: rgba(26,77,255,.08); }
+.works-tab.active  { color: var(--white); background: var(--accent); border-color: var(--accent); }
 
 .works-grid {
   display: grid;
