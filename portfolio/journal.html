@@ -48,23 +48,23 @@
   <main class="main journal-main">
     <div class="journal-grid">
 
-      <!-- 1: portrait -->
-      <div class="journal-item">
-        <img class="journal-img zoomable" src="https://picsum.photos/seed/j1/600/900" alt="">
+      <!-- 1: landscape large, left -->
+      <div class="journal-item j-w80 j-left">
+        <img class="journal-img zoomable" src="https://picsum.photos/seed/j1/900/600" alt="">
       </div>
 
-      <!-- 2: landscape -->
-      <div class="journal-item">
-        <img class="journal-img zoomable" src="https://picsum.photos/seed/j2/800/533" alt="">
+      <!-- 2: portrait small, right -->
+      <div class="journal-item j-w32 j-right">
+        <img class="journal-img zoomable" src="https://picsum.photos/seed/j2/600/900" alt="">
       </div>
 
-      <!-- 3: carousel — 3 landscape -->
-      <div class="journal-item">
+      <!-- 3: carousel 3 landscape, offset from left -->
+      <div class="journal-item j-w65 j-offset">
         <div class="jc-wrap">
           <div class="jc-track">
-            <img src="https://picsum.photos/seed/j3/800/533" alt="">
-            <img src="https://picsum.photos/seed/j4/800/533" alt="">
-            <img src="https://picsum.photos/seed/j5/800/533" alt="">
+            <img src="https://picsum.photos/seed/j3/900/600" alt="">
+            <img src="https://picsum.photos/seed/j4/900/600" alt="">
+            <img src="https://picsum.photos/seed/j5/900/600" alt="">
           </div>
           <button class="jc-btn jc-prev" aria-label="이전">&#8592;</button>
           <button class="jc-btn jc-next" aria-label="다음">&#8594;</button>
@@ -72,27 +72,32 @@
         </div>
       </div>
 
-      <!-- 4: square -->
-      <div class="journal-item">
-        <img class="journal-img zoomable" src="https://picsum.photos/seed/j6/600/600" alt="">
+      <!-- 4+5: side-by-side — square + portrait -->
+      <div class="j-row">
+        <div class="journal-item" style="flex:1">
+          <img class="journal-img zoomable" src="https://picsum.photos/seed/j6/600/600" alt="">
+        </div>
+        <div class="journal-item" style="flex:0.7">
+          <img class="journal-img zoomable" src="https://picsum.photos/seed/j7/600/900" alt="">
+        </div>
       </div>
 
-      <!-- 5: portrait -->
-      <div class="journal-item">
-        <img class="journal-img zoomable" src="https://picsum.photos/seed/j7/600/900" alt="">
+      <!-- 6: landscape large, right -->
+      <div class="journal-item j-w75 j-right">
+        <img class="journal-img zoomable" src="https://picsum.photos/seed/j8/900/600" alt="">
       </div>
 
-      <!-- 6: landscape -->
-      <div class="journal-item">
-        <img class="journal-img zoomable" src="https://picsum.photos/seed/j8/800/533" alt="">
+      <!-- 7: portrait small, left with indent -->
+      <div class="journal-item j-w38 j-offset2">
+        <img class="journal-img zoomable" src="https://picsum.photos/seed/j9/600/900" alt="">
       </div>
 
-      <!-- 7: carousel — 2 portrait -->
-      <div class="journal-item">
+      <!-- 8: carousel 2 portrait, centered-left -->
+      <div class="journal-item j-w55 j-left">
         <div class="jc-wrap">
           <div class="jc-track">
-            <img src="https://picsum.photos/seed/j9/600/900" alt="">
             <img src="https://picsum.photos/seed/j10/600/900" alt="">
+            <img src="https://picsum.photos/seed/j11/600/900" alt="">
           </div>
           <button class="jc-btn jc-prev" aria-label="이전">&#8592;</button>
           <button class="jc-btn jc-next" aria-label="다음">&#8594;</button>
@@ -100,9 +105,9 @@
         </div>
       </div>
 
-      <!-- 8: square -->
-      <div class="journal-item">
-        <img class="journal-img zoomable" src="https://picsum.photos/seed/j11/600/600" alt="">
+      <!-- 9: square small, right -->
+      <div class="journal-item j-w28 j-right">
+        <img class="journal-img zoomable" src="https://picsum.photos/seed/j12/600/600" alt="">
       </div>
 
     </div>

@@ -850,19 +850,41 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 .journal-grid {
-  columns: 2;
-  column-gap: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
 }
 
 .journal-item {
-  break-inside: avoid;
-  margin-bottom: 28px;
+  display: block;
 }
 
 .journal-item img {
   width: 100%;
   height: auto;
   display: block;
+}
+
+/* ─── 너비 변형 ── */
+.j-w28  { width: 28%; }
+.j-w32  { width: 32%; }
+.j-w38  { width: 38%; }
+.j-w55  { width: 55%; }
+.j-w65  { width: 65%; }
+.j-w75  { width: 75%; }
+.j-w80  { width: 80%; }
+
+/* ─── 정렬 변형 ── */
+.j-left    { margin-left: 0;   margin-right: auto; }
+.j-right   { margin-left: auto; margin-right: 0;  }
+.j-offset  { margin-left: 20%; }
+.j-offset2 { margin-left: 10%; }
+
+/* ─── 나란히 배치 ── */
+.j-row {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
 }
 
 .journal-img { cursor: zoom-in; }
@@ -927,5 +949,8 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ─── Journal Mobile ──────────────────────────────────────── */
 @media (max-width: 640px) {
-  .journal-grid { columns: 1; }
+  .journal-grid { gap: 36px; }
+  .j-w28, .j-w32, .j-w38, .j-w55, .j-w65, .j-w75, .j-w80 { width: 90%; }
+  .j-left, .j-right, .j-offset, .j-offset2 { margin-left: 0; margin-right: 0; }
+  .j-row { flex-direction: column; }
 }
