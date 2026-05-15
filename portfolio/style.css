@@ -846,13 +846,13 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 .journal-main {
-  padding: clamp(80px, 10vw, 140px) clamp(28px, 4vw, 56px);
+  padding: clamp(120px, 14vw, 200px) clamp(48px, 7vw, 100px);
 }
 
 .journal-grid {
   display: flex;
   flex-direction: column;
-  gap: 140px;
+  gap: 220px;
 }
 
 .journal-item {
@@ -871,6 +871,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .j-w28  { width: 28%; }
 .j-w32  { width: 32%; }
 .j-w38  { width: 38%; }
+.j-w45  { width: 45%; }
 .j-w55  { width: 55%; }
 .j-w65  { width: 65%; }
 .j-w75  { width: 75%; }
@@ -887,7 +888,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 /* ─── 나란히 배치 ── */
 .j-row {
   display: flex;
-  gap: 36px;
+  justify-content: space-between;
   align-items: flex-start;
 }
 
@@ -950,12 +951,15 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 .jc-dot.active { background: rgba(255,255,255,.9); }
+.jc-dots { display: none; }
 
 /* ─── Journal Mobile ──────────────────────────────────────── */
 @media (max-width: 640px) {
-  .journal-grid { gap: 80px; }
-  .j-w20, .j-w22, .j-w28, .j-w32, .j-w38, .j-w55, .j-w65, .j-w75, .j-w80, .j-w90 { width: 90%; }
+  .journal-grid { gap: 100px; }
+  .journal-main { padding: 80px 24px; }
+  .j-w20, .j-w22, .j-w28, .j-w32, .j-w38, .j-w45, .j-w55, .j-w65, .j-w75, .j-w80, .j-w90 { width: 80%; }
   .j-w100 { width: 100%; }
   .j-left, .j-right, .j-offset, .j-offset2 { margin-left: 0; margin-right: 0; }
-  .j-row { flex-direction: column; }
+  .j-row { flex-direction: column; gap: 60px; }
+  .j-row > * { width: 70% !important; flex: none !important; }
 }
