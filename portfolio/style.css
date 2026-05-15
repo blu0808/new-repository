@@ -766,49 +766,61 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .hamburger.open span:first-child { transform: translateY(6.5px) rotate(45deg); }
 .hamburger.open span:last-child  { transform: translateY(-6.5px) rotate(-45deg); }
 
+/* ─── Journey Float (desktop에서 숨김) ────────────────────── */
+.journey-float {
+  display: none;
+}
+
 /* ─── Mobile ──────────────────────────────────────────────── */
 @media (max-width: 860px) {
-  .sidebar { display: none; }
-  .main    { margin-left: 0; }
+  /* 사이드바 → 상단 스크롤 섹션으로 */
+  .sidebar {
+    display: flex;
+    position: static;
+    width: 100%;
+    height: auto;
+    padding: 72px 24px 36px;
+    border-bottom: 1px solid rgba(200,80,80,.1);
+    gap: 20px;
+  }
+  .sb-logo   { display: none; }
+  .sb-footer { display: none; }
+  .main { margin-left: 0; padding-top: 0; }
 
+  /* Nav → 얇은 고정 상단바 (햄버거 없음) */
   .nav {
     display: flex;
     position: fixed; top: 0; left: 0; right: 0; z-index: 300;
-    height: 56px;
+    height: 52px;
     align-items: center; justify-content: space-between;
     padding: 0 20px;
     background: rgba(255,255,255,.97);
     backdrop-filter: blur(8px);
-    box-shadow: 0 2px 16px rgba(0,0,0,.10);
     transition: box-shadow .3s;
   }
-  .nav.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.13); }
+  .nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,.08); }
   .nav-logo { font-size: .95rem; font-weight: 700; letter-spacing: .04em; color: var(--accent); }
   .nav-right { display: flex; align-items: center; gap: 12px; }
-  .nav-menu {
-    display: none;
-    position: fixed;
-    top: 56px; left: 0; right: 0;
-    height: calc(100dvh - 56px);
-    background: var(--white);
-    flex-direction: column;
-    padding: 40px 32px;
-    padding-bottom: max(40px, env(safe-area-inset-bottom));
-    gap: 8px;
-    overflow-y: auto;
-  }
-  .nav-menu.open { display: flex; }
-  .nav-link {
-    font-size: 1.25rem; letter-spacing: .04em;
-    color: var(--black); background: none; border: none;
-    text-align: left; padding: 14px 0;
-    border-bottom: 1px solid var(--gray-2);
-    width: 100%;
-  }
-  .nav-link:last-child { border-bottom: none; }
-  .nav-link--contact { color: var(--accent); }
+  .hamburger { display: none; }
+  .nav-menu  { display: none !important; }
 
-  .main { padding-top: 56px; }
+  /* 하단 Journey 플로팅 */
+  .journey-float {
+    display: block;
+    position: fixed;
+    bottom: 28px;
+    right: 24px;
+    z-index: 200;
+    font-size: .75rem;
+    font-weight: 500;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: opacity .2s;
+  }
+  .journey-float:hover { opacity: .6; }
 
   .proj-row {
     grid-template-columns: 1fr;
@@ -952,22 +964,6 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 
 .jc-dot.active { background: rgba(255,255,255,.9); }
 .jc-dots { display: none; }
-
-/* ─── Journal Mobile Header (사이드바 → 상단 블록) ─────────── */
-@media (max-width: 860px) {
-  .journal-page .sidebar {
-    display: flex;
-    position: static;
-    width: 100%;
-    height: auto;
-    padding: 48px 24px 36px;
-    border-bottom: 1px solid rgba(200,80,80,.12);
-    gap: 20px;
-  }
-  .journal-page .sb-footer { margin-top: 0; }
-  .journal-page .nav { display: none; }
-  .journal-page .main { padding-top: 0; }
-}
 
 /* ─── Journal Mobile ──────────────────────────────────────── */
 @media (max-width: 640px) {
