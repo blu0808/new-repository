@@ -160,10 +160,10 @@ const modalYear   = document.getElementById('modalYear');
 const modalDesc   = document.getElementById('modalDesc');
 const modalLink   = document.getElementById('modalLink');
 
-function openModal(index) {
+function openModal(card) {
+  const index = [...document.querySelectorAll('.work-card')].indexOf(card);
   const data = worksData[index];
-  const card = document.querySelectorAll('.work-card')[index];
-  if (!data || !card) return;
+  if (!data) return;
 
   modalImg.src = card.querySelector('img').src;
   modalImg.alt = data.title;
@@ -173,9 +173,13 @@ function openModal(index) {
   modalDesc.textContent   = data.desc;
   modalDesc.style.display = data.desc ? '' : 'none';
 
-  if (data.link) {
-    modalLink.href         = data.link;
+  const ytId = card.dataset.yt;
+  const musicUrl = ytId ? `https://youtu.be/${ytId}` : data.link;
+  if (musicUrl) {
+    modalLink.href         = musicUrl;
     modalLink.textContent  = '음악 듣기 →';
+    modalLink.target       = '_blank';
+    modalLink.rel          = 'noopener';
     modalLink.style.display = '';
   } else {
     modalLink.style.display = 'none';
@@ -190,8 +194,8 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-document.querySelectorAll('.work-card').forEach((card, i) => {
-  card.addEventListener('click', () => openModal(i));
+document.querySelectorAll('.work-card').forEach(card => {
+  card.addEventListener('click', () => openModal(card));
 });
 
 document.getElementById('modalClose').addEventListener('click', closeModal);
@@ -504,11 +508,7 @@ function closeYtModal() {
   document.body.style.overflow = '';
 }
 
-document.querySelectorAll('.work-card[data-yt]').forEach(card => {
-  card.addEventListener('click', () => {
-    openYtModal(card.dataset.yt, card.querySelector('.work-name')?.textContent || '');
-  });
-});
+/* 앨범커버 클릭은 이미지 확대 모달로 처리 (ytModal 직접 실행 제거) */
 
 if (ytModalClose) ytModalClose.addEventListener('click', closeYtModal);
 if (ytModalBackdrop) ytModalBackdrop.addEventListener('click', closeYtModal);
