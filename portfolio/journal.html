@@ -48,65 +48,61 @@
   <main class="main journal-main">
     <div class="journal-grid">
 
-      <!-- 1: landscape large, left -->
-      <div class="journal-item j-w80 j-left">
+      <!-- 1: landscape full width -->
+      <div class="journal-item j-w100">
         <img class="journal-img zoomable" src="https://picsum.photos/seed/j1/900/600" alt="">
       </div>
 
-      <!-- 2: portrait small, right -->
-      <div class="journal-item j-w32 j-right">
+      <!-- 2: portrait tiny, right -->
+      <div class="journal-item j-w22 j-right">
         <img class="journal-img zoomable" src="https://picsum.photos/seed/j2/600/900" alt="">
       </div>
 
       <!-- 3: carousel 3 landscape, offset from left -->
-      <div class="journal-item j-w65 j-offset">
+      <div class="journal-item j-w75 j-offset">
         <div class="jc-wrap">
           <div class="jc-track">
             <img src="https://picsum.photos/seed/j3/900/600" alt="">
             <img src="https://picsum.photos/seed/j4/900/600" alt="">
             <img src="https://picsum.photos/seed/j5/900/600" alt="">
           </div>
-          <button class="jc-btn jc-prev" aria-label="이전">&#8592;</button>
-          <button class="jc-btn jc-next" aria-label="다음">&#8594;</button>
           <div class="jc-dots"></div>
         </div>
       </div>
 
-      <!-- 4+5: side-by-side — square + portrait -->
+      <!-- 4+5: side-by-side — big landscape + small portrait -->
       <div class="j-row">
-        <div class="journal-item" style="flex:1">
+        <div class="journal-item" style="flex:1.5">
           <img class="journal-img zoomable" src="https://picsum.photos/seed/j6/600/600" alt="">
         </div>
-        <div class="journal-item" style="flex:0.7">
+        <div class="journal-item" style="flex:0.5">
           <img class="journal-img zoomable" src="https://picsum.photos/seed/j7/600/900" alt="">
         </div>
       </div>
 
-      <!-- 6: landscape large, right -->
-      <div class="journal-item j-w75 j-right">
+      <!-- 6: landscape very large, right -->
+      <div class="journal-item j-w90 j-right">
         <img class="journal-img zoomable" src="https://picsum.photos/seed/j8/900/600" alt="">
       </div>
 
-      <!-- 7: portrait small, left with indent -->
-      <div class="journal-item j-w38 j-offset2">
+      <!-- 7: portrait tiny, left with indent -->
+      <div class="journal-item j-w22 j-offset2">
         <img class="journal-img zoomable" src="https://picsum.photos/seed/j9/600/900" alt="">
       </div>
 
-      <!-- 8: carousel 2 portrait, centered-left -->
-      <div class="journal-item j-w55 j-left">
+      <!-- 8: carousel 2 portrait, left -->
+      <div class="journal-item j-w65 j-left">
         <div class="jc-wrap">
           <div class="jc-track">
             <img src="https://picsum.photos/seed/j10/600/900" alt="">
             <img src="https://picsum.photos/seed/j11/600/900" alt="">
           </div>
-          <button class="jc-btn jc-prev" aria-label="이전">&#8592;</button>
-          <button class="jc-btn jc-next" aria-label="다음">&#8594;</button>
           <div class="jc-dots"></div>
         </div>
       </div>
 
-      <!-- 9: square small, right -->
-      <div class="journal-item j-w28 j-right">
+      <!-- 9: square tiny, right -->
+      <div class="journal-item j-w20 j-right">
         <img class="journal-img zoomable" src="https://picsum.photos/seed/j12/600/600" alt="">
       </div>
 
@@ -174,8 +170,6 @@
     document.querySelectorAll('.jc-wrap').forEach(wrap => {
       const track = wrap.querySelector('.jc-track');
       const imgs  = track.querySelectorAll('img');
-      const prev  = wrap.querySelector('.jc-prev');
-      const next  = wrap.querySelector('.jc-next');
       const dotsWrap = wrap.querySelector('.jc-dots');
       let cur = 0;
 
@@ -196,9 +190,6 @@
             d.classList.toggle('active', i === cur));
         }
       }
-
-      prev.addEventListener('click', e => { e.stopPropagation(); go(cur - 1); });
-      next.addEventListener('click', e => { e.stopPropagation(); go(cur + 1); });
 
       let tx = 0;
       track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
