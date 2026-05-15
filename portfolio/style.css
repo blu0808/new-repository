@@ -953,6 +953,22 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .jc-dot.active { background: rgba(255,255,255,.9); }
 .jc-dots { display: none; }
 
+/* ─── Journal Mobile Header (사이드바 → 상단 블록) ─────────── */
+@media (max-width: 860px) {
+  .journal-page .sidebar {
+    display: flex;
+    position: static;
+    width: 100%;
+    height: auto;
+    padding: 48px 24px 36px;
+    border-bottom: 1px solid rgba(200,80,80,.12);
+    gap: 20px;
+  }
+  .journal-page .sb-footer { margin-top: 0; }
+  .journal-page .nav { display: none; }
+  .journal-page .main { padding-top: 0; }
+}
+
 /* ─── Journal Mobile ──────────────────────────────────────── */
 @media (max-width: 640px) {
   .journal-grid { gap: 100px; }
