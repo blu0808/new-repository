@@ -160,6 +160,11 @@ const modalYear   = document.getElementById('modalYear');
 const modalDesc   = document.getElementById('modalDesc');
 const modalLink   = document.getElementById('modalLink');
 
+let currentYtId = '';
+
+const modalPlayBtn = document.getElementById('modalPlayBtn');
+const modalPlayer  = document.getElementById('modalPlayer');
+
 function openModal(card) {
   const index = [...document.querySelectorAll('.work-card')].indexOf(card);
   const data = worksData[index];
@@ -173,17 +178,10 @@ function openModal(card) {
   modalDesc.textContent   = data.desc;
   modalDesc.style.display = data.desc ? '' : 'none';
 
-  const ytId = card.dataset.yt;
-  const musicUrl = ytId ? `https://youtu.be/${ytId}` : data.link;
-  if (musicUrl) {
-    modalLink.href         = musicUrl;
-    modalLink.textContent  = '음악 듣기 →';
-    modalLink.target       = '_blank';
-    modalLink.rel          = 'noopener';
-    modalLink.style.display = '';
-  } else {
-    modalLink.style.display = 'none';
-  }
+  currentYtId = card.dataset.yt || '';
+  modalPlayer.classList.remove('active');
+  modalPlayer.innerHTML = '';
+  if (modalPlayBtn) modalPlayBtn.style.display = currentYtId ? 'flex' : 'none';
 
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -192,6 +190,17 @@ function openModal(card) {
 function closeModal() {
   modal.classList.remove('open');
   document.body.style.overflow = '';
+  modalPlayer.classList.remove('active');
+  modalPlayer.innerHTML = '';
+}
+
+if (modalPlayBtn) {
+  modalPlayBtn.addEventListener('click', () => {
+    if (!currentYtId) return;
+    modalPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${currentYtId}?autoplay=1&rel=0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+    modalPlayer.classList.add('active');
+    modalPlayBtn.style.display = 'none';
+  });
 }
 
 document.querySelectorAll('.work-card').forEach(card => {
