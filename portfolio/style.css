@@ -204,6 +204,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   gap: 4px;
 }
 .work-card:hover .work-overlay { opacity: 1; }
+.work-card[data-category="album-cover"] .work-overlay { display: none; }
 .work-tag {
   font-size: 10px;
   letter-spacing: .08em;
@@ -847,7 +848,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   .modal-body { grid-template-columns: 1fr; }
   .modal-img-wrap { max-height: 40vh; }
 
-  .works-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  .works-grid:not(.poster-view) { grid-template-columns: 1fr; }
   .works-grid.poster-view {
     grid-template-columns: repeat(2, 1fr);
     row-gap: clamp(28px, 5vw, 48px);
@@ -860,7 +861,6 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 @media (max-width: 640px) {
-  .works-grid:not(.poster-view) { grid-template-columns: 1fr; }
   .works-grid.poster-view { grid-template-columns: 1fr; }
   .proj-row-visual--grid { grid-template-columns: 1fr; }
   .proj-row-visual--grid img { height: 200px; }
