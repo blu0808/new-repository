@@ -291,11 +291,11 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 #works { transition: background .5s ease; }
-#works.poster-active { background: #0c0c0c; }
-#works.poster-active .works-tab { color: rgba(255,255,255,.45); border-color: rgba(255,255,255,.18); }
-#works.poster-active .works-tab:hover { color: var(--white); border-color: rgba(255,255,255,.55); background: none; }
-#works.poster-active .works-tab.active { color: #0c0c0c; background: var(--white); border-color: var(--white); }
-#works.poster-active .section-title { color: rgba(255,255,255,.28); }
+#works.poster-active { background: #1A4DFF; }
+#works.poster-active .works-tab { color: rgba(255,255,255,.55); border-color: rgba(255,255,255,.25); }
+#works.poster-active .works-tab:hover { color: var(--white); border-color: rgba(255,255,255,.65); background: none; }
+#works.poster-active .works-tab.active { color: #1A4DFF; background: var(--white); border-color: var(--white); }
+#works.poster-active .section-title { color: rgba(255,255,255,.35); }
 
 /* ─── Poster Gallery Overlay ─────────────────────────────── */
 .pg-overlay {
