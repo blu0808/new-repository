@@ -168,7 +168,12 @@
 
   <script src="script.js"></script>
   <script>
-    document.querySelectorAll('.iv-chapter').forEach(chapter => {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    const chapters = document.querySelectorAll('.iv-chapter');
+    window.addEventListener('load', () => {
+      chapters.forEach(c => { c.scrollLeft = 0; });
+    });
+    chapters.forEach(chapter => {
       const thumb = chapter.closest('.iv-chapter-wrap').querySelector('.iv-progress-thumb');
 
       function updateProgress() {
@@ -177,7 +182,6 @@
         const ratio = chapter.scrollLeft / max;
         thumb.style.width = Math.max(8, ratio * 100) + '%';
       }
-      chapter.scrollLeft = 0;
       chapter.addEventListener('scroll', updateProgress);
       updateProgress();
 
