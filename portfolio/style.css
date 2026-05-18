@@ -109,6 +109,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   background: none;
   border: 1px solid var(--accent);
   padding: 5px 12px;
+  border-radius: 4px;
   transition: all .2s;
 }
 .lang-btn:hover { background: var(--accent); color: var(--white); }
@@ -175,6 +176,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   background: none;
   border: 1px solid var(--accent);
   padding: 6px 16px;
+  border-radius: 4px;
   transition: all .2s;
 }
 .works-tab:hover   { background: rgba(26,77,255,.08); }
@@ -408,10 +410,10 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   font-size: 10px;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--gray-3);
-  background: var(--gray-1);
+  color: var(--accent);
+  background: rgba(26,77,255,.1);
   padding: .3em .9em;
-  border-radius: 3px;
+  border-radius: 4px;
   align-self: flex-start;
 }
 .proj-row-title {
@@ -645,8 +647,8 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 .modal-tag {
   font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
-  color: rgba(0,0,0,.4); background: var(--gray-1);
-  padding: .28em .8em; border-radius: 3px; align-self: flex-start;
+  color: var(--accent); background: rgba(26,77,255,.1);
+  padding: .28em .8em; border-radius: 4px; align-self: flex-start;
 }
 .modal-title  { font-size: clamp(18px, 2vw, 24px); font-weight: 700; }
 .modal-artist { font-size: clamp(13px, 1vw, 15px); color: var(--gray-4); }
@@ -977,7 +979,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  gap: 3px;
+  gap: 0;
   padding: 0 clamp(28px, 5vw, 72px);
   cursor: grab;
 }
