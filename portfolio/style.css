@@ -99,8 +99,21 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   letter-spacing: .05em;
   color: var(--accent);
   transition: opacity .2s;
+  text-decoration: none;
+  position: relative;
 }
-.sb-journey:hover { opacity: .6; }
+.sb-journey::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 100%; height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
+}
+.sb-journey:hover { opacity: .9; }
+.sb-journey:hover::after { transform: scaleX(1); }
 .lang-btn {
   font-size: .75rem;
   font-weight: 500;
@@ -900,10 +913,25 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
     color: var(--accent);
     opacity: .45;
     text-decoration: none;
+    position: relative;
     transition: opacity .2s;
   }
-  .nav-link--sub:hover { opacity: .8; }
+  .nav-link--sub::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 100%; height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .25s ease;
+  }
+  .nav-link--sub:hover { opacity: .9; }
+  .nav-link--sub:hover::after { transform: scaleX(1); }
   .nav-link--sub-active { opacity: .9; }
+  .nav-link--sub-active::after { transform: scaleX(1); }
+  .interview-page .sidebar,
+  .journal-page .sidebar { display: none; }
 
   /* 하단 Journey 플로팅 */
   .journey-float {
