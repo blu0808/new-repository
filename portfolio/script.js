@@ -352,20 +352,20 @@ if (activeTab) applyWorksFilter(activeTab.dataset.filter);
 /* ─── Carousel ──────────────────────────────────────────────── */
 document.querySelectorAll('.proj-carousel').forEach(carousel => {
   const track  = carousel.querySelector('.proj-carousel-track');
-  const imgs   = track.querySelectorAll('img');
+  const slides = track.querySelectorAll('img, video');
   const dotsEl = carousel.querySelector('.proj-carousel-dots');
   let cur = 0;
 
-  imgs.forEach((_, i) => {
+  slides.forEach((_, i) => {
     const d = document.createElement('button');
     d.className = 'proj-dot' + (i === 0 ? ' active' : '');
-    d.setAttribute('aria-label', `${i + 1}번 사진`);
+    d.setAttribute('aria-label', `${i + 1}번 슬라이드`);
     d.addEventListener('click', () => go(i));
     dotsEl.appendChild(d);
   });
 
   function go(n) {
-    cur = (n + imgs.length) % imgs.length;
+    cur = (n + slides.length) % slides.length;
     track.style.transform = `translateX(-${cur * 100}%)`;
     carousel.querySelectorAll('.proj-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
   }

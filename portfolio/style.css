@@ -471,7 +471,8 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   height: 100%;
   transition: transform .45s cubic-bezier(.4,0,.2,1);
 }
-.proj-carousel-track img {
+.proj-carousel-track img,
+.proj-carousel-track video {
   flex: 0 0 100%;
   width: 100%;
   height: 100%;
