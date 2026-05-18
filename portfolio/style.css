@@ -96,7 +96,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   margin-top: auto;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 .sb-journey[aria-current="page"] { font-weight: 600; }
 .lang-btn {
