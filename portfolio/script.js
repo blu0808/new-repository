@@ -221,7 +221,7 @@ function closeModal() {
 if (modalPlayBtn) {
   modalPlayBtn.addEventListener('click', () => {
     if (!currentYtId) return;
-    modalPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${currentYtId}?autoplay=1&rel=0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+    modalPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${currentYtId}?autoplay=1&rel=0&playsinline=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
     modalPlayer.classList.add('active');
     modalPlayBtn.style.display = 'none';
   });
@@ -424,6 +424,17 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
   track.addEventListener('touchend',   e => {
     const dx = e.changedTouches[0].clientX - sx;
     if (Math.abs(dx) > 48) goTo(dx < 0 ? cur + 1 : cur - 1);
+  });
+
+  track.querySelectorAll('.proj-carousel-vimeo').forEach(vimeoEl => {
+    const guard = document.createElement('div');
+    guard.style.cssText = 'position:absolute;inset:0;z-index:2;';
+    vimeoEl.appendChild(guard);
+    guard.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+    guard.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 48) goTo(dx < 0 ? cur + 1 : cur - 1);
+    });
   });
 });
 
