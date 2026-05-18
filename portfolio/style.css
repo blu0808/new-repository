@@ -940,6 +940,24 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   .proj-row-visual--grid img { height: 200px; }
 }
 
+/* ─── Interview Page ─────────────────────────────────────── */
+.iv-main {
+  padding: clamp(60px, 8vw, 120px) clamp(28px, 5vw, 72px);
+  max-width: 760px;
+}
+.iv-chapter {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.iv-img {
+  width: 100%;
+  display: block;
+}
+.iv-divider {
+  height: clamp(60px, 8vw, 100px);
+}
+
 /* ─── Journal Page ────────────────────────────────────────── */
 .journal-page {
   font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
