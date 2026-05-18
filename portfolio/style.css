@@ -427,7 +427,6 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   color: var(--accent);
   opacity: .8;
   line-height: 1.8;
-  white-space: pre-line;
 }
 
 .proj-row-visual {
