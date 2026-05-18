@@ -443,6 +443,12 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   transition: opacity .3s;
 }
 .proj-row-visual > img:hover { opacity: .88; }
+.proj-carousel--book { background: var(--black); }
+.proj-carousel--book .proj-carousel-track img {
+  object-fit: contain;
+  padding: 40px 32px;
+  filter: drop-shadow(0 8px 32px rgba(0,0,0,.6));
+}
 .book-cover-caption {
   text-align: center;
   font-size: .7rem;
