@@ -443,6 +443,31 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   transition: opacity .3s;
 }
 .proj-row-visual > img:hover { opacity: .88; }
+.book-covers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  width: 100%;
+  height: 100%;
+}
+.book-covers img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: zoom-in;
+  transition: opacity .3s;
+}
+.book-covers img:hover { opacity: .88; }
+.book-cover-caption {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: .7rem;
+  letter-spacing: .06em;
+  color: rgba(255,255,255,.45);
+}
 
 /* ─── Carousel ──────────────────────────────────────────── */
 .proj-carousel {
