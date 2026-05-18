@@ -1,0 +1,13 @@
+.mcp.json
+.vercel
+.DS_Store
+.omc/sessions/
+.omc/state/
+.omc/specs/
+.claude/worktrees/
+07)대담집_인스타피드용/
+images_원본백업/
+google_auth.py
+google_token.json
+ttudun
+*.mov
