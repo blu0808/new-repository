@@ -385,6 +385,7 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
 
   function goTo(pos) {
     if (locked) return;
+    locked = true;
     cur = pos;
     track.style.transform = `translate3d(-${cur * 100}%, 0, 0)`;
     updateDots();
@@ -396,25 +397,27 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
       track.style.transition = 'none';
       cur = 1;
       track.style.transform = `translate3d(-100%, 0, 0)`;
-      setTimeout(() => { track.style.transition = ''; }, 20);
+      setTimeout(() => { track.style.transition = ''; locked = false; }, 20);
+      return;
     }
     if (cur === 0) {
       track.style.transition = 'none';
       cur = total;
       track.style.transform = `translate3d(-${total * 100}%, 0, 0)`;
-      setTimeout(() => { track.style.transition = ''; }, 20);
+      setTimeout(() => { track.style.transition = ''; locked = false; }, 20);
+      return;
     }
     locked = false;
   });
 
-  carousel.querySelector('.proj-carousel-prev').addEventListener('click', () => { locked = true; goTo(cur - 1); });
-  carousel.querySelector('.proj-carousel-next').addEventListener('click', () => { locked = true; goTo(cur + 1); });
+  carousel.querySelector('.proj-carousel-prev').addEventListener('click', () => goTo(cur - 1));
+  carousel.querySelector('.proj-carousel-next').addEventListener('click', () => goTo(cur + 1));
 
   let sx = 0;
   track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
   track.addEventListener('touchend',   e => {
     const dx = e.changedTouches[0].clientX - sx;
-    if (Math.abs(dx) > 48) { locked = true; goTo(dx < 0 ? cur + 1 : cur - 1); }
+    if (Math.abs(dx) > 48) goTo(dx < 0 ? cur + 1 : cur - 1);
   });
 });
 
