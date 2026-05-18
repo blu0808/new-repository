@@ -365,8 +365,17 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
   });
 
   function go(n) {
-    cur = (n + slides.length) % slides.length;
-    track.style.transform = `translateX(-${cur * 100}%)`;
+    const total = slides.length;
+    const wrapping = (n < 0 && cur === 0) || (n >= total && cur === total - 1);
+    cur = (n + total) % total;
+    if (wrapping) {
+      track.style.transition = 'none';
+      track.style.transform = `translate3d(-${cur * 100}%, 0, 0)`;
+      track.offsetHeight;
+      track.style.transition = '';
+    } else {
+      track.style.transform = `translate3d(-${cur * 100}%, 0, 0)`;
+    }
     carousel.querySelectorAll('.proj-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
   }
 
