@@ -508,31 +508,31 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .proj-carousel-btn {
   position: absolute;
   top: 50%; transform: translateY(-50%);
-  width: 44px; height: 44px;
+  width: 56px; height: 56px;
   background: none;
-  color: var(--white);
   border: none;
-  font-size: 1.8rem;
-  line-height: 1;
   cursor: pointer;
   z-index: 2;
   display: flex; align-items: center; justify-content: center;
-  filter: drop-shadow(0 1px 3px rgba(0,0,0,.7)) drop-shadow(0 0 6px rgba(0,0,0,.4));
   opacity: 0;
   transition: opacity .3s;
-  animation: btn-intro 2.2s ease forwards;
+  color: transparent;
+  font-size: 0;
 }
-.proj-carousel:hover .proj-carousel-btn {
-  animation: none;
-  opacity: 1;
+.proj-carousel:hover .proj-carousel-btn { opacity: 1; }
+.proj-carousel-btn::before {
+  content: '';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-top: 1.5px solid rgba(255,255,255,.9);
+  border-right: 1.5px solid rgba(255,255,255,.9);
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,.7));
 }
-@keyframes btn-intro {
-  0%   { opacity: 1; }
-  60%  { opacity: 1; }
-  100% { opacity: 0; }
-}
-.proj-carousel-prev { left: 14px; }
-.proj-carousel-next { right: 14px; }
+.proj-carousel-prev { left: 16px; }
+.proj-carousel-prev::before { transform: rotate(-135deg); margin-left: 5px; }
+.proj-carousel-next { right: 16px; }
+.proj-carousel-next::before { transform: rotate(45deg); margin-right: 5px; }
 .proj-carousel-dots {
   position: absolute;
   bottom: 14px; left: 50%;
