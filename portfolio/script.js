@@ -351,43 +351,70 @@ if (activeTab) applyWorksFilter(activeTab.dataset.filter);
 
 /* ─── Carousel ──────────────────────────────────────────────── */
 document.querySelectorAll('.proj-carousel').forEach(carousel => {
-  const track  = carousel.querySelector('.proj-carousel-track');
-  const slides = track.querySelectorAll('img, video, .proj-carousel-vimeo');
-  const dotsEl = carousel.querySelector('.proj-carousel-dots');
-  let cur = 0;
+  const track   = carousel.querySelector('.proj-carousel-track');
+  const originals = [...track.querySelectorAll('img, video, .proj-carousel-vimeo')];
+  const dotsEl  = carousel.querySelector('.proj-carousel-dots');
+  const total   = originals.length;
+  let cur = 1;
+  let locked = false;
 
-  slides.forEach((_, i) => {
+  /* 첫/마지막 슬라이드 복제해서 양 끝에 붙임 */
+  const firstClone = originals[0].cloneNode(true);
+  const lastClone  = originals[total - 1].cloneNode(true);
+  track.appendChild(firstClone);
+  track.insertBefore(lastClone, originals[0]);
+
+  /* 초기 위치 (애니 없이) */
+  track.style.transition = 'none';
+  track.style.transform  = `translate3d(-100%, 0, 0)`;
+  setTimeout(() => { track.style.transition = ''; }, 50);
+
+  /* dots */
+  originals.forEach((_, i) => {
     const d = document.createElement('button');
     d.className = 'proj-dot' + (i === 0 ? ' active' : '');
     d.setAttribute('aria-label', `${i + 1}번 슬라이드`);
-    d.addEventListener('click', () => go(i));
+    d.addEventListener('click', () => goTo(i + 1));
     dotsEl.appendChild(d);
   });
 
-  function go(n) {
-    const total = slides.length;
-    const wrapping = (n < 0 && cur === 0) || (n >= total && cur === total - 1);
-    cur = (n + total) % total;
-    if (wrapping) {
-      track.style.transition = 'none';
-      track.style.transform = `translate3d(-${cur * 100}%, 0, 0)`;
-      track.offsetHeight;
-      track.style.transition = '';
-    } else {
-      track.style.transform = `translate3d(-${cur * 100}%, 0, 0)`;
-    }
-    carousel.querySelectorAll('.proj-dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+  function updateDots() {
+    let real = cur === 0 ? total - 1 : cur === total + 1 ? 0 : cur - 1;
+    carousel.querySelectorAll('.proj-dot').forEach((d, i) => d.classList.toggle('active', i === real));
   }
 
-  carousel.querySelector('.proj-carousel-prev').addEventListener('click', () => go(cur - 1));
-  carousel.querySelector('.proj-carousel-next').addEventListener('click', () => go(cur + 1));
+  function goTo(pos) {
+    if (locked) return;
+    cur = pos;
+    track.style.transform = `translate3d(-${cur * 100}%, 0, 0)`;
+    updateDots();
+  }
 
-  /* swipe */
+  /* 클론에 도달하면 실제 슬라이드로 순간이동 */
+  track.addEventListener('transitionend', () => {
+    if (cur === total + 1) {
+      track.style.transition = 'none';
+      cur = 1;
+      track.style.transform = `translate3d(-100%, 0, 0)`;
+      setTimeout(() => { track.style.transition = ''; }, 20);
+    }
+    if (cur === 0) {
+      track.style.transition = 'none';
+      cur = total;
+      track.style.transform = `translate3d(-${total * 100}%, 0, 0)`;
+      setTimeout(() => { track.style.transition = ''; }, 20);
+    }
+    locked = false;
+  });
+
+  carousel.querySelector('.proj-carousel-prev').addEventListener('click', () => { locked = true; goTo(cur - 1); });
+  carousel.querySelector('.proj-carousel-next').addEventListener('click', () => { locked = true; goTo(cur + 1); });
+
   let sx = 0;
   track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
   track.addEventListener('touchend',   e => {
     const dx = e.changedTouches[0].clientX - sx;
-    if (Math.abs(dx) > 48) go(dx < 0 ? cur + 1 : cur - 1);
+    if (Math.abs(dx) > 48) { locked = true; goTo(dx < 0 ? cur + 1 : cur - 1); }
   });
 });
 
