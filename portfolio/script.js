@@ -627,6 +627,8 @@ function closePg() {
   pgOverlay.classList.remove('open');
   pgOverlay.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
+  const heroIframe = document.getElementById('heroVideoIframe');
+  if (heroIframe) { const s = heroIframe.src; heroIframe.src = ''; heroIframe.src = s; }
 }
 
 document.querySelectorAll('.work-card[data-category="poster"]').forEach((card, i) => {
