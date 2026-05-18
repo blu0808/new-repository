@@ -90,7 +90,6 @@ button { font-family: var(--font); cursor: pointer; }
   text-align: left;
 }
 a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
-a.sb-journey { text-decoration: none; }
 .sb-link:hover { opacity: .6; }
 .sb-contact { font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
 .sb-footer {
@@ -99,16 +98,7 @@ a.sb-journey { text-decoration: none; }
   flex-direction: column;
   gap: 10px;
 }
-.sb-journey {
-  font-size: .8rem;
-  font-weight: 400;
-  letter-spacing: .05em;
-  color: var(--accent);
-  transition: opacity .2s;
-  text-decoration: none;
-}
-.sb-journey:hover { opacity: .6; }
-.sb-journey[aria-current="page"] { font-weight: 600; border-bottom: 1.5px solid var(--accent); padding-bottom: 1px; }
+.sb-journey[aria-current="page"] { font-weight: 600; }
 .lang-btn {
   font-size: .75rem;
   font-weight: 500;
@@ -1138,7 +1128,6 @@ a.sb-journey { text-decoration: none; }
 @media (max-width: 640px) {
   .journal-grid { gap: 100px; }
   .journal-main { padding: 80px 24px; }
-  .j-w20, .j-w22, .j-w28, .j-w32, .j-w38, .j-w45, .j-w55, .j-w65, .j-w75, .j-w80, .j-w90 { width: 80%; }
   .j-w100 { width: 100%; }
   .j-left    { margin-left: 0; margin-right: auto; }
   .j-right   { margin-left: auto; margin-right: 0; }
