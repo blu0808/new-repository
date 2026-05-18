@@ -990,13 +990,12 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 .iv-label {
   display: block;
-  padding: 0 clamp(28px, 5vw, 72px);
+  padding: 0;
   margin-bottom: 10px;
   font-size: .68rem;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--accent);
-  opacity: .45;
 }
 .iv-chapter {
   display: flex;
@@ -1006,7 +1005,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   gap: 0;
-  padding: 0 clamp(28px, 5vw, 72px);
+  padding: 0;
   cursor: grab;
 }
 .iv-chapter.dragging { cursor: grabbing; scroll-snap-type: none; }
@@ -1014,7 +1013,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .iv-progress {
   height: 2px;
   background: rgba(0,0,0,.08);
-  margin: 10px clamp(28px, 5vw, 72px) 0;
+  margin: 10px 0 0;
   border-radius: 1px;
   opacity: 0;
   transition: opacity .3s;
@@ -1023,7 +1022,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .iv-progress-thumb {
   height: 100%;
   background: var(--accent);
-  opacity: .45;
+  opacity: .6;
   border-radius: 1px;
   min-width: 8%;
   transition: width .08s linear;
