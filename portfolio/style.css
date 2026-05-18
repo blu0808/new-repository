@@ -709,7 +709,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 /* ─── Project Lightbox ───────────────────────────────────── */
 .proj-lightbox {
   position: fixed; inset: 0; z-index: 900;
-  background: rgba(0,0,0,.95);
+  background: rgba(248,247,244,.97);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; pointer-events: none;
   transition: opacity .25s;
@@ -723,21 +723,21 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .pl-close {
   position: absolute; top: 20px; right: 24px;
   background: none; border: none;
-  color: rgba(255,255,255,.65); font-size: 1.2rem;
+  color: rgba(0,0,0,.4); font-size: 1.2rem;
   cursor: pointer; padding: 8px; line-height: 1;
   transition: color .2s;
 }
-.pl-close:hover { color: #fff; }
+.pl-close:hover { color: #000; }
 .pl-prev, .pl-next {
   position: absolute; top: 50%; transform: translateY(-50%);
   background: none; border: none;
-  color: rgba(255,255,255,.5); font-size: 3rem;
+  color: rgba(0,0,0,.3); font-size: 3rem;
   cursor: pointer; padding: 16px 20px; line-height: 1;
   transition: color .2s;
 }
 .pl-prev { left: 8px; }
 .pl-next { right: 8px; }
-.pl-prev:hover, .pl-next:hover { color: #fff; }
+.pl-prev:hover, .pl-next:hover { color: #000; }
 
 .zoom-overlay {
   position: fixed; inset: 0; z-index: 800;
