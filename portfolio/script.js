@@ -419,27 +419,41 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
   carousel.querySelector('.proj-carousel-prev').addEventListener('click', () => goTo(cur - 1));
   carousel.querySelector('.proj-carousel-next').addEventListener('click', () => goTo(cur + 1));
 
-  let sx = 0, sy = 0;
-  track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  let sx = 0, sy = 0, swipeDir = null;
+  track.addEventListener('touchstart', e => {
+    sx = e.touches[0].clientX; sy = e.touches[0].clientY; swipeDir = null;
+  }, { passive: true });
   track.addEventListener('touchmove', e => {
-    if (Math.abs(e.touches[0].clientX - sx) > Math.abs(e.touches[0].clientY - sy)) e.preventDefault();
+    if (!swipeDir) {
+      const dx = Math.abs(e.touches[0].clientX - sx);
+      const dy = Math.abs(e.touches[0].clientY - sy);
+      if (dx > 4 || dy > 4) swipeDir = dx >= dy ? 'h' : 'v';
+    }
+    if (swipeDir === 'h') e.preventDefault();
   }, { passive: false });
   track.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - sx;
-    if (Math.abs(dx) > 48) goTo(dx < 0 ? cur + 1 : cur - 1);
+    if (swipeDir === 'h' && Math.abs(dx) > 48) goTo(dx < 0 ? cur + 1 : cur - 1);
   });
 
   track.querySelectorAll('.proj-carousel-vimeo').forEach(vimeoEl => {
     const guard = document.createElement('div');
     guard.style.cssText = 'position:absolute;inset:0;z-index:2;';
     vimeoEl.appendChild(guard);
-    guard.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    guard.addEventListener('touchstart', e => {
+      sx = e.touches[0].clientX; sy = e.touches[0].clientY; swipeDir = null;
+    }, { passive: true });
     guard.addEventListener('touchmove', e => {
-      if (Math.abs(e.touches[0].clientX - sx) > Math.abs(e.touches[0].clientY - sy)) e.preventDefault();
+      if (!swipeDir) {
+        const dx = Math.abs(e.touches[0].clientX - sx);
+        const dy = Math.abs(e.touches[0].clientY - sy);
+        if (dx > 4 || dy > 4) swipeDir = dx >= dy ? 'h' : 'v';
+      }
+      if (swipeDir === 'h') e.preventDefault();
     }, { passive: false });
     guard.addEventListener('touchend', e => {
       const dx = e.changedTouches[0].clientX - sx;
-      if (Math.abs(dx) > 48) goTo(dx < 0 ? cur + 1 : cur - 1);
+      if (swipeDir === 'h' && Math.abs(dx) > 48) goTo(dx < 0 ? cur + 1 : cur - 1);
     });
   });
 });

@@ -483,6 +483,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   will-change: transform;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  touch-action: pan-y;
 }
 .proj-carousel-vimeo {
   flex: 0 0 100%;
