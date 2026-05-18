@@ -157,8 +157,11 @@
         }
       }
 
-      let tx = 0;
-      track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+      let tx = 0, ty = 0;
+      track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+      track.addEventListener('touchmove', e => {
+        if (Math.abs(e.touches[0].clientX - tx) > Math.abs(e.touches[0].clientY - ty)) e.preventDefault();
+      }, { passive: false });
       track.addEventListener('touchend', e => {
         const dx = e.changedTouches[0].clientX - tx;
         if (Math.abs(dx) > 40) go(dx < 0 ? cur + 1 : cur - 1);

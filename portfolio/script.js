@@ -419,9 +419,12 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
   carousel.querySelector('.proj-carousel-prev').addEventListener('click', () => goTo(cur - 1));
   carousel.querySelector('.proj-carousel-next').addEventListener('click', () => goTo(cur + 1));
 
-  let sx = 0;
-  track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend',   e => {
+  let sx = 0, sy = 0;
+  track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  track.addEventListener('touchmove', e => {
+    if (Math.abs(e.touches[0].clientX - sx) > Math.abs(e.touches[0].clientY - sy)) e.preventDefault();
+  }, { passive: false });
+  track.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - sx;
     if (Math.abs(dx) > 48) goTo(dx < 0 ? cur + 1 : cur - 1);
   });
@@ -430,7 +433,10 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
     const guard = document.createElement('div');
     guard.style.cssText = 'position:absolute;inset:0;z-index:2;';
     vimeoEl.appendChild(guard);
-    guard.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+    guard.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    guard.addEventListener('touchmove', e => {
+      if (Math.abs(e.touches[0].clientX - sx) > Math.abs(e.touches[0].clientY - sy)) e.preventDefault();
+    }, { passive: false });
     guard.addEventListener('touchend', e => {
       const dx = e.changedTouches[0].clientX - sx;
       if (Math.abs(dx) > 48) goTo(dx < 0 ? cur + 1 : cur - 1);
