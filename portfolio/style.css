@@ -463,12 +463,10 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   filter: drop-shadow(0 8px 32px rgba(0,0,0,.6));
 }
 .book-cover-caption {
-  text-align: center;
-  font-size: .7rem;
-  letter-spacing: .06em;
-  color: rgba(255,255,255,.45);
-  padding: 10px 0 14px;
-  background: var(--black);
+  font-size: clamp(11px, .85vw, 13px);
+  letter-spacing: .04em;
+  color: var(--accent);
+  opacity: .55;
 }
 
 /* ─── Carousel ──────────────────────────────────────────── */
