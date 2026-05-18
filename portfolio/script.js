@@ -352,7 +352,7 @@ if (activeTab) applyWorksFilter(activeTab.dataset.filter);
 /* ─── Carousel ──────────────────────────────────────────────── */
 document.querySelectorAll('.proj-carousel').forEach(carousel => {
   const track  = carousel.querySelector('.proj-carousel-track');
-  const slides = track.querySelectorAll('img, video');
+  const slides = track.querySelectorAll('img, video, .proj-carousel-vimeo');
   const dotsEl = carousel.querySelector('.proj-carousel-dots');
   let cur = 0;
 
