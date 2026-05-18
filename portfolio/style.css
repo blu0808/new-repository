@@ -462,7 +462,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .proj-carousel {
   position: relative;
   width: 100%;
-  height: 500px;
+  aspect-ratio: 4/5;
   overflow: hidden;
 }
 .proj-carousel-track {
