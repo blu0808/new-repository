@@ -984,6 +984,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .iv-img {
   height: clamp(260px, 58vh, 700px);
   width: auto;
+  max-width: none;
   flex-shrink: 0;
   display: block;
   scroll-snap-align: start;
