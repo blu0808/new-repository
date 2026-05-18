@@ -38,7 +38,18 @@ button { font-family: var(--font); cursor: pointer; }
   z-index: 200;
 }
 .sb-top { display: flex; flex-direction: column; gap: 10px; }
-.sb-logo-img { display: block; width: 3.4rem; height: auto; }
+.sb-logo-img {
+  display: block;
+  width: 3.4rem;
+  height: auto;
+  background-color: var(--accent);
+  -webkit-mask-image: url('images/logo.png');
+  mask-image: url('images/logo.png');
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
 .sb-logo {
   font-size: 1.1rem;
   font-weight: 700;
