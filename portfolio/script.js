@@ -403,6 +403,66 @@ if (zoomOverlay) {
   });
 }
 
+/* ─── Project Lightbox ──────────────────────────────────── */
+const projLightbox = document.getElementById('projLightbox');
+const plImg        = document.getElementById('plImg');
+const plCloseBtn   = document.getElementById('plClose');
+const plPrevBtn    = document.getElementById('plPrev');
+const plNextBtn    = document.getElementById('plNext');
+
+if (projLightbox) {
+  let plImages = [];
+  let plCur = 0;
+
+  function plShow(idx) {
+    plCur = (idx + plImages.length) % plImages.length;
+    plImg.src = plImages[plCur];
+  }
+
+  function plOpen(imgs, idx) {
+    plImages = imgs;
+    plShow(idx);
+    projLightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function plClose() {
+    projLightbox.classList.remove('open');
+    document.body.style.overflow = '';
+    plImg.src = '';
+  }
+
+  document.querySelectorAll('.proj-carousel').forEach(carousel => {
+    const imgs = [...carousel.querySelectorAll('.proj-carousel-track img')];
+    imgs.forEach((img, i) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', e => {
+        e.stopPropagation();
+        plOpen(imgs.map(im => im.src), i);
+      });
+    });
+  });
+
+  plCloseBtn.addEventListener('click', plClose);
+  plPrevBtn.addEventListener('click', e => { e.stopPropagation(); plShow(plCur - 1); });
+  plNextBtn.addEventListener('click', e => { e.stopPropagation(); plShow(plCur + 1); });
+  projLightbox.addEventListener('click', e => { if (e.target === projLightbox) plClose(); });
+
+  document.addEventListener('keydown', e => {
+    if (!projLightbox.classList.contains('open')) return;
+    if (e.key === 'Escape')      plClose();
+    if (e.key === 'ArrowLeft')   plShow(plCur - 1);
+    if (e.key === 'ArrowRight')  plShow(plCur + 1);
+  });
+
+  let plTx = 0;
+  projLightbox.addEventListener('touchstart', e => { plTx = e.touches[0].clientX; }, { passive: true });
+  projLightbox.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - plTx;
+    if (Math.abs(dx) > 48) plShow(dx < 0 ? plCur + 1 : plCur - 1);
+  });
+}
+
 /* ─── Poster data-pg-idx 할당 ───────────────────────────── */
 document.querySelectorAll('.work-card[data-category="poster"]').forEach((card, i) => {
   card.setAttribute('data-pg-idx', i + 1);
