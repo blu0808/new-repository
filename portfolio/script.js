@@ -80,6 +80,8 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
   });
 });
 
+applyLang();
+
 /* ─── 내비게이션 스크롤 효과 ─────────────────────────────── */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
