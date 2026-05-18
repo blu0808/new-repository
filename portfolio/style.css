@@ -300,6 +300,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   color: rgba(255,255,255,.38);
 }
 
+#works .container { max-width: 1600px; }
 #works { transition: background .5s ease; }
 #works.poster-active { background: #1A4DFF; }
 #works.poster-active .works-tab { color: rgba(255,255,255,.55); border-color: rgba(255,255,255,.25); }
