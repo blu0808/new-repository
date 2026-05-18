@@ -32,7 +32,7 @@ const dict = {
     'proj.ex2.desc': '여름휴가는 언제부터 멀리 떠나는 일과 동의어가 되었을까. 나 역시 낯선 풍경 속에 들어서야 비로소 여름이 시작된다고 믿었다. 그러다 베를린의 한 동네 공원에서 멈춰 섰다. 풀밭 위에 머무는 사람들의 평범하고 완전한 여름을 보며, 휴식은 \'어디에 있느냐\'보다 \'어떻게 바라보느냐\'에 달려 있다는 단순한 진실을 깨달았다. 우리 동네 공원은 언제부터 스쳐 지나가는 회색 배경이 되었을까. 한강은 언제부터 관광지의 조연이 되었을까. 《일상의 여름》은 멀리 떠난 덕분에 오히려 가까운 것들의 가치를 다시 알게 된 담담한 기록이다. 여름은 거창한 모험이 아니라, 나무 그늘 아래 가만히 머무는 태도에서 피어난다.',
     'cat.poster': '포스터',
     'works.empty': '업로드 예정입니다.',
-    'sb.bio': '앨범커버·포스터를 만드는 그래픽 디자이너. 일상의 작고 여린 감정들을 이미지와 언어로 담습니다. 독립출판 《춤추는 독백》 저자.',
+    'sb.bio': '그래픽 디자인부터 독립출판, 전시 기획, 영상까지 — 형식에 얽매이지 않고 감각을 작업으로 옮깁니다. 침묵 속에서 건져올린 문장처럼, 오래 남는 것들을 만듭니다.',
   },
   en: {
     'nav.works':   'Works',
@@ -66,7 +66,7 @@ const dict = {
     'proj.ex2.desc': 'When did summer holidays become synonymous with going far away? I too believed summer only truly began when I stepped into an unfamiliar landscape. Then I stopped at a neighbourhood park in Berlin. Watching people rest on the grass — living a perfectly ordinary, complete summer — I came to understand a simple truth: rest depends less on where you are and more on how you choose to see. When did our neighbourhood parks become grey backdrops we pass through without noticing? When did the Han River become a side character in someone else\'s travel story? Ordinary Summer is a quiet record of rediscovering the value of what is close, made possible only by going far away. Summer does not bloom from grand adventures. It rises from the quiet act of staying still beneath the shade of a tree.',
     'cat.poster': 'Poster',
     'works.empty': 'Coming soon.',
-    'sb.bio': 'Visual artist capturing small, tender emotions through image and language. Author of self-published 《Dancing Soliloquy》.',
+    'sb.bio': 'From graphic design to independent publishing, exhibition curation, and film — translating sensibility into work, unbound by form. Like sentences drawn from silence, making things that linger.',
   },
 };
 
