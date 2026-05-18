@@ -38,6 +38,7 @@ button { font-family: var(--font); cursor: pointer; }
   z-index: 200;
 }
 .sb-top { display: flex; flex-direction: column; gap: 10px; }
+.sb-logo-img { display: block; width: 3.4rem; height: auto; }
 .sb-logo {
   font-size: 1.1rem;
   font-weight: 700;
@@ -390,7 +391,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   display: flex;
   flex-direction: column;
   gap: 14px;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .proj-tag {
   font-size: 10px;
