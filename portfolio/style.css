@@ -979,8 +979,27 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   scrollbar-width: none;
   gap: 3px;
   padding: 0 clamp(28px, 5vw, 72px);
+  cursor: grab;
 }
+.iv-chapter.dragging { cursor: grabbing; scroll-snap-type: none; }
 .iv-chapter::-webkit-scrollbar { display: none; }
+.iv-progress {
+  height: 2px;
+  background: rgba(0,0,0,.08);
+  margin: 10px clamp(28px, 5vw, 72px) 0;
+  border-radius: 1px;
+  opacity: 0;
+  transition: opacity .3s;
+}
+.iv-chapter-wrap:hover .iv-progress { opacity: 1; }
+.iv-progress-thumb {
+  height: 100%;
+  background: var(--accent);
+  opacity: .45;
+  border-radius: 1px;
+  min-width: 8%;
+  transition: width .08s linear;
+}
 .iv-img {
   height: clamp(260px, 58vh, 700px);
   width: auto;

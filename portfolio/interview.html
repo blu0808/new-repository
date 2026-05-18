@@ -53,6 +53,7 @@
         <img class="iv-img" src="images/interview/prologue_6.jpg" alt="">
         <img class="iv-img" src="images/interview/prologue_7.jpg" alt="">
       </section>
+      <div class="iv-progress"><div class="iv-progress-thumb"></div></div>
     </div>
 
     <div class="iv-chapter-wrap">
@@ -66,6 +67,7 @@
         <img class="iv-img" src="images/interview/ch01_6.jpg" alt="">
         <img class="iv-img" src="images/interview/ch01_7.jpg" alt="">
       </section>
+      <div class="iv-progress"><div class="iv-progress-thumb"></div></div>
     </div>
 
     <div class="iv-chapter-wrap">
@@ -80,6 +82,7 @@
         <img class="iv-img" src="images/interview/ch02_7.jpg" alt="">
         <img class="iv-img" src="images/interview/ch02_8.jpg" alt="">
       </section>
+      <div class="iv-progress"><div class="iv-progress-thumb"></div></div>
     </div>
 
     <div class="iv-chapter-wrap">
@@ -96,6 +99,7 @@
         <img class="iv-img" src="images/interview/ch03_9.jpg" alt="">
         <img class="iv-img" src="images/interview/ch03_10.jpg" alt="">
       </section>
+      <div class="iv-progress"><div class="iv-progress-thumb"></div></div>
     </div>
 
     <div class="iv-chapter-wrap">
@@ -112,6 +116,7 @@
         <img class="iv-img" src="images/interview/ch04_9.jpg" alt="">
         <img class="iv-img" src="images/interview/ch04_10.jpg" alt="">
       </section>
+      <div class="iv-progress"><div class="iv-progress-thumb"></div></div>
     </div>
 
     <div class="iv-chapter-wrap">
@@ -125,6 +130,7 @@
         <img class="iv-img" src="images/interview/epilogue_6.jpg" alt="">
         <img class="iv-img" src="images/interview/epilogue_7.jpg" alt="">
       </section>
+      <div class="iv-progress"><div class="iv-progress-thumb"></div></div>
     </div>
 
   </main>
@@ -163,5 +169,37 @@
   <a class="journey-float" href="journal.html">Journey</a>
 
   <script src="script.js"></script>
+  <script>
+    document.querySelectorAll('.iv-chapter').forEach(chapter => {
+      const thumb = chapter.closest('.iv-chapter-wrap').querySelector('.iv-progress-thumb');
+
+      function updateProgress() {
+        const max = chapter.scrollWidth - chapter.clientWidth;
+        if (max <= 0) return;
+        const ratio = chapter.scrollLeft / max;
+        thumb.style.width = Math.max(8, ratio * 100) + '%';
+      }
+      chapter.addEventListener('scroll', updateProgress);
+      updateProgress();
+
+      let isDragging = false, startX = 0, scrollLeft = 0;
+      chapter.addEventListener('mousedown', e => {
+        isDragging = true;
+        chapter.classList.add('dragging');
+        startX = e.pageX;
+        scrollLeft = chapter.scrollLeft;
+        e.preventDefault();
+      });
+      document.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        chapter.classList.remove('dragging');
+      });
+      document.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        chapter.scrollLeft = scrollLeft - (e.pageX - startX);
+      });
+    });
+  </script>
 </body>
 </html>
