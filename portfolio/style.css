@@ -15,11 +15,16 @@
 /* ─── Reset ───────────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 body {
   font-family: var(--font);
   color: var(--black);
   background: var(--white);
   line-height: 1.6;
+  animation: pageFadeIn .4s ease;
 }
 a  { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
@@ -102,6 +107,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   text-decoration: none;
 }
 .sb-journey:hover { opacity: .6; }
+.sb-journey[aria-current="page"] { font-weight: 600; border-bottom: 1.5px solid var(--accent); padding-bottom: 1px; }
 .lang-btn {
   font-size: .75rem;
   font-weight: 500;
@@ -904,7 +910,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
     transition: opacity .2s;
   }
   .nav-link--sub:hover { opacity: .6; }
-  .nav-link--sub-active { opacity: 1; font-weight: 600; }
+  .nav-link--sub-active { opacity: 1; font-weight: 600; border-bottom: 1.5px solid var(--accent); padding-bottom: 1px; }
   .interview-page .sidebar,
   .journal-page .sidebar { display: none; }
 
@@ -946,6 +952,9 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   .works-grid.poster-view [data-pg-idx="8"] { grid-column: span 1; }
   .pg-stage { padding: 60px 24px 0; }
   .pg-img { max-width: 92vw; max-height: calc(100vh - 180px); }
+
+  .iv-main { padding-left: 20px; padding-right: 20px; }
+  .iv-chapter { margin-left: -20px; margin-right: -20px; }
 }
 
 @media (max-width: 640px) {
