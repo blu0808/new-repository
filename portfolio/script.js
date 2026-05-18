@@ -138,14 +138,14 @@ const style = document.createElement('style');
 style.textContent = `
   .fade-up {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity .6s ease, transform .6s ease;
+    transform: translateY(14px);
+    transition: opacity .35s ease, transform .35s ease;
   }
   .fade-up.visible {
     opacity: 1;
     transform: none;
   }
-  .work-card.fade-up { transition-delay: calc(var(--i, 0) * 80ms); }
+  .work-card.fade-up { transition-delay: calc(var(--i, 0) * 50ms); }
 `;
 document.head.appendChild(style);
 
@@ -615,6 +615,9 @@ document.querySelectorAll('.work-card[data-category="poster"]').forEach((card, i
 
 if (pgClosBtn) pgClosBtn.addEventListener('click', closePg);
 if (pgBg)      pgBg.addEventListener('click', closePg);
+pgOverlay?.addEventListener('click', e => {
+  if (e.target === pgOverlay || e.target.classList.contains('pg-stage')) closePg();
+});
 
 pgOverlay?.addEventListener('wheel', e => {
   e.preventDefault();
