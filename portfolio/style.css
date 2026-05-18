@@ -90,6 +90,7 @@ button { font-family: var(--font); cursor: pointer; }
   text-align: left;
 }
 a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
+a.sb-journey { text-decoration: none; }
 .sb-link:hover { opacity: .6; }
 .sb-contact { font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
 .sb-footer {
@@ -1139,7 +1140,9 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   .journal-main { padding: 80px 24px; }
   .j-w20, .j-w22, .j-w28, .j-w32, .j-w38, .j-w45, .j-w55, .j-w65, .j-w75, .j-w80, .j-w90 { width: 80%; }
   .j-w100 { width: 100%; }
-  .j-left, .j-right, .j-offset, .j-offset2 { margin-left: auto; margin-right: auto; }
-  .j-row { flex-direction: column; gap: 60px; align-items: center; }
-  .j-row > * { width: 70% !important; flex: none !important; margin-left: auto !important; margin-right: auto !important; }
+  .j-left    { margin-left: 0; margin-right: auto; }
+  .j-right   { margin-left: auto; margin-right: 0; }
+  .j-offset, .j-offset2 { margin-left: 0; }
+  .j-row { flex-direction: column; gap: 60px; }
+  .j-row > * { width: 70% !important; flex: none !important; }
 }
