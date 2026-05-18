@@ -893,6 +893,17 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   .nav-right { display: flex; align-items: center; gap: 12px; }
   .hamburger { display: none; }
   .nav-menu  { display: none !important; }
+  .nav-link--sub {
+    font-size: .72rem;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: .45;
+    text-decoration: none;
+    transition: opacity .2s;
+  }
+  .nav-link--sub:hover { opacity: .8; }
+  .nav-link--sub-active { opacity: .9; }
 
   /* 하단 Journey 플로팅 */
   .journey-float {
@@ -942,20 +953,40 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ─── Interview Page ─────────────────────────────────────── */
 .iv-main {
-  padding: clamp(60px, 8vw, 120px) clamp(28px, 5vw, 72px);
-  max-width: 760px;
+  padding-top: clamp(60px, 8vw, 120px);
+  padding-bottom: clamp(60px, 8vw, 120px);
+  max-width: none;
+}
+.iv-chapter-wrap {
+  margin-bottom: clamp(40px, 6vw, 80px);
+}
+.iv-label {
+  display: block;
+  padding: 0 clamp(28px, 5vw, 72px);
+  margin-bottom: 10px;
+  font-size: .68rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: .45;
 }
 .iv-chapter {
   display: flex;
-  flex-direction: column;
-  gap: 2px;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: 3px;
+  padding: 0 clamp(28px, 5vw, 72px);
 }
+.iv-chapter::-webkit-scrollbar { display: none; }
 .iv-img {
-  width: 100%;
+  height: clamp(260px, 58vh, 700px);
+  width: auto;
+  flex-shrink: 0;
   display: block;
-}
-.iv-divider {
-  height: clamp(60px, 8vw, 100px);
+  scroll-snap-align: start;
 }
 
 /* ─── Journal Page ────────────────────────────────────────── */
