@@ -628,7 +628,7 @@ function closePg() {
   pgOverlay.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
   const heroIframe = document.getElementById('heroVideoIframe');
-  if (heroIframe) { const s = heroIframe.src; heroIframe.src = ''; heroIframe.src = s; }
+  if (heroIframe) heroIframe.contentWindow.postMessage('{"method":"play"}', 'https://player.vimeo.com');
 }
 
 document.querySelectorAll('.work-card[data-category="poster"]').forEach((card, i) => {
