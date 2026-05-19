@@ -1053,7 +1053,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .journal-grid {
   display: flex;
   flex-direction: column;
-  gap: 220px;
+  gap: 360px;
 }
 
 .journal-item {
@@ -1174,7 +1174,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ─── Journal Mobile ──────────────────────────────────────── */
 @media (max-width: 640px) {
-  .journal-grid { gap: 100px; }
+  .journal-grid { gap: 160px; }
   .journal-main { padding: 80px 24px; }
   .j-w100 { width: 100%; }
   .j-left    { margin-left: 0; margin-right: auto; }
