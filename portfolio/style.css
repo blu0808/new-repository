@@ -513,11 +513,12 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   cursor: pointer;
   z-index: 2;
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity .3s, color .2s;
   color: rgba(255,255,255,.4);
   font-size: 3rem;
   line-height: 1;
-  padding: 8px 16px;
+  padding: 16px 20px;
+  text-shadow: 0 1px 8px rgba(0,0,0,.7);
 }
 .proj-carousel:hover .proj-carousel-btn { opacity: 1; }
 .proj-carousel-btn:hover { color: #fff; }
