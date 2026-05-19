@@ -1095,6 +1095,24 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 
 .journal-img { cursor: zoom-in; }
 
+/* ─── Relay Strip ────────────────────────────────────────── */
+.relay-strip {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.relay-strip::-webkit-scrollbar { display: none; }
+.relay-strip img {
+  height: 130px;
+  width: auto;
+  flex-shrink: 0;
+  display: block;
+  object-fit: cover;
+  cursor: zoom-in;
+}
+
 /* ─── Journal Carousel ────────────────────────────────────── */
 .jc-wrap {
   position: relative;
