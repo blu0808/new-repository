@@ -326,7 +326,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   position: absolute; top: 24px; right: 28px; z-index: 2;
   background: none; border: none;
   color: rgba(255,255,255,.4);
-  font-size: .9rem; cursor: pointer;
+  font-size: 1.3rem; cursor: pointer;
   transition: color .2s;
   letter-spacing: .04em;
 }
@@ -612,7 +612,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .modal-close {
   position: absolute; top: 14px; right: 14px;
   background: none; border: none;
-  font-size: 1rem; color: rgba(255,255,255,.7); cursor: pointer;
+  font-size: 1.3rem; color: rgba(255,255,255,.7); cursor: pointer;
   z-index: 2;
   text-shadow: 1px 1px 3px rgba(0,0,0,.5);
 }
@@ -626,7 +626,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .modal-play-btn {
   position: absolute; bottom: 16px; right: 16px;
   width: 48px; height: 48px; border-radius: 50%;
-  background: rgba(255,255,255,.95); border: none;
+  background: rgba(255,255,255,.30); border: none;
   font-size: 1rem; color: var(--black);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; z-index: 2;
@@ -814,7 +814,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   top: -40px; right: 0;
   background: none; border: none;
   color: var(--white);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   cursor: pointer;
   opacity: .7;
   transition: opacity .2s;
@@ -935,7 +935,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
     margin: auto; overflow-y: auto;
   }
   .modal-img-wrap { max-height: none; }
-  .modal-close { font-size: 1.1rem; }
+  .modal-close { font-size: 1.3rem; }
 
   .works-grid:not(.poster-view) { grid-template-columns: 1fr; }
   .works-grid.poster-view {
