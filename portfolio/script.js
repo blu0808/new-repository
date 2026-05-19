@@ -209,12 +209,12 @@ function openModal(card) {
   if (modalPlayBtn) modalPlayBtn.style.display = currentYtId ? 'flex' : 'none';
 
   modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
+  document.documentElement.style.overflow = 'hidden';
 }
 
 function closeModal() {
   modal.classList.remove('open');
-  document.body.style.overflow = '';
+  document.documentElement.style.overflow = '';
   modalPlayer.classList.remove('active');
   modalPlayer.innerHTML = '';
 }
