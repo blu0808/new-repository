@@ -420,6 +420,13 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
   carousel.querySelector('.proj-carousel-prev').addEventListener('click', () => goTo(cur - 1));
   carousel.querySelector('.proj-carousel-next').addEventListener('click', () => goTo(cur + 1));
 
+  let touchTimer;
+  carousel.addEventListener('touchstart', () => {
+    carousel.classList.add('touched');
+    clearTimeout(touchTimer);
+    touchTimer = setTimeout(() => carousel.classList.remove('touched'), 2000);
+  }, { passive: true });
+
   let sx = 0, sy = 0, swipeDir = null;
   track.addEventListener('touchstart', e => {
     sx = e.touches[0].clientX; sy = e.touches[0].clientY; swipeDir = null;

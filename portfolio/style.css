@@ -975,7 +975,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
     padding-right: clamp(28px, 5vw, 72px);
   }
   #works.poster-active .works-tabs { background: #1A4DFF; }
-  .proj-carousel-btn { opacity: 1; }
+  .proj-carousel.touched .proj-carousel-btn { opacity: 1; }
 }
 
 @media (max-width: 640px) {
