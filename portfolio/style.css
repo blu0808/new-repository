@@ -614,7 +614,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   background: none; border: none;
   font-size: 1rem; color: rgba(255,255,255,.7); cursor: pointer;
   z-index: 2;
-  text-shadow: 0 0 1px rgba(0,0,0,.9), 0 0 3px rgba(0,0,0,.4);
+  text-shadow: 1px 1px 3px rgba(0,0,0,.5);
 }
 .modal-close:hover { color: var(--white); }
 .modal-body {
@@ -626,7 +626,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .modal-play-btn {
   position: absolute; bottom: 16px; right: 16px;
   width: 48px; height: 48px; border-radius: 50%;
-  background: rgba(255,255,255,.85); border: none;
+  background: rgba(255,255,255,.95); border: none;
   font-size: 1rem; color: var(--black);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; z-index: 2;
