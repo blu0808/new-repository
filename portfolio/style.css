@@ -1070,10 +1070,13 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .j-w20  { width: 20%; }
 .j-w22  { width: 22%; }
 .j-w28  { width: 28%; }
+.j-w30  { width: 30%; }
 .j-w32  { width: 32%; }
+.j-w35  { width: 35%; }
 .j-w38  { width: 38%; }
 .j-w45  { width: 45%; }
 .j-w55  { width: 55%; }
+.j-w60  { width: 60%; }
 .j-w65  { width: 65%; }
 .j-w70  { width: 70%; }
 .j-w75  { width: 75%; }
