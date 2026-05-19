@@ -1103,9 +1103,9 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .relay-strip img {
   flex: 1 1 0;
   min-width: 0;
-  height: 130px;
+  width: 0;
+  height: auto;
   display: block;
-  object-fit: cover;
   cursor: zoom-in;
 }
 
