@@ -91,7 +91,7 @@ button { font-family: var(--font); cursor: pointer; }
 }
 a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .sb-link:hover { opacity: .6; }
-.sb-contact { font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+.sb-contact { text-decoration: underline; text-underline-offset: 3px; }
 .sb-footer {
   margin-top: auto;
   display: flex;
@@ -965,7 +965,8 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
     padding-right: clamp(28px, 5vw, 72px);
   }
   #works.poster-active .works-tabs { background: #1A4DFF; }
-  .proj-carousel-btn { opacity: 1; }
+  .proj-carousel-btn { opacity: 1; color: rgba(255,255,255,.4); font-size: 3rem; }
+  .proj-carousel-btn::before { display: none; }
 }
 
 @media (max-width: 640px) {
