@@ -933,16 +933,12 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   .proj-row-visual { min-height: 260px; }
   .proj-row-visual--grid img { height: 140px; }
 
-  .modal-body { grid-template-columns: 1fr; }
-  .modal-img-wrap { max-height: 40vh; }
-  .modal { align-items: center; justify-content: center; }
   .modal-panel {
-    position: relative;
     width: 90vw; max-width: 420px; max-height: 88vh;
-    transform: none; margin: auto; z-index: 1;
-    overflow-y: auto;
+    margin: auto; overflow-y: auto;
   }
-  .modal-close { font-size: 1.1rem; background: none; border-radius: 0; width: auto; height: auto; }
+  .modal-img-wrap { max-height: none; }
+  .modal-close { font-size: 1.1rem; }
 
   .works-grid:not(.poster-view) { grid-template-columns: 1fr; }
   .works-grid.poster-view {
