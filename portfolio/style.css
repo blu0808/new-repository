@@ -277,13 +277,13 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   height: auto;
   width: 100%;
   object-fit: cover;
-  box-shadow: 0 16px 48px rgba(0,0,0,.55);
+  filter: drop-shadow(4px 12px 20px rgba(0,0,0,0.55));
   transition: transform .5s cubic-bezier(.25,.46,.45,.94),
-              box-shadow .5s ease;
+              filter .5s ease;
 }
 .works-grid.poster-view .work-card:hover .work-thumb img {
   transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 28px 64px rgba(0,0,0,.7);
+  filter: drop-shadow(6px 20px 32px rgba(0,0,0,0.75));
 }
 .works-grid.poster-view .work-overlay {
   position: static;
