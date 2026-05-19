@@ -103,14 +103,14 @@ window.addEventListener('scroll', () => {
 const hamburger = document.getElementById('hamburger');
 const navMenu   = document.getElementById('navMenu');
 
-hamburger.addEventListener('click', () => {
+hamburger?.addEventListener('click', () => {
   const open = navMenu.classList.toggle('open');
   hamburger.classList.toggle('open', open);
   hamburger.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
   document.body.style.overflow = open ? 'hidden' : '';
 });
 
-navMenu.querySelectorAll('.nav-link').forEach(link => {
+navMenu?.querySelectorAll('.nav-link').forEach(link => {
   link.addEventListener('click', () => {
     navMenu.classList.remove('open');
     hamburger.classList.remove('open');
@@ -232,8 +232,8 @@ document.querySelectorAll('.work-card').forEach(card => {
   card.addEventListener('click', () => openModal(card));
 });
 
-document.getElementById('modalClose').addEventListener('click', closeModal);
-document.getElementById('modalBackdrop').addEventListener('click', closeModal);
+document.getElementById('modalClose')?.addEventListener('click', closeModal);
+document.getElementById('modalBackdrop')?.addEventListener('click', closeModal);
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     closeModal();
@@ -278,9 +278,9 @@ function closeEmailPanel() {
 }
 
 document.getElementById('emailTrigger').addEventListener('click', openEmailPanel);
-document.getElementById('navContact').addEventListener('click', () => {
-  navMenu.classList.remove('open');
-  hamburger.classList.remove('open');
+document.getElementById('navContact')?.addEventListener('click', () => {
+  navMenu?.classList.remove('open');
+  hamburger?.classList.remove('open');
   document.body.style.overflow = '';
   openEmailPanel();
 });
