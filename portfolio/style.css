@@ -614,7 +614,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   background: none; border: none;
   font-size: 1rem; color: rgba(255,255,255,.7); cursor: pointer;
   z-index: 2;
-  text-shadow: 0 1px 6px rgba(0,0,0,.7);
+  text-shadow: 0 0 1px rgba(0,0,0,.9), 0 0 3px rgba(0,0,0,.4);
 }
 .modal-close:hover { color: var(--white); }
 .modal-body {
