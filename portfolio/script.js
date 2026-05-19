@@ -511,11 +511,21 @@ if (projLightbox) {
 
   document.querySelectorAll('.proj-carousel').forEach(carousel => {
     const imgs = [...carousel.querySelectorAll('.proj-carousel-track img')];
+    const track = carousel.querySelector('.proj-carousel-track');
+    let tapX = 0, tapY = 0;
+    track.addEventListener('touchstart', e => {
+      tapX = e.touches[0].clientX; tapY = e.touches[0].clientY;
+    }, { passive: true });
     imgs.forEach((img, i) => {
       img.style.cursor = 'zoom-in';
       img.addEventListener('click', e => {
         e.stopPropagation();
         plOpen(imgs.map(im => im.src), i);
+      });
+      img.addEventListener('touchend', e => {
+        const dx = Math.abs(e.changedTouches[0].clientX - tapX);
+        const dy = Math.abs(e.changedTouches[0].clientY - tapY);
+        if (dx < 8 && dy < 8) { e.preventDefault(); plOpen(imgs.map(im => im.src), i); }
       });
     });
   });

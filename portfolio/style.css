@@ -508,31 +508,21 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .proj-carousel-btn {
   position: absolute;
   top: 50%; transform: translateY(-50%);
-  width: 56px; height: 56px;
   background: none;
   border: none;
   cursor: pointer;
   z-index: 2;
-  display: flex; align-items: center; justify-content: center;
   opacity: 0;
   transition: opacity .3s;
-  color: transparent;
-  font-size: 0;
+  color: rgba(255,255,255,.4);
+  font-size: 3rem;
+  line-height: 1;
+  padding: 8px 16px;
 }
 .proj-carousel:hover .proj-carousel-btn { opacity: 1; }
-.proj-carousel-btn::before {
-  content: '';
-  display: block;
-  width: 20px;
-  height: 20px;
-  border-top: 1.5px solid rgba(255,255,255,.9);
-  border-right: 1.5px solid rgba(255,255,255,.9);
-  filter: drop-shadow(0 1px 4px rgba(0,0,0,.7));
-}
-.proj-carousel-prev { left: 16px; }
-.proj-carousel-prev::before { transform: rotate(-135deg); margin-left: 5px; }
-.proj-carousel-next { right: 16px; }
-.proj-carousel-next::before { transform: rotate(45deg); margin-right: 5px; }
+.proj-carousel-btn:hover { color: #fff; }
+.proj-carousel-prev { left: 8px; }
+.proj-carousel-next { right: 8px; }
 .proj-carousel-dots {
   position: absolute;
   bottom: 14px; left: 50%;
@@ -965,8 +955,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
     padding-right: clamp(28px, 5vw, 72px);
   }
   #works.poster-active .works-tabs { background: #1A4DFF; }
-  .proj-carousel-btn { opacity: 1; color: rgba(255,255,255,.4); font-size: 3rem; }
-  .proj-carousel-btn::before { display: none; }
+  .proj-carousel-btn { opacity: 1; }
 }
 
 @media (max-width: 640px) {
