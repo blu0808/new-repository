@@ -371,10 +371,16 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
   track.appendChild(firstClone);
   track.insertBefore(lastClone, originals[0]);
 
+  function setPos(n, animate) {
+    const w = Math.round(carousel.offsetWidth);
+    if (!animate) track.style.transition = 'none';
+    track.style.transform = `translate3d(-${n * w}px, 0, 0)`;
+    if (!animate) setTimeout(() => { track.style.transition = ''; }, 20);
+  }
+
   /* 초기 위치 (애니 없이) */
-  track.style.transition = 'none';
-  track.style.transform  = `translate3d(-100%, 0, 0)`;
-  setTimeout(() => { track.style.transition = ''; }, 50);
+  setPos(1, false);
+  setTimeout(() => {}, 50);
 
   /* dots */
   originals.forEach((_, i) => {
@@ -394,28 +400,28 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
     if (locked) return;
     locked = true;
     cur = pos;
-    track.style.transform = `translate3d(-${cur * 100}%, 0, 0)`;
+    setPos(cur, true);
     updateDots();
   }
 
   /* 클론에 도달하면 실제 슬라이드로 순간이동 */
   track.addEventListener('transitionend', () => {
     if (cur === total + 1) {
-      track.style.transition = 'none';
       cur = 1;
-      track.style.transform = `translate3d(-100%, 0, 0)`;
-      setTimeout(() => { track.style.transition = ''; locked = false; }, 20);
+      setPos(cur, false);
+      setTimeout(() => { locked = false; }, 20);
       return;
     }
     if (cur === 0) {
-      track.style.transition = 'none';
       cur = total;
-      track.style.transform = `translate3d(-${total * 100}%, 0, 0)`;
-      setTimeout(() => { track.style.transition = ''; locked = false; }, 20);
+      setPos(cur, false);
+      setTimeout(() => { locked = false; }, 20);
       return;
     }
     locked = false;
   });
+
+  window.addEventListener('resize', () => setPos(cur, false));
 
   carousel.querySelector('.proj-carousel-prev').addEventListener('click', () => goTo(cur - 1));
   carousel.querySelector('.proj-carousel-next').addEventListener('click', () => goTo(cur + 1));

@@ -442,6 +442,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 .proj-row-visual {
+  background: var(--black);
   overflow: hidden;
   position: relative;
 }
@@ -474,7 +475,6 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   aspect-ratio: 4/5;
   overflow: hidden;
   isolation: isolate;
-  background: var(--white);
 }
 .proj-carousel-track {
   display: flex;
