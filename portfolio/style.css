@@ -614,6 +614,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   background: none; border: none;
   font-size: 1rem; color: rgba(255,255,255,.7); cursor: pointer;
   z-index: 2;
+  text-shadow: 0 1px 6px rgba(0,0,0,.7);
 }
 .modal-close:hover { color: var(--white); }
 .modal-body {
@@ -625,7 +626,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .modal-play-btn {
   position: absolute; bottom: 16px; right: 16px;
   width: 48px; height: 48px; border-radius: 50%;
-  background: rgba(255,255,255,.92); border: none;
+  background: rgba(255,255,255,.85); border: none;
   font-size: 1rem; color: var(--black);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; z-index: 2;
@@ -643,11 +644,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   flex-direction: column;
   gap: 7px;
 }
-.modal-tag {
-  font-size: 10px; letter-spacing: .08em; text-transform: uppercase;
-  color: var(--accent); background: rgba(26,77,255,.1);
-  padding: .28em .8em; border-radius: 4px; align-self: flex-start;
-}
+.modal-tag { display: none; }
 .modal-title  { font-size: clamp(18px, 2vw, 24px); font-weight: 700; }
 .modal-artist { font-size: clamp(13px, 1vw, 15px); color: var(--gray-4); }
 .modal-year   { font-size: clamp(11px, .85vw, 13px); color: var(--gray-3); }

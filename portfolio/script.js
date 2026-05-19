@@ -222,9 +222,13 @@ function closeModal() {
 if (modalPlayBtn) {
   modalPlayBtn.addEventListener('click', () => {
     if (!currentYtId) return;
-    modalPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${currentYtId}?autoplay=1&rel=0&playsinline=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
-    modalPlayer.classList.add('active');
-    modalPlayBtn.style.display = 'none';
+    if (window.innerWidth <= 860) {
+      window.open(`https://youtu.be/${currentYtId}`, '_blank');
+    } else {
+      modalPlayer.innerHTML = `<iframe src="https://www.youtube.com/embed/${currentYtId}?autoplay=1&rel=0&playsinline=1" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>`;
+      modalPlayer.classList.add('active');
+      modalPlayBtn.style.display = 'none';
+    }
   });
 }
 
