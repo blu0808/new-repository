@@ -626,7 +626,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .modal-play-btn {
   position: absolute; bottom: 16px; right: 16px;
   width: 48px; height: 48px; border-radius: 50%;
-  background: rgba(255,255,255,.30); border: none;
+  background: rgba(255,255,255,.50); border: none;
   font-size: 1rem; color: var(--black);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; z-index: 2;
@@ -885,7 +885,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
     backdrop-filter: blur(8px);
     transition: box-shadow .3s;
   }
-  .nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,.08); }
+  .nav.scrolled { box-shadow: none; }
   .nav-logo { font-size: .95rem; font-weight: 700; letter-spacing: .04em; color: var(--accent); }
   .nav-right { display: flex; align-items: center; gap: 12px; }
   .hamburger { display: none; }
@@ -963,9 +963,9 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
     margin-right: calc(-1 * clamp(28px, 5vw, 72px));
     padding-left: clamp(28px, 5vw, 72px);
     padding-right: clamp(28px, 5vw, 72px);
-    box-shadow: 0 1px 0 rgba(0,0,0,.08);
   }
-  #works.poster-active .works-tabs { background: #1A4DFF; box-shadow: 0 1px 0 rgba(0,0,0,.15); }
+  #works.poster-active .works-tabs { background: #1A4DFF; }
+  .proj-carousel-btn { opacity: 1; }
 }
 
 @media (max-width: 640px) {
