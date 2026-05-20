@@ -646,14 +646,14 @@ if (projLightbox) {
     plImg.src = plImages[idx];
     projLightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
-    document.querySelectorAll('.proj-carousel-btn').forEach(btn => btn.style.visibility = 'hidden');
+    document.body.classList.add('pl-open');
   }
 
   function plClose() {
     projLightbox.classList.remove('open');
     document.body.style.overflow = '';
     plImg.src = '';
-    document.querySelectorAll('.proj-carousel-btn').forEach(btn => btn.style.visibility = '');
+    document.body.classList.remove('pl-open');
   }
 
   document.querySelectorAll('.proj-carousel').forEach(carousel => {

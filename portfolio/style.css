@@ -530,6 +530,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   color: transparent; font-size: 0;
 }
 .proj-carousel:hover .proj-carousel-btn { opacity: 1; }
+body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 .proj-carousel-btn::before {
   content: '';
   display: block;
