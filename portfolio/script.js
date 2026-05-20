@@ -187,6 +187,7 @@ const modalDesc   = document.getElementById('modalDesc');
 const modalLink   = document.getElementById('modalLink');
 
 let currentYtId = '';
+let currentModalIndex = -1;
 
 const modalPlayBtn = document.getElementById('modalPlayBtn');
 const modalPlayer  = document.getElementById('modalPlayer');
@@ -195,6 +196,7 @@ function openModal(card) {
   const index = [...document.querySelectorAll('.work-card')].indexOf(card);
   const data = worksData[index];
   if (!data) return;
+  currentModalIndex = [...document.querySelectorAll('.work-card:not(.hidden)')].indexOf(card);
 
   modalImg.src = card.querySelector('img').src;
   modalImg.alt = data.title;
@@ -246,6 +248,15 @@ document.addEventListener('keydown', e => {
   if (pgOverlay?.classList.contains('open')) {
     if (e.key === 'ArrowRight') pgGo(pgCur + 1);
     if (e.key === 'ArrowLeft')  pgGo(pgCur - 1);
+  }
+  if (modal?.classList.contains('open')) {
+    const visibles = [...document.querySelectorAll('.work-card:not(.hidden)')];
+    if (e.key === 'ArrowRight' && currentModalIndex < visibles.length - 1) {
+      openModal(visibles[currentModalIndex + 1]);
+    }
+    if (e.key === 'ArrowLeft' && currentModalIndex > 0) {
+      openModal(visibles[currentModalIndex - 1]);
+    }
   }
 });
 
@@ -367,11 +378,21 @@ function applyWorksFilter(filter, animate = true) {
   }, animate ? 180 : 0);
 }
 
-document.querySelectorAll('.works-tab').forEach(tab => {
+const worksTabEls = [...document.querySelectorAll('.works-tab')];
+worksTabEls.forEach((tab, i) => {
   tab.addEventListener('click', () => {
-    document.querySelectorAll('.works-tab').forEach(t => t.classList.remove('active'));
+    worksTabEls.forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
     applyWorksFilter(tab.dataset.filter);
+  });
+  tab.addEventListener('keydown', e => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    e.preventDefault();
+    const next = e.key === 'ArrowRight'
+      ? (i + 1) % worksTabEls.length
+      : (i - 1 + worksTabEls.length) % worksTabEls.length;
+    worksTabEls[next].focus();
+    worksTabEls[next].click();
   });
 });
 
@@ -837,3 +858,19 @@ if (emailFloatBtn) {
   emailFloatBtn.classList.add('visible');
   emailFloatBtn.addEventListener('click', openEmailPanel);
 }
+
+/* ─── 이메일 패널 포커스 트랩 ────────────────────────────────── */
+emailPanel?.addEventListener('keydown', e => {
+  if (e.key !== 'Tab') return;
+  const confirmVisible = epConfirm.classList.contains('show');
+  const focusable = confirmVisible
+    ? [document.getElementById('epConfirmSend'), document.getElementById('epConfirmBack')]
+    : [epFrom, epMessage, document.getElementById('epSend'), document.getElementById('epCancel')];
+  const first = focusable[0];
+  const last  = focusable[focusable.length - 1];
+  if (e.shiftKey) {
+    if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+  } else {
+    if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+  }
+});
