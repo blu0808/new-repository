@@ -523,15 +523,30 @@ const plNextBtn    = document.getElementById('plNext');
 if (projLightbox) {
   let plImages = [];
   let plCur = 0;
+  let plBusy = false;
 
   function plShow(idx) {
-    plCur = (idx + plImages.length) % plImages.length;
-    plImg.src = plImages[plCur];
+    if (plBusy) return;
+    const next = (idx + plImages.length) % plImages.length;
+    if (next === plCur && plImages.length > 1) return;
+    plBusy = true;
+    plImg.classList.add('pl-out');
+    setTimeout(() => {
+      plCur = next;
+      plImg.src = plImages[next];
+      plImg.classList.remove('pl-out');
+      plImg.classList.add('pl-in');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        plImg.classList.remove('pl-in');
+        plBusy = false;
+      }));
+    }, 280);
   }
 
   function plOpen(imgs, idx) {
     plImages = imgs;
-    plShow(idx);
+    plCur = idx;
+    plImg.src = plImages[idx];
     projLightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
