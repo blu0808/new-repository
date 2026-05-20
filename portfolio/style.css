@@ -70,10 +70,10 @@ button { font-family: var(--font); cursor: pointer; }
   line-height: 1.5;
 }
 .sb-bio {
-  font-size: .75rem;
+  font-size: .8rem;
   color: var(--accent);
   line-height: 1.7;
-  opacity: .75;
+  opacity: .9;
 }
 .sb-links {
   display: flex;
@@ -390,7 +390,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .proj-tagline {
   font-size: clamp(13px, 1vw, 14px);
   color: var(--accent);
-  opacity: .55;
+  opacity: .75;
   margin-top: 8px;
 }
 .proj-row {
@@ -426,23 +426,23 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   color: var(--accent);
 }
 .proj-row-meta {
-  font-size: clamp(11px, .85vw, 13px);
+  font-size: clamp(12px, .9vw, 14px);
   color: var(--accent);
-  opacity: .55;
+  opacity: .72;
   letter-spacing: .04em;
 }
 .proj-row-quote {
-  font-size: clamp(13px, 1vw, 15px);
+  font-size: clamp(14px, 1vw, 15px);
   font-style: italic;
   color: var(--accent);
-  opacity: .75;
+  opacity: .88;
   line-height: 1.7;
   padding-left: 16px;
 }
 .proj-row-desc {
-  font-size: clamp(13px, 1vw, 14px);
+  font-size: clamp(14px, 1.05vw, 15px);
   color: var(--accent);
-  opacity: .8;
+  opacity: 1;
   line-height: 1.8;
 }
 

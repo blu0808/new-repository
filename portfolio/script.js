@@ -624,6 +624,17 @@ if (projLightbox) {
     const dx = e.changedTouches[0].clientX - plTx;
     if (Math.abs(dx) > 48) plShow(dx < 0 ? plCur + 1 : plCur - 1);
   });
+
+  const journalAllImgs = [...document.querySelectorAll('.journal-img, .relay-strip img')];
+  if (journalAllImgs.length) {
+    journalAllImgs.forEach((img, i) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', e => {
+        e.stopPropagation();
+        plOpen(journalAllImgs.map(im => im.src), i);
+      });
+    });
+  }
 }
 
 /* ─── Poster data-pg-idx 할당 ───────────────────────────── */
