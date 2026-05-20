@@ -192,13 +192,27 @@
     window.addEventListener('load', resetChapters);
     window.addEventListener('pageshow', () => setTimeout(resetChapters, 150));
     chapters.forEach(chapter => {
-      const thumb = chapter.closest('.iv-chapter-wrap').querySelector('.iv-progress-thumb');
+      const wrap = chapter.closest('.iv-chapter-wrap');
+      const thumb = wrap.querySelector('.iv-progress-thumb');
+      const imgCount = chapter.querySelectorAll('.iv-img').length;
+
+      const label = wrap.querySelector('.iv-label');
+      const header = document.createElement('div');
+      header.className = 'iv-chapter-header';
+      label.parentNode.insertBefore(header, label);
+      header.appendChild(label);
+      const counter = document.createElement('span');
+      counter.className = 'iv-counter';
+      counter.textContent = `1 / ${imgCount}`;
+      header.appendChild(counter);
 
       function updateProgress() {
         const max = chapter.scrollWidth - chapter.clientWidth;
         if (max <= 0) return;
         const ratio = chapter.scrollLeft / max;
         thumb.style.width = Math.max(8, ratio * 100) + '%';
+        const cur = Math.min(Math.round(chapter.scrollLeft / chapter.clientWidth) + 1, imgCount);
+        counter.textContent = `${cur} / ${imgCount}`;
       }
       chapter.addEventListener('scroll', updateProgress);
       updateProgress();

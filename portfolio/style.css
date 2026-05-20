@@ -185,6 +185,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: clamp(12px, 1.5vw, 20px);
+  transition: opacity .2s ease, transform .2s ease;
 }
 .work-card {
   position: relative;
@@ -662,6 +663,8 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .ep-backdrop {
   position: absolute; inset: 0;
   background: rgba(0,0,0,.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   opacity: 0; transition: opacity .35s ease;
 }
 .email-panel.open .ep-backdrop { opacity: 1; }
@@ -1034,6 +1037,15 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   border-radius: 1px;
   min-width: 8%;
   transition: width .08s linear;
+}
+.iv-chapter-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 10px;
+}
+.iv-chapter-header .iv-label { margin-bottom: 0; }
+.iv-counter {
+  font-size: .6rem; letter-spacing: .1em;
+  color: rgba(255,255,255,.28);
 }
 .iv-img {
   height: clamp(260px, 58vh, 700px);

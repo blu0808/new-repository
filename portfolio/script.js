@@ -333,17 +333,27 @@ document.getElementById('epConfirmSend').addEventListener('click', async () => {
 /* ─── Works 카테고리 필터 ─────────────────────────────────── */
 const worksGrid = document.querySelector('.works-grid');
 
-function applyWorksFilter(filter) {
-  let visible = 0;
-  document.querySelectorAll('.work-card').forEach(card => {
-    const hide = card.dataset.category !== filter;
-    card.classList.toggle('hidden', hide);
-    if (!hide) visible++;
-  });
-  worksGrid.classList.toggle('poster-view', filter === 'poster');
-  document.getElementById('works').classList.toggle('poster-active', filter === 'poster');
-  const emptyEl = document.getElementById('worksEmpty');
-  if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+function applyWorksFilter(filter, animate = true) {
+  if (animate) {
+    worksGrid.style.opacity = '0';
+    worksGrid.style.transform = 'scale(0.97)';
+  }
+  setTimeout(() => {
+    let visible = 0;
+    document.querySelectorAll('.work-card').forEach(card => {
+      const hide = card.dataset.category !== filter;
+      card.classList.toggle('hidden', hide);
+      if (!hide) visible++;
+    });
+    worksGrid.classList.toggle('poster-view', filter === 'poster');
+    document.getElementById('works').classList.toggle('poster-active', filter === 'poster');
+    const emptyEl = document.getElementById('worksEmpty');
+    if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+    if (animate) {
+      worksGrid.style.opacity = '';
+      worksGrid.style.transform = '';
+    }
+  }, animate ? 180 : 0);
 }
 
 document.querySelectorAll('.works-tab').forEach(tab => {
@@ -355,7 +365,7 @@ document.querySelectorAll('.works-tab').forEach(tab => {
 });
 
 const activeTab = document.querySelector('.works-tab.active');
-if (activeTab) applyWorksFilter(activeTab.dataset.filter);
+if (activeTab) applyWorksFilter(activeTab.dataset.filter, false);
 
 /* ─── Carousel ──────────────────────────────────────────────── */
 document.querySelectorAll('.proj-carousel').forEach(carousel => {
