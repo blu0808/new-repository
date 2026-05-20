@@ -706,7 +706,7 @@ let pgWheelTime = 0;
 pgOverlay?.addEventListener('wheel', e => {
   e.preventDefault();
   const now = Date.now();
-  if (now - pgWheelTime < 600) return;
+  if (now - pgWheelTime < 1000) return;
   const delta = Math.abs(e.deltaX) >= Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
   if (Math.abs(delta) < 3) return;
   pgWheelTime = now;
