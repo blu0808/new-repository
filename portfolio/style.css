@@ -1266,27 +1266,6 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .loader-svg { animation: lr-spin 1.2s linear infinite; }
 .loader-circle { animation: lr-dash 1.2s ease-in-out infinite; }
 
-/* ─── 모바일 nav 이메일 버튼 ─────────────────────────────────── */
-.nav-email-btn {
-  display: none;
-}
-@media (max-width: 860px) {
-  .interview-page .nav-email-btn,
-  .journal-page  .nav-email-btn {
-    display: inline;
-    font-size: .8rem;
-    letter-spacing: .05em;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: none;
-    border: none;
-    padding: 0;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    cursor: pointer;
-  }
-}
-
 /* ─── 위로 가기 버튼 ─────────────────────────────────────────── */
 .scroll-top {
   position: fixed; bottom: 32px; right: 32px; z-index: 500;
@@ -1313,4 +1292,24 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 @media (max-width: 640px) {
   .scroll-top { bottom: 24px; right: 20px; width: 40px; height: 40px; }
+}
+
+/* ─── 이메일 플로팅 버튼 ────────────────────────────────────── */
+.email-float {
+  position: fixed; bottom: 32px; right: 84px; z-index: 500;
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,.92);
+  border: none; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease, transform .25s ease;
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  font-size: .7rem; font-weight: 700; letter-spacing: .02em;
+  color: #1a4dff;
+}
+.email-float.visible { opacity: 1; pointer-events: all; }
+.email-float:hover { transform: translateY(-3px); }
+@media (max-width: 640px) {
+  .email-float { bottom: 24px; right: 68px; width: 40px; height: 40px; }
 }
