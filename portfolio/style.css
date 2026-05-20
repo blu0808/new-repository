@@ -1039,8 +1039,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   background: var(--accent);
   opacity: .6;
   border-radius: 1px;
-  width: 0;
-  min-width: 0;
+  width: 8%;
   transition: width .08s linear;
 }
 .iv-chapter-header {
