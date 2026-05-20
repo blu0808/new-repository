@@ -522,6 +522,9 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
   carousel.querySelector('.proj-carousel-prev').addEventListener('click', () => goTo(cur - 1));
   carousel.querySelector('.proj-carousel-next').addEventListener('click', () => goTo(cur + 1));
 
+  carousel.addEventListener('mouseenter', () => carousel.classList.add('is-hovered'));
+  carousel.addEventListener('mouseleave', () => carousel.classList.remove('is-hovered'));
+
   let touchTimer;
   carousel.addEventListener('touchstart', () => {
     carousel.classList.add('touched');
