@@ -521,54 +521,32 @@ const plPrevBtn    = document.getElementById('plPrev');
 const plNextBtn    = document.getElementById('plNext');
 
 if (projLightbox) {
-  const plVideo      = document.getElementById('plVideo');
-  const plVideoFrame = document.getElementById('plVideoFrame');
-  let plItems = [];
-  let plCur   = 0;
-  let plBusy  = false;
-
-  function plGetEl(item) { return item.type === 'image' ? plImg : plVideo; }
-
-  function plShowItem(item) {
-    if (item.type === 'image') {
-      plVideo.style.display = 'none';
-      plImg.style.display = '';
-      plImg.src = item.src;
-      plImg.alt = item.alt || '';
-    } else {
-      plImg.style.display = 'none';
-      plVideo.style.display = '';
-      plVideoFrame.src = `https://player.vimeo.com/video/${item.id}?autoplay=1&dnt=1&playsinline=1`;
-    }
-  }
+  let plImages = [];
+  let plCur = 0;
+  let plBusy = false;
 
   function plShow(idx) {
     if (plBusy) return;
-    const next = (idx + plItems.length) % plItems.length;
-    if (next === plCur && plItems.length > 1) return;
+    const next = (idx + plImages.length) % plImages.length;
+    if (next === plCur && plImages.length > 1) return;
     plBusy = true;
-    const curEl = plGetEl(plItems[plCur]);
-    curEl.classList.add('pl-out');
+    plImg.classList.add('pl-out');
     setTimeout(() => {
-      if (plItems[plCur].type === 'video') plVideoFrame.src = '';
       plCur = next;
-      const item = plItems[plCur];
-      curEl.classList.remove('pl-out');
-      const nextEl = plGetEl(item);
-      plShowItem(item);
-      nextEl.classList.add('pl-in');
+      plImg.src = plImages[next];
+      plImg.classList.remove('pl-out');
+      plImg.classList.add('pl-in');
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        nextEl.classList.remove('pl-in');
+        plImg.classList.remove('pl-in');
         plBusy = false;
       }));
     }, 280);
   }
 
-  function plOpen(items, idx) {
-    plItems = items;
-    plCur   = idx;
-    plBusy  = false;
-    plShowItem(plItems[plCur]);
+  function plOpen(imgs, idx) {
+    plImages = imgs;
+    plCur = idx;
+    plImg.src = plImages[idx];
     projLightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -577,38 +555,25 @@ if (projLightbox) {
     projLightbox.classList.remove('open');
     document.body.style.overflow = '';
     plImg.src = '';
-    plVideoFrame.src = '';
   }
 
   document.querySelectorAll('.proj-carousel').forEach(carousel => {
+    const imgs = [...carousel.querySelectorAll('.proj-carousel-track img')];
     const track = carousel.querySelector('.proj-carousel-track');
     let tapX = 0, tapY = 0;
     track.addEventListener('touchstart', e => {
       tapX = e.touches[0].clientX; tapY = e.touches[0].clientY;
     }, { passive: true });
-
-    const trackKids = [...track.children];
-    const originals = trackKids.slice(1, trackKids.length - 1);
-    const items = [];
-    originals.forEach(child => {
-      if (child.tagName === 'IMG') {
-        items.push({ type: 'image', src: child.src, alt: child.alt, el: child });
-      } else if (child.classList.contains('proj-carousel-vimeo')) {
-        const id = child.querySelector('iframe')?.src.match(/video\/(\d+)/)?.[1];
-        if (id) items.push({ type: 'video', id, el: child });
-      }
-    });
-
-    items.forEach((item, i) => {
-      item.el.style.cursor = 'zoom-in';
-      item.el.addEventListener('click', e => {
+    imgs.forEach((img, i) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', e => {
         e.stopPropagation();
-        plOpen(items, i);
+        plOpen(imgs.map(im => im.src), i);
       });
-      item.el.addEventListener('touchend', e => {
+      img.addEventListener('touchend', e => {
         const dx = Math.abs(e.changedTouches[0].clientX - tapX);
         const dy = Math.abs(e.changedTouches[0].clientY - tapY);
-        if (dx < 8 && dy < 8) { e.preventDefault(); plOpen(items, i); }
+        if (dx < 8 && dy < 8) { e.preventDefault(); plOpen(imgs.map(im => im.src), i); }
       });
     });
   });
