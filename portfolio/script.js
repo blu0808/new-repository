@@ -818,17 +818,20 @@ if (worksSection) {
   setTimeout(() => loader.classList.add('done'), 5000);
 })();
 
-/* ─── 위로 가기 버튼 + 이메일 플로팅 버튼 ───────────────────── */
-const scrollTopBtn  = document.getElementById('scrollTop');
+/* ─── 위로 가기 버튼 ─────────────────────────────────────────── */
+const scrollTopBtn = document.getElementById('scrollTop');
+if (scrollTopBtn) {
+  window.addEventListener('scroll', () => {
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
+
+/* ─── 이메일 플로팅 버튼 (Journey/Interview) ─────────────────── */
 const emailFloatBtn = document.getElementById('emailFloat');
-
-window.addEventListener('scroll', () => {
-  const show = window.scrollY > 400;
-  scrollTopBtn?.classList.toggle('visible', show);
-  emailFloatBtn?.classList.toggle('visible', show);
-}, { passive: true });
-
-scrollTopBtn?.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-emailFloatBtn?.addEventListener('click', openEmailPanel);
+if (emailFloatBtn) {
+  emailFloatBtn.classList.add('visible');
+  emailFloatBtn.addEventListener('click', openEmailPanel);
+}
