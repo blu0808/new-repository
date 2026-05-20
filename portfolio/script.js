@@ -192,10 +192,11 @@ let currentModalIndex = -1;
 const modalPlayBtn = document.getElementById('modalPlayBtn');
 const modalPlayer  = document.getElementById('modalPlayer');
 
-function openModal(card) {
+function openModal(card, dir = 0) {
   const index = [...document.querySelectorAll('.work-card')].indexOf(card);
   const data = worksData[index];
   if (!data) return;
+  const alreadyOpen = modal.classList.contains('open');
   currentModalIndex = [...document.querySelectorAll('.work-card:not(.hidden)')].indexOf(card);
 
   modalImg.src = card.querySelector('img').src;
@@ -214,6 +215,20 @@ function openModal(card) {
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
   requestAnimationFrame(positionModalNav);
+
+  if (dir !== 0 && alreadyOpen) {
+    const panel = document.querySelector('#workModal .modal-panel');
+    if (panel) {
+      panel.style.transition = 'none';
+      panel.style.transform = `translateX(${dir * 48}px)`;
+      panel.style.opacity = '0';
+      void panel.offsetWidth;
+      panel.style.transition = 'transform .22s ease, opacity .18s ease';
+      panel.style.transform = '';
+      panel.style.opacity = '';
+      setTimeout(() => { panel.style.transition = ''; }, 220);
+    }
+  }
 }
 
 function closeModal() {
@@ -253,10 +268,10 @@ document.addEventListener('keydown', e => {
   if (modal?.classList.contains('open')) {
     const visibles = [...document.querySelectorAll('.work-card:not(.hidden)')];
     if (e.key === 'ArrowRight' && currentModalIndex < visibles.length - 1) {
-      openModal(visibles[currentModalIndex + 1]);
+      openModal(visibles[currentModalIndex + 1], 1);
     }
     if (e.key === 'ArrowLeft' && currentModalIndex > 0) {
-      openModal(visibles[currentModalIndex - 1]);
+      openModal(visibles[currentModalIndex - 1], -1);
     }
   }
 });
@@ -276,12 +291,12 @@ function positionModalNav() {
 document.getElementById('modalPrev')?.addEventListener('click', e => {
   e.stopPropagation();
   const visibles = [...document.querySelectorAll('.work-card:not(.hidden)')];
-  if (currentModalIndex > 0) openModal(visibles[currentModalIndex - 1]);
+  if (currentModalIndex > 0) openModal(visibles[currentModalIndex - 1], -1);
 });
 document.getElementById('modalNext')?.addEventListener('click', e => {
   e.stopPropagation();
   const visibles = [...document.querySelectorAll('.work-card:not(.hidden)')];
-  if (currentModalIndex < visibles.length - 1) openModal(visibles[currentModalIndex + 1]);
+  if (currentModalIndex < visibles.length - 1) openModal(visibles[currentModalIndex + 1], 1);
 });
 let modalTx = 0;
 const workModal = document.getElementById('workModal');
@@ -290,8 +305,8 @@ workModal?.addEventListener('touchend', e => {
   const dx = e.changedTouches[0].clientX - modalTx;
   if (Math.abs(dx) < 50) return;
   const visibles = [...document.querySelectorAll('.work-card:not(.hidden)')];
-  if (dx < 0 && currentModalIndex < visibles.length - 1) openModal(visibles[currentModalIndex + 1]);
-  if (dx > 0 && currentModalIndex > 0) openModal(visibles[currentModalIndex - 1]);
+  if (dx < 0 && currentModalIndex < visibles.length - 1) openModal(visibles[currentModalIndex + 1], 1);
+  if (dx > 0 && currentModalIndex > 0) openModal(visibles[currentModalIndex - 1], -1);
 });
 
 /* ─── Email Panel ───────────────────────────────────────── */
@@ -627,12 +642,14 @@ if (projLightbox) {
     plImg.src = plImages[idx];
     projLightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
+    document.querySelectorAll('.proj-carousel-btn').forEach(btn => btn.style.visibility = 'hidden');
   }
 
   function plClose() {
     projLightbox.classList.remove('open');
     document.body.style.overflow = '';
     plImg.src = '';
+    document.querySelectorAll('.proj-carousel-btn').forEach(btn => btn.style.visibility = '');
   }
 
   document.querySelectorAll('.proj-carousel').forEach(carousel => {
