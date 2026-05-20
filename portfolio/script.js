@@ -213,6 +213,7 @@ function openModal(card) {
 
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
+  requestAnimationFrame(positionModalNav);
 }
 
 function closeModal() {
@@ -259,6 +260,17 @@ document.addEventListener('keydown', e => {
     }
   }
 });
+
+/* ─── Works 모달 화살표 위치 (이미지 세로 중심 기준) ─────────── */
+function positionModalNav() {
+  const imgWrap = document.querySelector('#workModal .modal-img-wrap');
+  const prev = document.getElementById('modalPrev');
+  const next = document.getElementById('modalNext');
+  if (!imgWrap || !prev || !next) return;
+  const r = imgWrap.getBoundingClientRect();
+  const cy = r.top + r.height / 2;
+  prev.style.top = next.style.top = cy + 'px';
+}
 
 /* ─── Works 모달 화살표 + 모바일 스와이프 ──────────────────── */
 document.getElementById('modalPrev')?.addEventListener('click', e => {

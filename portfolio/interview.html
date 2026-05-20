@@ -205,15 +205,21 @@
     window.addEventListener('pageshow', () => setTimeout(resetChapters, 150));
     window.addEventListener('load', () => {
       const first = chapters[0];
-      if (!first) return;
+      const wrap = first?.closest('.iv-chapter-wrap');
+      if (!first || !wrap) return;
+      const hint = document.createElement('div');
+      hint.className = 'iv-scroll-hint';
+      wrap.appendChild(hint);
       setTimeout(() => {
-        first.style.scrollSnapType = 'none';
-        first.scrollTo({ left: 64, behavior: 'smooth' });
-        setTimeout(() => {
-          first.scrollTo({ left: 0, behavior: 'smooth' });
-          setTimeout(() => { first.style.scrollSnapType = ''; }, 500);
-        }, 700);
-      }, 1500);
+        hint.classList.add('show');
+        const hide = () => {
+          hint.classList.remove('show');
+          setTimeout(() => hint.remove(), 400);
+          first.removeEventListener('scroll', hide);
+        };
+        first.addEventListener('scroll', hide, { once: true });
+        setTimeout(hide, 2500);
+      }, 900);
     });
     chapters.forEach(chapter => {
       const wrap = chapter.closest('.iv-chapter-wrap');

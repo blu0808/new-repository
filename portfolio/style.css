@@ -630,13 +630,14 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 .modal-close:hover { color: var(--white); }
 .modal-nav {
-  position: absolute; top: 50%; transform: translateY(-50%);
+  position: absolute;
   width: 56px; height: 56px;
   background: none; border: none;
   color: transparent; font-size: 0;
   cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   z-index: 2; transition: opacity .2s;
+  transform: translateY(-50%);
 }
 .modal-nav::before {
   content: '';
@@ -1034,6 +1035,32 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 .iv-chapter-wrap {
   margin-bottom: clamp(40px, 6vw, 80px);
+  position: relative;
+}
+.iv-scroll-hint {
+  position: absolute;
+  right: 0; top: 0; bottom: 14px;
+  width: 56px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,.85));
+  display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 12px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s ease;
+  z-index: 5;
+}
+.iv-scroll-hint.show { opacity: 1; }
+.iv-scroll-hint::after {
+  content: '';
+  width: 10px; height: 10px;
+  border-top: 2px solid var(--accent);
+  border-right: 2px solid var(--accent);
+  transform: rotate(45deg) translate(-1px, -1px);
+  animation: iv-hint-bounce 0.9s ease-in-out infinite;
+}
+@keyframes iv-hint-bounce {
+  0%, 100% { opacity: .5; transform: rotate(45deg) translate(-1px, -1px); }
+  50%       { opacity: 1;  transform: rotate(45deg) translate(3px, -3px); }
 }
 .iv-label {
   display: block;
