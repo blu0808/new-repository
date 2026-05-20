@@ -532,15 +532,18 @@ if (projLightbox) {
     plBusy = true;
     plImg.classList.add('pl-out');
     setTimeout(() => {
-      plCur = next;
-      plImg.src = plImages[next];
+      plImg.style.transition = 'none';
       plImg.classList.remove('pl-out');
+      plImg.src = plImages[next];
+      plCur = next;
+      void plImg.offsetWidth;
+      plImg.style.transition = '';
       plImg.classList.add('pl-in');
       requestAnimationFrame(() => requestAnimationFrame(() => {
         plImg.classList.remove('pl-in');
         plBusy = false;
       }));
-    }, 280);
+    }, 310);
   }
 
   function plOpen(imgs, idx) {
