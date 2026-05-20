@@ -199,35 +199,39 @@ function openModal(card, dir = 0) {
   const alreadyOpen = modal.classList.contains('open');
   currentModalIndex = [...document.querySelectorAll('.work-card:not(.hidden)')].indexOf(card);
 
-  modalImg.src = card.querySelector('img').src;
-  modalImg.alt = data.title;
-  modalTitle.textContent  = data.title;
-  modalArtist.textContent = data.artist;
-  modalYear.textContent   = data.year;
-  modalDesc.textContent   = data.desc;
-  modalDesc.style.display = data.desc ? '' : 'none';
+  const panel = document.querySelector('#workModal .modal-panel');
 
-  currentYtId = card.dataset.yt || '';
-  modalPlayer.classList.remove('active');
-  modalPlayer.innerHTML = '';
-  if (modalPlayBtn) modalPlayBtn.style.display = currentYtId ? 'flex' : 'none';
+  const applyContent = () => {
+    modalImg.src = card.querySelector('img').src;
+    modalImg.alt = data.title;
+    modalTitle.textContent  = data.title;
+    modalArtist.textContent = data.artist;
+    modalYear.textContent   = data.year;
+    modalDesc.textContent   = data.desc;
+    modalDesc.style.display = data.desc ? '' : 'none';
+    currentYtId = card.dataset.yt || '';
+    modalPlayer.classList.remove('active');
+    modalPlayer.innerHTML = '';
+    if (modalPlayBtn) modalPlayBtn.style.display = currentYtId ? 'flex' : 'none';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(positionModalNav);
+  };
 
-  modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  requestAnimationFrame(positionModalNav);
-
-  if (dir !== 0 && alreadyOpen) {
-    const panel = document.querySelector('#workModal .modal-panel');
-    if (panel) {
-      panel.style.transition = 'none';
-      panel.style.transform = `translateX(${dir * 48}px)`;
-      panel.style.opacity = '0';
-      void panel.offsetWidth;
+  if (dir !== 0 && alreadyOpen && panel) {
+    panel.style.transition = 'none';
+    panel.style.opacity = '0';
+    panel.style.transform = `translateX(${dir * 48}px)`;
+    void panel.offsetWidth;
+    applyContent();
+    requestAnimationFrame(() => {
       panel.style.transition = 'transform .22s ease, opacity .18s ease';
       panel.style.transform = '';
       panel.style.opacity = '';
       setTimeout(() => { panel.style.transition = ''; }, 220);
-    }
+    });
+  } else {
+    applyContent();
   }
 }
 
