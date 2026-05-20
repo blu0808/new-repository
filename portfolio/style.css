@@ -1180,8 +1180,8 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   .journal-grid { gap: 160px; }
   .journal-main { padding: 80px 24px; }
   .j-w100 { width: 100%; }
-  .j-w20, .j-w22 { width: 42%; }
-  .j-w28, .j-w32, .j-w35 { width: 58%; }
+  .j-w20, .j-w22, .j-w28 { width: 42%; }
+  .j-w32, .j-w35 { width: 58%; }
   .j-left    { margin-left: 0; margin-right: auto; }
   .j-right   { margin-left: auto; margin-right: 0; }
   .j-offset, .j-offset2 { margin-left: 0; }

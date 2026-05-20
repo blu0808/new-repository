@@ -177,9 +177,10 @@
   <script>
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     const chapters = document.querySelectorAll('.iv-chapter');
-    window.addEventListener('load', () => {
-      chapters.forEach(c => { c.scrollLeft = 0; });
-    });
+    function resetChapters() { chapters.forEach(c => { c.scrollLeft = 0; }); }
+    document.addEventListener('DOMContentLoaded', resetChapters);
+    window.addEventListener('load', resetChapters);
+    window.addEventListener('pageshow', resetChapters);
     chapters.forEach(chapter => {
       const thumb = chapter.closest('.iv-chapter-wrap').querySelector('.iv-progress-thumb');
 
