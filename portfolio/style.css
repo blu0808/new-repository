@@ -1174,7 +1174,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ─── Journal Mobile ──────────────────────────────────────── */
 @media (max-width: 640px) {
-  .journal-grid { gap: 80px; }
+  .journal-grid { gap: 160px; }
   .journal-main { padding: 80px 24px; }
   .j-w100 { width: 100%; }
   .j-w20, .j-w22 { width: 42%; }
@@ -1182,6 +1182,4 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   .j-left    { margin-left: 0; margin-right: auto; }
   .j-right   { margin-left: auto; margin-right: 0; }
   .j-offset, .j-offset2 { margin-left: 0; }
-  .j-row { flex-direction: column; gap: 60px; }
-  .j-row > * { width: 70% !important; flex: none !important; }
 }
