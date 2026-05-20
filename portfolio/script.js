@@ -812,11 +812,9 @@ if (worksSection) {
 (function() {
   const loader = document.getElementById('page-loader');
   if (!loader) return;
-  let pageLoaded = false, minElapsed = false;
-  const tryHide = () => { if (pageLoaded && minElapsed) loader.classList.add('done'); };
-  if (document.readyState === 'complete') { pageLoaded = true; }
-  else window.addEventListener('load', () => { pageLoaded = true; tryHide(); });
-  setTimeout(() => { minElapsed = true; tryHide(); }, 900);
+  const hide = () => loader.classList.add('done');
+  if (document.readyState === 'complete') hide();
+  else window.addEventListener('load', hide);
   setTimeout(() => loader.classList.add('done'), 5000);
 })();
 
