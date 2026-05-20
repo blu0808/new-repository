@@ -775,8 +775,8 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .zoom-img {
   max-width: 90vw; max-height: 90vh;
   object-fit: contain;
-  transform: scale(.96);
-  transition: transform .3s ease;
+  transform: scale(.84);
+  transition: transform .4s cubic-bezier(.34,1.4,.64,1);
 }
 .zoom-overlay.open .zoom-img { transform: scale(1); }
 
@@ -1186,6 +1186,23 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   .j-right   { margin-left: auto; margin-right: 0; }
   .j-offset, .j-offset2 { margin-left: 0; }
 }
+
+/* ─── 터치 피드백 ──────────────────────────────────────────── */
+.sb-link, .lang-btn, .ep-btn, .nav-link--sub,
+.works-tab, .hamburger, .nav-link--contact {
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .12s ease, opacity .12s ease;
+}
+.sb-link:active, .lang-btn:active, .ep-btn:active,
+.nav-link--sub:active, .works-tab:active, .nav-link--contact:active {
+  transform: scale(.93);
+  opacity: .7;
+}
+.work-card {
+  -webkit-tap-highlight-color: transparent;
+}
+.work-card:active { transform: scale(.975) !important; }
+.journal-img:active, .iv-img:active { opacity: .85; }
 
 /* ─── Journey 스크롤 등장 ──────────────────────────────────── */
 .j-anim {
