@@ -203,6 +203,14 @@
     document.addEventListener('DOMContentLoaded', resetChapters);
     window.addEventListener('load', resetChapters);
     window.addEventListener('pageshow', () => setTimeout(resetChapters, 150));
+    window.addEventListener('load', () => {
+      const first = chapters[0];
+      if (!first) return;
+      setTimeout(() => {
+        first.scrollTo({ left: 64, behavior: 'smooth' });
+        setTimeout(() => first.scrollTo({ left: 0, behavior: 'smooth' }), 700);
+      }, 1500);
+    });
     chapters.forEach(chapter => {
       const wrap = chapter.closest('.iv-chapter-wrap');
       const thumb = wrap.querySelector('.iv-progress-thumb');

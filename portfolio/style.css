@@ -629,6 +629,17 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   text-shadow: 1px 1px 3px rgba(0,0,0,.5);
 }
 .modal-close:hover { color: var(--white); }
+.modal-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: none; border: none;
+  color: rgba(255,255,255,.55); font-size: 3.5rem; line-height: 1;
+  cursor: pointer; padding: 12px 20px; z-index: 2;
+  transition: color .2s; user-select: none;
+}
+.modal-nav:hover { color: #fff; }
+.modal-prev { left: clamp(8px, 3vw, 40px); }
+.modal-next { right: clamp(8px, 3vw, 40px); }
+@media (max-width: 640px) { .modal-prev, .modal-next { display: none; } }
 .modal-body {
   display: flex;
   flex-direction: column;

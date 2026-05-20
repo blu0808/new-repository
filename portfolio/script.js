@@ -260,6 +260,28 @@ document.addEventListener('keydown', e => {
   }
 });
 
+/* ─── Works 모달 화살표 + 모바일 스와이프 ──────────────────── */
+document.getElementById('modalPrev')?.addEventListener('click', e => {
+  e.stopPropagation();
+  const visibles = [...document.querySelectorAll('.work-card:not(.hidden)')];
+  if (currentModalIndex > 0) openModal(visibles[currentModalIndex - 1]);
+});
+document.getElementById('modalNext')?.addEventListener('click', e => {
+  e.stopPropagation();
+  const visibles = [...document.querySelectorAll('.work-card:not(.hidden)')];
+  if (currentModalIndex < visibles.length - 1) openModal(visibles[currentModalIndex + 1]);
+});
+let modalTx = 0;
+const workModal = document.getElementById('workModal');
+workModal?.addEventListener('touchstart', e => { modalTx = e.touches[0].clientX; }, { passive: true });
+workModal?.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - modalTx;
+  if (Math.abs(dx) < 50) return;
+  const visibles = [...document.querySelectorAll('.work-card:not(.hidden)')];
+  if (dx < 0 && currentModalIndex < visibles.length - 1) openModal(visibles[currentModalIndex + 1]);
+  if (dx > 0 && currentModalIndex > 0) openModal(visibles[currentModalIndex - 1]);
+});
+
 /* ─── Email Panel ───────────────────────────────────────── */
 const emailPanel = document.getElementById('emailPanel');
 const epFrom     = document.getElementById('epFrom');
