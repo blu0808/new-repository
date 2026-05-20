@@ -614,19 +614,21 @@ if (projLightbox) {
       if (done) return;
       done = true;
       plImg.style.transition = 'none';
-      plImg.src = plImages[next];
-      plImg.style.transform = `translateX(${dir * 48}px)`;
       plImg.style.opacity = '0';
+      plImg.style.transform = `translateX(${dir * 48}px)`;
       void plImg.offsetWidth;
-      plImg.style.transition = 'transform .22s ease, opacity .18s ease';
-      plImg.style.transform = 'translateX(0)';
-      plImg.style.opacity = '1';
-      setTimeout(() => {
-        plImg.style.transition = '';
+      plImg.src = plImages[next];
+      requestAnimationFrame(() => {
+        plImg.style.transition = 'transform .22s ease, opacity .18s ease';
         plImg.style.transform = '';
-        plImg.style.opacity = '';
-        plBusy = false;
-      }, 220);
+        plImg.style.opacity = '1';
+        setTimeout(() => {
+          plImg.style.transition = '';
+          plImg.style.transform = '';
+          plImg.style.opacity = '';
+          plBusy = false;
+        }, 220);
+      });
     };
 
     const probe = new Image();
@@ -918,7 +920,7 @@ if (worksSection) {
   let loaded = false;
   const hide = () => { loaded = true; loader.classList.add('done'); };
   if (document.readyState === 'complete') { loaded = true; loader.classList.add('done'); return; }
-  setTimeout(() => { if (!loaded) loader.classList.add('show'); }, 300);
+  setTimeout(() => { if (!loaded) loader.classList.add('show'); }, 50);
   window.addEventListener('load', hide);
   setTimeout(hide, 8000);
 })();
