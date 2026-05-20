@@ -285,11 +285,16 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   box-shadow: 4px 12px 20px rgba(0,0,0,0.45);
   transition: transform .5s cubic-bezier(.25,.46,.45,.94),
               box-shadow .5s ease;
-  will-change: transform;
 }
 .works-grid.poster-view .work-card:hover .work-thumb img {
   transform: translateY(-6px) scale(1.01);
   box-shadow: 6px 20px 32px rgba(0,0,0,0.65);
+}
+@media (max-width: 860px) {
+  .works-grid.poster-view .work-thumb img {
+    box-shadow: 3px 8px 16px rgba(0,0,0,0.38);
+    transition: none;
+  }
 }
 .works-grid.poster-view .work-overlay {
   position: static;

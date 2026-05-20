@@ -24,7 +24,7 @@ const dict = {
     'proj.ex2.title': '일상의 여름',
     'proj.ex2.meta': '2025.07 – 2025.08 · 원두서점 신풍점',
     'proj.ex2.quote': '"특별한 여름은 멀리 있지 않다."',
-    'proj.zine.title': '치기어린사유 #1~#8',
+    'proj.zine.title': '치기어린마음 #1~#8',
     'proj.zine.meta': '2025 · Childlike Heart Series #1~#8',
     'proj.zine.quote': '"지독한 감정들의 은밀한 전시"',
     'proj.zine.desc': '고통과 흔들림을 숨기지 않고 바라보며 손그림으로 엮은 소책자 시리즈 입니다. 앞면은 한국어, 뒷면은 번체·영어로 시작되는 반반 구성의 수제 중철제본으로, 서로 다른 언어의 감정이 한 권 안에서 마주보듯 이어집니다.',
