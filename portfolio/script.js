@@ -808,16 +808,6 @@ if (worksSection) {
   worksObs.observe(worksSection);
 }
 
-/* ─── 페이지 로더 숨기기 ─────────────────────────────────────── */
-(function() {
-  const loader = document.getElementById('page-loader');
-  if (!loader) return;
-  const hide = () => loader.classList.add('done');
-  if (document.readyState === 'complete') hide();
-  else window.addEventListener('load', hide);
-  setTimeout(() => loader.classList.add('done'), 5000);
-})();
-
 /* ─── 위로 가기 버튼 ─────────────────────────────────────────── */
 const scrollTopBtn = document.getElementById('scrollTop');
 if (scrollTopBtn) {
