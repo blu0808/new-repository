@@ -177,10 +177,20 @@
   <script>
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     const chapters = document.querySelectorAll('.iv-chapter');
-    function resetChapters() { chapters.forEach(c => { c.scrollLeft = 0; }); }
+    function resetChapters() {
+      chapters.forEach(c => {
+        c.style.scrollSnapType = 'none';
+        c.style.webkitOverflowScrolling = 'auto';
+        c.scrollLeft = 0;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          c.style.scrollSnapType = '';
+          c.style.webkitOverflowScrolling = '';
+        }));
+      });
+    }
     document.addEventListener('DOMContentLoaded', resetChapters);
     window.addEventListener('load', resetChapters);
-    window.addEventListener('pageshow', () => setTimeout(resetChapters, 80));
+    window.addEventListener('pageshow', () => setTimeout(resetChapters, 150));
     chapters.forEach(chapter => {
       const thumb = chapter.closest('.iv-chapter-wrap').querySelector('.iv-progress-thumb');
 
