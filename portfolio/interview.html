@@ -207,8 +207,12 @@
       const first = chapters[0];
       if (!first) return;
       setTimeout(() => {
+        first.style.scrollSnapType = 'none';
         first.scrollTo({ left: 64, behavior: 'smooth' });
-        setTimeout(() => first.scrollTo({ left: 0, behavior: 'smooth' }), 700);
+        setTimeout(() => {
+          first.scrollTo({ left: 0, behavior: 'smooth' });
+          setTimeout(() => { first.style.scrollSnapType = ''; }, 500);
+        }, 700);
       }, 1500);
     });
     chapters.forEach(chapter => {

@@ -631,15 +631,31 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .modal-close:hover { color: var(--white); }
 .modal-nav {
   position: absolute; top: 50%; transform: translateY(-50%);
+  width: 56px; height: 56px;
   background: none; border: none;
-  color: rgba(255,255,255,.55); font-size: 3.5rem; line-height: 1;
-  cursor: pointer; padding: 12px 20px; z-index: 2;
-  transition: color .2s; user-select: none;
+  color: transparent; font-size: 0;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2; transition: opacity .2s;
 }
-.modal-nav:hover { color: #fff; }
-.modal-prev { left: clamp(8px, 3vw, 40px); }
-.modal-next { right: clamp(8px, 3vw, 40px); }
-@media (max-width: 640px) { .modal-prev, .modal-next { display: none; } }
+.modal-nav::before {
+  content: '';
+  display: block;
+  width: 18px; height: 18px;
+  border-top: 1.5px solid rgba(255,255,255,.85);
+  border-right: 1.5px solid rgba(255,255,255,.85);
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,.6));
+}
+.modal-prev { left: clamp(4px, 2.5vw, 40px); }
+.modal-prev::before { transform: rotate(-135deg) translate(-2px, 2px); }
+.modal-next { right: clamp(4px, 2.5vw, 40px); }
+.modal-next::before { transform: rotate(45deg) translate(-2px, 2px); }
+.modal-nav:hover { opacity: .6; }
+@media (max-width: 640px) {
+  .modal-panel { width: 84vw; }
+  .modal-prev { left: 4px; }
+  .modal-next { right: 4px; }
+}
 .modal-body {
   display: flex;
   flex-direction: column;

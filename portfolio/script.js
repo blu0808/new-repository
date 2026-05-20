@@ -212,7 +212,7 @@ function openModal(card) {
   if (modalPlayBtn) modalPlayBtn.style.display = currentYtId ? 'flex' : 'none';
 
   modal.classList.add('open');
-  if (window.innerWidth > 860) document.body.style.overflow = 'hidden';
+  document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
