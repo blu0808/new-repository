@@ -808,6 +808,18 @@ if (worksSection) {
   worksObs.observe(worksSection);
 }
 
+/* ─── 페이지 로더 (느린 연결에서만 노출) ────────────────────── */
+(function() {
+  const loader = document.getElementById('page-loader');
+  if (!loader) return;
+  let loaded = false;
+  const hide = () => { loaded = true; loader.classList.add('done'); };
+  if (document.readyState === 'complete') { loaded = true; loader.classList.add('done'); return; }
+  setTimeout(() => { if (!loaded) loader.classList.add('show'); }, 300);
+  window.addEventListener('load', hide);
+  setTimeout(hide, 8000);
+})();
+
 /* ─── 위로 가기 버튼 ─────────────────────────────────────────── */
 const scrollTopBtn = document.getElementById('scrollTop');
 if (scrollTopBtn) {

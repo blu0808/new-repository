@@ -1252,6 +1252,19 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   transform: none;
 }
 
+/* ─── 페이지 로더 ────────────────────────────────────────────── */
+@keyframes lr-spin { to { transform: rotate(360deg); } }
+@keyframes lr-dash {
+  0%   { stroke-dasharray: 1 150; stroke-dashoffset: 0; }
+  50%  { stroke-dasharray: 90 150; stroke-dashoffset: -35; }
+  100% { stroke-dasharray: 90 150; stroke-dashoffset: -124; }
+}
+#page-loader { transition: opacity .4s ease; }
+#page-loader.show { opacity: 1; }
+#page-loader.done  { opacity: 0; pointer-events: none; }
+.loader-svg    { animation: lr-spin 1.2s linear infinite; }
+.loader-circle { animation: lr-dash 1.2s ease-in-out infinite; }
+
 /* ─── 위로 가기 버튼 ─────────────────────────────────────────── */
 .scroll-top {
   position: fixed; bottom: 32px; right: 32px; z-index: 500;
@@ -1296,6 +1309,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 .email-float.visible { opacity: 1; pointer-events: all; }
 .email-float:hover { transform: translateY(-3px); }
+@media (min-width: 861px) { .email-float { display: none; } }
 @media (max-width: 640px) {
   .email-float { bottom: 24px; right: 20px; width: 40px; height: 40px; }
 }
