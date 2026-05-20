@@ -180,7 +180,7 @@
     function resetChapters() { chapters.forEach(c => { c.scrollLeft = 0; }); }
     document.addEventListener('DOMContentLoaded', resetChapters);
     window.addEventListener('load', resetChapters);
-    window.addEventListener('pageshow', resetChapters);
+    window.addEventListener('pageshow', () => setTimeout(resetChapters, 80));
     chapters.forEach(chapter => {
       const thumb = chapter.closest('.iv-chapter-wrap').querySelector('.iv-progress-thumb');
 
