@@ -530,20 +530,21 @@ if (projLightbox) {
     const next = (idx + plImages.length) % plImages.length;
     if (next === plCur && plImages.length > 1) return;
     plBusy = true;
-    plImg.classList.add('pl-out');
+    plImg.style.transition = 'opacity .22s ease';
+    plImg.style.opacity = '0';
     setTimeout(() => {
       plImg.style.transition = 'none';
-      plImg.classList.remove('pl-out');
       plImg.src = plImages[next];
       plCur = next;
       void plImg.offsetWidth;
-      plImg.style.transition = '';
-      plImg.classList.add('pl-in');
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        plImg.classList.remove('pl-in');
+      plImg.style.transition = 'opacity .22s ease';
+      plImg.style.opacity = '1';
+      setTimeout(() => {
+        plImg.style.transition = '';
+        plImg.style.opacity = '';
         plBusy = false;
-      }));
-    }, 310);
+      }, 220);
+    }, 220);
   }
 
   function plOpen(imgs, idx) {
