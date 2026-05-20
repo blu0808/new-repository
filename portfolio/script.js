@@ -576,6 +576,24 @@ if (projLightbox) {
         if (dx < 8 && dy < 8) { e.preventDefault(); plOpen(imgs.map(im => im.src), i); }
       });
     });
+
+    carousel.querySelectorAll('.proj-carousel-vimeo').forEach(div => {
+      div.style.cursor = 'zoom-in';
+      div.addEventListener('click', e => {
+        e.stopPropagation();
+        const id = div.querySelector('iframe')?.src.match(/video\/(\d+)/)?.[1];
+        if (id) openVimeoModal(id);
+      });
+      div.addEventListener('touchend', e => {
+        const dx = Math.abs(e.changedTouches[0].clientX - tapX);
+        const dy = Math.abs(e.changedTouches[0].clientY - tapY);
+        if (dx < 8 && dy < 8) {
+          e.preventDefault();
+          const id = div.querySelector('iframe')?.src.match(/video\/(\d+)/)?.[1];
+          if (id) openVimeoModal(id);
+        }
+      });
+    });
   });
 
   plCloseBtn.addEventListener('click', plClose);
@@ -741,6 +759,15 @@ function closeYtModal() {
   ytModal.setAttribute('aria-hidden', 'true');
   ytModalPlayer.innerHTML = '';
   document.body.style.overflow = '';
+}
+
+function openVimeoModal(videoId) {
+  if (!ytModal || !ytModalPlayer) return;
+  ytModalPlayer.innerHTML = `<iframe src="https://player.vimeo.com/video/${videoId}?autoplay=1&dnt=1&playsinline=1" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+  if (ytModalTitle) ytModalTitle.textContent = '';
+  ytModal.classList.add('open');
+  ytModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
 }
 
 /* 앨범커버 클릭은 이미지 확대 모달로 처리 (ytModal 직접 실행 제거) */
