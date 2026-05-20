@@ -554,21 +554,37 @@ if (projLightbox) {
     if (next === plCur && plImages.length > 1) return;
     const dir = idx >= plCur ? 1 : -1;
     plBusy = true;
-    plImg.style.transition = 'none';
-    plImg.src = plImages[next];
     plCur = next;
-    plImg.style.transform = `translateX(${dir * 48}px)`;
-    plImg.style.opacity = '0';
-    void plImg.offsetWidth;
-    plImg.style.transition = 'transform .22s ease, opacity .18s ease';
-    plImg.style.transform = 'translateX(0)';
-    plImg.style.opacity = '1';
-    setTimeout(() => {
-      plImg.style.transition = '';
-      plImg.style.transform = '';
-      plImg.style.opacity = '';
-      plBusy = false;
-    }, 220);
+
+    let done = false;
+    const doTransition = () => {
+      if (done) return;
+      done = true;
+      plImg.style.transition = 'none';
+      plImg.src = plImages[next];
+      plImg.style.transform = `translateX(${dir * 48}px)`;
+      plImg.style.opacity = '0';
+      void plImg.offsetWidth;
+      plImg.style.transition = 'transform .22s ease, opacity .18s ease';
+      plImg.style.transform = 'translateX(0)';
+      plImg.style.opacity = '1';
+      setTimeout(() => {
+        plImg.style.transition = '';
+        plImg.style.transform = '';
+        plImg.style.opacity = '';
+        plBusy = false;
+      }, 220);
+    };
+
+    const probe = new Image();
+    probe.src = plImages[next];
+    if (probe.complete) {
+      doTransition();
+    } else {
+      probe.onload  = doTransition;
+      probe.onerror = doTransition;
+      setTimeout(doTransition, 2000);
+    }
   }
 
   function plOpen(imgs, idx) {
