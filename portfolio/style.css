@@ -1237,3 +1237,42 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   filter: blur(10px);
   opacity: .6;
 }
+
+/* ─── Works 카드 스태거 ─────────────────────────────────────── */
+.work-card.w-anim {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+.work-card.w-anim.w-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── 위로 가기 버튼 ─────────────────────────────────────────── */
+.scroll-top {
+  position: fixed; bottom: 32px; right: 32px; z-index: 500;
+  width: 44px; height: 44px;
+  background: rgba(20,20,20,.85);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease, transform .25s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.scroll-top.visible { opacity: 1; pointer-events: all; }
+.scroll-top:hover { transform: translateY(-3px); opacity: .9; }
+.scroll-top::before {
+  content: '';
+  display: block;
+  width: 8px; height: 8px;
+  border-top: 1.5px solid rgba(255,255,255,.75);
+  border-right: 1.5px solid rgba(255,255,255,.75);
+  transform: rotate(-45deg) translate(1px, 2px);
+}
+@media (max-width: 640px) {
+  .scroll-top { bottom: 24px; right: 20px; width: 40px; height: 40px; }
+}

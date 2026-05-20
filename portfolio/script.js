@@ -333,10 +333,18 @@ document.getElementById('epConfirmSend').addEventListener('click', async () => {
 /* ─── Works 카테고리 필터 ─────────────────────────────────── */
 const worksGrid = document.querySelector('.works-grid');
 
+function staggerWorkCards(cards) {
+  cards.forEach((card, i) => {
+    card.classList.add('w-anim');
+    setTimeout(() => card.classList.add('w-visible'), i * 35 + 10);
+  });
+}
+
 function applyWorksFilter(filter, animate = true) {
   if (animate) {
     worksGrid.style.opacity = '0';
     worksGrid.style.transform = 'scale(0.97)';
+    document.querySelectorAll('.work-card').forEach(c => c.classList.remove('w-anim', 'w-visible'));
   }
   setTimeout(() => {
     let visible = 0;
@@ -352,6 +360,7 @@ function applyWorksFilter(filter, animate = true) {
     if (animate) {
       worksGrid.style.opacity = '';
       worksGrid.style.transform = '';
+      staggerWorkCards([...document.querySelectorAll('.work-card:not(.hidden)')]);
     }
   }, animate ? 180 : 0);
 }
@@ -758,3 +767,26 @@ document.querySelectorAll('.journal-img, .iv-img').forEach(img => {
     img.addEventListener('load', () => img.classList.remove('img-blur'));
   }
 });
+
+/* ─── Works 첫 스크롤 스태거 ────────────────────────────────── */
+const worksSection = document.getElementById('works');
+if (worksSection) {
+  const worksObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      staggerWorkCards([...document.querySelectorAll('.work-card:not(.hidden)')]);
+      worksObs.disconnect();
+    }
+  }, { threshold: 0.08 });
+  worksObs.observe(worksSection);
+}
+
+/* ─── 위로 가기 버튼 ─────────────────────────────────────────── */
+const scrollTopBtn = document.getElementById('scrollTop');
+if (scrollTopBtn) {
+  window.addEventListener('scroll', () => {
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
