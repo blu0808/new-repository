@@ -19,6 +19,9 @@ html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overscroll-behav
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: none; }
 }
+@keyframes pageFadeOut {
+  to { opacity: 0; transform: translateY(-6px); }
+}
 body {
   font-family: var(--font);
   color: var(--black);
@@ -1182,4 +1185,25 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   .j-left    { margin-left: 0; margin-right: auto; }
   .j-right   { margin-left: auto; margin-right: 0; }
   .j-offset, .j-offset2 { margin-left: 0; }
+}
+
+/* ─── Journey 스크롤 등장 ──────────────────────────────────── */
+.j-anim {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity .65s cubic-bezier(.25,.46,.45,.94),
+              transform .65s cubic-bezier(.25,.46,.45,.94);
+}
+.j-anim.j-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── 이미지 로드 블러 ─────────────────────────────────────── */
+.journal-img, .iv-img {
+  transition: filter .5s ease, opacity .4s ease;
+}
+.img-blur {
+  filter: blur(10px);
+  opacity: .6;
 }

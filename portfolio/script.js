@@ -715,3 +715,36 @@ if (heroCover) {
     heroCover.style.opacity = '0';
   }, 1200);
 }
+
+/* ─── 페이지 전환 페이드 ────────────────────────────────────── */
+document.querySelectorAll('a[href]').forEach(link => {
+  const url = link.getAttribute('href');
+  if (!url || url.startsWith('#') || url.startsWith('http') || link.target === '_blank') return;
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    document.body.style.animation = 'pageFadeOut .22s ease forwards';
+    setTimeout(() => { window.location.href = url; }, 220);
+  });
+});
+
+/* ─── Journey 스크롤 등장 ───────────────────────────────────── */
+const journalItems = document.querySelectorAll('.journal-item');
+if (journalItems.length) {
+  journalItems.forEach(el => el.classList.add('j-anim'));
+  const jObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('j-visible'); jObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+  journalItems.forEach(el => jObs.observe(el));
+}
+
+/* ─── 이미지 로드 블러 ──────────────────────────────────────── */
+document.querySelectorAll('.journal-img, .iv-img').forEach(img => {
+  img.classList.add('img-blur');
+  if (img.complete && img.naturalWidth) {
+    img.classList.remove('img-blur');
+  } else {
+    img.addEventListener('load', () => img.classList.remove('img-blur'));
+  }
+});
