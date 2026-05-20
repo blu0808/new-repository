@@ -702,9 +702,15 @@ pgOverlay?.addEventListener('click', e => {
   if (e.target === pgOverlay || e.target.classList.contains('pg-stage')) closePg();
 });
 
+let pgWheelTime = 0;
 pgOverlay?.addEventListener('wheel', e => {
   e.preventDefault();
-  pgGo(e.deltaY > 0 ? pgCur + 1 : pgCur - 1);
+  const now = Date.now();
+  if (now - pgWheelTime < 600) return;
+  const delta = Math.abs(e.deltaX) >= Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+  if (Math.abs(delta) < 3) return;
+  pgWheelTime = now;
+  pgGo(delta > 0 ? pgCur + 1 : pgCur - 1);
 }, { passive: false });
 
 let pgTx = 0;
