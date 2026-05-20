@@ -533,26 +533,21 @@ if (projLightbox) {
     if (next === plCur && plImages.length > 1) return;
     const dir = idx >= plCur ? 1 : -1;
     plBusy = true;
-    plImg.style.transition = 'transform .18s ease, opacity .18s ease';
-    plImg.style.transform = `translateX(${dir * -36}px)`;
+    plImg.style.transition = 'none';
+    plImg.src = plImages[next];
+    plCur = next;
+    plImg.style.transform = `translateX(${dir * 48}px)`;
     plImg.style.opacity = '0';
+    void plImg.offsetWidth;
+    plImg.style.transition = 'transform .22s ease, opacity .18s ease';
+    plImg.style.transform = 'translateX(0)';
+    plImg.style.opacity = '1';
     setTimeout(() => {
-      plImg.style.transition = 'none';
-      plImg.src = plImages[next];
-      plCur = next;
-      plImg.style.transform = `translateX(${dir * 36}px)`;
-      plImg.style.opacity = '0';
-      void plImg.offsetWidth;
-      plImg.style.transition = 'transform .18s ease, opacity .18s ease';
-      plImg.style.transform = 'translateX(0)';
-      plImg.style.opacity = '1';
-      setTimeout(() => {
-        plImg.style.transition = '';
-        plImg.style.transform = '';
-        plImg.style.opacity = '';
-        plBusy = false;
-      }, 180);
-    }, 180);
+      plImg.style.transition = '';
+      plImg.style.transform = '';
+      plImg.style.opacity = '';
+      plBusy = false;
+    }, 220);
   }
 
   function plOpen(imgs, idx) {
@@ -817,10 +812,12 @@ if (worksSection) {
 (function() {
   const loader = document.getElementById('page-loader');
   if (!loader) return;
-  const hide = () => loader.classList.add('done');
-  if (document.readyState === 'complete') hide();
-  else window.addEventListener('load', hide);
-  setTimeout(hide, 4000);
+  let pageLoaded = false, minElapsed = false;
+  const tryHide = () => { if (pageLoaded && minElapsed) loader.classList.add('done'); };
+  if (document.readyState === 'complete') { pageLoaded = true; }
+  else window.addEventListener('load', () => { pageLoaded = true; tryHide(); });
+  setTimeout(() => { minElapsed = true; tryHide(); }, 900);
+  setTimeout(() => loader.classList.add('done'), 5000);
 })();
 
 /* ─── 위로 가기 버튼 ─────────────────────────────────────────── */
