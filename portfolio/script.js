@@ -278,7 +278,9 @@ function closeEmailPanel() {
   resetConfirm();
 }
 
-document.getElementById('emailTrigger').addEventListener('click', openEmailPanel);
+document.querySelectorAll('#emailTrigger, #emailTriggerNav').forEach(btn =>
+  btn?.addEventListener('click', openEmailPanel)
+);
 document.getElementById('navContact')?.addEventListener('click', () => {
   navMenu?.classList.remove('open');
   hamburger?.classList.remove('open');
@@ -529,22 +531,28 @@ if (projLightbox) {
     if (plBusy) return;
     const next = (idx + plImages.length) % plImages.length;
     if (next === plCur && plImages.length > 1) return;
+    const dir = idx >= plCur ? 1 : -1;
     plBusy = true;
-    plImg.style.transition = 'opacity .22s ease';
+    plImg.style.transition = 'transform .18s ease, opacity .18s ease';
+    plImg.style.transform = `translateX(${dir * -36}px)`;
     plImg.style.opacity = '0';
     setTimeout(() => {
       plImg.style.transition = 'none';
       plImg.src = plImages[next];
       plCur = next;
+      plImg.style.transform = `translateX(${dir * 36}px)`;
+      plImg.style.opacity = '0';
       void plImg.offsetWidth;
-      plImg.style.transition = 'opacity .22s ease';
+      plImg.style.transition = 'transform .18s ease, opacity .18s ease';
+      plImg.style.transform = 'translateX(0)';
       plImg.style.opacity = '1';
       setTimeout(() => {
         plImg.style.transition = '';
+        plImg.style.transform = '';
         plImg.style.opacity = '';
         plBusy = false;
-      }, 220);
-    }, 220);
+      }, 180);
+    }, 180);
   }
 
   function plOpen(imgs, idx) {
@@ -804,6 +812,16 @@ if (worksSection) {
   }, { threshold: 0.08 });
   worksObs.observe(worksSection);
 }
+
+/* ─── 페이지 로더 숨기기 ─────────────────────────────────────── */
+(function() {
+  const loader = document.getElementById('page-loader');
+  if (!loader) return;
+  const hide = () => loader.classList.add('done');
+  if (document.readyState === 'complete') hide();
+  else window.addEventListener('load', hide);
+  setTimeout(hide, 4000);
+})();
 
 /* ─── 위로 가기 버튼 ─────────────────────────────────────────── */
 const scrollTopBtn = document.getElementById('scrollTop');

@@ -16,6 +16,11 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="journal-page">
+  <div id="page-loader" style="position:fixed;inset:0;z-index:9999;background:#fff;display:flex;align-items:center;justify-content:center;">
+    <svg class="loader-svg" width="36" height="36" viewBox="0 0 50 50">
+      <circle class="loader-circle" cx="25" cy="25" r="20" fill="none" stroke="#1a4dff" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
 
   <!-- ─── SIDEBAR ──────────────────────────────────────────── -->
   <aside class="sidebar">
@@ -48,6 +53,7 @@
     <div class="nav-right">
       <a class="nav-link--sub nav-link--sub-active" href="journal.html">Journey</a>
       <a class="nav-link--sub" href="interview.html">Interview</a>
+      <button class="nav-email-btn" id="emailTriggerNav">Email</button>
       <button class="lang-btn" id="langToggleMobile">EN</button>
       <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
         <span></span><span></span>
