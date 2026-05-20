@@ -613,21 +613,39 @@ if (projLightbox) {
     const doTransition = () => {
       if (done) return;
       done = true;
+
+      // 나가는 이미지 클론 (현재 위치에 고정)
+      const exitImg = plImg.cloneNode(true);
+      exitImg.removeAttribute('id');
+      exitImg.style.cssText = 'position:absolute;inset:0;margin:auto;max-width:88vw;max-height:88vh;object-fit:contain;pointer-events:none;z-index:1;';
+      projLightbox.appendChild(exitImg);
+
+      // 새 이미지: 진입 방향에서 대기
       plImg.style.transition = 'none';
+      plImg.style.transform = `translateX(${dir * 100}vw)`;
       plImg.style.opacity = '0';
-      plImg.style.transform = `translateX(${dir * 48}px)`;
       void plImg.offsetWidth;
       plImg.src = plImages[next];
+
       requestAnimationFrame(() => {
-        plImg.style.transition = 'transform .22s ease, opacity .18s ease';
+        const dur = '.3s';
+        const ease = 'cubic-bezier(0.25,0.46,0.45,0.94)';
+        // 나가기: 반대 방향으로 슬라이드
+        exitImg.style.transition = `transform ${dur} ${ease}, opacity .2s ease`;
+        exitImg.style.transform = `translateX(${-dir * 55}vw)`;
+        exitImg.style.opacity = '0';
+        // 들어오기: 중앙으로 슬라이드
+        plImg.style.transition = `transform ${dur} ${ease}, opacity .2s ease`;
         plImg.style.transform = '';
         plImg.style.opacity = '1';
+
         setTimeout(() => {
+          exitImg.remove();
           plImg.style.transition = '';
           plImg.style.transform = '';
           plImg.style.opacity = '';
           plBusy = false;
-        }, 220);
+        }, 300);
       });
     };
 
@@ -647,19 +665,28 @@ if (projLightbox) {
     plCur = idx;
     plImg.src = plImages[idx];
     projLightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
     document.body.classList.add('pl-open');
+    const sy = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${sy}px`;
+    document.body.style.width = '100%';
   }
 
   function plClose() {
+    const sy = parseFloat(document.body.style.top || '0') * -1;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, sy);
     projLightbox.classList.remove('open');
-    document.body.style.overflow = '';
     plImg.src = '';
     document.body.classList.remove('pl-open');
+    document.querySelectorAll('.proj-carousel.touched').forEach(c => c.classList.remove('touched'));
   }
 
   document.querySelectorAll('.proj-carousel').forEach(carousel => {
-    const imgs = [...carousel.querySelectorAll('.proj-carousel-track img')];
+    const allTrackImgs = [...carousel.querySelectorAll('.proj-carousel-track img')];
+    const imgs = allTrackImgs.slice(1, -1);
     const track = carousel.querySelector('.proj-carousel-track');
     let tapX = 0, tapY = 0;
     track.addEventListener('touchstart', e => {

@@ -770,6 +770,7 @@ body:has(#works.poster-active) { background: #1A4DFF; }
   display: flex; align-items: center; justify-content: center;
   opacity: 0; pointer-events: none;
   transition: opacity .25s;
+  overflow: hidden;
 }
 .proj-lightbox.open { opacity: 1; pointer-events: all; }
 .pl-img {
