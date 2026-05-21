@@ -215,32 +215,21 @@ function openModal(card, dir = 0) {
     if (modalPlayBtn) modalPlayBtn.style.display = currentYtId ? 'flex' : 'none';
     modal.classList.add('open');
     document.body.style.overflow = 'hidden';
-    requestAnimationFrame(positionModalNav);
   };
 
   if (dir !== 0 && alreadyOpen && panel) {
-    const EXIT = 160;
-    const ENTER = 240;
-    const EASE = 'cubic-bezier(0.4,0,0.2,1)';
-    // 1) 현재 패널 슬라이드 아웃
-    panel.style.transition = `transform ${EXIT}ms ${EASE}, opacity ${EXIT}ms ease`;
-    panel.style.transform = `translateX(${-dir * 60}px)`;
+    // 즉시 숨기고 콘텐츠 교체 후 방향 있는 슬라이드인
+    panel.style.transition = 'none';
     panel.style.opacity = '0';
-    setTimeout(() => {
-      // 2) 콘텐츠 교체 (패널 보이지 않는 동안)
-      panel.style.transition = 'none';
-      panel.style.transform = `translateX(${dir * 50}px)`;
-      panel.style.opacity = '0';
-      void panel.offsetWidth;
-      applyContent();
-      // 3) 새 콘텐츠 슬라이드 인
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        panel.style.transition = `transform ${ENTER}ms ${EASE}, opacity ${ENTER}ms ease`;
-        panel.style.transform = '';
-        panel.style.opacity = '';
-        setTimeout(() => { panel.style.transition = ''; }, ENTER + 20);
-      }));
-    }, EXIT);
+    panel.style.transform = `translateX(${dir * 44}px)`;
+    void panel.offsetWidth;
+    applyContent();
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      panel.style.transition = 'transform 260ms cubic-bezier(0.4,0,0.2,1), opacity 220ms ease';
+      panel.style.transform = '';
+      panel.style.opacity = '';
+      setTimeout(() => { panel.style.transition = ''; }, 280);
+    }));
   } else {
     applyContent();
   }

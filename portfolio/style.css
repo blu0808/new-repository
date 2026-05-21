@@ -624,6 +624,7 @@ body:has(#works.poster-active) { background: #1A4DFF; }
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  will-change: transform, opacity;
 }
 .modal-close {
   position: absolute; top: 14px; right: 14px;
