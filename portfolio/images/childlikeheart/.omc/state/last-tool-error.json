@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"git add portfolio/images/childlikeheart/ && git commit -m \\\"$(cat <<'EOF'\\n치기어린마음 이미지 교체 및 WebP 최적화\\n\\n- 1-1~1-8.jpg 신규 이미지로 교체\\n- sharp로 WebP 변환 (quality 85), 평균 50% 압축 (9.4MB → 4.5MB)\\n\\...",
+  "error": "Exit code 128\nwarning: could not open directory 'portfolio/images/childlikeheart/portfolio/images/childlikeheart/': No such file or directory\nfatal: pathspec 'portfolio/images/childlikeheart/' did not match any files",
+  "timestamp": "2026-05-21T09:10:56.563Z",
+  "retry_count": 1
+}
