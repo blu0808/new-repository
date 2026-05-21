@@ -141,7 +141,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: var(--black);
+  background: var(--black) url(images/thumbnail.webp) center/cover no-repeat;
   transition: opacity .6s ease;
 }
 
@@ -815,6 +815,22 @@ body:has(#works.poster-active) { background: #1A4DFF; }
 .pl-prev:hover, .pl-next:hover { opacity: .7; }
 @media (max-width: 860px) {
   .pl-prev, .pl-next { display: none; }
+}
+.pl-tap-prev, .pl-tap-next {
+  display: none;
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 32%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 5;
+  -webkit-tap-highlight-color: transparent;
+}
+.pl-tap-prev { left: 0; }
+.pl-tap-next { right: 0; }
+@media (max-width: 860px) {
+  .pl-tap-prev, .pl-tap-next { display: block; }
 }
 
 .zoom-overlay {

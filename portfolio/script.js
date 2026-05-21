@@ -672,6 +672,13 @@ if (projLightbox) {
     plCur = next;
     plUpdateCounter();
 
+    // 모바일: 페이드 없이 즉시 교체 (깜빡임 방지)
+    if (window.innerWidth <= 860) {
+      plImg.src = plImages[next];
+      plBusy = false;
+      return;
+    }
+
     const FADE = 260;
     const EASE = 'cubic-bezier(0.25,0.46,0.45,0.94)';
 
@@ -751,6 +758,10 @@ if (projLightbox) {
   plCloseBtn.addEventListener('click', plClose);
   plPrevBtn.addEventListener('click', e => { e.stopPropagation(); plShow(plCur - 1); });
   plNextBtn.addEventListener('click', e => { e.stopPropagation(); plShow(plCur + 1); });
+
+  // 모바일 탭존 (좌/우 32% 영역 터치로 이동)
+  document.getElementById('plTapPrev')?.addEventListener('click', e => { e.stopPropagation(); plShow(plCur - 1); });
+  document.getElementById('plTapNext')?.addEventListener('click', e => { e.stopPropagation(); plShow(plCur + 1); });
   projLightbox.addEventListener('click', e => { if (e.target === projLightbox) plClose(); });
 
   document.addEventListener('keydown', e => {
@@ -859,6 +870,9 @@ function openPg(index) {
   pgSet(index, false);
   pgOverlay.classList.add('open');
   pgOverlay.setAttribute('aria-hidden', 'false');
+  // 스크롤바 사라지면서 레이아웃 확대처럼 보이는 현상 방지
+  const sb = window.innerWidth - document.documentElement.clientWidth;
+  if (sb > 0) document.body.style.paddingRight = sb + 'px';
   document.body.style.overflow = 'hidden';
 }
 
@@ -866,7 +880,11 @@ function closePg() {
   if (!pgOverlay?.classList.contains('open')) return;
   pgOverlay.classList.remove('open');
   pgOverlay.setAttribute('aria-hidden', 'true');
+  // pgGo 애니메이션 중 닫힐 때 transform 잔상 제거
+  pgImg.classList.remove('out', 'in');
+  pgBusy = false;
   document.body.style.overflow = '';
+  document.body.style.paddingRight = '';
   const heroIframe = document.getElementById('heroVideoIframe');
   if (heroIframe) setTimeout(() => {
     heroIframe.contentWindow.postMessage('{"method":"play"}', 'https://player.vimeo.com');
@@ -929,12 +947,22 @@ function closeYtModal() {
 if (ytModalClose) ytModalClose.addEventListener('click', closeYtModal);
 if (ytModalBackdrop) ytModalBackdrop.addEventListener('click', closeYtModal);
 
-/* hero video cover — 썸네일로 초기 로딩 숨기고 1.2초 후 페이드아웃, 이후 쉴드로 유지 */
+/* hero video cover — thumbnail 배경 표시 후 Vimeo ready 시 페이드아웃 (최대 5초) */
 const heroCover = document.getElementById('heroVideoCover');
 if (heroCover) {
-  setTimeout(() => {
+  let coverGone = false;
+  const fadeHeroCover = () => {
+    if (coverGone) return;
+    coverGone = true;
     heroCover.style.opacity = '0';
-  }, 1200);
+  };
+  window.addEventListener('message', e => {
+    try {
+      const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+      if (data.event === 'ready') fadeHeroCover();
+    } catch {}
+  });
+  setTimeout(fadeHeroCover, 5000);
 }
 
 /* ─── 페이지 전환 로더 ──────────────────────────────────────── */
