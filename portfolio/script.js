@@ -612,44 +612,40 @@ if (projLightbox) {
     plBusy = true;
     plCur = next;
 
+    const DUR = 350;
+    const EASE = 'cubic-bezier(0.4,0,0.2,1)';
+
     let done = false;
     const doTransition = () => {
       if (done) return;
       done = true;
 
-      // 나가는 이미지 클론 (현재 위치에 고정)
+      // 나가는 이미지 클론
       const exitImg = plImg.cloneNode(true);
       exitImg.removeAttribute('id');
-      exitImg.style.cssText = 'position:absolute;inset:0;margin:auto;max-width:88vw;max-height:88vh;object-fit:contain;pointer-events:none;z-index:1;';
+      exitImg.style.cssText = 'position:absolute;inset:0;margin:auto;max-width:88vw;max-height:88vh;object-fit:contain;pointer-events:none;';
       projLightbox.appendChild(exitImg);
 
-      // 새 이미지: 진입 방향에서 대기
+      // 새 이미지를 진입 방향 밖에 배치
       plImg.style.transition = 'none';
       plImg.style.transform = `translateX(${dir * 100}vw)`;
-      plImg.style.opacity = '0';
       void plImg.offsetWidth;
       plImg.src = plImages[next];
 
-      requestAnimationFrame(() => {
-        const dur = '.3s';
-        const ease = 'cubic-bezier(0.25,0.46,0.45,0.94)';
-        // 나가기: 반대 방향으로 슬라이드
-        exitImg.style.transition = `transform ${dur} ${ease}, opacity .2s ease`;
-        exitImg.style.transform = `translateX(${-dir * 55}vw)`;
-        exitImg.style.opacity = '0';
-        // 들어오기: 중앙으로 슬라이드
-        plImg.style.transition = `transform ${dur} ${ease}, opacity .2s ease`;
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        // 나가기: 반대 방향으로 완전히 슬라이드 아웃
+        exitImg.style.transition = `transform ${DUR}ms ${EASE}`;
+        exitImg.style.transform = `translateX(${-dir * 100}vw)`;
+        // 들어오기: 중앙으로 슬라이드 인
+        plImg.style.transition = `transform ${DUR}ms ${EASE}`;
         plImg.style.transform = '';
-        plImg.style.opacity = '1';
 
         setTimeout(() => {
           exitImg.remove();
           plImg.style.transition = '';
-          plImg.style.transform = '';
-          plImg.style.opacity = '';
           plBusy = false;
-        }, 300);
-      });
+        }, DUR + 50);
+      }));
     };
 
     const probe = new Image();
