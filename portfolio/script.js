@@ -460,25 +460,36 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
   const total   = originals.length;
   let cur = 1;
   let locked = false;
+  let lockTimer = null;
 
   /* 첫/마지막 슬라이드 복제해서 양 끝에 붙임 */
   const firstClone = originals[0].cloneNode(true);
   const lastClone  = originals[total - 1].cloneNode(true);
   firstClone.dataset.clone = 'true';
   lastClone.dataset.clone  = 'true';
+  /* 클론 안의 iframe은 src 제거 (Vimeo 중복 로드 방지) */
+  [firstClone, lastClone].forEach(cl =>
+    cl.querySelectorAll('iframe').forEach(f => f.removeAttribute('src'))
+  );
   track.appendChild(firstClone);
   track.insertBefore(lastClone, originals[0]);
 
   function setPos(n, animate) {
     const w = Math.round(carousel.offsetWidth);
+    if (w === 0) return;
     if (!animate) track.style.transition = 'none';
     track.style.transform = `translate3d(-${n * w}px, 0, 0)`;
     if (!animate) setTimeout(() => { track.style.transition = ''; }, 20);
   }
 
-  /* 초기 위치 (애니 없이) */
+  /* 초기 위치 — 폭이 확정된 뒤 한 번만 설정 */
   setPos(1, false);
-  setTimeout(() => {}, 50);
+  if (carousel.offsetWidth === 0) {
+    const ro = new ResizeObserver(() => {
+      if (carousel.offsetWidth > 0) { setPos(cur, false); ro.disconnect(); }
+    });
+    ro.observe(carousel);
+  }
 
   /* dots */
   originals.forEach((_, i) => {
@@ -494,29 +505,40 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
     carousel.querySelectorAll('.proj-dot').forEach((d, i) => d.classList.toggle('active', i === real));
   }
 
+  function unlock() {
+    locked = false;
+    clearTimeout(lockTimer);
+    lockTimer = null;
+  }
+
   function goTo(pos) {
     if (locked) return;
     locked = true;
     cur = pos;
     setPos(cur, true);
     updateDots();
+    /* transitionend가 발화 안 될 때를 대비한 안전 해제 (600ms) */
+    clearTimeout(lockTimer);
+    lockTimer = setTimeout(unlock, 600);
   }
 
   /* 클론에 도달하면 실제 슬라이드로 순간이동 */
   track.addEventListener('transitionend', () => {
+    clearTimeout(lockTimer);
+    lockTimer = null;
     if (cur === total + 1) {
       cur = 1;
       setPos(cur, false);
-      setTimeout(() => { locked = false; }, 20);
+      setTimeout(unlock, 20);
       return;
     }
     if (cur === 0) {
       cur = total;
       setPos(cur, false);
-      setTimeout(() => { locked = false; }, 20);
+      setTimeout(unlock, 20);
       return;
     }
-    locked = false;
+    unlock();
   });
 
   window.addEventListener('resize', () => setPos(cur, false));
