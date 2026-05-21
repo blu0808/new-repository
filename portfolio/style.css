@@ -450,7 +450,6 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 .proj-row-visual {
-  background: var(--black);
   overflow: hidden;
   position: relative;
 }
@@ -1337,10 +1336,12 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   opacity: 0;
   transform: translateY(16px);
   transition: opacity .45s ease, transform .45s ease;
+  pointer-events: none;
 }
 .work-card.w-anim.w-visible {
   opacity: 1;
   transform: none;
+  pointer-events: auto;
 }
 
 /* ─── 페이지 로더 ────────────────────────────────────────────── */
