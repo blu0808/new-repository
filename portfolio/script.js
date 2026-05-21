@@ -217,19 +217,39 @@ function openModal(card, dir = 0) {
     document.body.style.overflow = 'hidden';
   };
 
-  if (dir !== 0 && alreadyOpen && panel) {
-    // 즉시 숨기고 콘텐츠 교체 후 방향 있는 슬라이드인
-    panel.style.transition = 'none';
-    panel.style.opacity = '0';
-    panel.style.transform = `translateX(${dir * 44}px)`;
-    void panel.offsetWidth;
-    applyContent();
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-      panel.style.transition = 'transform 260ms cubic-bezier(0.4,0,0.2,1), opacity 220ms ease';
-      panel.style.transform = '';
-      panel.style.opacity = '';
-      setTimeout(() => { panel.style.transition = ''; }, 280);
-    }));
+  if (dir !== 0 && alreadyOpen) {
+    const imgWrap = document.querySelector('#workModal .modal-img-wrap');
+    if (imgWrap) {
+      // plShow 와 동일한 클론 방식: 이미지만 슬라이드, 텍스트는 즉시 교체
+      const exitImg = modalImg.cloneNode(true);
+      exitImg.removeAttribute('id');
+      exitImg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;z-index:1;';
+      imgWrap.appendChild(exitImg);
+
+      modalImg.style.transition = 'none';
+      modalImg.style.transform = `translateX(${dir * 48}px)`;
+      modalImg.style.opacity = '0';
+      void modalImg.offsetWidth;
+      applyContent();
+
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        const DUR  = 480;
+        const EASE = 'cubic-bezier(0.25,0.46,0.45,0.94)';
+        exitImg.style.transition = `transform ${DUR}ms ${EASE}, opacity ${Math.round(DUR * 0.35)}ms ease`;
+        exitImg.style.transform = `translateX(${-dir * 48}px)`;
+        exitImg.style.opacity = '0';
+        modalImg.style.transition = `transform ${DUR}ms ${EASE}, opacity ${Math.round(DUR * 0.55)}ms ${Math.round(DUR * 0.12)}ms ease`;
+        modalImg.style.transform = '';
+        modalImg.style.opacity = '1';
+        setTimeout(() => {
+          exitImg.remove();
+          modalImg.style.transition = '';
+          modalImg.style.opacity = '';
+        }, DUR + 50);
+      }));
+    } else {
+      applyContent();
+    }
   } else {
     applyContent();
   }
@@ -398,6 +418,7 @@ document.getElementById('epConfirmSend').addEventListener('click', async () => {
 
 /* ─── Works 카테고리 필터 ─────────────────────────────────── */
 const worksGrid = document.querySelector('.works-grid');
+let filterTimer = null;
 
 function staggerWorkCards(cards) {
   cards.forEach((card, i) => {
@@ -407,6 +428,7 @@ function staggerWorkCards(cards) {
 }
 
 function applyWorksFilter(filter, animate = true) {
+  if (filterTimer) clearTimeout(filterTimer);
   const allCards = [...document.querySelectorAll('.work-card')];
 
   if (animate) {
@@ -419,7 +441,7 @@ function applyWorksFilter(filter, animate = true) {
     });
   }
 
-  setTimeout(() => {
+  filterTimer = setTimeout(() => {
     const visibleCards = [];
     allCards.forEach(card => {
       const hide = card.dataset.category !== filter;
@@ -660,8 +682,9 @@ if (projLightbox) {
     plCur = next;
     plUpdateCounter();
 
-    const DUR = 350;
-    const EASE = 'cubic-bezier(0.4,0,0.2,1)';
+    const DUR  = 520;
+    const EASE = 'cubic-bezier(0.25,0.46,0.45,0.94)';
+    const SLIDE = 48; // px — 미세 슬라이드로 흰 선 완전 제거
 
     let done = false;
     const doTransition = () => {
@@ -674,21 +697,23 @@ if (projLightbox) {
       exitImg.style.cssText = 'position:absolute;inset:0;margin:auto;max-width:88vw;max-height:88vh;object-fit:contain;pointer-events:none;';
       projLightbox.appendChild(exitImg);
 
-      // 새 이미지를 진입 방향 밖에 배치 (opacity 0으로 시작)
+      // 새 이미지를 미세 오프셋 + opacity 0으로 배치
       plImg.style.transition = 'none';
-      plImg.style.transform = `translateX(${dir * 100}vw)`;
+      plImg.style.transform = `translateX(${dir * SLIDE}px)`;
       plImg.style.opacity = '0';
       void plImg.offsetWidth;
       plImg.src = plImages[next];
 
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        const FADE = Math.round(DUR * 0.55);
-        // 나가기: 슬라이드 아웃 + 페이드 아웃
-        exitImg.style.transition = `transform ${DUR}ms ${EASE}, opacity ${FADE}ms ease`;
-        exitImg.style.transform = `translateX(${-dir * 100}vw)`;
+        const FADE_OUT = Math.round(DUR * 0.35);
+        const FADE_IN  = Math.round(DUR * 0.55);
+        const FADE_IN_DELAY = Math.round(DUR * 0.12);
+        // 나가기: 미세 슬라이드 + 빠른 페이드 아웃
+        exitImg.style.transition = `transform ${DUR}ms ${EASE}, opacity ${FADE_OUT}ms ease`;
+        exitImg.style.transform = `translateX(${-dir * SLIDE}px)`;
         exitImg.style.opacity = '0';
-        // 들어오기: 슬라이드 인 + 페이드 인 (후반부)
-        plImg.style.transition = `transform ${DUR}ms ${EASE}, opacity ${FADE}ms ${DUR - FADE}ms ease`;
+        // 들어오기: 미세 슬라이드 인 + 지연 페이드 인
+        plImg.style.transition = `transform ${DUR}ms ${EASE}, opacity ${FADE_IN}ms ${FADE_IN_DELAY}ms ease`;
         plImg.style.transform = '';
         plImg.style.opacity = '1';
 
@@ -938,14 +963,15 @@ if (heroCover) {
   }, 1200);
 }
 
-/* ─── 페이지 전환 페이드 ────────────────────────────────────── */
+/* ─── 페이지 전환 로더 ──────────────────────────────────────── */
 document.querySelectorAll('a[href]').forEach(link => {
   const url = link.getAttribute('href');
   if (!url || url.startsWith('#') || url.startsWith('http') || link.target === '_blank') return;
   link.addEventListener('click', e => {
     e.preventDefault();
-    document.body.style.animation = 'pageFadeOut .22s ease forwards';
-    setTimeout(() => { window.location.href = url; }, 220);
+    const loader = document.getElementById('page-loader');
+    if (loader) { loader.style.opacity = '1'; loader.style.pointerEvents = 'all'; }
+    setTimeout(() => { window.location.href = url; }, 350);
   });
 });
 
@@ -983,16 +1009,25 @@ if (worksSection) {
   worksObs.observe(worksSection);
 }
 
-/* ─── 페이지 로더 (느린 연결에서만 노출) ────────────────────── */
+/* ─── 페이지 로더 ────────────────────────────────────────────── */
 (function() {
   const loader = document.getElementById('page-loader');
   if (!loader) return;
+
+  // 인라인 style="opacity:0" 이 class보다 우선하므로 직접 style로 제어
   let loaded = false;
-  const hide = () => { loaded = true; loader.classList.add('done'); };
-  if (document.readyState === 'complete') { loaded = true; loader.classList.add('done'); return; }
-  setTimeout(() => { if (!loaded) loader.classList.add('show'); }, 50);
-  window.addEventListener('load', hide);
-  setTimeout(hide, 8000);
+  const showLoader = () => { loader.style.opacity = '1'; loader.style.pointerEvents = 'all'; };
+  const hideLoader = () => { loader.style.opacity = '0'; loader.style.pointerEvents = 'none'; loaded = true; };
+
+  // 이미 로드 완료면 즉시 숨김
+  if (document.readyState === 'complete') { hideLoader(); }
+  else {
+    // 느린 연결: 80ms 후에도 로드 안되면 스피너 표시
+    setTimeout(() => { if (!loaded) showLoader(); }, 80);
+    window.addEventListener('load', hideLoader);
+    setTimeout(hideLoader, 8000);
+  }
+
 })();
 
 /* ─── 위로 가기 버튼 ─────────────────────────────────────────── */
