@@ -967,8 +967,12 @@ document.querySelectorAll('a[href]').forEach(link => {
   link.addEventListener('click', e => {
     e.preventDefault();
     const loader = document.getElementById('page-loader');
-    if (loader) { loader.style.opacity = '1'; loader.style.pointerEvents = 'all'; }
-    setTimeout(() => { window.location.href = url; }, 350);
+    if (loader) {
+      loader.style.transition = 'none';
+      loader.style.opacity = '1';
+      loader.style.pointerEvents = 'all';
+    }
+    setTimeout(() => { window.location.href = url; }, 150);
   });
 });
 
@@ -1016,11 +1020,9 @@ if (worksSection) {
   const showLoader = () => { loader.style.opacity = '1'; loader.style.pointerEvents = 'all'; };
   const hideLoader = () => { loader.style.opacity = '0'; loader.style.pointerEvents = 'none'; loaded = true; };
 
-  // 이미 로드 완료면 즉시 숨김
+  // 로더는 항상 opacity:1 시작 → 로드 완료 시 페이드아웃
   if (document.readyState === 'complete') { hideLoader(); }
   else {
-    // 느린 연결: 80ms 후에도 로드 안되면 스피너 표시
-    setTimeout(() => { if (!loaded) showLoader(); }, 80);
     window.addEventListener('load', hideLoader);
     setTimeout(hideLoader, 8000);
   }
