@@ -240,23 +240,26 @@ function openModal(card, dir = 0) {
   };
 
   if (alreadyOpen) {
-    // pgGo 방식: 이미지 페이드아웃 → src 교체 → 페이드인 (깜빡임 없음)
-    const FADE = 220;
-    modalImg.style.transition = `opacity ${FADE}ms ease, transform ${FADE}ms ease`;
-    modalImg.style.opacity = '0';
-    modalImg.style.transform = 'scale(1.04)';
-    setTimeout(() => {
+    if (window.innerWidth <= 860) {
       applyContent();
-      modalImg.style.transition = 'none';
-      modalImg.style.transform = 'scale(0.97)';
-      void modalImg.offsetWidth;
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        modalImg.style.transition = `opacity ${FADE}ms ease, transform ${FADE}ms ease`;
-        modalImg.style.opacity = '';
-        modalImg.style.transform = '';
-        setTimeout(() => { modalImg.style.transition = ''; }, FADE + 20);
-      }));
-    }, FADE + 10);
+    } else {
+      const FADE = 220;
+      modalImg.style.transition = `opacity ${FADE}ms ease, transform ${FADE}ms ease`;
+      modalImg.style.opacity = '0';
+      modalImg.style.transform = 'scale(1.04)';
+      setTimeout(() => {
+        applyContent();
+        modalImg.style.transition = 'none';
+        modalImg.style.transform = 'scale(0.97)';
+        void modalImg.offsetWidth;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          modalImg.style.transition = `opacity ${FADE}ms ease, transform ${FADE}ms ease`;
+          modalImg.style.opacity = '';
+          modalImg.style.transform = '';
+          setTimeout(() => { modalImg.style.transition = ''; }, FADE + 20);
+        }));
+      }, FADE + 10);
+    }
   } else {
     applyContent();
   }
@@ -298,12 +301,8 @@ document.addEventListener('keydown', e => {
   }
   if (modal?.classList.contains('open')) {
     const visibles = [...document.querySelectorAll('.work-card:not(.hidden)')];
-    if (e.key === 'ArrowRight' && currentModalIndex < visibles.length - 1) {
-      openModal(visibles[currentModalIndex + 1], 1);
-    }
-    if (e.key === 'ArrowLeft' && currentModalIndex > 0) {
-      openModal(visibles[currentModalIndex - 1], -1);
-    }
+    if (e.key === 'ArrowRight') openModal(visibles[(currentModalIndex + 1) % visibles.length], 1);
+    if (e.key === 'ArrowLeft')  openModal(visibles[(currentModalIndex - 1 + visibles.length) % visibles.length], -1);
   }
 });
 
@@ -322,12 +321,12 @@ function positionModalNav() {
 document.getElementById('modalPrev')?.addEventListener('click', e => {
   e.stopPropagation();
   const visibles = [...document.querySelectorAll('.work-card:not(.hidden)')];
-  if (currentModalIndex > 0) openModal(visibles[currentModalIndex - 1], -1);
+  openModal(visibles[(currentModalIndex - 1 + visibles.length) % visibles.length], -1);
 });
 document.getElementById('modalNext')?.addEventListener('click', e => {
   e.stopPropagation();
   const visibles = [...document.querySelectorAll('.work-card:not(.hidden)')];
-  if (currentModalIndex < visibles.length - 1) openModal(visibles[currentModalIndex + 1], 1);
+  openModal(visibles[(currentModalIndex + 1) % visibles.length], 1);
 });
 let modalTx = 0;
 const workModal = document.getElementById('workModal');
@@ -336,8 +335,8 @@ workModal?.addEventListener('touchend', e => {
   const dx = e.changedTouches[0].clientX - modalTx;
   if (Math.abs(dx) < 50) return;
   const visibles = [...document.querySelectorAll('.work-card:not(.hidden)')];
-  if (dx < 0 && currentModalIndex < visibles.length - 1) openModal(visibles[currentModalIndex + 1], 1);
-  if (dx > 0 && currentModalIndex > 0) openModal(visibles[currentModalIndex - 1], -1);
+  if (dx < 0) openModal(visibles[(currentModalIndex + 1) % visibles.length], 1);
+  if (dx > 0) openModal(visibles[(currentModalIndex - 1 + visibles.length) % visibles.length], -1);
 });
 
 /* ─── Email Panel ───────────────────────────────────────── */
