@@ -542,7 +542,11 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
     if (!swipeDir) {
       const dx = Math.abs(e.touches[0].clientX - sx);
       const dy = Math.abs(e.touches[0].clientY - sy);
-      if (dx > 4 || dy > 4) swipeDir = dx >= dy ? 'h' : 'v';
+      if (dx > 10 || dy > 10) {
+        swipeDir = dx >= dy ? 'h' : 'v';
+      } else {
+        e.preventDefault(); // 방향 결정 전까지 화면 고정
+      }
     }
     if (swipeDir === 'h') e.preventDefault();
   }, { passive: false });
@@ -562,7 +566,11 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
       if (!swipeDir) {
         const dx = Math.abs(e.touches[0].clientX - sx);
         const dy = Math.abs(e.touches[0].clientY - sy);
-        if (dx > 4 || dy > 4) swipeDir = dx >= dy ? 'h' : 'v';
+        if (dx > 10 || dy > 10) {
+          swipeDir = dx >= dy ? 'h' : 'v';
+        } else {
+          e.preventDefault();
+        }
       }
       if (swipeDir === 'h') e.preventDefault();
     }, { passive: false });
