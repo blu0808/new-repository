@@ -464,6 +464,8 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
   /* 첫/마지막 슬라이드 복제해서 양 끝에 붙임 */
   const firstClone = originals[0].cloneNode(true);
   const lastClone  = originals[total - 1].cloneNode(true);
+  firstClone.dataset.clone = 'true';
+  lastClone.dataset.clone  = 'true';
   track.appendChild(firstClone);
   track.insertBefore(lastClone, originals[0]);
 
@@ -673,19 +675,22 @@ if (projLightbox) {
 
   function plClose() {
     const sy = parseFloat(document.body.style.top || '0') * -1;
+    // 라이트박스가 덮고 있는 동안 스크롤 복원 → 페이지 점프가 보이지 않음
     document.body.style.position = '';
     document.body.style.top = '';
     document.body.style.width = '';
     window.scrollTo(0, sy);
-    projLightbox.classList.remove('open');
-    plImg.src = '';
-    document.body.classList.remove('pl-open');
-    document.querySelectorAll('.proj-carousel.touched').forEach(c => c.classList.remove('touched'));
+    // 스크롤이 적용된 다음 프레임에 페이드 아웃 시작
+    requestAnimationFrame(() => {
+      projLightbox.classList.remove('open');
+      document.body.classList.remove('pl-open');
+      document.querySelectorAll('.proj-carousel.touched').forEach(c => c.classList.remove('touched'));
+      setTimeout(() => { plImg.src = ''; }, 300);
+    });
   }
 
   document.querySelectorAll('.proj-carousel').forEach(carousel => {
-    const allTrackImgs = [...carousel.querySelectorAll('.proj-carousel-track img')];
-    const imgs = allTrackImgs.slice(1, -1);
+    const imgs = [...carousel.querySelectorAll('.proj-carousel-track img:not([data-clone])')].filter(img => !img.closest('.proj-carousel-vimeo'));
     const track = carousel.querySelector('.proj-carousel-track');
     let tapX = 0, tapY = 0;
     track.addEventListener('touchstart', e => {
