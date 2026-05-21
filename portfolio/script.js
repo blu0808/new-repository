@@ -658,23 +658,28 @@ if (projLightbox) {
       exitImg.style.cssText = 'position:absolute;inset:0;margin:auto;max-width:88vw;max-height:88vh;object-fit:contain;pointer-events:none;';
       projLightbox.appendChild(exitImg);
 
-      // 새 이미지를 진입 방향 밖에 배치
+      // 새 이미지를 진입 방향 밖에 배치 (opacity 0으로 시작)
       plImg.style.transition = 'none';
       plImg.style.transform = `translateX(${dir * 100}vw)`;
+      plImg.style.opacity = '0';
       void plImg.offsetWidth;
       plImg.src = plImages[next];
 
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        // 나가기: 반대 방향으로 완전히 슬라이드 아웃
-        exitImg.style.transition = `transform ${DUR}ms ${EASE}`;
+        const FADE = Math.round(DUR * 0.55);
+        // 나가기: 슬라이드 아웃 + 페이드 아웃
+        exitImg.style.transition = `transform ${DUR}ms ${EASE}, opacity ${FADE}ms ease`;
         exitImg.style.transform = `translateX(${-dir * 100}vw)`;
-        // 들어오기: 중앙으로 슬라이드 인
-        plImg.style.transition = `transform ${DUR}ms ${EASE}`;
+        exitImg.style.opacity = '0';
+        // 들어오기: 슬라이드 인 + 페이드 인 (후반부)
+        plImg.style.transition = `transform ${DUR}ms ${EASE}, opacity ${FADE}ms ${DUR - FADE}ms ease`;
         plImg.style.transform = '';
+        plImg.style.opacity = '1';
 
         setTimeout(() => {
           exitImg.remove();
           plImg.style.transition = '';
+          plImg.style.opacity = '';
           plBusy = false;
         }, DUR + 50);
       }));
