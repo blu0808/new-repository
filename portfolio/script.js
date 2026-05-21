@@ -667,26 +667,13 @@ if (projLightbox) {
     plImg.src = plImages[idx];
     projLightbox.classList.add('open');
     document.body.classList.add('pl-open');
-    const sy = window.scrollY;
-    document.body.style.position = 'fixed';
-    document.body.style.top = `-${sy}px`;
-    document.body.style.width = '100%';
   }
 
   function plClose() {
-    const sy = parseFloat(document.body.style.top || '0') * -1;
-    // 라이트박스가 덮고 있는 동안 스크롤 복원 → 페이지 점프가 보이지 않음
-    document.body.style.position = '';
-    document.body.style.top = '';
-    document.body.style.width = '';
-    window.scrollTo(0, sy);
-    // 스크롤이 적용된 다음 프레임에 페이드 아웃 시작
-    requestAnimationFrame(() => {
-      projLightbox.classList.remove('open');
-      document.body.classList.remove('pl-open');
-      document.querySelectorAll('.proj-carousel.touched').forEach(c => c.classList.remove('touched'));
-      setTimeout(() => { plImg.src = ''; }, 300);
-    });
+    projLightbox.classList.remove('open');
+    document.body.classList.remove('pl-open');
+    document.querySelectorAll('.proj-carousel.touched').forEach(c => c.classList.remove('touched'));
+    setTimeout(() => { plImg.src = ''; }, 300);
   }
 
   document.querySelectorAll('.proj-carousel').forEach(carousel => {

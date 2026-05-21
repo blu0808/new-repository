@@ -771,6 +771,7 @@ body:has(#works.poster-active) { background: #1A4DFF; }
   opacity: 0; pointer-events: none;
   transition: opacity .25s;
   overflow: hidden;
+  touch-action: none;
 }
 .proj-lightbox.open { opacity: 1; pointer-events: all; }
 .pl-img {
