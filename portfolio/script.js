@@ -210,6 +210,7 @@ const modalLink   = document.getElementById('modalLink');
 
 let currentYtId = '';
 let currentModalIndex = -1;
+let modalAnimTimer = null;
 
 const modalPlayBtn = document.getElementById('modalPlayBtn');
 const modalPlayer  = document.getElementById('modalPlayer');
@@ -241,10 +242,11 @@ function openModal(card, dir = 0) {
 
   if (alreadyOpen) {
     if (window.innerWidth <= 860) {
+      if (modalAnimTimer) clearTimeout(modalAnimTimer);
       const F = 120;
       modalImg.style.transition = `opacity ${F}ms ease`;
       modalImg.style.opacity = '0';
-      setTimeout(() => {
+      modalAnimTimer = setTimeout(() => {
         applyContent();
         modalImg.style.transition = 'none';
         void modalImg.offsetWidth;
