@@ -407,28 +407,38 @@ function staggerWorkCards(cards) {
 }
 
 function applyWorksFilter(filter, animate = true) {
+  const allCards = [...document.querySelectorAll('.work-card')];
+
   if (animate) {
-    worksGrid.style.opacity = '0';
-    worksGrid.style.transform = 'scale(0.97)';
-    document.querySelectorAll('.work-card').forEach(c => c.classList.remove('w-anim', 'w-visible'));
+    // 현재 보이는 카드를 즉시 opacity:0으로 (그리드 레벨 조작 없이 깜빡임 방지)
+    allCards.forEach(c => {
+      if (!c.classList.contains('hidden')) {
+        c.classList.add('w-anim');
+        c.classList.remove('w-visible');
+      }
+    });
   }
+
   setTimeout(() => {
-    let visible = 0;
-    document.querySelectorAll('.work-card').forEach(card => {
+    const visibleCards = [];
+    allCards.forEach(card => {
       const hide = card.dataset.category !== filter;
       card.classList.toggle('hidden', hide);
-      if (!hide) visible++;
+      card.classList.remove('w-anim', 'w-visible');
+      if (!hide) visibleCards.push(card);
     });
     worksGrid.classList.toggle('poster-view', filter === 'poster');
     document.getElementById('works').classList.toggle('poster-active', filter === 'poster');
     const emptyEl = document.getElementById('worksEmpty');
-    if (emptyEl) emptyEl.style.display = visible === 0 ? 'block' : 'none';
+    if (emptyEl) emptyEl.style.display = visibleCards.length === 0 ? 'block' : 'none';
     if (animate) {
-      worksGrid.style.opacity = '';
-      worksGrid.style.transform = '';
-      staggerWorkCards([...document.querySelectorAll('.work-card:not(.hidden)')]);
+      // w-anim 즉시 적용 (opacity:0 snap) → stagger로 w-visible 추가
+      visibleCards.forEach(c => c.classList.add('w-anim'));
+      visibleCards.forEach((card, i) => {
+        setTimeout(() => card.classList.add('w-visible'), i * 40 + 10);
+      });
     }
-  }, animate ? 180 : 0);
+  }, animate ? 150 : 0);
 }
 
 const worksTabEls = [...document.querySelectorAll('.works-tab')];
