@@ -481,6 +481,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   aspect-ratio: 4/5;
   overflow: hidden;
   isolation: isolate;
+  background: var(--black);
 }
 .proj-carousel-track {
   display: flex;
