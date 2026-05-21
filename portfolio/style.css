@@ -311,6 +311,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   color: rgba(255,255,255,.38);
 }
 
+.section--projects { background: var(--white); }
 #works .container { max-width: 1600px; }
 #works { transition: background .5s ease; }
 #works.poster-active { background: #1A4DFF; }
@@ -592,7 +593,6 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 }
 #works.poster-active + .footer { background: #1A4DFF; }
 #works.poster-active + .footer .footer-inner { color: rgba(255,255,255,.4); }
-body:has(#works.poster-active) { background: #1A4DFF; }
 .footer-inner {
   display: flex;
   align-items: center;
