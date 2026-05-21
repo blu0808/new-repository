@@ -217,7 +217,27 @@ function openModal(card, dir = 0) {
     document.body.style.overflow = 'hidden';
   };
 
-  applyContent();
+  if (alreadyOpen) {
+    // pgGo 방식: 이미지 페이드아웃 → src 교체 → 페이드인 (깜빡임 없음)
+    const FADE = 220;
+    modalImg.style.transition = `opacity ${FADE}ms ease, transform ${FADE}ms ease`;
+    modalImg.style.opacity = '0';
+    modalImg.style.transform = 'scale(1.04)';
+    setTimeout(() => {
+      applyContent();
+      modalImg.style.transition = 'none';
+      modalImg.style.transform = 'scale(0.97)';
+      void modalImg.offsetWidth;
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        modalImg.style.transition = `opacity ${FADE}ms ease, transform ${FADE}ms ease`;
+        modalImg.style.opacity = '';
+        modalImg.style.transform = '';
+        setTimeout(() => { modalImg.style.transition = ''; }, FADE + 20);
+      }));
+    }, FADE + 10);
+  } else {
+    applyContent();
+  }
 }
 
 function closeModal() {
@@ -652,49 +672,32 @@ if (projLightbox) {
     plCur = next;
     plUpdateCounter();
 
-    const DUR  = 520;
+    const FADE = 260;
     const EASE = 'cubic-bezier(0.25,0.46,0.45,0.94)';
-    const SLIDE = 48; // px — 미세 슬라이드로 흰 선 완전 제거
 
     let done = false;
     const doTransition = () => {
       if (done) return;
       done = true;
 
-      // 나가는 이미지 클론
-      const exitImg = plImg.cloneNode(true);
-      exitImg.removeAttribute('id');
-      exitImg.style.cssText = 'position:absolute;inset:0;margin:auto;max-width:88vw;max-height:88vh;object-fit:contain;pointer-events:none;';
-      projLightbox.appendChild(exitImg);
-
-      // 새 이미지를 미세 오프셋 + opacity 0으로 배치
-      plImg.style.transition = 'none';
-      plImg.style.transform = `translateX(${dir * SLIDE}px)`;
+      // 순차 페이드: 구 이미지 완전 소멸 후 신 이미지 등장 → 겹침 없어 흰선 완전 제거
+      plImg.style.transition = `opacity ${FADE}ms ${EASE}`;
       plImg.style.opacity = '0';
-      void plImg.offsetWidth;
-      plImg.src = plImages[next];
 
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        // exit: 80ms 내에 즉시 소멸 → 새 이미지와 겹치는 구간 없음 → 흰선 완전 제거
-        const FADE_OUT = 80;
-        const FADE_IN  = Math.round(DUR * 0.55);
-        const FADE_IN_DELAY = 120; // exit 완전 사라진 후 등장
-        // 나가기: 미세 슬라이드 + 즉시 페이드 아웃
-        exitImg.style.transition = `transform ${DUR}ms ${EASE}, opacity ${FADE_OUT}ms ease`;
-        exitImg.style.transform = `translateX(${-dir * SLIDE}px)`;
-        exitImg.style.opacity = '0';
-        // 들어오기: 미세 슬라이드 인 + 지연 페이드 인
-        plImg.style.transition = `transform ${DUR}ms ${EASE}, opacity ${FADE_IN}ms ${FADE_IN_DELAY}ms ease`;
-        plImg.style.transform = '';
-        plImg.style.opacity = '1';
-
-        setTimeout(() => {
-          exitImg.remove();
-          plImg.style.transition = '';
-          plImg.style.opacity = '';
-          plBusy = false;
-        }, DUR + 50);
-      }));
+      setTimeout(() => {
+        plImg.style.transition = 'none';
+        plImg.src = plImages[next];
+        void plImg.offsetWidth;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          plImg.style.transition = `opacity ${FADE}ms ${EASE}`;
+          plImg.style.opacity = '1';
+          setTimeout(() => {
+            plImg.style.transition = '';
+            plImg.style.opacity = '';
+            plBusy = false;
+          }, FADE + 30);
+        }));
+      }, FADE + 10);
     };
 
     const probe = new Image();
