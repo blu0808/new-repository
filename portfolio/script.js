@@ -241,7 +241,19 @@ function openModal(card, dir = 0) {
 
   if (alreadyOpen) {
     if (window.innerWidth <= 860) {
-      applyContent();
+      const F = 120;
+      modalImg.style.transition = `opacity ${F}ms ease`;
+      modalImg.style.opacity = '0';
+      setTimeout(() => {
+        applyContent();
+        modalImg.style.transition = 'none';
+        void modalImg.offsetWidth;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          modalImg.style.transition = `opacity ${F}ms ease`;
+          modalImg.style.opacity = '';
+          setTimeout(() => { modalImg.style.transition = ''; }, F + 10);
+        }));
+      }, F + 10);
     } else {
       const FADE = 220;
       modalImg.style.transition = `opacity ${FADE}ms ease, transform ${FADE}ms ease`;
