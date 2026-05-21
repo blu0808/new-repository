@@ -1337,7 +1337,7 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--accent);
-  opacity: .5;
+  opacity: .55;
   padding-top: 3px;
   font-weight: 500;
 }
@@ -1351,7 +1351,7 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 }
 .hs-item {
   font-size: clamp(14px, 1.1vw, 16px);
-  color: var(--black);
+  color: var(--accent);
   line-height: 1.5;
 }
 .hs-row--solo .hs-item {
@@ -1364,8 +1364,8 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 }
 .hs-venue {
   font-size: clamp(12px, .9vw, 13px);
-  color: var(--black);
-  opacity: .45;
+  color: var(--accent);
+  opacity: .5;
 }
 
 @media (max-width: 860px) {
