@@ -141,7 +141,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: var(--black) url(images/thumbnail.webp) center/cover no-repeat;
+  background: var(--black);
   transition: opacity .6s ease;
 }
 
@@ -327,7 +327,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   opacity: 0; pointer-events: none;
   transition: opacity .45s ease;
 }
-.pg-overlay.open { opacity: 1; pointer-events: all; }
+.pg-overlay.open { opacity: 1; pointer-events: all; touch-action: none; }
 .pg-bg {
   position: absolute; inset: 0;
   background: rgba(6,6,6,.97);
@@ -359,8 +359,8 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
               transform .4s cubic-bezier(.4,0,.2,1);
   will-change: opacity, transform;
 }
-.pg-img.out { opacity: 0; transform: scale(1.04); }
-.pg-img.in  { opacity: 0; transform: scale(0.96); }
+.pg-img.out { opacity: 0; }
+.pg-img.in  { opacity: 0; }
 .pg-meta { margin-top: 18px; text-align: center; }
 .pg-label {
   font-size: 10px; letter-spacing: .15em;
@@ -766,7 +766,7 @@ body:has(#works.poster-active) { background: #1A4DFF; }
 /* ─── Project Lightbox ───────────────────────────────────── */
 .proj-lightbox {
   position: fixed; inset: 0; z-index: 9000;
-  background: rgba(0,0,0,.93);
+  background: #000;
   display: flex; align-items: center; justify-content: center;
   opacity: 0; pointer-events: none;
   transition: opacity .25s;
@@ -777,6 +777,7 @@ body:has(#works.poster-active) { background: #1A4DFF; }
 .pl-img {
   max-width: 88vw; max-height: 88vh;
   object-fit: contain;
+  background: #000;
 }
 .pl-counter {
   position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
@@ -819,8 +820,8 @@ body:has(#works.poster-active) { background: #1A4DFF; }
 .pl-tap-prev, .pl-tap-next {
   display: none;
   position: absolute;
-  top: 0; bottom: 0;
-  width: 32%;
+  top: 20%; bottom: 20%;
+  width: 24%;
   background: none;
   border: none;
   cursor: pointer;

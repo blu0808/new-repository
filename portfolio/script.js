@@ -870,21 +870,18 @@ function openPg(index) {
   pgSet(index, false);
   pgOverlay.classList.add('open');
   pgOverlay.setAttribute('aria-hidden', 'false');
-  // 스크롤바 사라지면서 레이아웃 확대처럼 보이는 현상 방지
-  const sb = window.innerWidth - document.documentElement.clientWidth;
-  if (sb > 0) document.body.style.paddingRight = sb + 'px';
-  document.body.style.overflow = 'hidden';
 }
 
 function closePg() {
   if (!pgOverlay?.classList.contains('open')) return;
   pgOverlay.classList.remove('open');
   pgOverlay.setAttribute('aria-hidden', 'true');
-  // pgGo 애니메이션 중 닫힐 때 transform 잔상 제거
+  // pgGo 애니메이션 중 닫힐 때 transform 즉시 초기화
+  pgImg.style.transition = 'none';
   pgImg.classList.remove('out', 'in');
+  void pgImg.offsetWidth;
+  pgImg.style.transition = '';
   pgBusy = false;
-  document.body.style.overflow = '';
-  document.body.style.paddingRight = '';
   const heroIframe = document.getElementById('heroVideoIframe');
   if (heroIframe) setTimeout(() => {
     heroIframe.contentWindow.postMessage('{"method":"play"}', 'https://player.vimeo.com');
@@ -947,7 +944,7 @@ function closeYtModal() {
 if (ytModalClose) ytModalClose.addEventListener('click', closeYtModal);
 if (ytModalBackdrop) ytModalBackdrop.addEventListener('click', closeYtModal);
 
-/* hero video cover — thumbnail 배경 표시 후 Vimeo ready 시 페이드아웃 (최대 5초) */
+/* hero video cover — iframe 로드 후 1.5초 뒤 페이드아웃 (최대 6초 fallback) */
 const heroCover = document.getElementById('heroVideoCover');
 if (heroCover) {
   let coverGone = false;
@@ -956,13 +953,11 @@ if (heroCover) {
     coverGone = true;
     heroCover.style.opacity = '0';
   };
-  window.addEventListener('message', e => {
-    try {
-      const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
-      if (data.event === 'ready') fadeHeroCover();
-    } catch {}
-  });
-  setTimeout(fadeHeroCover, 5000);
+  const _heroIframe = document.getElementById('heroVideoIframe');
+  if (_heroIframe) {
+    _heroIframe.addEventListener('load', () => setTimeout(fadeHeroCover, 1500));
+  }
+  setTimeout(fadeHeroCover, 6000);
 }
 
 /* ─── 페이지 전환 로더 ──────────────────────────────────────── */
