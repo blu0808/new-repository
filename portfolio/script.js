@@ -630,11 +630,16 @@ const plImg        = document.getElementById('plImg');
 const plCloseBtn   = document.getElementById('plClose');
 const plPrevBtn    = document.getElementById('plPrev');
 const plNextBtn    = document.getElementById('plNext');
+const plCounter    = document.getElementById('plCounter');
 
 if (projLightbox) {
   let plImages = [];
   let plCur = 0;
   let plBusy = false;
+
+  function plUpdateCounter() {
+    if (plCounter) plCounter.textContent = plImages.length > 1 ? `${plCur + 1} / ${plImages.length}` : '';
+  }
 
   function plShow(idx) {
     if (plBusy) return;
@@ -643,6 +648,7 @@ if (projLightbox) {
     const dir = idx >= plCur ? 1 : -1;
     plBusy = true;
     plCur = next;
+    plUpdateCounter();
 
     const DUR = 350;
     const EASE = 'cubic-bezier(0.4,0,0.2,1)';
@@ -700,6 +706,7 @@ if (projLightbox) {
     plImages = imgs;
     plCur = idx;
     plImg.src = plImages[idx];
+    plUpdateCounter();
     projLightbox.classList.add('open');
     document.body.classList.add('pl-open');
   }
