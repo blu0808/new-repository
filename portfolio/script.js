@@ -219,17 +219,28 @@ function openModal(card, dir = 0) {
   };
 
   if (dir !== 0 && alreadyOpen && panel) {
-    panel.style.transition = 'none';
+    const EXIT = 160;
+    const ENTER = 240;
+    const EASE = 'cubic-bezier(0.4,0,0.2,1)';
+    // 1) 현재 패널 슬라이드 아웃
+    panel.style.transition = `transform ${EXIT}ms ${EASE}, opacity ${EXIT}ms ease`;
+    panel.style.transform = `translateX(${-dir * 60}px)`;
     panel.style.opacity = '0';
-    panel.style.transform = `translateX(${dir * 48}px)`;
-    void panel.offsetWidth;
-    applyContent();
-    requestAnimationFrame(() => {
-      panel.style.transition = 'transform .22s ease, opacity .18s ease';
-      panel.style.transform = '';
-      panel.style.opacity = '';
-      setTimeout(() => { panel.style.transition = ''; }, 220);
-    });
+    setTimeout(() => {
+      // 2) 콘텐츠 교체 (패널 보이지 않는 동안)
+      panel.style.transition = 'none';
+      panel.style.transform = `translateX(${dir * 50}px)`;
+      panel.style.opacity = '0';
+      void panel.offsetWidth;
+      applyContent();
+      // 3) 새 콘텐츠 슬라이드 인
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        panel.style.transition = `transform ${ENTER}ms ${EASE}, opacity ${ENTER}ms ease`;
+        panel.style.transform = '';
+        panel.style.opacity = '';
+        setTimeout(() => { panel.style.transition = ''; }, ENTER + 20);
+      }));
+    }, EXIT);
   } else {
     applyContent();
   }
