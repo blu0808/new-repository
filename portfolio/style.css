@@ -774,6 +774,8 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   max-width: 88vw; max-height: 88vh;
   object-fit: contain;
   background: #000;
+  outline: 2px solid #000;
+  outline-offset: -1px;
 }
 .pl-counter {
   position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
