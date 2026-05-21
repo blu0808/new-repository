@@ -765,7 +765,7 @@ body:has(#works.poster-active) { background: #1A4DFF; }
 /* ─── Image Zoom ──────────────────────────────────────────── */
 /* ─── Project Lightbox ───────────────────────────────────── */
 .proj-lightbox {
-  position: fixed; inset: 0; z-index: 900;
+  position: fixed; inset: 0; z-index: 9000;
   background: rgba(0,0,0,.93);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; pointer-events: none;
