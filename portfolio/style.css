@@ -200,7 +200,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   object-fit: cover;
   transition: transform .5s ease;
 }
-.work-card:hover .work-thumb img { transform: scale(1.04); }
+@media (hover: hover) { .work-card:hover .work-thumb img { transform: scale(1.04); } }
 
 .work-overlay {
   position: absolute;
@@ -214,7 +214,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   padding: 14px;
   gap: 4px;
 }
-.work-card:hover .work-overlay { opacity: 1; }
+@media (hover: hover) { .work-card:hover .work-overlay { opacity: 1; } }
 .work-card[data-category="album-cover"] .work-overlay { display: none; }
 .work-tag {
   font-size: 10px;
@@ -282,9 +282,11 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   transition: transform .5s cubic-bezier(.25,.46,.45,.94),
               box-shadow .5s ease;
 }
-.works-grid.poster-view .work-card:hover .work-thumb img {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 6px 20px 32px rgba(0,0,0,0.65);
+@media (hover: hover) {
+  .works-grid.poster-view .work-card:hover .work-thumb img {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 6px 20px 32px rgba(0,0,0,0.65);
+  }
 }
 @media (max-width: 860px) {
   .works-grid.poster-view .work-thumb img {
@@ -869,9 +871,11 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   transition: opacity .2s, transform .2s;
   pointer-events: none;
 }
-.work-card[data-yt]:hover .work-overlay::after {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+@media (hover: hover) {
+  .work-card[data-yt]:hover .work-overlay::after {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 /* ─── YouTube Modal ───────────────────────────────────────── */
@@ -1016,7 +1020,7 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
     width: 90vw; max-width: 420px; max-height: 88vh;
     margin: auto; overflow-y: auto;
   }
-  .modal-img-wrap { max-height: none; }
+  .modal-img-wrap { max-height: none; background: transparent; }
   .modal-close { font-size: 1.3rem; }
 
   .works-grid:not(.poster-view) { grid-template-columns: 1fr; }
@@ -1390,6 +1394,7 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 }
 .work-card {
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 .work-card:active { transform: scale(.975) !important; }
 .journal-img:active, .iv-img:active { opacity: .85; }
