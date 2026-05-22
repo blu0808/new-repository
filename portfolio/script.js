@@ -1000,6 +1000,22 @@ function closeYtModal() {
 if (ytModalClose) ytModalClose.addEventListener('click', closeYtModal);
 if (ytModalBackdrop) ytModalBackdrop.addEventListener('click', closeYtModal);
 
+/* 캐러셀 Vimeo 썸네일 — iframe 로드 후 1.5초 뒤 페이드아웃, 최대 8초 fallback */
+document.querySelectorAll('.proj-carousel-vimeo').forEach(wrap => {
+  const thumb = wrap.querySelector('.vimeo-thumb');
+  const iframe = wrap.querySelector('iframe');
+  if (!thumb || !iframe) return;
+  let done = false;
+  const fadeThumb = () => {
+    if (done) return;
+    done = true;
+    thumb.style.opacity = '0';
+    setTimeout(() => thumb.remove(), 700);
+  };
+  iframe.addEventListener('load', () => setTimeout(fadeThumb, 1500));
+  setTimeout(fadeThumb, 8000);
+});
+
 /* hero video cover — iframe 로드 후 1.5초 뒤 페이드아웃 (최대 6초 fallback) */
 const heroCover = document.getElementById('heroVideoCover');
 if (heroCover) {
