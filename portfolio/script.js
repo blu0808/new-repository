@@ -502,11 +502,20 @@ function applyWorksFilter(filter, animate = true) {
 
 const worksTabEls = [...document.querySelectorAll('.works-tab')];
 worksTabEls.forEach((tab, i) => {
-  tab.addEventListener('click', () => {
+  const activateTab = () => {
     worksTabEls.forEach(t => t.classList.remove('active'));
     tab.classList.add('active');
     applyWorksFilter(tab.dataset.filter);
+  };
+  let tabTouchY = 0;
+  tab.addEventListener('touchstart', e => { tabTouchY = e.touches[0].clientY; }, { passive: true });
+  tab.addEventListener('touchend', e => {
+    if (Math.abs(e.changedTouches[0].clientY - tabTouchY) < 10) {
+      e.preventDefault();
+      activateTab();
+    }
   });
+  tab.addEventListener('click', activateTab);
   tab.addEventListener('keydown', e => {
     if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
     e.preventDefault();
