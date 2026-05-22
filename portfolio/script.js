@@ -284,6 +284,14 @@ if (modalPlayBtn) {
 }
 
 document.querySelectorAll('.work-card').forEach(card => {
+  let touchStartY = 0;
+  card.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
+  card.addEventListener('touchend', e => {
+    if (Math.abs(e.changedTouches[0].clientY - touchStartY) < 10) {
+      e.preventDefault();
+      openModal(card);
+    }
+  });
   card.addEventListener('click', () => openModal(card));
 });
 
