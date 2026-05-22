@@ -525,7 +525,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   height: 100%;
   border: none;
 }
-.proj-carousel-track img,
+.proj-carousel-track img:not(.vimeo-thumb),
 .proj-carousel-track video {
   flex: 0 0 100%;
   width: 100%;
