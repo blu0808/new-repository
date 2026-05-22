@@ -553,8 +553,9 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
   track.insertBefore(lastClone, originals[0]);
 
   function setPos(n, animate) {
-    const w = Math.round(carousel.offsetWidth);
+    const w = carousel.offsetWidth;
     if (w === 0) return;
+    [...track.children].forEach(c => { c.style.flex = `0 0 ${w}px`; c.style.width = w + 'px'; });
     if (!animate) track.style.transition = 'none';
     track.style.transform = `translate3d(-${n * w}px, 0, 0)`;
     if (!animate) setTimeout(() => { track.style.transition = ''; }, 20);
