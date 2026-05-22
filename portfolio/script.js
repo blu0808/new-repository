@@ -628,7 +628,7 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
   let sx = 0, sy = 0, swipeDir = null;
   track.addEventListener('touchstart', e => {
     sx = e.touches[0].clientX; sy = e.touches[0].clientY; swipeDir = null;
-  }, { passive: true });
+  }, { passive: false });
   track.addEventListener('touchmove', e => {
     if (!swipeDir) {
       const dx = Math.abs(e.touches[0].clientX - sx);
@@ -652,7 +652,7 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
     vimeoEl.appendChild(guard);
     guard.addEventListener('touchstart', e => {
       sx = e.touches[0].clientX; sy = e.touches[0].clientY; swipeDir = null;
-    }, { passive: true });
+    }, { passive: false });
     guard.addEventListener('touchmove', e => {
       if (!swipeDir) {
         const dx = Math.abs(e.touches[0].clientX - sx);
