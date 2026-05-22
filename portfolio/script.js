@@ -444,6 +444,8 @@ function applyWorksFilter(filter, animate = true) {
   staggerTimers = [];
   const allCards = [...document.querySelectorAll('.work-card')];
 
+  document.getElementById('works').classList.toggle('poster-active', filter === 'poster');
+
   if (animate) {
     // 현재 보이는 카드를 즉시 opacity:0으로 (그리드 레벨 조작 없이 깜빡임 방지)
     allCards.forEach(c => {
@@ -463,7 +465,6 @@ function applyWorksFilter(filter, animate = true) {
       if (!hide) visibleCards.push(card);
     });
     worksGrid.classList.toggle('poster-view', filter === 'poster');
-    document.getElementById('works').classList.toggle('poster-active', filter === 'poster');
     const emptyEl = document.getElementById('worksEmpty');
     if (emptyEl) emptyEl.style.display = visibleCards.length === 0 ? 'block' : 'none';
     if (animate) {
