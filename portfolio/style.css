@@ -190,6 +190,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   overflow: hidden;
   cursor: pointer;
   background: var(--gray-1);
+  touch-action: manipulation;
 }
 .work-card.hidden { display: none; }
 .work-card.extra-card { display: none; }
@@ -1425,12 +1426,10 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   opacity: 0;
   transform: translateY(16px);
   transition: opacity .45s ease, transform .45s ease;
-  pointer-events: none;
 }
 .work-card.w-anim.w-visible {
   opacity: 1;
   transform: none;
-  pointer-events: auto;
 }
 
 /* ─── 페이지 로더 ────────────────────────────────────────────── */
