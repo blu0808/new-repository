@@ -483,7 +483,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 .proj-row-visual > img:hover { opacity: .88; }
 .proj-carousel--book { background: none; }
-.proj-carousel--book .proj-carousel-track img {
+.proj-carousel--book .proj-carousel-track img:not(.vimeo-thumb) {
   object-fit: cover;
   padding: 0;
 }
