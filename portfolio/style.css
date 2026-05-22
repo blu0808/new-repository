@@ -328,6 +328,12 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 
 .section--projects { background: var(--white); }
+
+/* ─── Teaser ─────────────────────────────────────────────── */
+.section--teaser { padding-left: clamp(16px, 4vw, 48px); padding-right: clamp(16px, 4vw, 48px); }
+.teaser-img { width: 100%; display: block; }
+.teaser-caption { display: flex; align-items: center; gap: 14px; padding-top: 14px; }
+.teaser-title { font-size: .9rem; color: var(--gray-4); letter-spacing: .01em; }
 #works .container { max-width: 1600px; }
 #works { transition: background .5s ease; }
 #works.poster-active { background: #1A4DFF; }
