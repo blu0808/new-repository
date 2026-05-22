@@ -240,10 +240,17 @@ function openModal(card, dir = 0) {
     document.body.style.overflow = 'hidden';
   };
 
+  const preloadAdjacent = () => {
+    const vis = [...document.querySelectorAll('.work-card:not(.hidden)')];
+    [vis[(currentModalIndex - 1 + vis.length) % vis.length], vis[(currentModalIndex + 1) % vis.length]]
+      .forEach(c => { if (c) { const i = new Image(); i.src = c.querySelector('img')?.src; } });
+  };
+
   if (alreadyOpen) {
     if (window.innerWidth <= 860) {
       if (modalAnimTimer) clearTimeout(modalAnimTimer);
       applyContent();
+      preloadAdjacent();
     } else {
       const FADE = 220;
       modalImg.style.transition = `opacity ${FADE}ms ease, transform ${FADE}ms ease`;
@@ -264,6 +271,7 @@ function openModal(card, dir = 0) {
     }
   } else {
     applyContent();
+    preloadAdjacent();
   }
 }
 
@@ -338,9 +346,20 @@ document.getElementById('modalNext')?.addEventListener('click', e => {
   const visibles = [...document.querySelectorAll('.work-card:not(.hidden)')];
   openModal(visibles[(currentModalIndex + 1) % visibles.length], 1);
 });
-let modalTx = 0;
+let modalTx = 0, modalPreloaded = false;
 const workModal = document.getElementById('workModal');
-workModal?.addEventListener('touchstart', e => { modalTx = e.touches[0].clientX; }, { passive: true });
+workModal?.addEventListener('touchstart', e => { modalTx = e.touches[0].clientX; modalPreloaded = false; }, { passive: true });
+workModal?.addEventListener('touchmove', e => {
+  if (modalPreloaded) return;
+  const dx = e.touches[0].clientX - modalTx;
+  if (Math.abs(dx) < 20) return;
+  modalPreloaded = true;
+  const vis = [...document.querySelectorAll('.work-card:not(.hidden)')];
+  const target = dx < 0
+    ? vis[(currentModalIndex + 1) % vis.length]
+    : vis[(currentModalIndex - 1 + vis.length) % vis.length];
+  if (target) { const img = new Image(); img.src = target.querySelector('img')?.src; }
+}, { passive: true });
 workModal?.addEventListener('touchend', e => {
   const dx = e.changedTouches[0].clientX - modalTx;
   if (Math.abs(dx) < 50) return;
