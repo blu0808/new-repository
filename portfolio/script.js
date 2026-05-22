@@ -495,11 +495,7 @@ function applyWorksFilter(filter, animate = true) {
     const emptyEl = document.getElementById('worksEmpty');
     if (emptyEl) emptyEl.style.display = visibleCards.length === 0 ? 'block' : 'none';
     if (animate) {
-      // w-anim 즉시 적용 (opacity:0 snap) → stagger로 w-visible 추가
-      visibleCards.forEach(c => c.classList.add('w-anim'));
-      visibleCards.forEach((card, i) => {
-        setTimeout(() => card.classList.add('w-visible'), i * 40 + 10);
-      });
+      staggerWorkCards(visibleCards);
     }
   }, animate ? 150 : 0);
 }
