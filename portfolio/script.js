@@ -243,20 +243,7 @@ function openModal(card, dir = 0) {
   if (alreadyOpen) {
     if (window.innerWidth <= 860) {
       if (modalAnimTimer) clearTimeout(modalAnimTimer);
-      const F = 120;
-      const imgWrap = document.querySelector('#workModal .modal-img-wrap');
-      imgWrap.style.transition = `opacity ${F}ms ease`;
-      imgWrap.style.opacity = '0';
-      modalAnimTimer = setTimeout(() => {
-        applyContent();
-        imgWrap.style.transition = 'none';
-        void imgWrap.offsetWidth;
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          imgWrap.style.transition = `opacity ${F}ms ease`;
-          imgWrap.style.opacity = '';
-          setTimeout(() => { imgWrap.style.transition = ''; }, F + 10);
-        }));
-      }, F + 10);
+      applyContent();
     } else {
       const FADE = 220;
       modalImg.style.transition = `opacity ${FADE}ms ease, transform ${FADE}ms ease`;
