@@ -244,16 +244,17 @@ function openModal(card, dir = 0) {
     if (window.innerWidth <= 860) {
       if (modalAnimTimer) clearTimeout(modalAnimTimer);
       const F = 120;
-      modalImg.style.transition = `opacity ${F}ms ease`;
-      modalImg.style.opacity = '0';
+      const imgWrap = document.querySelector('#workModal .modal-img-wrap');
+      imgWrap.style.transition = `opacity ${F}ms ease`;
+      imgWrap.style.opacity = '0';
       modalAnimTimer = setTimeout(() => {
         applyContent();
-        modalImg.style.transition = 'none';
-        void modalImg.offsetWidth;
+        imgWrap.style.transition = 'none';
+        void imgWrap.offsetWidth;
         requestAnimationFrame(() => requestAnimationFrame(() => {
-          modalImg.style.transition = `opacity ${F}ms ease`;
-          modalImg.style.opacity = '';
-          setTimeout(() => { modalImg.style.transition = ''; }, F + 10);
+          imgWrap.style.transition = `opacity ${F}ms ease`;
+          imgWrap.style.opacity = '';
+          setTimeout(() => { imgWrap.style.transition = ''; }, F + 10);
         }));
       }, F + 10);
     } else {
