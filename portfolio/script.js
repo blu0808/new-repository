@@ -202,6 +202,21 @@ const worksData = [
   { title: 'End(And)',                 artist: 'Grace',           year: '2025', desc: '', link: '' },
 ];
 
+/* iOS 배경 스크롤 완전 차단 */
+let _savedScrollY = 0;
+function lockScroll() {
+  _savedScrollY = window.scrollY;
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${_savedScrollY}px`;
+  document.body.style.width = '100%';
+}
+function unlockScroll() {
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.width = '';
+  window.scrollTo(0, _savedScrollY);
+}
+
 const modal       = document.getElementById('workModal');
 const modalImg    = document.getElementById('modalImg');
 const modalTitle  = document.getElementById('modalTitle');
@@ -239,7 +254,7 @@ function openModal(card, dir = 0) {
     modalPlayer.innerHTML = '';
     if (modalPlayBtn) modalPlayBtn.style.display = currentYtId ? 'flex' : 'none';
     modal.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    lockScroll();
   };
 
   const preloadAdjacent = () => {
@@ -251,8 +266,10 @@ function openModal(card, dir = 0) {
   if (alreadyOpen) {
     if (window.innerWidth <= 860) {
       if (modalAnimTimer) clearTimeout(modalAnimTimer);
-      applyContent();
-      preloadAdjacent();
+      const nextSrc = card.querySelector('img').src;
+      const tmp = new Image();
+      tmp.src = nextSrc;
+      tmp.decode().then(() => { applyContent(); preloadAdjacent(); }).catch(() => { applyContent(); preloadAdjacent(); });
     } else {
       const FADE = 220;
       modalImg.style.transition = `opacity ${FADE}ms ease, transform ${FADE}ms ease`;
@@ -279,7 +296,7 @@ function openModal(card, dir = 0) {
 
 function closeModal() {
   modal.classList.remove('open');
-  document.body.style.overflow = '';
+  unlockScroll();
   modalPlayer.classList.remove('active');
   modalPlayer.innerHTML = '';
 }
