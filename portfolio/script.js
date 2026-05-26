@@ -203,14 +203,19 @@ const worksData = [
 ];
 
 /* iOS 배경 스크롤 완전 차단 */
+let _scrollLocked = false;
 let _savedScrollY = 0;
 function lockScroll() {
+  if (_scrollLocked) return;
+  _scrollLocked = true;
   _savedScrollY = window.scrollY;
   document.body.style.position = 'fixed';
   document.body.style.top = `-${_savedScrollY}px`;
   document.body.style.width = '100%';
 }
 function unlockScroll() {
+  if (!_scrollLocked) return;
+  _scrollLocked = false;
   document.body.style.position = '';
   document.body.style.top = '';
   document.body.style.width = '';
@@ -328,7 +333,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     closeModal();
     closeEmailPanel();
-    if (zoomOverlay) { zoomOverlay.classList.remove('open'); document.body.style.overflow = ''; }
+    if (zoomOverlay) { zoomOverlay.classList.remove('open'); unlockScroll(); }
     if (typeof closeYtModal === 'function') closeYtModal();
     if (typeof closePg === 'function') closePg();
   }
@@ -396,7 +401,7 @@ const epStatus   = document.getElementById('epStatus');
 function openEmailPanel() {
   emailPanel.classList.add('open');
   emailPanel.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
+  lockScroll();
   setTimeout(() => epFrom.focus(), 420);
 }
 
@@ -412,7 +417,7 @@ function resetConfirm() {
 function closeEmailPanel() {
   emailPanel.classList.remove('open');
   emailPanel.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
+  unlockScroll();
   resetConfirm();
 }
 
@@ -712,13 +717,13 @@ if (zoomOverlay) {
       zoomImg.src = img.src;
       zoomImg.alt = img.alt;
       zoomOverlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      lockScroll();
     });
   });
 
   zoomOverlay.addEventListener('click', () => {
     zoomOverlay.classList.remove('open');
-    document.body.style.overflow = '';
+    unlockScroll();
   });
 }
 
@@ -946,12 +951,14 @@ function openPg(index) {
   pgSet(index, false);
   pgOverlay.classList.add('open');
   pgOverlay.setAttribute('aria-hidden', 'false');
+  lockScroll();
 }
 
 function closePg() {
   if (!pgOverlay?.classList.contains('open')) return;
   pgOverlay.classList.remove('open');
   pgOverlay.setAttribute('aria-hidden', 'true');
+  unlockScroll();
   // pgGo 애니메이션 중 닫힐 때 transform 즉시 초기화
   pgImg.style.transition = 'none';
   pgImg.classList.remove('out', 'in');
@@ -1004,7 +1011,7 @@ function openYtModal(videoId, title) {
   ytModalTitle.textContent = title;
   ytModal.classList.add('open');
   ytModal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
+  lockScroll();
 }
 
 function closeYtModal() {
@@ -1012,7 +1019,7 @@ function closeYtModal() {
   ytModal.classList.remove('open');
   ytModal.setAttribute('aria-hidden', 'true');
   ytModalPlayer.innerHTML = '';
-  document.body.style.overflow = '';
+  unlockScroll();
 }
 
 /* 앨범커버 클릭은 이미지 확대 모달로 처리 (ytModal 직접 실행 제거) */
