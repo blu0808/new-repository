@@ -1111,6 +1111,21 @@ if (journalItems.length) {
   journalItems.forEach(el => jObs.observe(el));
 }
 
+/* ─── History 스크롤 등장 ───────────────────────────────────── */
+const historyRows = document.querySelectorAll('.hs-year-row, .hs-row');
+if (historyRows.length) {
+  historyRows.forEach((el, i) => {
+    el.classList.add('h-anim');
+    el.style.transitionDelay = (i * 0.07) + 's';
+  });
+  const hObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('h-visible'); hObs.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+  historyRows.forEach(el => hObs.observe(el));
+}
+
 /* ─── 이미지 로드 블러 ──────────────────────────────────────── */
 document.querySelectorAll('.journal-img, .iv-img').forEach(img => {
   img.classList.add('img-blur');

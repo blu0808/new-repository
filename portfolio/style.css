@@ -1493,6 +1493,23 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   opacity: .5;
 }
 
+.hs-item {
+  transition: opacity .2s ease;
+}
+@media (hover: hover) {
+  .hs-item:hover { opacity: .6; }
+}
+
+.h-anim {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.h-anim.h-visible {
+  opacity: 1;
+  transform: none;
+}
+
 @media (max-width: 860px) {
   .history-main { padding: 60px 28px 80px; }
   .hs-row { grid-template-columns: 80px 1fr; gap: 10px 20px; }
