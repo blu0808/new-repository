@@ -515,6 +515,7 @@ function applyWorksFilter(filter, animate = true) {
   const allCards = [...document.querySelectorAll('.work-card')];
 
   document.getElementById('works').classList.toggle('poster-active', filter === 'poster');
+  document.querySelector('.scroll-progress')?.classList.toggle('sp-poster', filter === 'poster');
 
   if (animate) {
     // 현재 보이는 카드를 즉시 opacity:0으로 (그리드 레벨 조작 없이 깜빡임 방지)
