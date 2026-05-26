@@ -1493,13 +1493,6 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   opacity: .5;
 }
 
-.hs-item {
-  transition: opacity .2s ease;
-}
-@media (hover: hover) {
-  .hs-item:hover { opacity: .6; }
-}
-
 .h-anim {
   opacity: 0;
   transform: translateY(18px);
