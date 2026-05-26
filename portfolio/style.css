@@ -138,7 +138,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   inset: 0;
   z-index: 1;
   background: var(--black);
-  transition: opacity .6s ease;
+  transition: opacity 1.2s ease;
   overflow: hidden;
 }
 .hero-video-cover img {

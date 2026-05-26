@@ -1062,7 +1062,7 @@ if (heroCover) {
   };
   const _heroIframe = document.getElementById('heroVideoIframe');
   if (_heroIframe) {
-    _heroIframe.addEventListener('load', () => setTimeout(fadeHeroCover, 300));
+    _heroIframe.addEventListener('load', () => setTimeout(fadeHeroCover, 600));
   }
   setTimeout(fadeHeroCover, 6000);
 }
