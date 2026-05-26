@@ -202,24 +202,32 @@ const worksData = [
   { title: 'End(And)',                 artist: 'Grace',           year: '2025', desc: '', link: '' },
 ];
 
-/* iOS 배경 스크롤 완전 차단 */
+/* 스크롤 차단 — 모바일(iOS): position:fixed, 데스크탑: overflow:hidden */
 let _scrollLocked = false;
 let _savedScrollY = 0;
 function lockScroll() {
   if (_scrollLocked) return;
   _scrollLocked = true;
-  _savedScrollY = window.scrollY;
-  document.body.style.position = 'fixed';
-  document.body.style.top = `-${_savedScrollY}px`;
-  document.body.style.width = '100%';
+  if (window.innerWidth <= 860) {
+    _savedScrollY = window.scrollY;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${_savedScrollY}px`;
+    document.body.style.width = '100%';
+  } else {
+    document.body.style.overflow = 'hidden';
+  }
 }
 function unlockScroll() {
   if (!_scrollLocked) return;
   _scrollLocked = false;
-  document.body.style.position = '';
-  document.body.style.top = '';
-  document.body.style.width = '';
-  window.scrollTo(0, _savedScrollY);
+  if (window.innerWidth <= 860) {
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.width = '';
+    window.scrollTo(0, _savedScrollY);
+  } else {
+    document.body.style.overflow = '';
+  }
 }
 
 const modal       = document.getElementById('workModal');
@@ -1054,7 +1062,7 @@ if (heroCover) {
   };
   const _heroIframe = document.getElementById('heroVideoIframe');
   if (_heroIframe) {
-    _heroIframe.addEventListener('load', () => setTimeout(fadeHeroCover, 1500));
+    _heroIframe.addEventListener('load', () => setTimeout(fadeHeroCover, 300));
   }
   setTimeout(fadeHeroCover, 6000);
 }
