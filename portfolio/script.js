@@ -203,7 +203,7 @@ const worksData = [
 ];
 
 /* 스크롤 차단 — 터치기기(iOS): position:fixed, 데스크탑: overflow:hidden */
-const _isTouchDevice = navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
+const _isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
 let _scrollLocked = false;
 let _savedScrollY = 0;
 function lockScroll() {
