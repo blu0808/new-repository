@@ -239,15 +239,13 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
     display: flex; opacity: 0;
     background: linear-gradient(to top, rgba(0,0,0,.72) 0%, transparent 58%);
   }
-  .work-card[data-category="album-cover"] .work-overlay .work-tag,
+  .work-card[data-category="album-cover"] .work-overlay .work-tag { display: none; }
   .work-card[data-category="album-cover"] .work-overlay .work-name {
     transform: translateY(9px); opacity: 0;
     transition: transform .4s ease, opacity .35s ease;
   }
   .work-card[data-category="album-cover"]:hover .work-overlay { opacity: 1; }
-  .work-card[data-category="album-cover"]:hover .work-overlay .work-tag,
   .work-card[data-category="album-cover"]:hover .work-overlay .work-name { transform: translateY(0); opacity: 1; }
-  .work-card[data-category="album-cover"]:hover .work-overlay .work-name { transition-delay: .06s; }
 }
 .work-tag {
   font-size: 10px;
@@ -715,7 +713,7 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   position: absolute; bottom: 16px; right: 16px;
   width: 48px; height: 48px; border-radius: 50%;
   background: rgba(255,255,255,.50); border: none;
-  font-size: 1rem; color: var(--black);
+  font-size: 1rem; color: var(--accent);
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; z-index: 2;
   transition: background .15s, transform .15s;
