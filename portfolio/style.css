@@ -368,7 +368,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .teaser-title-en { font-size: clamp(12px, .9vw, 14px); font-style: italic; color: var(--accent); opacity: .6; }
 .teaser-wip { font-size: .85em; }
 #works .container { max-width: 1600px; }
-#works { transition: background .5s ease; }
+#works { transition: background .5s ease; overflow-anchor: none; }
 #works.poster-active { background: #1A4DFF; }
 @media (min-width: 861px) {
   .works-tabs {
