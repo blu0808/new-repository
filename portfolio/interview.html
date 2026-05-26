@@ -259,14 +259,18 @@
       chapter.addEventListener('scroll', updateProgress);
       updateProgress();
 
-      let isDragging = false, startX = 0, scrollLeft = 0;
+      let isDragging = false, didDrag = false, startX = 0, scrollLeft = 0;
       chapter.addEventListener('mousedown', e => {
         isDragging = true;
+        didDrag = false;
         chapter.classList.add('dragging');
         startX = e.pageX;
         scrollLeft = chapter.scrollLeft;
         e.preventDefault();
       });
+      chapter.addEventListener('click', e => {
+        if (didDrag) { e.stopImmediatePropagation(); didDrag = false; }
+      }, true);
       document.addEventListener('mouseup', () => {
         if (!isDragging) return;
         isDragging = false;
@@ -274,7 +278,16 @@
       });
       document.addEventListener('mousemove', e => {
         if (!isDragging) return;
+        if (Math.abs(e.pageX - startX) > 4) didDrag = true;
         chapter.scrollLeft = scrollLeft - (e.pageX - startX);
+      });
+
+      let touchStartX = 0;
+      chapter.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      chapter.addEventListener('touchend', e => {
+        if (Math.abs(e.changedTouches[0].clientX - touchStartX) > 8) {
+          chapter.addEventListener('click', e2 => e2.stopImmediatePropagation(), { capture: true, once: true });
+        }
       });
     });
   </script>
