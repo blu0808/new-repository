@@ -515,7 +515,7 @@ function applyWorksFilter(filter, animate = true) {
   const allCards = [...document.querySelectorAll('.work-card')];
 
   document.getElementById('works').classList.toggle('poster-active', filter === 'poster');
-  document.querySelector('.scroll-progress')?.classList.toggle('sp-poster', filter === 'poster');
+  updateProgressBarColor();
 
   if (animate) {
     // 현재 보이는 카드를 즉시 opacity:0으로 (그리드 레벨 조작 없이 깜빡임 방지)
@@ -1244,6 +1244,19 @@ window.addEventListener('scroll', () => {
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   scrollProgress.style.width = (window.scrollY / docHeight * 100) + '%';
 }, { passive: true });
+
+let worksInView = false;
+function updateProgressBarColor() {
+  const isPoster = document.getElementById('works')?.classList.contains('poster-active');
+  scrollProgress.classList.toggle('sp-poster', !!(isPoster && worksInView));
+}
+const worksEl = document.getElementById('works');
+if (worksEl) {
+  new IntersectionObserver(entries => {
+    worksInView = entries[0].isIntersecting;
+    updateProgressBarColor();
+  }, { threshold: 0.01 }).observe(worksEl);
+}
 
 /* ─── 커스텀 커서 ────────────────────────────────────────────── */
 if (window.matchMedia('(hover: hover)').matches) {
