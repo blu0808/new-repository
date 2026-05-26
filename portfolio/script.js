@@ -998,17 +998,6 @@ pgOverlay?.addEventListener('click', e => {
   if (e.target === pgOverlay || e.target.classList.contains('pg-stage')) closePg();
 });
 
-let pgTx = 0, pgTy = 0;
-pgOverlay?.addEventListener('touchstart', e => {
-  pgTx = e.touches[0].clientX;
-  pgTy = e.touches[0].clientY;
-}, { passive: true });
-pgOverlay?.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - pgTx;
-  const dy = e.changedTouches[0].clientY - pgTy;
-  if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
-  pgGo(dx < 0 ? pgCur + 1 : pgCur - 1);
-});
 
 let pgWheelTime = 0;
 pgOverlay?.addEventListener('wheel', e => {
@@ -1021,11 +1010,13 @@ pgOverlay?.addEventListener('wheel', e => {
   pgGo(delta > 0 ? pgCur + 1 : pgCur - 1);
 }, { passive: false });
 
-let pgTx = 0;
-pgOverlay?.addEventListener('touchstart', e => { pgTx = e.touches[0].clientX; }, { passive: true });
-pgOverlay?.addEventListener('touchend',   e => {
+let pgTx = 0, pgTy = 0;
+pgOverlay?.addEventListener('touchstart', e => { pgTx = e.touches[0].clientX; pgTy = e.touches[0].clientY; }, { passive: true });
+pgOverlay?.addEventListener('touchend', e => {
   const dx = e.changedTouches[0].clientX - pgTx;
-  if (Math.abs(dx) > 50) pgGo(dx < 0 ? pgCur + 1 : pgCur - 1);
+  const dy = e.changedTouches[0].clientY - pgTy;
+  if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy)) return;
+  pgGo(dx < 0 ? pgCur + 1 : pgCur - 1);
 });
 
 /* ─── YouTube Modal ─────────────────────────────────────── */
