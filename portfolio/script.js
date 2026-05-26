@@ -1215,6 +1215,12 @@ window.addEventListener('scroll', () => {
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   scrollProgress.style.width = (window.scrollY / docHeight * 100) + '%';
 }, { passive: true });
+window.addEventListener('resize', () => {
+  const activeTab = document.querySelector('.works-tab.active');
+  if (activeTab) {
+    scrollProgress.style.background = (activeTab.dataset.filter === 'poster' && window.innerWidth > 860) ? '#fff' : 'var(--accent)';
+  }
+}, { passive: true });
 
 /* ─── 커스텀 커서 ────────────────────────────────────────────── */
 if (window.matchMedia('(hover: hover)').matches) {
