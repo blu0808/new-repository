@@ -225,7 +225,7 @@ function unlockScroll() {
     document.body.style.position = '';
     document.body.style.top = '';
     document.body.style.width = '';
-    window.scrollTo(0, _savedScrollY);
+    window.scrollTo({ top: _savedScrollY, behavior: 'instant' });
   } else {
     document.body.style.overflow = '';
   }
