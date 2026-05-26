@@ -1194,6 +1194,13 @@ if (projRows.length) {
   projRows.forEach(el => projObs.observe(el));
 }
 
+/* ─── 이미지 blur-up 로딩 ───────────────────────────────────── */
+document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+  if (img.complete && img.naturalWidth > 0) return;
+  img.classList.add('img-lazy');
+  img.addEventListener('load', () => img.classList.add('loaded'));
+});
+
 /* ─── 앨범커버 오버레이 아티스트명 주입 ─────────────────────── */
 document.querySelectorAll('.work-card[data-category="album-cover"]').forEach((card, i) => {
   const overlay = card.querySelector('.work-overlay');
