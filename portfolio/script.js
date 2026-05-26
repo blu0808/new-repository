@@ -1247,8 +1247,10 @@ window.addEventListener('scroll', () => {
 
 let worksInView = false;
 function updateProgressBarColor() {
+  const sp = document.querySelector('.scroll-progress');
+  if (!sp) return;
   const isPoster = document.getElementById('works')?.classList.contains('poster-active');
-  scrollProgress.classList.toggle('sp-poster', !!(isPoster && worksInView));
+  sp.classList.toggle('sp-poster', !!(isPoster && worksInView));
 }
 const worksEl = document.getElementById('works');
 if (worksEl) {
