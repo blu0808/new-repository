@@ -1540,7 +1540,7 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 /* ─── 스크롤 프로그레스 바 ───────────────────────────────────── */
 .scroll-progress {
   position: fixed; top: 0; left: 0;
-  height: 2px; background: var(--accent);
+  height: 3px; background: var(--accent);
   z-index: 9000; width: 0%;
   transition: width .1s linear;
   pointer-events: none;
