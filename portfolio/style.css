@@ -1283,12 +1283,21 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 
 .journal-item {
   display: block;
+  overflow: hidden;
 }
 
 .journal-item img {
   width: 100%;
   height: auto;
   display: block;
+}
+@media (hover: hover) {
+  .journal-img, .relay-strip img {
+    transition: transform .4s ease, filter .5s ease, opacity .4s ease;
+  }
+  .journal-img:hover, .relay-strip img:hover {
+    transform: scale(1.03);
+  }
 }
 
 /* ─── 너비 변형 ── */
