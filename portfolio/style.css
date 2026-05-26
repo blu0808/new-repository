@@ -928,6 +928,7 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
+  .work-card[data-category="album-cover"]:hover .work-overlay::after { opacity: 0 !important; }
 }
 
 /* ─── YouTube Modal ───────────────────────────────────────── */
