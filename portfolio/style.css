@@ -240,12 +240,15 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
     background: linear-gradient(to top, rgba(0,0,0,.72) 0%, transparent 58%);
   }
   .work-card[data-category="album-cover"] .work-overlay .work-tag { display: none; }
-  .work-card[data-category="album-cover"] .work-overlay .work-name {
+  .work-card[data-category="album-cover"] .work-overlay .work-name,
+  .work-card[data-category="album-cover"] .work-overlay .work-artist {
     transform: translateY(9px); opacity: 0;
     transition: transform .4s ease, opacity .35s ease;
   }
   .work-card[data-category="album-cover"]:hover .work-overlay { opacity: 1; }
-  .work-card[data-category="album-cover"]:hover .work-overlay .work-name { transform: translateY(0); opacity: 1; }
+  .work-card[data-category="album-cover"]:hover .work-overlay .work-name,
+  .work-card[data-category="album-cover"]:hover .work-overlay .work-artist { transform: translateY(0); opacity: 1; }
+  .work-card[data-category="album-cover"]:hover .work-overlay .work-artist { transition-delay: .06s; }
 }
 .work-tag {
   font-size: 10px;
@@ -262,6 +265,11 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   font-weight: 500;
   color: var(--white);
   line-height: 1.3;
+}
+.work-artist {
+  font-size: 10px;
+  color: rgba(255,255,255,.65);
+  letter-spacing: .03em;
 }
 .works-empty {
   margin-top: 32px;

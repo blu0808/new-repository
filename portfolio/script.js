@@ -1171,6 +1171,17 @@ emailPanel?.addEventListener('keydown', e => {
   }
 });
 
+/* ─── 앨범커버 오버레이 아티스트명 주입 ─────────────────────── */
+document.querySelectorAll('.work-card[data-category="album-cover"]').forEach((card, i) => {
+  const overlay = card.querySelector('.work-overlay');
+  if (overlay && works[i]?.artist) {
+    const el = document.createElement('span');
+    el.className = 'work-artist';
+    el.textContent = works[i].artist;
+    overlay.appendChild(el);
+  }
+});
+
 /* ─── 스크롤 프로그레스 바 ───────────────────────────────────── */
 const scrollProgress = document.createElement('div');
 scrollProgress.className = 'scroll-progress';
