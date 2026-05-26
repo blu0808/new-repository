@@ -1593,6 +1593,15 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   box-shadow: 0 0 6px rgba(26,77,255,.5), 0 1px 2px rgba(0,0,0,.15);
 }
 
+/* ─── 모바일 탭 피드백 ───────────────────────────────────────── */
+@media (hover: none) {
+  .work-card:active .work-thumb img { transform: scale(.97); opacity: .85; }
+  .work-card:active { transition: none; }
+  .works-tab:active { opacity: .7; }
+  .proj-carousel-btn:active, .modal-nav:active,
+  .pg-close:active, .modal-close:active { opacity: .5; transform: scale(.92); }
+}
+
 /* ─── 이미지 blur-up 로딩 ───────────────────────────────────── */
 img.img-lazy {
   filter: blur(8px);
