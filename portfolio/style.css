@@ -1053,9 +1053,6 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
     transition: box-shadow .3s;
   }
   .nav.scrolled { box-shadow: none; }
-  .nav.nav--poster { background: rgba(26,77,255,.82); }
-  .nav.nav--poster .nav-logo,
-  .nav.nav--poster .nav-link--sub { color: var(--white); }
   .nav-logo { font-size: .95rem; font-weight: 700; letter-spacing: .04em; color: var(--accent); }
   .nav-right { display: flex; align-items: center; gap: 12px; }
   .hamburger { display: none; }
