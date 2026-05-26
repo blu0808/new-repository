@@ -269,6 +269,7 @@ function openModal(card, dir = 0) {
     if (modalPlayBtn) modalPlayBtn.style.display = currentYtId ? 'flex' : 'none';
     modal.classList.add('open');
     lockScroll();
+    requestAnimationFrame(positionModalNav);
   };
 
   const preloadAdjacent = () => {
@@ -375,6 +376,8 @@ function positionModalNav() {
   const cy = r.top + r.height / 2;
   prev.style.top = next.style.top = cy + 'px';
 }
+
+window.addEventListener('resize', () => { if (modal?.classList.contains('open')) positionModalNav(); });
 
 /* ─── Works 모달 화살표 + 모바일 스와이프 ──────────────────── */
 document.getElementById('modalPrev')?.addEventListener('click', e => {
