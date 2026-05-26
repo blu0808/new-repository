@@ -514,7 +514,7 @@ function applyWorksFilter(filter, animate = true) {
 
   document.getElementById('works').classList.toggle('poster-active', filter === 'poster');
   const bar = document.querySelector('.scroll-progress');
-  if (bar) bar.style.background = filter === 'poster' ? '#fff' : 'var(--accent)';
+  if (bar) bar.style.background = (filter === 'poster' && window.innerWidth > 860) ? '#fff' : 'var(--accent)';
 
   if (animate) {
     // 현재 보이는 카드를 즉시 opacity:0으로 (그리드 레벨 조작 없이 깜빡임 방지)
