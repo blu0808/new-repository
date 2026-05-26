@@ -373,7 +373,9 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 @media (min-width: 861px) {
   .works-tabs {
     position: sticky; top: 0; z-index: 50;
-    background: var(--white);
+    background: rgba(255,255,255,.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding-top: 14px; padding-bottom: 14px;
     margin-top: -14px;
     margin-left: calc(-1 * clamp(28px, 5vw, 72px));
@@ -381,7 +383,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
     padding-left: clamp(28px, 5vw, 72px);
     padding-right: clamp(28px, 5vw, 72px);
   }
-  #works.poster-active .works-tabs { background: #1A4DFF; }
+  #works.poster-active .works-tabs { background: rgba(26,77,255,.82); }
 }
 #works.poster-active .works-tab { color: rgba(255,255,255,.55); border-color: rgba(255,255,255,.25); }
 @media (hover: hover) { #works.poster-active .works-tab:hover { color: var(--white); border-color: rgba(255,255,255,.65); background: none; } }
@@ -1122,7 +1124,9 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
     position: sticky;
     top: 52px;
     z-index: 200;
-    background: var(--white);
+    background: rgba(255,255,255,.82);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding-top: 10px;
     padding-bottom: 10px;
     margin-bottom: 16px;
@@ -1131,7 +1135,7 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
     padding-left: clamp(28px, 5vw, 72px);
     padding-right: clamp(28px, 5vw, 72px);
   }
-  #works.poster-active .works-tabs { background: #1A4DFF; }
+  #works.poster-active .works-tabs { background: rgba(26,77,255,.82); }
   .proj-carousel.touched .proj-carousel-btn { opacity: 1; }
 }
 
