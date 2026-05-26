@@ -346,6 +346,12 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   letter-spacing: .12em;
   text-transform: uppercase;
   color: rgba(255,255,255,.38);
+  transition: color .3s ease;
+}
+@media (hover: hover) {
+  .works-grid.poster-view .work-card:hover .work-name {
+    color: rgba(255,255,255,.82);
+  }
 }
 
 .section--projects { background: var(--white); }
@@ -665,6 +671,10 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   position: absolute; inset: 0;
   background: rgba(0,0,0,.75);
 }
+@keyframes modal-in {
+  from { transform: translateY(16px) scale(.97); }
+  to   { transform: translateY(0) scale(1); }
+}
 .modal-panel {
   position: relative; z-index: 1;
   background: var(--white);
@@ -674,6 +684,9 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   display: flex;
   flex-direction: column;
   will-change: transform, opacity;
+}
+.modal.open .modal-panel {
+  animation: modal-in .32s cubic-bezier(.25,.46,.45,.94) both;
 }
 .modal-close {
   position: absolute; top: 14px; right: 14px;
