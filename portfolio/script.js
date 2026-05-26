@@ -279,30 +279,28 @@ function openModal(card, dir = 0) {
   };
 
   if (alreadyOpen) {
-    if (window.innerWidth <= 860) {
-      if (modalAnimTimer) clearTimeout(modalAnimTimer);
-      const nextSrc = card.querySelector('img').src;
-      const tmp = new Image();
-      tmp.src = nextSrc;
-      tmp.decode().then(() => { applyContent(); preloadAdjacent(); }).catch(() => { applyContent(); preloadAdjacent(); });
-    } else {
-      const FADE = 220;
-      modalImg.style.transition = `opacity ${FADE}ms ease, transform ${FADE}ms ease`;
-      modalImg.style.opacity = '0';
-      modalImg.style.transform = 'scale(1.04)';
-      setTimeout(() => {
-        applyContent();
-        modalImg.style.transition = 'none';
-        modalImg.style.transform = 'scale(0.97)';
-        void modalImg.offsetWidth;
-        requestAnimationFrame(() => requestAnimationFrame(() => {
-          modalImg.style.transition = `opacity ${FADE}ms ease, transform ${FADE}ms ease`;
-          modalImg.style.opacity = '';
-          modalImg.style.transform = '';
-          setTimeout(() => { modalImg.style.transition = ''; }, FADE + 20);
-        }));
-      }, FADE + 10);
-    }
+    if (modalAnimTimer) clearTimeout(modalAnimTimer);
+    const FADE = 180;
+    const body = document.querySelector('#workModal .modal-body');
+    const panel = document.querySelector('#workModal .modal-panel');
+    panel.style.minHeight = panel.offsetHeight + 'px';
+    body.style.transition = `opacity ${FADE}ms ease`;
+    body.style.opacity = '0';
+    const nextSrc = card.querySelector('img').src;
+    const tmp = new Image();
+    tmp.src = nextSrc;
+    const go = () => {
+      applyContent();
+      preloadAdjacent();
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        body.style.opacity = '';
+        modalAnimTimer = setTimeout(() => {
+          body.style.transition = '';
+          panel.style.minHeight = '';
+        }, FADE + 20);
+      }));
+    };
+    (tmp.decode ? tmp.decode() : Promise.reject()).then(go).catch(go);
   } else {
     applyContent();
     preloadAdjacent();
