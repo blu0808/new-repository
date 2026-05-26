@@ -234,6 +234,21 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 }
 @media (hover: hover) { .work-card:hover .work-overlay { opacity: 1; } }
 .work-card[data-category="album-cover"] .work-overlay { display: none; }
+@media (hover: hover) {
+  .work-card[data-category="album-cover"] .work-overlay {
+    display: flex; opacity: 0;
+    background: linear-gradient(to top, rgba(0,0,0,.72) 0%, transparent 58%);
+  }
+  .work-card[data-category="album-cover"] .work-overlay .work-tag,
+  .work-card[data-category="album-cover"] .work-overlay .work-name {
+    transform: translateY(9px); opacity: 0;
+    transition: transform .4s ease, opacity .35s ease;
+  }
+  .work-card[data-category="album-cover"]:hover .work-overlay { opacity: 1; }
+  .work-card[data-category="album-cover"]:hover .work-overlay .work-tag,
+  .work-card[data-category="album-cover"]:hover .work-overlay .work-name { transform: translateY(0); opacity: 1; }
+  .work-card[data-category="album-cover"]:hover .work-overlay .work-name { transition-delay: .06s; }
+}
 .work-tag {
   font-size: 10px;
   letter-spacing: .08em;
@@ -1522,4 +1537,38 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 @media (min-width: 861px) { .email-float { display: none; } }
 @media (max-width: 640px) {
   .email-float { bottom: 24px; right: 20px; width: 40px; height: 40px; }
+}
+
+/* ─── 스크롤 프로그레스 바 ───────────────────────────────────── */
+.scroll-progress {
+  position: fixed; top: 0; left: 0;
+  height: 2px; background: var(--accent);
+  z-index: 9000; width: 0%;
+  transition: width .1s linear;
+  pointer-events: none;
+}
+
+/* ─── 커스텀 커서 ────────────────────────────────────────────── */
+@media (hover: hover) {
+  body { cursor: none; }
+  .cursor-dot {
+    position: fixed; top: 0; left: 0;
+    width: 7px; height: 7px;
+    background: var(--accent); border-radius: 50%;
+    pointer-events: none; z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: width .2s ease, height .2s ease, opacity .3s;
+  }
+  .cursor-ring {
+    position: fixed; top: 0; left: 0;
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--accent); border-radius: 50%;
+    pointer-events: none; z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition: width .35s ease, height .35s ease, opacity .3s;
+    opacity: .45;
+  }
+  .cursor-dot.cursor-hover { width: 10px; height: 10px; }
+  .cursor-ring.cursor-hover { width: 50px; height: 50px; opacity: .65; }
+  .cursor-dot.cursor-hidden, .cursor-ring.cursor-hidden { opacity: 0 !important; }
 }

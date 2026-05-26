@@ -1169,3 +1169,44 @@ emailPanel?.addEventListener('keydown', e => {
     if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
   }
 });
+
+/* ─── 스크롤 프로그레스 바 ───────────────────────────────────── */
+const scrollProgress = document.createElement('div');
+scrollProgress.className = 'scroll-progress';
+document.body.appendChild(scrollProgress);
+window.addEventListener('scroll', () => {
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  scrollProgress.style.width = (window.scrollY / docHeight * 100) + '%';
+}, { passive: true });
+
+/* ─── 커스텀 커서 ────────────────────────────────────────────── */
+if (window.matchMedia('(hover: hover)').matches) {
+  const dot = document.createElement('div');
+  dot.className = 'cursor-dot cursor-hidden';
+  const ring = document.createElement('div');
+  ring.className = 'cursor-ring cursor-hidden';
+  document.body.append(dot, ring);
+
+  let mouseX = 0, mouseY = 0, ringX = -100, ringY = -100;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px';
+    dot.classList.remove('cursor-hidden'); ring.classList.remove('cursor-hidden');
+  });
+  document.addEventListener('mouseleave', () => {
+    dot.classList.add('cursor-hidden'); ring.classList.add('cursor-hidden');
+  });
+
+  (function animateRing() {
+    ringX += (mouseX - ringX) * 0.1; ringY += (mouseY - ringY) * 0.1;
+    ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px';
+    requestAnimationFrame(animateRing);
+  })();
+
+  const hoverTargets = 'a, button, .work-card, .proj-carousel-btn, .modal-close, .pg-close, .pl-close, .scroll-top, .email-float, .sb-link, .nav-link, .nav-link--sub, .lang-btn, .hamburger';
+  document.querySelectorAll(hoverTargets).forEach(el => {
+    el.addEventListener('mouseenter', () => { dot.classList.add('cursor-hover'); ring.classList.add('cursor-hover'); });
+    el.addEventListener('mouseleave', () => { dot.classList.remove('cursor-hover'); ring.classList.remove('cursor-hover'); });
+  });
+}
