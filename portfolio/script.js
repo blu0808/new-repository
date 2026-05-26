@@ -889,15 +889,6 @@ if (projLightbox) {
     });
   }
 
-  const ivImgs = [...document.querySelectorAll('.iv-img')];
-  if (ivImgs.length) {
-    ivImgs.forEach((img, i) => {
-      img.addEventListener('click', e => {
-        e.stopPropagation();
-        plOpen(ivImgs.map(im => im.src), i);
-      });
-    });
-  }
 }
 
 /* ─── Poster data-pg-idx 할당 ───────────────────────────── */
@@ -1119,18 +1110,6 @@ if (journalItems.length) {
     });
   }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
   journalItems.forEach(el => jObs.observe(el));
-}
-
-/* ─── Interview 챕터 스크롤 등장 ───────────────────────────── */
-const ivWraps = document.querySelectorAll('.iv-chapter-wrap');
-if (ivWraps.length) {
-  ivWraps.forEach(el => el.classList.add('h-anim'));
-  const ivObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('h-visible'); ivObs.unobserve(e.target); }
-    });
-  }, { threshold: 0.05 });
-  ivWraps.forEach(el => ivObs.observe(el));
 }
 
 /* ─── History 스크롤 등장 ───────────────────────────────────── */
