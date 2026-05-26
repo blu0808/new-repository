@@ -202,14 +202,15 @@ const worksData = [
   { title: 'End(And)',                 artist: 'Grace',           year: '2025', desc: '', link: '' },
 ];
 
-/* 스크롤 차단 — 모바일(iOS): position:fixed, 데스크탑: overflow:hidden */
+/* 스크롤 차단 — 터치기기(iOS): position:fixed, 데스크탑: overflow:hidden */
+const _isTouchDevice = navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
 let _scrollLocked = false;
 let _savedScrollY = 0;
 function lockScroll() {
   if (_scrollLocked) return;
   _scrollLocked = true;
-  if (window.innerWidth <= 860) {
-    _savedScrollY = window.scrollY;
+  _savedScrollY = window.scrollY;
+  if (_isTouchDevice) {
     document.body.style.position = 'fixed';
     document.body.style.top = `-${_savedScrollY}px`;
     document.body.style.width = '100%';
@@ -220,7 +221,7 @@ function lockScroll() {
 function unlockScroll() {
   if (!_scrollLocked) return;
   _scrollLocked = false;
-  if (window.innerWidth <= 860) {
+  if (_isTouchDevice) {
     document.body.style.position = '';
     document.body.style.top = '';
     document.body.style.width = '';
@@ -329,10 +330,18 @@ document.querySelectorAll('.work-card').forEach(card => {
   card.addEventListener('touchend', e => {
     if (Math.abs(e.changedTouches[0].clientY - touchStartY) < 10) {
       e.preventDefault();
-      openModal(card);
+      if (card.dataset.category === 'poster') {
+        const pgIdx = [...document.querySelectorAll('.work-card[data-category="poster"]')].indexOf(card);
+        openPg(pgIdx);
+      } else {
+        openModal(card);
+      }
     }
   });
-  card.addEventListener('click', () => openModal(card));
+  card.addEventListener('click', () => {
+    if (card.dataset.category === 'poster') return;
+    openModal(card);
+  });
 });
 
 document.getElementById('modalClose')?.addEventListener('click', closeModal);
@@ -1171,6 +1180,21 @@ emailPanel?.addEventListener('keydown', e => {
     if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
   }
 });
+
+/* ─── Projects 스크롤 등장 애니메이션 ───────────────────────── */
+const projRows = document.querySelectorAll('.proj-row');
+if (projRows.length) {
+  projRows.forEach(el => el.classList.add('p-anim'));
+  const projObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('p-visible');
+        projObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  projRows.forEach(el => projObs.observe(el));
+}
 
 /* ─── 앨범커버 오버레이 아티스트명 주입 ─────────────────────── */
 document.querySelectorAll('.work-card[data-category="album-cover"]').forEach((card, i) => {

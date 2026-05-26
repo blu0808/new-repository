@@ -1559,6 +1559,17 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   .email-float { bottom: 24px; right: 20px; width: 40px; height: 40px; }
 }
 
+/* ─── Projects 스크롤 등장 ───────────────────────────────────── */
+.proj-row.p-anim {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.proj-row.p-anim.p-visible {
+  opacity: 1;
+  transform: none;
+}
+
 /* ─── 스크롤 프로그레스 바 ───────────────────────────────────── */
 .scroll-progress {
   position: fixed; top: 0; left: 0;
