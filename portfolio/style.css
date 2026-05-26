@@ -401,9 +401,34 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .pg-overlay.open { opacity: 1; pointer-events: all; touch-action: none; }
 .pg-bg {
   position: absolute; inset: 0;
-  background: rgba(6,6,6,.97);
+  background: rgba(6,6,6,.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   cursor: pointer;
 }
+.pg-prev, .pg-next {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 56px; height: 56px;
+  background: none; border: none;
+  color: transparent; font-size: 0;
+  cursor: pointer; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity .2s;
+}
+.pg-prev::before, .pg-next::before {
+  content: '';
+  display: block;
+  width: 18px; height: 18px;
+  border-top: 1.5px solid rgba(255,255,255,.85);
+  border-right: 1.5px solid rgba(255,255,255,.85);
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,.6));
+}
+.pg-prev { left: 8px; }
+.pg-prev::before { transform: rotate(-135deg) translate(-2px, 2px); }
+.pg-next { right: 8px; }
+.pg-next::before { transform: rotate(45deg) translate(-2px, 2px); }
+.pg-prev:hover, .pg-next:hover { opacity: .7; }
+@media (max-width: 860px) { .pg-prev, .pg-next { display: none; } }
 .pg-close {
   position: absolute; top: 24px; right: 28px; z-index: 2;
   background: none; border: none;
@@ -846,7 +871,9 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 /* ─── Project Lightbox ───────────────────────────────────── */
 .proj-lightbox {
   position: fixed; inset: 0; z-index: 9000;
-  background: #000;
+  background: rgba(0,0,0,.75);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; pointer-events: none;
   transition: opacity .25s;

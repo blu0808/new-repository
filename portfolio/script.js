@@ -357,6 +357,7 @@ document.addEventListener('keydown', e => {
     if (e.key === 'ArrowRight') pgGo(pgCur + 1);
     if (e.key === 'ArrowLeft')  pgGo(pgCur - 1);
   }
+
   if (modal?.classList.contains('open')) {
     const visibles = [...document.querySelectorAll('.work-card:not(.hidden)')];
     if (e.key === 'ArrowRight') openModal(visibles[(currentModalIndex + 1) % visibles.length], 1);
@@ -995,6 +996,8 @@ document.querySelectorAll('.work-card[data-category="poster"]').forEach((card, i
 
 if (pgClosBtn) pgClosBtn.addEventListener('click', closePg);
 if (pgBg)      pgBg.addEventListener('click', closePg);
+document.getElementById('pgPrev')?.addEventListener('click', e => { e.stopPropagation(); pgGo(pgCur - 1); });
+document.getElementById('pgNext')?.addEventListener('click', e => { e.stopPropagation(); pgGo(pgCur + 1); });
 pgOverlay?.addEventListener('click', e => {
   if (e.target === pgOverlay || e.target.classList.contains('pg-stage')) closePg();
 });
