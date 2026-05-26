@@ -1264,6 +1264,7 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   flex-shrink: 0;
   display: block;
   scroll-snap-align: start;
+  cursor: zoom-in;
 }
 
 /* ─── Journal Page ────────────────────────────────────────── */
