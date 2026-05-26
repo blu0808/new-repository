@@ -684,7 +684,9 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 .modal.open { opacity: 1; pointer-events: all; }
 .modal-backdrop {
   position: absolute; inset: 0;
-  background: rgba(0,0,0,.75);
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 @keyframes modal-in {
   from { transform: translateY(16px) scale(.97); }
@@ -1594,10 +1596,11 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   position: fixed; top: 0; left: 0;
   height: 3px; background: var(--accent);
   z-index: 9000; width: 0%;
-  transition: width .1s linear;
+  transition: width .1s linear, opacity .2s ease;
   pointer-events: none;
   box-shadow: 0 0 6px rgba(26,77,255,.5), 0 1px 2px rgba(0,0,0,.15);
 }
+.modal.open ~ .scroll-progress { opacity: 0; }
 
 /* ─── 모바일 탭 피드백 ───────────────────────────────────────── */
 @media (hover: none) {
