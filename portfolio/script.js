@@ -1236,6 +1236,17 @@ document.querySelectorAll('.work-card[data-category="album-cover"]').forEach((ca
 });
 
 
+/* ─── 스크롤 프로그레스 바 ───────────────────────────────────── */
+if (!document.body.classList.contains('history-page')) {
+  const scrollProgress = document.createElement('div');
+  scrollProgress.className = 'scroll-progress';
+  document.body.appendChild(scrollProgress);
+  window.addEventListener('scroll', () => {
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    scrollProgress.style.width = (window.scrollY / docHeight * 100) + '%';
+  }, { passive: true });
+}
+
 /* ─── 커스텀 커서 ────────────────────────────────────────────── */
 if (window.matchMedia('(hover: hover)').matches) {
   const dot = document.createElement('div');
