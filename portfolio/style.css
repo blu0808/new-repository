@@ -1492,17 +1492,6 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   color: var(--accent);
   opacity: .5;
 }
-.hs-thumbs {
-  display: flex; flex-wrap: wrap; gap: 6px;
-  margin-top: 8px;
-}
-.hs-thumbs img {
-  width: 64px; height: 64px;
-  object-fit: cover; border-radius: 4px;
-  cursor: pointer; opacity: .75;
-  transition: opacity .2s, transform .2s;
-}
-.hs-thumbs img:hover { opacity: 1; transform: scale(1.05); }
 
 .h-anim {
   opacity: 0;
