@@ -712,6 +712,7 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   background: rgba(0,0,0,.6);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  will-change: backdrop-filter;
 }
 @keyframes modal-in {
   from { transform: translateY(16px) scale(.97); }
