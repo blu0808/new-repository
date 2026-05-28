@@ -1492,6 +1492,16 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   color: var(--accent);
   opacity: .5;
 }
+.hs-photo-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  margin-top: 5px; padding: 3px 10px;
+  font-size: 11px; font-family: inherit; letter-spacing: .04em;
+  color: var(--accent); border: 1px solid var(--accent);
+  border-radius: 20px; background: none; cursor: pointer;
+  opacity: .6; transition: opacity .2s;
+  width: fit-content;
+}
+.hs-photo-btn:hover { opacity: 1; }
 
 .h-anim {
   opacity: 0;

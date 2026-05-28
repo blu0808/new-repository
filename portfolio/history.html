@@ -122,6 +122,7 @@
         <ul class="hs-items">
           <li class="hs-item-group">
             <span class="hs-item" data-i18n="hist.yeoginga.title">김제청년창업지원 사업 "여긴가벼" 디자이너</span>
+            <button class="hs-photo-btn" id="yeogingaPhotos">사진 보기</button>
           </li>
         </ul>
       </div>
@@ -132,6 +133,7 @@
           <li class="hs-item-group">
             <span class="hs-item" data-i18n="hist.palbok.title">전주 공공미술 프로젝트 《우리 동네 미술》</span>
             <span class="hs-venue" data-i18n="hist.palbok.venue">팔복 A/S Project 상상공장</span>
+            <button class="hs-photo-btn" id="palbokPhotos">사진 보기</button>
           </li>
         </ul>
       </div>
@@ -187,6 +189,30 @@
   </div>
 
 
+  <!-- ─── PROJECT LIGHTBOX ────────────────────────────────── -->
+  <div class="proj-lightbox" id="projLightbox">
+    <button class="pl-close" id="plClose">&#10005;</button>
+    <button class="pl-prev" id="plPrev">&#8249;</button>
+    <button class="pl-next" id="plNext">&#8250;</button>
+    <img loading="lazy" class="pl-img" id="plImg" src="" alt="">
+  </div>
+
   <script src="script.js"></script>
+  <script>
+    const yeogingaSrcs = [
+      'images/teaser.webp',
+      'images/artboard2.webp',
+      'images/artboard3.webp',
+      'images/artboard4.webp',
+    ];
+    const palbokSrcs = [
+      'images/hero_thumb.webp',
+      'images/projects/ex1-cafe.webp',
+      'images/projects/ex1-lamp.webp',
+      'images/projects/ex1-print.webp',
+    ];
+    document.getElementById('yeogingaPhotos').addEventListener('click', () => plOpen(yeogingaSrcs, 0));
+    document.getElementById('palbokPhotos').addEventListener('click', () => plOpen(palbokSrcs, 0));
+  </script>
 </body>
 </html>
