@@ -1090,17 +1090,18 @@ document.querySelectorAll('.proj-carousel-vimeo').forEach(wrap => {
     thumb.style.opacity = '0';
     setTimeout(() => thumb.remove(), 700);
   };
-  // iframe 로드 후 Vimeo에 play 이벤트 구독 요청
+  // iframe 로드 후 Vimeo에 play 이벤트 구독 요청 + 빠른 환경 1.5초 페이드
   iframe.addEventListener('load', () => {
     try { iframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'play'}), 'https://player.vimeo.com'); } catch(e) {}
+    setTimeout(fadeThumb, 1500);
   });
   // Vimeo play 이벤트 수신 → 실제 재생 시작 시 썸네일 페이드
   window.addEventListener('message', (e) => {
     if (e.origin !== 'https://player.vimeo.com') return;
     try { if (JSON.parse(e.data).event === 'play') fadeThumb(); } catch(e) {}
   });
-  // fallback
-  setTimeout(fadeThumb, 10000);
+  // 느린 환경 fallback
+  setTimeout(fadeThumb, 6000);
 });
 
 /* hero video cover — iframe 로드 후 1.5초 뒤 페이드아웃 (최대 6초 fallback) */
