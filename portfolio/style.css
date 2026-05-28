@@ -709,10 +709,7 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 .modal.open { opacity: 1; pointer-events: all; }
 .modal-backdrop {
   position: absolute; inset: 0;
-  background: rgba(0,0,0,.6);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  will-change: backdrop-filter;
+  background: rgba(0,0,0,.7);
 }
 @keyframes modal-in {
   from { transform: translateY(16px) scale(.97); }
