@@ -50,7 +50,7 @@ const dict = {
     'hist.pub.crowd':      '《춤추는 독백》 텀블벅 크라우드 펀딩',
     'hist.jiff.title':     '전주국제영화제 20회 자원활동가 지프지기(JIFF Zigi)',
     'hist.yeoginga.title': '김제 청년 창업지원 사업 《여긴가벼》 디자이너로 참여',
-    'hist.palbok.title':   '전주 공공미술 프로젝트 《우리 동네 미술》 팔복 A/S Project 상상공장 작가로 참여',
+    'hist.palbok.title':   '전주 공공미술 프로젝트 팔복 A/S Project 상상공장 작가로 참여',
   },
   en: {
     'nav.works':   'Works',
