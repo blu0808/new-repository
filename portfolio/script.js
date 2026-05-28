@@ -1249,7 +1249,7 @@ document.querySelectorAll('.work-card[data-category="album-cover"]').forEach((ca
 
 
 /* ─── 스크롤 프로그레스 바 ───────────────────────────────────── */
-if (!document.body.classList.contains('history-page') && !document.body.classList.contains('interview-page')) {
+if (!document.body.classList.contains('history-page') && !document.body.classList.contains('interview-page') && !document.body.classList.contains('archive-page')) {
   const scrollProgress = document.createElement('div');
   scrollProgress.className = 'scroll-progress';
   document.body.appendChild(scrollProgress);
