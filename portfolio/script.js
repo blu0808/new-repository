@@ -347,9 +347,11 @@ if (modalPlayBtn) {
 
 document.querySelectorAll('.work-card').forEach(card => {
   let touchStartY = 0;
+  let lastTouchTime = 0;
   card.addEventListener('touchstart', e => { touchStartY = e.touches[0].clientY; }, { passive: true });
   card.addEventListener('touchend', e => {
     if (Math.abs(e.changedTouches[0].clientY - touchStartY) < 10) {
+      lastTouchTime = Date.now();
       e.preventDefault();
       if (card.dataset.category === 'poster') {
         const pgIdx = [...document.querySelectorAll('.work-card[data-category="poster"]')].indexOf(card);
@@ -360,7 +362,12 @@ document.querySelectorAll('.work-card').forEach(card => {
     }
   });
   card.addEventListener('click', () => {
-    if (card.dataset.category === 'poster') return;
+    if (Date.now() - lastTouchTime < 500) return;
+    if (card.dataset.category === 'poster') {
+      const pgIdx = [...document.querySelectorAll('.work-card[data-category="poster"]')].indexOf(card);
+      openPg(pgIdx);
+      return;
+    }
     openModal(card);
   });
 });
@@ -1013,9 +1020,6 @@ function closePg() {
   }, 400);
 }
 
-document.querySelectorAll('.work-card[data-category="poster"]').forEach((card, i) => {
-  card.addEventListener('click', () => openPg(i));
-});
 
 if (pgClosBtn) pgClosBtn.addEventListener('click', closePg);
 if (pgBg)      pgBg.addEventListener('click', closePg);
@@ -1207,7 +1211,7 @@ if (worksSection) {
   if (document.readyState === 'complete') { afterLoad(); }
   else {
     window.addEventListener('load', afterLoad);
-    setTimeout(afterLoad, 8000);
+    setTimeout(afterLoad, 3000);
   }
 
   // bfcache 복원 시 (뒤로가기) 로더 즉시 숨김
