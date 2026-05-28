@@ -1541,11 +1541,11 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 .arc-yt-link {
   display: inline-block; margin-top: 14px;
   font-size: 11px; letter-spacing: .06em;
-  color: var(--accent); opacity: .55;
+  color: var(--accent);
   text-decoration: underline; text-underline-offset: 3px;
   transition: opacity .2s;
 }
-.arc-yt-link:hover { opacity: 1; }
+.arc-yt-link:hover { opacity: .6; }
 .arc-divider { height: 1px; background: rgba(0,0,0,.07); margin: 60px 0; }
 .hs-item--link {
   color: inherit;
