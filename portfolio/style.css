@@ -869,9 +869,7 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 /* ─── Project Lightbox ───────────────────────────────────── */
 .proj-lightbox {
   position: fixed; inset: 0; z-index: 9000;
-  background: rgba(0,0,0,.75);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(0,0,0,.82);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; pointer-events: none;
   transition: opacity .25s;
