@@ -1213,9 +1213,10 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   display: block;
   padding: 0;
   margin-bottom: 10px;
-  font-size: .68rem;
-  letter-spacing: .12em;
+  font-size: 10px;
+  letter-spacing: .1em;
   text-transform: uppercase;
+  font-weight: 500;
   color: var(--accent);
 }
 .iv-chapter {
@@ -1503,8 +1504,8 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 .arc-back:hover { opacity: 1; }
 .arc-project { margin-bottom: 72px; }
 .arc-meta { display: flex; gap: 14px; align-items: center; margin-bottom: 6px; }
-.arc-year { font-size: 11px; color: var(--accent); opacity: .65; letter-spacing: .07em; }
-.arc-role { font-size: 11px; color: var(--accent); opacity: .8; letter-spacing: .04em; }
+.arc-year { font-size: 10px; color: var(--accent); opacity: .5; letter-spacing: .07em; }
+.arc-role { font-size: 10px; color: var(--accent); opacity: .55; letter-spacing: .1em; text-transform: uppercase; font-weight: 500; }
 .arc-title {
   font-size: clamp(20px, 2.4vw, 26px); font-weight: 600;
   color: var(--accent); margin-bottom: 14px; letter-spacing: -.01em;
