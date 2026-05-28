@@ -1498,10 +1498,10 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 .arc-main { padding: clamp(60px, 8vw, 120px) clamp(40px, 7vw, 100px) 120px; }
 .arc-back {
   display: inline-block; font-size: 12px; letter-spacing: .06em;
-  color: var(--accent); text-decoration: none; opacity: .5;
+  color: var(--accent); text-decoration: none;
   margin-bottom: 56px; transition: opacity .2s;
 }
-.arc-back:hover { opacity: 1; }
+.arc-back:hover { opacity: .6; }
 .arc-project { margin-bottom: 72px; }
 .arc-meta { display: flex; gap: 14px; align-items: center; margin-bottom: 6px; }
 .arc-year { font-size: 10px; color: var(--accent); opacity: .5; letter-spacing: .07em; }
@@ -1551,10 +1551,10 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
   color: inherit;
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: rgba(26,77,255,.35);
-  transition: opacity .2s, text-decoration-color .2s;
+  text-decoration-color: var(--accent);
+  transition: opacity .2s;
 }
-.hs-item--link:hover { opacity: .6; text-decoration-color: var(--accent); }
+.hs-item--link:hover { opacity: .6; }
 @media (max-width: 600px) {
   .arc-grid { grid-template-columns: 1fr; }
   .arc-palbok { grid-template-columns: 1fr; }
