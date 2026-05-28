@@ -1181,12 +1181,33 @@ if (worksSection) {
   const showLoader = () => { loader.style.opacity = '1'; loader.style.pointerEvents = 'all'; };
   const hideLoader = () => { loader.style.opacity = '0'; loader.style.pointerEvents = 'none'; loaded = true; };
 
-  // 로더는 항상 opacity:1 시작 → 로드 완료 시 페이드아웃
-  if (document.readyState === 'complete') { hideLoader(); }
+  // 해시 앵커 스크롤 점프 방지: 로더 표시 중 브라우저 자동 스크롤 억제
+  const hash = window.location.hash;
+  if (hash) { window.scrollTo(0, 0); }
+
+  const afterLoad = () => {
+    hideLoader();
+    if (hash) {
+      setTimeout(() => {
+        const target = document.querySelector(hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 150);
+    }
+  };
+
+  if (document.readyState === 'complete') { afterLoad(); }
   else {
-    window.addEventListener('load', hideLoader);
-    setTimeout(hideLoader, 8000);
+    window.addEventListener('load', afterLoad);
+    setTimeout(afterLoad, 8000);
   }
+
+  // bfcache 복원 시 (뒤로가기) 로더 즉시 숨김
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) {
+      loader.style.transition = 'none';
+      hideLoader();
+    }
+  });
 
 })();
 
