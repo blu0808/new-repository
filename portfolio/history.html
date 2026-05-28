@@ -122,7 +122,12 @@
         <ul class="hs-items">
           <li class="hs-item-group">
             <span class="hs-item" data-i18n="hist.yeoginga.title">김제청년창업지원 사업 "여긴가벼" 디자이너</span>
-            <button class="hs-photo-btn" id="yeogingaPhotos">사진 보기</button>
+            <div class="hs-thumbs" id="yeogingaPhotos">
+              <img src="images/teaser.webp" alt="">
+              <img src="images/artboard2.webp" alt="">
+              <img src="images/artboard3.webp" alt="">
+              <img src="images/artboard4.webp" alt="">
+            </div>
           </li>
         </ul>
       </div>
@@ -133,7 +138,12 @@
           <li class="hs-item-group">
             <span class="hs-item" data-i18n="hist.palbok.title">전주 공공미술 프로젝트 《우리 동네 미술》</span>
             <span class="hs-venue" data-i18n="hist.palbok.venue">팔복 A/S Project 상상공장</span>
-            <button class="hs-photo-btn" id="palbokPhotos">사진 보기</button>
+            <div class="hs-thumbs" id="palbokPhotos">
+              <img src="images/hero_thumb.webp" alt="">
+              <img src="images/projects/ex1-cafe.webp" alt="">
+              <img src="images/projects/ex1-lamp.webp" alt="">
+              <img src="images/projects/ex1-print.webp" alt="">
+            </div>
           </li>
         </ul>
       </div>
@@ -199,20 +209,13 @@
 
   <script src="script.js"></script>
   <script>
-    const yeogingaSrcs = [
-      'images/teaser.webp',
-      'images/artboard2.webp',
-      'images/artboard3.webp',
-      'images/artboard4.webp',
-    ];
-    const palbokSrcs = [
-      'images/hero_thumb.webp',
-      'images/projects/ex1-cafe.webp',
-      'images/projects/ex1-lamp.webp',
-      'images/projects/ex1-print.webp',
-    ];
-    document.getElementById('yeogingaPhotos').addEventListener('click', () => plOpen(yeogingaSrcs, 0));
-    document.getElementById('palbokPhotos').addEventListener('click', () => plOpen(palbokSrcs, 0));
+    document.querySelectorAll('.hs-thumbs').forEach(wrap => {
+      const imgs = wrap.querySelectorAll('img');
+      const srcs = [...imgs].map(i => i.src);
+      imgs.forEach((img, idx) => {
+        img.addEventListener('click', () => plOpen(srcs, idx));
+      });
+    });
   </script>
 </body>
 </html>
