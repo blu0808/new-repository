@@ -53,7 +53,7 @@ const dict = {
     'hist.palbok.title':   '전주 공공미술 프로젝트 팔복 A/S Project 상상공장 작가로 참여',
     'arc.back':            '← History',
     'arc.yeoginga.title':  '여긴가벼',
-    'arc.yeoginga.desc':   '김제시 청년지원사업으로 진행한 로컬 브랜딩 프로젝트입니다. 김제의 상징 '벼'를 모티프로 로고, 캐릭터, 굿즈를 제작하며 지역 활성화를 위한 전반적인 디자인 작업을 맡았습니다.',
+    'arc.yeoginga.desc':   '김제시 청년지원사업으로 진행한 로컬 브랜딩 프로젝트입니다. 김제의 상징 《벼》를 모티프로 로고, 캐릭터, 굿즈를 제작하며 지역 활성화를 위한 전반적인 디자인 작업을 맡았습니다.',
     'arc.palbok.title':    '팔복 A/S Project',
     'arc.palbok.desc':     '(재)전주문화재단에서 주관하는 팔복 A/S Project 상상공장 팀의 작가로 참여했습니다. 팔복예술공장을 무대로 시민들과 함께한 공공미술 프로젝트입니다.',
     'arc.palbok.video':    '▶ 소개 영상 보기',
