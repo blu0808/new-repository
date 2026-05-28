@@ -46,6 +46,10 @@ const dict = {
     'hist.ex1.venue':  '원두서점 가산점',
     'hist.ex2.title':  '《일상의 여름》 개인 사진전',
     'hist.ex2.venue':  '원두서점 신풍점',
+    'hist.jiff.title':     '전주국제영화제 20회 자원활동가 지프지기(JIFF Zigi)',
+    'hist.yeoginga.title': '김제청년창업지원 사업 "여긴가벼" 디자이너',
+    'hist.palbok.title':   '전주 공공미술 프로젝트 《우리 동네 미술》',
+    'hist.palbok.venue':   '팔복 A/S Project 상상공장',
   },
   en: {
     'nav.works':   'Works',
@@ -93,6 +97,10 @@ const dict = {
     'hist.ex1.venue':  'Wondu Bookstore, Gasan',
     'hist.ex2.title':  '"Ordinary Summer" Solo Exhibition',
     'hist.ex2.venue':  'Wondu Bookstore, Sinpung',
+    'hist.jiff.title':     'JIFF Zigi Volunteer — 20th Jeonju International Film Festival',
+    'hist.yeoginga.title': '"Yeogin Gabyeo" — Gimje Youth Startup Program, Designer',
+    'hist.palbok.title':   'Jeonju Public Art Project《Art in Our Neighborhood》',
+    'hist.palbok.venue':   'Palbok A/S Project — Sangsang Factory',
   },
 };
 
