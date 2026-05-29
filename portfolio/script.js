@@ -1104,7 +1104,7 @@ document.querySelectorAll('.proj-carousel-vimeo').forEach(wrap => {
   setTimeout(fadeThumb, 6000);
 });
 
-/* hero video cover — Vimeo play 이벤트 감지 후 페이드아웃 (최대 6초 fallback) */
+/* hero video cover — play/timeupdate 감지 후 페이드아웃 (최대 3초 fallback) */
 const heroCover = document.getElementById('heroVideoCover');
 if (heroCover) {
   let coverGone = false;
@@ -1116,15 +1116,21 @@ if (heroCover) {
   const _heroIframe = document.getElementById('heroVideoIframe');
   if (_heroIframe) {
     _heroIframe.addEventListener('load', () => {
-      try { _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'play'}), 'https://player.vimeo.com'); } catch(e) {}
+      try {
+        _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'play'}), 'https://player.vimeo.com');
+        _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'timeupdate'}), 'https://player.vimeo.com');
+      } catch(e) {}
     });
     window.addEventListener('message', (e) => {
       if (e.origin !== 'https://player.vimeo.com') return;
       if (e.source !== _heroIframe.contentWindow) return;
-      try { if (JSON.parse(e.data).event === 'play') fadeHeroCover(); } catch(e) {}
+      try {
+        const ev = JSON.parse(e.data).event;
+        if (ev === 'play' || ev === 'timeupdate') fadeHeroCover();
+      } catch(e) {}
     });
   }
-  setTimeout(fadeHeroCover, 6000);
+  setTimeout(fadeHeroCover, 3000);
 }
 
 /* ─── 페이지 전환 로더 ──────────────────────────────────────── */
