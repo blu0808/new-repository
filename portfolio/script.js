@@ -193,7 +193,7 @@ style.textContent = `
     opacity: 1;
     transform: none;
   }
-  .work-card.fade-up { transition-delay: calc(var(--i, 0) * 50ms); }
+  .work-card.fade-up { transition-delay: min(calc(var(--i, 0) * 50ms), 150ms); }
 `;
 document.head.appendChild(style);
 
