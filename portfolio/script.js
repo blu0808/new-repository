@@ -1204,7 +1204,15 @@ if (worksSection) {
     if (hash) {
       setTimeout(() => {
         const target = document.querySelector(hash);
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
+        if (target) {
+          const navOffset = window.innerWidth <= 860 ? 52 : 0;
+          // yeoginga: arc-back(← History) 버튼이 보이도록 위쪽 기준으로 스크롤
+          const scrollTarget = hash === '#yeoginga'
+            ? (document.querySelector('.arc-back') || target)
+            : target;
+          const y = scrollTarget.getBoundingClientRect().top + window.scrollY - navOffset - 16;
+          window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+        }
       }, 150);
     }
   };
