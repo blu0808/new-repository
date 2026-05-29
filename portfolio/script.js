@@ -215,15 +215,15 @@ const worksData = [
   { title: 'Hidden Things',           artist: '김소연',          year: '2025', desc: '', link: '' },
   { title: 'Dark of Fantasy',         artist: '윤혜문',          year: '2024', desc: '', link: '' },
   { title: 'JUMP',                    artist: '밴드기린',         year: '2023', desc: '', link: '' },
-  { title: 'Wave',                    artist: 'Sayma',           year: '2022', desc: '', link: '' },
-  { title: 'SICK',                    artist: '정재승',          year: '2023', desc: '', link: '' },
   { title: 'hikari.',                 artist: 'Gonhee',          year: '2025', desc: '', link: '' },
+  { title: 'SICK',                    artist: '정재승',          year: '2023', desc: '', link: '' },
+  { title: 'Wave',                    artist: 'Sayma',           year: '2022', desc: '', link: '' },
   { title: 'Joy of the Moment ver.1', artist: '한바탕 & KIMTAE', year: '2025', desc: '', link: '' },
   { title: 'Joy of the Moment ver.2', artist: '한바탕 & KIMTAE', year: '2025', desc: '', link: '' },
   { title: '말해줘',                   artist: '이미블루',        year: '2024', desc: '', link: '' },
-  { title: '애국가',                   artist: '박미자, 정경',     year: '2024', desc: '', link: '' },
-  { title: '야호',                     artist: '아루단테',         year: '2025', desc: '', link: '' },
   { title: '너를 기다리고 있어',        artist: '예례밴드',         year: '2026', desc: '', link: '' },
+  { title: '야호',                     artist: '아루단테',         year: '2025', desc: '', link: '' },
+  { title: '애국가',                   artist: '박미자, 정경',     year: '2024', desc: '', link: '' },
   { title: '시큰',                     artist: '조에',            year: '2025', desc: '', link: '' },
   { title: 'End(And)',                 artist: 'Grace',           year: '2025', desc: '', link: '' },
 ];
@@ -1349,8 +1349,11 @@ if (window.matchMedia('(hover: hover)').matches) {
   });
 
   (function animateRing() {
-    ringX += (mouseX - ringX) * 0.1; ringY += (mouseY - ringY) * 0.1;
-    ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px';
+    const dx = mouseX - ringX, dy = mouseY - ringY;
+    if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+      ringX += dx * 0.1; ringY += dy * 0.1;
+      ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px';
+    }
     requestAnimationFrame(animateRing);
   })();
 
