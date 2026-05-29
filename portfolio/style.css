@@ -364,26 +364,6 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
 .teaser-img-wrap { overflow: hidden; position: relative; }
 .teaser-img { width: 100%; display: block; will-change: transform; transform: scale(1); transition: transform .5s ease; }
 @media (hover: hover) { .teaser-img-wrap:hover .teaser-img { transform: scale(1.04); } }
-.teaser-hover-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,.7) 0%, transparent 55%);
-  opacity: 0;
-  transition: opacity .3s;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  padding: 14px;
-  pointer-events: none;
-}
-.teaser-hover-name {
-  color: #fff;
-  font-size: clamp(11px, .9vw, 13px);
-  font-weight: 500;
-  transform: translateY(9px); opacity: 0;
-  transition: transform .4s ease, opacity .35s ease;
-}
-@media (hover: hover) {
-  .teaser-img-wrap:hover .teaser-hover-overlay { opacity: 1; }
-  .teaser-img-wrap:hover .teaser-hover-name { transform: translateY(0); opacity: 1; }
-}
 .teaser-caption { display: flex; align-items: flex-start; gap: 14px; padding-top: 14px; }
 .teaser-titles { display: flex; flex-direction: column; gap: 3px; }
 .teaser-title-ko { font-size: clamp(13px, 1vw, 15px); font-style: italic; color: var(--accent); opacity: .88; }
