@@ -1108,9 +1108,9 @@ document.querySelectorAll('.proj-carousel-vimeo').forEach(wrap => {
   setTimeout(fadeThumb, 6000);
 });
 
-/* hero video cover — play/timeupdate 감지 후 페이드아웃 (최대 3초 fallback) */
+/* hero video cover — 모바일은 썸네일 그대로, 데스크탑만 영상으로 전환 */
 const heroCover = document.getElementById('heroVideoCover');
-if (heroCover) {
+if (heroCover && !window.matchMedia('(max-width: 860px)').matches) {
   let coverGone = false;
   const fadeHeroCover = () => {
     if (coverGone) return;
