@@ -1228,9 +1228,7 @@ if (worksSection) {
       const target = document.querySelector(hash);
       if (target) {
         const navOffset = window.innerWidth <= 860 ? 52 : 0;
-        const scrollTarget = hash === '#yeoginga'
-          ? (document.querySelector('.arc-back') || target)
-          : target;
+        const scrollTarget = target.querySelector('.arc-meta') || target;
         const y = scrollTarget.getBoundingClientRect().top + window.scrollY - navOffset - 16;
         window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
       }
