@@ -1368,33 +1368,37 @@ if (!document.body.classList.contains('history-page') && !document.body.classLis
 /* ─── 커스텀 커서 ────────────────────────────────────────────── */
 if (window.matchMedia('(hover: hover)').matches) {
   const dot = document.createElement('div');
-  dot.className = 'cursor-dot cursor-hidden';
+  dot.className = 'cursor-dot';
   const ring = document.createElement('div');
-  ring.className = 'cursor-ring cursor-hidden';
+  ring.className = 'cursor-ring';
   document.body.append(dot, ring);
 
-  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-  let ringReady = false;
+  const OFF = -300;
+  let mouseX = OFF, mouseY = OFF, ringX = OFF, ringY = OFF;
 
-  document.addEventListener('mousemove', e => {
+  const moveDot = (x, y) => {
+    dot.style.transform = `translate(${x - 3.5}px, ${y - 3.5}px)`;
+  };
+  const moveRing = (x, y) => {
+    ring.style.transform = `translate(${x - 16}px, ${y - 16}px)`;
+  };
+
+  moveDot(OFF, OFF); moveRing(OFF, OFF);
+
+  window.addEventListener('mousemove', e => {
     mouseX = e.clientX; mouseY = e.clientY;
-    dot.style.transform = `translate(${mouseX - 3.5}px, ${mouseY - 3.5}px)`;
-    if (!ringReady) {
-      ringX = mouseX; ringY = mouseY;
-      ring.style.transform = `translate(${ringX - 16}px, ${ringY - 16}px)`;
-      ringReady = true;
-    }
-    dot.classList.remove('cursor-hidden'); ring.classList.remove('cursor-hidden');
-  });
-  document.addEventListener('mouseleave', () => {
-    dot.classList.add('cursor-hidden'); ring.classList.add('cursor-hidden');
+    moveDot(mouseX, mouseY);
+  }, { passive: true });
+
+  document.documentElement.addEventListener('mouseleave', () => {
+    mouseX = OFF; mouseY = OFF;
   });
 
   (function animateRing() {
     const dx = mouseX - ringX, dy = mouseY - ringY;
     if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
       ringX += dx * 0.12; ringY += dy * 0.12;
-      ring.style.transform = `translate(${ringX - 16}px, ${ringY - 16}px)`;
+      moveRing(ringX, ringY);
     }
     requestAnimationFrame(animateRing);
   })();
