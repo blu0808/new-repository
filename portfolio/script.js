@@ -1375,12 +1375,14 @@ if (window.matchMedia('(hover: hover)').matches) {
 
   let mouseX = 0, mouseY = 0, ringX = -100, ringY = -100;
 
-  document.addEventListener('mousemove', e => {
+  document.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
     mouseX = e.clientX; mouseY = e.clientY;
     dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px';
     dot.classList.remove('cursor-hidden'); ring.classList.remove('cursor-hidden');
   });
-  document.addEventListener('mouseleave', () => {
+  document.addEventListener('pointerleave', e => {
+    if (e.pointerType !== 'mouse') return;
     dot.classList.add('cursor-hidden'); ring.classList.add('cursor-hidden');
   });
 
