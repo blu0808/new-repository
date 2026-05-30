@@ -1220,21 +1220,19 @@ if (worksSection) {
   if (hash) { window.scrollTo(0, 0); }
 
   const afterLoad = () => {
-    hideLoader();
     if (hash) {
-      setTimeout(() => {
-        const target = document.querySelector(hash);
-        if (target) {
-          const navOffset = window.innerWidth <= 860 ? 52 : 0;
-          // yeoginga: arc-back(← History) 버튼이 보이도록 위쪽 기준으로 스크롤
-          const scrollTarget = hash === '#yeoginga'
-            ? (document.querySelector('.arc-back') || target)
-            : target;
-          const y = scrollTarget.getBoundingClientRect().top + window.scrollY - navOffset - 16;
-          window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-        }
-      }, 150);
+      const target = document.querySelector(hash);
+      if (target) {
+        const navOffset = window.innerWidth <= 860 ? 52 : 0;
+        const scrollTarget = hash === '#yeoginga'
+          ? (document.querySelector('.arc-back') || target)
+          : target;
+        const y = scrollTarget.getBoundingClientRect().top + window.scrollY - navOffset - 16;
+        // 로더가 덮고 있는 동안 위치 먼저 이동 → 로더 사라질 때 이미 정위치
+        window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
+      }
     }
+    hideLoader();
   };
 
   if (document.readyState === 'complete') { afterLoad(); }
