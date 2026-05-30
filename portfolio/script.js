@@ -119,7 +119,7 @@ const dict = {
 };
 
 /* ─── 언어 전환 ─────────────────────────────────────────── */
-let lang = 'ko';
+let lang = localStorage.getItem('lang') || 'ko';
 
 function applyLang() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -134,6 +134,7 @@ function applyLang() {
 document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     lang = lang === 'ko' ? 'en' : 'ko';
+    localStorage.setItem('lang', lang);
     applyLang();
   });
 });
@@ -1140,8 +1141,12 @@ if (heroCover) {
       } catch(e) {}
     });
   }
-  // 모바일은 6초, 데스크탑은 4초 fallback (버퍼링 충분히 기다림)
-  setTimeout(fadeHeroCover, window.matchMedia('(max-width: 860px)').matches ? 6000 : 4000);
+  // 모바일: timeupdate 이벤트 수신 증거 있을 때만 fade (없으면 썸네일 유지 > 검정화면)
+  // 데스크탑: 4초 후 무조건 fade
+  const _isMobile = window.matchMedia('(max-width: 860px)').matches;
+  setTimeout(() => {
+    if (!_isMobile || timeupdateCount > 0) fadeHeroCover();
+  }, _isMobile ? 6000 : 4000);
 }
 
 /* hero video — 탭 전환·화면 잠금 해제 시 iOS가 영상 멈추는 문제 대응 */
@@ -1251,12 +1256,11 @@ if (worksSection) {
     if (hash) {
       const target = document.querySelector(hash);
       if (target) {
-        // scrollY=0 확정 후 다음 프레임에서 측정 → BCR.top = 절대위치
-        window.scrollTo(0, 0);
         requestAnimationFrame(() => {
           const navOffset = window.innerWidth <= 860 ? 52 : 0;
           const metaEl = target.querySelector('.arc-meta') || target;
-          const y = metaEl.getBoundingClientRect().top - navOffset - 20;
+          // BCR.top + scrollY = 현재 스크롤 위치와 무관한 절대 좌표
+          const y = metaEl.getBoundingClientRect().top + window.scrollY - navOffset - 20;
           window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
           hideLoader();
           restoreScroll();
@@ -1268,11 +1272,14 @@ if (worksSection) {
     hideLoader();
   };
 
-  if (document.readyState === 'complete') { afterLoad(); }
-  else {
-    window.addEventListener('load', afterLoad);
-    setTimeout(afterLoad, 3000);
+  // DOMContentLoaded: 이미지 로드 전 DOM 파싱 완료 시점 → 빠른 스크롤 (aspect-ratio로 레이아웃 안정)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', afterLoad);
+  } else {
+    afterLoad();
   }
+  window.addEventListener('load', afterLoad); // 보험
+  setTimeout(afterLoad, 1500); // 최후 fallback
 
   // bfcache 복원 시 (뒤로가기) 로더 즉시 숨김
   window.addEventListener('pageshow', (e) => {
