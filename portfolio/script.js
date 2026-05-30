@@ -1213,26 +1213,30 @@ if (worksSection) {
   const showLoader = () => { loader.style.opacity = '1'; loader.style.pointerEvents = 'all'; };
   const hideLoader = () => { loader.style.opacity = '0'; loader.style.pointerEvents = 'none'; loaded = true; };
 
-  // 해시 앵커 스크롤 점프 방지: 로더 표시 중 브라우저 자동 스크롤 억제
+  // 해시 앵커 스크롤: 브라우저 자동 스크롤 차단 후 로더 뒤에서 정확한 위치로 이동
   const hash = window.location.hash;
-  if (hash) { window.scrollTo(0, 0); }
+  if (hash) {
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+  }
 
+  let afterLoadCalled = false;
   const afterLoad = () => {
-    hideLoader();
+    if (afterLoadCalled) return;
+    afterLoadCalled = true;
     if (hash) {
-      setTimeout(() => {
-        const target = document.querySelector(hash);
-        if (target) {
-          const navOffset = window.innerWidth <= 860 ? 52 : 0;
-          // yeoginga: arc-back(← History) 버튼이 보이도록 위쪽 기준으로 스크롤
-          const scrollTarget = hash === '#yeoginga'
-            ? (document.querySelector('.arc-back') || target)
-            : target;
-          const y = scrollTarget.getBoundingClientRect().top + window.scrollY - navOffset - 16;
-          window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
-        }
-      }, 150);
+      const target = document.querySelector(hash);
+      if (target) {
+        const navOffset = window.innerWidth <= 860 ? 52 : 0;
+        const scrollTarget = hash === '#yeoginga'
+          ? (document.querySelector('.arc-back') || target)
+          : target;
+        const y = scrollTarget.getBoundingClientRect().top + window.scrollY - navOffset - 16;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
+      }
     }
+    hideLoader();
+    requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = ''; });
   };
 
   if (document.readyState === 'complete') { afterLoad(); }
