@@ -1730,7 +1730,7 @@ img.img-lazy.loaded { filter: none; }
 
 /* ─── 커스텀 커서 ────────────────────────────────────────────── */
 @media (hover: hover) {
-  body { cursor: none; }
+  body, a, button, input, select, textarea, label { cursor: none; }
   .cursor-dot {
     position: fixed; top: 0; left: 0;
     width: 7px; height: 7px;
