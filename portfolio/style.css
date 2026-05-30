@@ -761,8 +761,7 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 .modal-nav:hover { opacity: .6; }
 @media (max-width: 640px) {
   .modal-panel { width: 84vw; }
-  .modal-prev { left: 4px; }
-  .modal-next { right: 4px; }
+  .modal-prev, .modal-next { display: none; }
 }
 .modal-body {
   display: flex;
