@@ -1383,6 +1383,9 @@ if (window.matchMedia('(hover: hover)').matches) {
   document.addEventListener('mouseleave', () => {
     dot.classList.add('cursor-hidden'); ring.classList.add('cursor-hidden');
   });
+  window.addEventListener('blur', () => {
+    dot.classList.add('cursor-hidden'); ring.classList.add('cursor-hidden');
+  });
 
   (function animateRing() {
     const dx = mouseX - ringX, dy = mouseY - ringY;

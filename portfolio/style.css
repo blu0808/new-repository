@@ -108,7 +108,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   padding: 5px 12px;
   transition: all .2s;
 }
-.lang-btn:hover { background: var(--accent); color: var(--white); }
+@media (hover: hover) { .lang-btn:hover { background: var(--accent); color: var(--white); } }
 
 /* ─── Mobile Nav (hidden on desktop) ──────────────────────── */
 .nav { display: none; }
