@@ -1375,18 +1375,13 @@ if (window.matchMedia('(hover: hover)').matches) {
 
   let mouseX = 0, mouseY = 0, ringX = -100, ringY = -100;
 
-  window.addEventListener('pointermove', e => {
-    if (e.pointerType !== 'mouse') return;
+  document.addEventListener('mousemove', e => {
     mouseX = e.clientX; mouseY = e.clientY;
     dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px';
     dot.classList.remove('cursor-hidden'); ring.classList.remove('cursor-hidden');
-  }, { passive: true, capture: true });
-  document.addEventListener('pointerleave', e => {
-    if (e.pointerType !== 'mouse') return;
-    dot.classList.add('cursor-hidden'); ring.classList.add('cursor-hidden');
   });
-  document.addEventListener('mousedown', () => {
-    dot.classList.remove('cursor-hover'); ring.classList.remove('cursor-hover');
+  document.addEventListener('mouseleave', () => {
+    dot.classList.add('cursor-hidden'); ring.classList.add('cursor-hidden');
   });
 
   (function animateRing() {
