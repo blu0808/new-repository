@@ -1144,6 +1144,21 @@ if (heroCover) {
   setTimeout(fadeHeroCover, window.matchMedia('(max-width: 860px)').matches ? 6000 : 4000);
 }
 
+/* hero video — 탭 전환·화면 잠금 해제 시 iOS가 영상 멈추는 문제 대응 */
+(function() {
+  function replayHero() {
+    const iframe = document.getElementById('heroVideoIframe');
+    if (!iframe) return;
+    try { iframe.contentWindow.postMessage('{"method":"play"}', 'https://player.vimeo.com'); } catch(e) {}
+  }
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) setTimeout(replayHero, 300);
+  });
+  window.addEventListener('pageshow', e => {
+    if (e.persisted) setTimeout(replayHero, 500);
+  });
+})();
+
 /* ─── 페이지 전환 로더 ──────────────────────────────────────── */
 document.querySelectorAll('a[href]').forEach(link => {
   const url = link.getAttribute('href');
