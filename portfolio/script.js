@@ -1115,7 +1115,9 @@ if (heroCover) {
   const _heroIframe = document.getElementById('heroVideoIframe');
   let coverGone = false;
   let timeupdateCount = 0;
-  const TIMEUPDATE_THRESHOLD = window.matchMedia('(max-width: 860px)').matches ? 3 : 2;
+  const _isMobile = window.matchMedia('(max-width: 860px)').matches;
+  // 모바일은 더 많은 이벤트 누적 후 fade (검정 프레임 방지)
+  const TIMEUPDATE_THRESHOLD = _isMobile ? 6 : 2;
   const fadeHeroCover = () => {
     if (coverGone) return;
     coverGone = true;
@@ -1124,12 +1126,11 @@ if (heroCover) {
   if (_heroIframe) {
     _heroIframe.addEventListener('load', () => {
       try {
-        _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'play'}), 'https://player.vimeo.com');
+        // background=1 autoplay가 있으므로 play 강제 없음 — timeupdate만 구독
         _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'timeupdate'}), 'https://player.vimeo.com');
-        _heroIframe.contentWindow.postMessage(JSON.stringify({method:'play'}), 'https://player.vimeo.com');
+        _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'playing'}), 'https://player.vimeo.com');
       } catch(e) {}
     });
-    // e.source 체크 제거 — 모바일 브라우저에서 source가 null로 올 수 있음
     window.addEventListener('message', (e) => {
       if (e.origin !== 'https://player.vimeo.com') return;
       try {
@@ -1137,16 +1138,18 @@ if (heroCover) {
         if (ev === 'timeupdate') {
           timeupdateCount++;
           if (timeupdateCount >= TIMEUPDATE_THRESHOLD) fadeHeroCover();
+        } else if (ev === 'playing') {
+          // playing 이벤트 = 실제 프레임 렌더 시작, 데스크탑은 바로 fade
+          if (!_isMobile) fadeHeroCover();
         }
       } catch(e) {}
     });
   }
-  // 모바일: timeupdate 이벤트 수신 증거 있을 때만 fade (없으면 썸네일 유지 > 검정화면)
-  // 데스크탑: 4초 후 무조건 fade
-  const _isMobile = window.matchMedia('(max-width: 860px)').matches;
+  // 모바일: timeupdate 수신 증거 없으면 fade 생략 (검정화면 < 썸네일 유지)
+  // 데스크탑: 4초 fallback
   setTimeout(() => {
     if (!_isMobile || timeupdateCount > 0) fadeHeroCover();
-  }, _isMobile ? 6000 : 4000);
+  }, _isMobile ? 8000 : 4000);
 }
 
 /* hero video — 탭 전환·화면 잠금 해제 시 iOS가 영상 멈추는 문제 대응 */
@@ -1234,52 +1237,44 @@ if (worksSection) {
   const loader = document.getElementById('page-loader');
   if (!loader) return;
 
-  // 인라인 style="opacity:0" 이 class보다 우선하므로 직접 style로 제어
   let loaded = false;
   const showLoader = () => { loader.style.opacity = '1'; loader.style.pointerEvents = 'all'; };
-  const restoreScroll = () => { requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = ''; }); };
   const hideLoader = () => { loader.style.opacity = '0'; loader.style.pointerEvents = 'none'; loaded = true; };
 
-  // 해시 앵커 스크롤 점프 방지
   const hash = window.location.hash;
   if (hash) {
-    // 브라우저 자동 스크롤 복원 방지
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    // smooth scroll 끄고 즉시 0으로 리셋
     document.documentElement.style.scrollBehavior = 'auto';
     window.scrollTo(0, 0);
+
+    // 스크립트 실행 시점(DOM 파싱 완료)에 동기적으로 스크롤 — 이벤트 타이밍 의존 제거
+    const target = document.querySelector(hash);
+    if (target) {
+      const navOffset = window.innerWidth <= 860 ? 52 : 0;
+      const metaEl = target.querySelector('.arc-meta') || target;
+      // scrollY=0 직후라서 BCR.top = 절대 좌표
+      const y = metaEl.getBoundingClientRect().top - navOffset - 20;
+      if (y > 0) window.scrollTo(0, y);
+    }
+    // smooth scroll 복원
+    requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = ''; });
   }
 
   let afterLoadCalled = false;
   const afterLoad = () => {
     if (afterLoadCalled) return;
     afterLoadCalled = true;
-    if (hash) {
-      const target = document.querySelector(hash);
-      if (target) {
-        requestAnimationFrame(() => {
-          const navOffset = window.innerWidth <= 860 ? 52 : 0;
-          const metaEl = target.querySelector('.arc-meta') || target;
-          // BCR.top + scrollY = 현재 스크롤 위치와 무관한 절대 좌표
-          const y = metaEl.getBoundingClientRect().top + window.scrollY - navOffset - 20;
-          window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
-          hideLoader();
-          restoreScroll();
-        });
-        return;
-      }
-      restoreScroll();
-    }
     hideLoader();
   };
 
-  // DOMContentLoaded: 이미지 로드 전 DOM 파싱 완료 시점 → 빠른 스크롤 (aspect-ratio로 레이아웃 안정)
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', afterLoad);
   } else {
     afterLoad();
   }
-  window.addEventListener('load', afterLoad); // 보험
-  setTimeout(afterLoad, 1500); // 최후 fallback
+  window.addEventListener('load', afterLoad);
+  setTimeout(afterLoad, 1500);
 
   // bfcache 복원 시 (뒤로가기) 로더 즉시 숨김
   window.addEventListener('pageshow', (e) => {
