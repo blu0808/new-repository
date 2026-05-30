@@ -1373,17 +1373,20 @@ if (window.matchMedia('(hover: hover)').matches) {
   ring.className = 'cursor-ring cursor-hidden';
   document.body.append(dot, ring);
 
-  let mouseX = 0, mouseY = 0, ringX = -100, ringY = -100;
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
+  let ringReady = false;
 
   document.addEventListener('mousemove', e => {
     mouseX = e.clientX; mouseY = e.clientY;
     dot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
+    if (!ringReady) {
+      ringX = mouseX; ringY = mouseY;
+      ring.style.transform = `translate(calc(${ringX}px - 50%), calc(${ringY}px - 50%))`;
+      ringReady = true;
+    }
     dot.classList.remove('cursor-hidden'); ring.classList.remove('cursor-hidden');
   });
   document.addEventListener('mouseleave', () => {
-    dot.classList.add('cursor-hidden'); ring.classList.add('cursor-hidden');
-  });
-  window.addEventListener('blur', () => {
     dot.classList.add('cursor-hidden'); ring.classList.add('cursor-hidden');
   });
 
