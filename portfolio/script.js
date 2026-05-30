@@ -1219,9 +1219,11 @@ if (worksSection) {
   const showLoader = () => { loader.style.opacity = '1'; loader.style.pointerEvents = 'all'; };
   const hideLoader = () => { loader.style.opacity = '0'; loader.style.pointerEvents = 'none'; loaded = true; };
 
-  // 해시 앵커 스크롤 점프 방지: smooth scroll 끄고 0으로 리셋
+  // 해시 앵커 스크롤 점프 방지
   const hash = window.location.hash;
   if (hash) {
+    // 브라우저 자동 스크롤 복원 방지
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     document.documentElement.style.scrollBehavior = 'auto';
     window.scrollTo(0, 0);
   }
@@ -1230,16 +1232,20 @@ if (worksSection) {
     if (hash) {
       const target = document.querySelector(hash);
       if (target) {
-        const navOffset = window.innerWidth <= 860 ? 52 : 0;
-        const metaEl = target.querySelector('.arc-meta') || target;
-        let absTop = 0, el = metaEl;
-        while (el) { absTop += el.offsetTop; el = el.offsetParent; }
-        window.scrollTo({ top: Math.max(0, absTop - navOffset - 20), behavior: 'instant' });
+        // scrollY=0 확정 후 다음 프레임에서 측정 → BCR.top = 절대위치
+        window.scrollTo(0, 0);
+        requestAnimationFrame(() => {
+          const navOffset = window.innerWidth <= 860 ? 52 : 0;
+          const metaEl = target.querySelector('.arc-meta') || target;
+          const y = metaEl.getBoundingClientRect().top - navOffset - 20;
+          window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
+          hideLoader();
+          requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = ''; });
+        });
+        return;
       }
     }
     hideLoader();
-    // smooth scroll 복원
-    requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = ''; });
   };
 
   if (document.readyState === 'complete') { afterLoad(); }
