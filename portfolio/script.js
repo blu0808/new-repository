@@ -1244,27 +1244,26 @@ if (worksSection) {
   const hash = window.location.hash;
   if (hash) {
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    // smooth scroll 끄고 즉시 0으로 리셋
-    document.documentElement.style.scrollBehavior = 'auto';
-    window.scrollTo(0, 0);
-
-    // 스크립트 실행 시점(DOM 파싱 완료)에 동기적으로 스크롤 — 이벤트 타이밍 의존 제거
-    const target = document.querySelector(hash);
-    if (target) {
-      const navOffset = window.innerWidth <= 860 ? 52 : 0;
-      const metaEl = target.querySelector('.arc-meta') || target;
-      // scrollY=0 직후라서 BCR.top = 절대 좌표
-      const y = metaEl.getBoundingClientRect().top - navOffset - 20;
-      if (y > 0) window.scrollTo(0, y);
-    }
-    // smooth scroll 복원
-    requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = ''; });
+    // overflowY:hidden으로 로더 뒤에서 브라우저 해시 스크롤 완전 잠금
+    document.documentElement.style.overflowY = 'hidden';
   }
 
   let afterLoadCalled = false;
   const afterLoad = () => {
     if (afterLoadCalled) return;
     afterLoadCalled = true;
+    if (hash) {
+      const target = document.querySelector(hash);
+      document.documentElement.style.overflowY = ''; // 스크롤 잠금 해제
+      if (target) {
+        const navOffset = window.innerWidth <= 860 ? 52 : 0;
+        const metaEl = target.querySelector('.arc-meta') || target;
+        // overflowY 해제 직후 scrollY=0, BCR.top = 절대 좌표
+        // behavior:'instant'이 browser smooth hash scroll 즉시 취소
+        const y = metaEl.getBoundingClientRect().top + window.scrollY - navOffset - 20;
+        window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
+      }
+    }
     hideLoader();
   };
 
@@ -1279,6 +1278,7 @@ if (worksSection) {
   // bfcache 복원 시 (뒤로가기) 로더 즉시 숨김
   window.addEventListener('pageshow', (e) => {
     if (e.persisted) {
+      document.documentElement.style.overflowY = '';
       loader.style.transition = 'none';
       hideLoader();
     }
