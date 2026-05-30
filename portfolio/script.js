@@ -1385,12 +1385,14 @@ if (window.matchMedia('(hover: hover)').matches) {
 
   moveDot(OFF, OFF); moveRing(OFF, OFF);
 
-  window.addEventListener('mousemove', e => {
+  window.addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
     mouseX = e.clientX; mouseY = e.clientY;
     moveDot(mouseX, mouseY);
   }, { passive: true });
 
-  document.documentElement.addEventListener('mouseleave', () => {
+  document.documentElement.addEventListener('pointerleave', e => {
+    if (e.pointerType !== 'mouse') return;
     mouseX = OFF; mouseY = OFF;
   });
 
