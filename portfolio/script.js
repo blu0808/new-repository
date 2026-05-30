@@ -1108,11 +1108,13 @@ document.querySelectorAll('.proj-carousel-vimeo').forEach(wrap => {
   setTimeout(fadeThumb, 6000);
 });
 
-/* hero video cover — play/timeupdate 감지 후 페이드아웃 */
+/* hero video cover — timeupdate 누적 확인 후 페이드아웃 */
 const heroCover = document.getElementById('heroVideoCover');
 if (heroCover) {
   const _heroIframe = document.getElementById('heroVideoIframe');
   let coverGone = false;
+  let timeupdateCount = 0;
+  const TIMEUPDATE_THRESHOLD = window.matchMedia('(max-width: 860px)').matches ? 3 : 2;
   const fadeHeroCover = () => {
     if (coverGone) return;
     coverGone = true;
@@ -1123,21 +1125,23 @@ if (heroCover) {
       try {
         _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'play'}), 'https://player.vimeo.com');
         _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'timeupdate'}), 'https://player.vimeo.com');
-        // 모바일에서 autoplay 트리거 명시적 요청
         _heroIframe.contentWindow.postMessage(JSON.stringify({method:'play'}), 'https://player.vimeo.com');
       } catch(e) {}
     });
+    // e.source 체크 제거 — 모바일 브라우저에서 source가 null로 올 수 있음
     window.addEventListener('message', (e) => {
       if (e.origin !== 'https://player.vimeo.com') return;
-      if (e.source !== _heroIframe.contentWindow) return;
       try {
         const ev = JSON.parse(e.data).event;
-        if (ev === 'play' || ev === 'timeupdate') fadeHeroCover();
+        if (ev === 'timeupdate') {
+          timeupdateCount++;
+          if (timeupdateCount >= TIMEUPDATE_THRESHOLD) fadeHeroCover();
+        }
       } catch(e) {}
     });
   }
-  // 모바일은 2초, 데스크탑은 3초 fallback
-  setTimeout(fadeHeroCover, window.matchMedia('(max-width: 860px)').matches ? 2000 : 3000);
+  // 모바일은 6초, 데스크탑은 4초 fallback (버퍼링 충분히 기다림)
+  setTimeout(fadeHeroCover, window.matchMedia('(max-width: 860px)').matches ? 6000 : 4000);
 }
 
 /* ─── 페이지 전환 로더 ──────────────────────────────────────── */
@@ -1224,10 +1228,8 @@ if (worksSection) {
       const target = document.querySelector(hash);
       if (target) {
         const navOffset = window.innerWidth <= 860 ? 52 : 0;
-        const scrollTarget = hash === '#yeoginga'
-          ? (document.querySelector('.arc-back') || target)
-          : target;
-        const y = scrollTarget.getBoundingClientRect().top + window.scrollY - navOffset - 16;
+        const metaEl = target.querySelector('.arc-meta') || target;
+        const y = metaEl.getBoundingClientRect().top + window.scrollY - navOffset - 20;
         // 로더가 덮고 있는 동안 위치 먼저 이동 → 로더 사라질 때 이미 정위치
         window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
       }
