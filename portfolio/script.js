@@ -1228,8 +1228,9 @@ if (worksSection) {
       const target = document.querySelector(hash);
       if (target) {
         const navOffset = window.innerWidth <= 860 ? 52 : 0;
+        const extraPad = window.innerWidth <= 860 ? 80 : 60;
         const scrollTarget = target.querySelector('.arc-meta') || target;
-        const y = scrollTarget.getBoundingClientRect().top + window.scrollY - navOffset - 60;
+        const y = scrollTarget.getBoundingClientRect().top + window.scrollY - navOffset - extraPad;
         window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
       }
     }
