@@ -199,6 +199,9 @@ style.textContent = `
     transition: opacity .35s ease;
     transition-delay: min(calc(var(--i, 0) * 50ms), 150ms);
   }
+  .work-card.fade-up.visible {
+    transition-delay: 0s;
+  }
 `;
 document.head.appendChild(style);
 
