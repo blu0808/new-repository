@@ -119,7 +119,7 @@ const dict = {
 };
 
 /* ─── 언어 전환 ─────────────────────────────────────────── */
-let lang = 'ko';
+let lang = localStorage.getItem('lang') || 'ko';
 
 function applyLang() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -134,6 +134,7 @@ function applyLang() {
 document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     lang = lang === 'ko' ? 'en' : 'ko';
+    localStorage.setItem('lang', lang);
     applyLang();
   });
 });
