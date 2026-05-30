@@ -1232,6 +1232,7 @@ if (worksSection) {
   // 인라인 style="opacity:0" 이 class보다 우선하므로 직접 style로 제어
   let loaded = false;
   const showLoader = () => { loader.style.opacity = '1'; loader.style.pointerEvents = 'all'; };
+  const restoreScroll = () => { requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = ''; }); };
   const hideLoader = () => { loader.style.opacity = '0'; loader.style.pointerEvents = 'none'; loaded = true; };
 
   // 해시 앵커 스크롤 점프 방지
@@ -1243,7 +1244,10 @@ if (worksSection) {
     window.scrollTo(0, 0);
   }
 
+  let afterLoadCalled = false;
   const afterLoad = () => {
+    if (afterLoadCalled) return;
+    afterLoadCalled = true;
     if (hash) {
       const target = document.querySelector(hash);
       if (target) {
@@ -1255,10 +1259,11 @@ if (worksSection) {
           const y = metaEl.getBoundingClientRect().top - navOffset - 20;
           window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
           hideLoader();
-          requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = ''; });
+          restoreScroll();
         });
         return;
       }
+      restoreScroll();
     }
     hideLoader();
   };
