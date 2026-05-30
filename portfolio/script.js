@@ -1229,7 +1229,7 @@ if (worksSection) {
       if (target) {
         const navOffset = window.innerWidth <= 860 ? 52 : 0;
         const scrollTarget = target.querySelector('.arc-meta') || target;
-        const y = scrollTarget.getBoundingClientRect().top + window.scrollY - navOffset - 16;
+        const y = scrollTarget.getBoundingClientRect().top + window.scrollY - navOffset - 60;
         window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
       }
     }
