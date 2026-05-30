@@ -133,9 +133,6 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   height: 100%;
   border: 0;
 }
-@media (max-width: 860px) {
-  .hero-video-wrap iframe { display: none; }
-}
 .hero-video-cover {
   position: absolute;
   inset: 0;

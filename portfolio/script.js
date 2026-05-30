@@ -1108,21 +1108,23 @@ document.querySelectorAll('.proj-carousel-vimeo').forEach(wrap => {
   setTimeout(fadeThumb, 6000);
 });
 
-/* hero video cover — 모바일은 썸네일 그대로, 데스크탑만 영상으로 전환 */
+/* hero video cover — play/timeupdate 감지 후 페이드아웃 */
 const heroCover = document.getElementById('heroVideoCover');
-if (heroCover && !window.matchMedia('(max-width: 860px)').matches) {
+if (heroCover) {
+  const _heroIframe = document.getElementById('heroVideoIframe');
   let coverGone = false;
   const fadeHeroCover = () => {
     if (coverGone) return;
     coverGone = true;
     heroCover.style.opacity = '0';
   };
-  const _heroIframe = document.getElementById('heroVideoIframe');
   if (_heroIframe) {
     _heroIframe.addEventListener('load', () => {
       try {
         _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'play'}), 'https://player.vimeo.com');
         _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'timeupdate'}), 'https://player.vimeo.com');
+        // 모바일에서 autoplay 트리거 명시적 요청
+        _heroIframe.contentWindow.postMessage(JSON.stringify({method:'play'}), 'https://player.vimeo.com');
       } catch(e) {}
     });
     window.addEventListener('message', (e) => {
@@ -1134,7 +1136,8 @@ if (heroCover && !window.matchMedia('(max-width: 860px)').matches) {
       } catch(e) {}
     });
   }
-  setTimeout(fadeHeroCover, 3000);
+  // 모바일은 2초, 데스크탑은 3초 fallback
+  setTimeout(fadeHeroCover, window.matchMedia('(max-width: 860px)').matches ? 2000 : 3000);
 }
 
 /* ─── 페이지 전환 로더 ──────────────────────────────────────── */
