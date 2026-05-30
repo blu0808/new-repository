@@ -119,7 +119,7 @@ const dict = {
 };
 
 /* ─── 언어 전환 ─────────────────────────────────────────── */
-let lang = localStorage.getItem('lang') || 'ko';
+let lang = 'ko';
 
 function applyLang() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -134,7 +134,6 @@ function applyLang() {
 document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     lang = lang === 'ko' ? 'en' : 'ko';
-    localStorage.setItem('lang', lang);
     applyLang();
   });
 });
@@ -198,9 +197,6 @@ style.textContent = `
     transform: none;
     transition: opacity .35s ease;
     transition-delay: min(calc(var(--i, 0) * 50ms), 150ms);
-  }
-  .work-card.fade-up.visible {
-    transition-delay: 0s;
   }
 `;
 document.head.appendChild(style);
@@ -1112,63 +1108,34 @@ document.querySelectorAll('.proj-carousel-vimeo').forEach(wrap => {
   setTimeout(fadeThumb, 6000);
 });
 
-/* hero video cover — timeupdate 누적 확인 후 페이드아웃 */
+/* hero video cover — play/timeupdate 감지 후 페이드아웃 (최대 3초 fallback) */
 const heroCover = document.getElementById('heroVideoCover');
 if (heroCover) {
-  const _heroIframe = document.getElementById('heroVideoIframe');
   let coverGone = false;
-  let timeupdateCount = 0;
-  const _isMobile = window.matchMedia('(max-width: 860px)').matches;
-  // 모바일은 더 많은 이벤트 누적 후 fade (검정 프레임 방지)
-  const TIMEUPDATE_THRESHOLD = _isMobile ? 6 : 2;
   const fadeHeroCover = () => {
     if (coverGone) return;
     coverGone = true;
     heroCover.style.opacity = '0';
   };
+  const _heroIframe = document.getElementById('heroVideoIframe');
   if (_heroIframe) {
     _heroIframe.addEventListener('load', () => {
       try {
-        // background=1 autoplay가 있으므로 play 강제 없음 — timeupdate만 구독
+        _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'play'}), 'https://player.vimeo.com');
         _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'timeupdate'}), 'https://player.vimeo.com');
-        _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'playing'}), 'https://player.vimeo.com');
       } catch(e) {}
     });
     window.addEventListener('message', (e) => {
       if (e.origin !== 'https://player.vimeo.com') return;
+      if (e.source !== _heroIframe.contentWindow) return;
       try {
         const ev = JSON.parse(e.data).event;
-        if (ev === 'timeupdate') {
-          timeupdateCount++;
-          if (timeupdateCount >= TIMEUPDATE_THRESHOLD) fadeHeroCover();
-        } else if (ev === 'playing') {
-          // playing 이벤트 = 실제 프레임 렌더 시작, 데스크탑은 바로 fade
-          if (!_isMobile) fadeHeroCover();
-        }
+        if (ev === 'play' || ev === 'timeupdate') fadeHeroCover();
       } catch(e) {}
     });
   }
-  // 모바일: timeupdate 수신 증거 없으면 fade 생략 (검정화면 < 썸네일 유지)
-  // 데스크탑: 4초 fallback
-  setTimeout(() => {
-    if (!_isMobile || timeupdateCount > 0) fadeHeroCover();
-  }, _isMobile ? 8000 : 4000);
+  setTimeout(fadeHeroCover, 3000);
 }
-
-/* hero video — 탭 전환·화면 잠금 해제 시 iOS가 영상 멈추는 문제 대응 */
-(function() {
-  function replayHero() {
-    const iframe = document.getElementById('heroVideoIframe');
-    if (!iframe) return;
-    try { iframe.contentWindow.postMessage('{"method":"play"}', 'https://player.vimeo.com'); } catch(e) {}
-  }
-  document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) setTimeout(replayHero, 300);
-  });
-  window.addEventListener('pageshow', e => {
-    if (e.persisted) setTimeout(replayHero, 500);
-  });
-})();
 
 /* ─── 페이지 전환 로더 ──────────────────────────────────────── */
 document.querySelectorAll('a[href]').forEach(link => {
@@ -1240,48 +1207,42 @@ if (worksSection) {
   const loader = document.getElementById('page-loader');
   if (!loader) return;
 
+  // 인라인 style="opacity:0" 이 class보다 우선하므로 직접 style로 제어
   let loaded = false;
   const showLoader = () => { loader.style.opacity = '1'; loader.style.pointerEvents = 'all'; };
   const hideLoader = () => { loader.style.opacity = '0'; loader.style.pointerEvents = 'none'; loaded = true; };
 
+  // 해시 앵커 스크롤 점프 방지: 로더 표시 중 브라우저 자동 스크롤 억제
   const hash = window.location.hash;
-  if (hash) {
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    // overflowY:hidden으로 로더 뒤에서 브라우저 해시 스크롤 완전 잠금
-    document.documentElement.style.overflowY = 'hidden';
-  }
+  if (hash) { window.scrollTo(0, 0); }
 
-  let afterLoadCalled = false;
   const afterLoad = () => {
-    if (afterLoadCalled) return;
-    afterLoadCalled = true;
-    if (hash) {
-      const target = document.querySelector(hash);
-      document.documentElement.style.overflowY = ''; // 스크롤 잠금 해제
-      if (target) {
-        const navOffset = window.innerWidth <= 860 ? 52 : 0;
-        const metaEl = target.querySelector('.arc-meta') || target;
-        // overflowY 해제 직후 scrollY=0, BCR.top = 절대 좌표
-        // behavior:'instant'이 browser smooth hash scroll 즉시 취소
-        const y = metaEl.getBoundingClientRect().top + window.scrollY - navOffset - 20;
-        window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
-      }
-    }
     hideLoader();
+    if (hash) {
+      setTimeout(() => {
+        const target = document.querySelector(hash);
+        if (target) {
+          const navOffset = window.innerWidth <= 860 ? 52 : 0;
+          // yeoginga: arc-back(← History) 버튼이 보이도록 위쪽 기준으로 스크롤
+          const scrollTarget = hash === '#yeoginga'
+            ? (document.querySelector('.arc-back') || target)
+            : target;
+          const y = scrollTarget.getBoundingClientRect().top + window.scrollY - navOffset - 16;
+          window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+        }
+      }, 150);
+    }
   };
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', afterLoad);
-  } else {
-    afterLoad();
+  if (document.readyState === 'complete') { afterLoad(); }
+  else {
+    window.addEventListener('load', afterLoad);
+    setTimeout(afterLoad, 3000);
   }
-  window.addEventListener('load', afterLoad);
-  setTimeout(afterLoad, 1500);
 
   // bfcache 복원 시 (뒤로가기) 로더 즉시 숨김
   window.addEventListener('pageshow', (e) => {
     if (e.persisted) {
-      document.documentElement.style.overflowY = '';
       loader.style.transition = 'none';
       hideLoader();
     }
@@ -1368,3 +1329,37 @@ if (!document.body.classList.contains('history-page') && !document.body.classLis
   }, { passive: true });
 }
 
+/* ─── 커스텀 커서 ────────────────────────────────────────────── */
+if (window.matchMedia('(hover: hover)').matches) {
+  const dot = document.createElement('div');
+  dot.className = 'cursor-dot cursor-hidden';
+  const ring = document.createElement('div');
+  ring.className = 'cursor-ring cursor-hidden';
+  document.body.append(dot, ring);
+
+  let mouseX = 0, mouseY = 0, ringX = -100, ringY = -100;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX; mouseY = e.clientY;
+    dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px';
+    dot.classList.remove('cursor-hidden'); ring.classList.remove('cursor-hidden');
+  });
+  document.addEventListener('mouseleave', () => {
+    dot.classList.add('cursor-hidden'); ring.classList.add('cursor-hidden');
+  });
+
+  (function animateRing() {
+    const dx = mouseX - ringX, dy = mouseY - ringY;
+    if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+      ringX += dx * 0.1; ringY += dy * 0.1;
+      ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px';
+    }
+    requestAnimationFrame(animateRing);
+  })();
+
+  const hoverTargets = 'a, button, .work-card, .proj-carousel-btn, .modal-close, .pg-close, .pl-close, .scroll-top, .email-float, .sb-link, .nav-link, .nav-link--sub, .lang-btn, .hamburger';
+  document.querySelectorAll(hoverTargets).forEach(el => {
+    el.addEventListener('mouseenter', () => { dot.classList.add('cursor-hover'); ring.classList.add('cursor-hover'); });
+    el.addEventListener('mouseleave', () => { dot.classList.remove('cursor-hover'); ring.classList.remove('cursor-hover'); });
+  });
+}

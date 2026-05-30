@@ -108,7 +108,7 @@ a.sb-link { text-decoration: underline; text-underline-offset: 3px; }
   padding: 5px 12px;
   transition: all .2s;
 }
-@media (hover: hover) { .lang-btn:hover { background: var(--accent); color: var(--white); } }
+.lang-btn:hover { background: var(--accent); color: var(--white); }
 
 /* ─── Mobile Nav (hidden on desktop) ──────────────────────── */
 .nav { display: none; }
@@ -761,7 +761,8 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
 .modal-nav:hover { opacity: .6; }
 @media (max-width: 640px) {
   .modal-panel { width: 84vw; }
-  .modal-prev, .modal-next { display: none; }
+  .modal-prev { left: 4px; }
+  .modal-next { right: 4px; }
 }
 .modal-body {
   display: flex;
@@ -1727,3 +1728,27 @@ img.img-lazy {
 }
 img.img-lazy.loaded { filter: none; }
 
+/* ─── 커스텀 커서 ────────────────────────────────────────────── */
+@media (hover: hover) {
+  body { cursor: none; }
+  .cursor-dot {
+    position: fixed; top: 0; left: 0;
+    width: 7px; height: 7px;
+    background: var(--accent); border-radius: 50%;
+    pointer-events: none; z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: width .2s ease, height .2s ease, opacity .3s;
+  }
+  .cursor-ring {
+    position: fixed; top: 0; left: 0;
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--accent); border-radius: 50%;
+    pointer-events: none; z-index: 99998;
+    transform: translate(-50%, -50%);
+    transition: width .35s ease, height .35s ease, opacity .3s;
+    opacity: .45;
+  }
+  .cursor-dot.cursor-hover { width: 10px; height: 10px; }
+  .cursor-ring.cursor-hover { width: 50px; height: 50px; opacity: .65; }
+  .cursor-dot.cursor-hidden, .cursor-ring.cursor-hidden { opacity: 0 !important; }
+}
