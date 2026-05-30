@@ -1735,7 +1735,7 @@ img.img-lazy.loaded { filter: none; }
     width: 7px; height: 7px;
     background: var(--accent); border-radius: 50%;
     pointer-events: none; z-index: 99999;
-    transform: translate(-50%, -50%);
+    will-change: transform;
     transition: width .2s ease, height .2s ease, opacity .3s;
   }
   .cursor-ring {
@@ -1743,7 +1743,7 @@ img.img-lazy.loaded { filter: none; }
     width: 32px; height: 32px;
     border: 1.5px solid var(--accent); border-radius: 50%;
     pointer-events: none; z-index: 99998;
-    transform: translate(-50%, -50%);
+    will-change: transform;
     transition: width .35s ease, height .35s ease, opacity .3s;
     opacity: .45;
   }

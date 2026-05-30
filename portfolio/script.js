@@ -1377,7 +1377,7 @@ if (window.matchMedia('(hover: hover)').matches) {
 
   document.addEventListener('mousemove', e => {
     mouseX = e.clientX; mouseY = e.clientY;
-    dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px';
+    dot.style.transform = `translate(calc(${mouseX}px - 50%), calc(${mouseY}px - 50%))`;
     dot.classList.remove('cursor-hidden'); ring.classList.remove('cursor-hidden');
   });
   document.addEventListener('mouseleave', () => {
@@ -1390,8 +1390,8 @@ if (window.matchMedia('(hover: hover)').matches) {
   (function animateRing() {
     const dx = mouseX - ringX, dy = mouseY - ringY;
     if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
-      ringX += dx * 0.1; ringY += dy * 0.1;
-      ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px';
+      ringX += dx * 0.12; ringY += dy * 0.12;
+      ring.style.transform = `translate(calc(${ringX}px - 50%), calc(${ringY}px - 50%))`;
     }
     requestAnimationFrame(animateRing);
   })();
