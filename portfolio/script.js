@@ -1219,9 +1219,12 @@ if (worksSection) {
   const showLoader = () => { loader.style.opacity = '1'; loader.style.pointerEvents = 'all'; };
   const hideLoader = () => { loader.style.opacity = '0'; loader.style.pointerEvents = 'none'; loaded = true; };
 
-  // 해시 앵커 스크롤 점프 방지: 로더 표시 중 브라우저 자동 스크롤 억제
+  // 해시 앵커 스크롤 점프 방지: smooth scroll 끄고 0으로 리셋
   const hash = window.location.hash;
-  if (hash) { window.scrollTo(0, 0); }
+  if (hash) {
+    document.documentElement.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+  }
 
   const afterLoad = () => {
     if (hash) {
@@ -1229,12 +1232,14 @@ if (worksSection) {
       if (target) {
         const navOffset = window.innerWidth <= 860 ? 52 : 0;
         const metaEl = target.querySelector('.arc-meta') || target;
-        const y = metaEl.getBoundingClientRect().top + window.scrollY - navOffset - 20;
-        // 로더가 덮고 있는 동안 위치 먼저 이동 → 로더 사라질 때 이미 정위치
-        window.scrollTo({ top: Math.max(0, y), behavior: 'instant' });
+        let absTop = 0, el = metaEl;
+        while (el) { absTop += el.offsetTop; el = el.offsetParent; }
+        window.scrollTo({ top: Math.max(0, absTop - navOffset - 20), behavior: 'instant' });
       }
     }
     hideLoader();
+    // smooth scroll 복원
+    requestAnimationFrame(() => { document.documentElement.style.scrollBehavior = ''; });
   };
 
   if (document.readyState === 'complete') { afterLoad(); }
