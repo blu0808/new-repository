@@ -1073,8 +1073,7 @@ body.pl-open .proj-carousel-btn { opacity: 0 !important; pointer-events: none; }
     background: rgba(255,255,255,.82);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    transition: background .4s ease;
-    transition: box-shadow .3s;
+    transition: background .4s ease, box-shadow .3s;
   }
   .nav.scrolled { box-shadow: none; }
   .nav-logo { font-size: .95rem; font-weight: 700; letter-spacing: .04em; color: var(--accent); }

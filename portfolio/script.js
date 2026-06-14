@@ -280,8 +280,6 @@ function openModal(card, dir = 0) {
   const alreadyOpen = modal.classList.contains('open');
   currentModalIndex = [...document.querySelectorAll('.work-card:not(.hidden)')].indexOf(card);
 
-  const panel = document.querySelector('#workModal .modal-panel');
-
   const applyContent = () => {
     modalImg.src = card.querySelector('img').src;
     modalImg.alt = data.title;
@@ -410,7 +408,12 @@ function positionModalNav() {
   prev.style.top = next.style.top = cy + 'px';
 }
 
-window.addEventListener('resize', () => { if (modal?.classList.contains('open')) positionModalNav(); });
+let _modalResizeTimer;
+window.addEventListener('resize', () => {
+  if (!modal?.classList.contains('open')) return;
+  clearTimeout(_modalResizeTimer);
+  _modalResizeTimer = setTimeout(positionModalNav, 100);
+});
 
 /* ─── Works 모달 화살표 + 모바일 스와이프 ──────────────────── */
 document.getElementById('modalPrev')?.addEventListener('click', e => {
@@ -697,7 +700,11 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
     unlock();
   });
 
-  window.addEventListener('resize', () => setPos(cur, false));
+  let _carResizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(_carResizeTimer);
+    _carResizeTimer = setTimeout(() => setPos(cur, false), 100);
+  });
 
   carousel.querySelector('.proj-carousel-prev').addEventListener('click', () => goTo(cur - 1));
   carousel.querySelector('.proj-carousel-next').addEventListener('click', () => goTo(cur + 1));
@@ -1100,11 +1107,17 @@ document.querySelectorAll('.proj-carousel-vimeo').forEach(wrap => {
     try { iframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'play'}), 'https://player.vimeo.com'); } catch(e) {}
     setTimeout(fadeThumb, 1500);
   });
-  // Vimeo play 이벤트 수신 → 실제 재생 시작 시 썸네일 페이드
-  window.addEventListener('message', (e) => {
+  // Vimeo play 이벤트 수신 → 실제 재생 시작 시 썸네일 페이드 (페이드 후 리스너 제거)
+  const _onVimeoMsg = (e) => {
     if (e.origin !== 'https://player.vimeo.com') return;
-    try { if (JSON.parse(e.data).event === 'play') fadeThumb(); } catch(e) {}
-  });
+    try {
+      if (JSON.parse(e.data).event === 'play') {
+        fadeThumb();
+        window.removeEventListener('message', _onVimeoMsg);
+      }
+    } catch (err) {}
+  };
+  window.addEventListener('message', _onVimeoMsg);
   // 느린 환경 fallback
   setTimeout(fadeThumb, 6000);
 });
@@ -1341,25 +1354,28 @@ if (window.matchMedia('(hover: hover)').matches) {
   ring.className = 'cursor-ring cursor-hidden';
   document.body.append(dot, ring);
 
-  let mouseX = 0, mouseY = 0, ringX = -100, ringY = -100;
+  let mouseX = 0, mouseY = 0, ringX = -100, ringY = -100, _ringRafId = null;
+
+  function _tickRing() {
+    const dx = mouseX - ringX, dy = mouseY - ringY;
+    if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+      ringX += dx * 0.1; ringY += dy * 0.1;
+      ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px';
+      _ringRafId = requestAnimationFrame(_tickRing);
+    } else {
+      _ringRafId = null;
+    }
+  }
 
   document.addEventListener('mousemove', e => {
     mouseX = e.clientX; mouseY = e.clientY;
     dot.style.left = mouseX + 'px'; dot.style.top = mouseY + 'px';
     dot.classList.remove('cursor-hidden'); ring.classList.remove('cursor-hidden');
+    if (!_ringRafId) _ringRafId = requestAnimationFrame(_tickRing);
   });
   document.addEventListener('mouseleave', () => {
     dot.classList.add('cursor-hidden'); ring.classList.add('cursor-hidden');
   });
-
-  (function animateRing() {
-    const dx = mouseX - ringX, dy = mouseY - ringY;
-    if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
-      ringX += dx * 0.1; ringY += dy * 0.1;
-      ring.style.left = ringX + 'px'; ring.style.top = ringY + 'px';
-    }
-    requestAnimationFrame(animateRing);
-  })();
 
   const hoverTargets = 'a, button, .work-card, .proj-carousel-btn, .modal-close, .pg-close, .pl-close, .scroll-top, .email-float, .sb-link, .nav-link, .nav-link--sub, .lang-btn, .hamburger';
   document.querySelectorAll(hoverTargets).forEach(el => {
