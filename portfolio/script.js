@@ -121,7 +121,9 @@ const dict = {
 };
 
 /* ─── 언어 전환 ─────────────────────────────────────────── */
-let lang = sessionStorage.getItem('lang') || 'ko';
+// Safari private 모드에서 sessionStorage 접근 실패 대응
+let lang = 'ko';
+try { lang = sessionStorage.getItem('lang') || 'ko'; } catch(e) {}
 
 function applyLang() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -136,7 +138,7 @@ function applyLang() {
 document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     lang = lang === 'ko' ? 'en' : 'ko';
-    sessionStorage.setItem('lang', lang);
+    try { sessionStorage.setItem('lang', lang); } catch(e) {}
     applyLang();
   });
 });
@@ -145,9 +147,11 @@ applyLang();
 
 /* ─── 내비게이션 스크롤 효과 ─────────────────────────────── */
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 20);
-}, { passive: true });
+if (nav) {
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+}
 
 /* ─── 모바일 햄버거 메뉴 ─────────────────────────────────── */
 const hamburger = document.getElementById('hamburger');
@@ -457,22 +461,24 @@ const epMessage  = document.getElementById('epMessage');
 const epStatus   = document.getElementById('epStatus');
 
 function openEmailPanel() {
+  if (!emailPanel) return;
   emailPanel.classList.add('open');
   emailPanel.setAttribute('aria-hidden', 'false');
   lockScroll();
-  setTimeout(() => epFrom.focus(), 420);
+  setTimeout(() => epFrom?.focus(), 420);
 }
 
-const epActions = document.getElementById('epSend').parentElement;
+const epActions = document.getElementById('epSend')?.parentElement;
 const epConfirm = document.getElementById('epConfirm');
 
 function resetConfirm() {
-  epConfirm.classList.remove('show');
-  epActions.style.display = '';
-  epStatus.textContent = '';
+  epConfirm?.classList.remove('show');
+  if (epActions) epActions.style.display = '';
+  if (epStatus) epStatus.textContent = '';
 }
 
 function closeEmailPanel() {
+  if (!emailPanel) return;
   emailPanel.classList.remove('open');
   emailPanel.setAttribute('aria-hidden', 'true');
   unlockScroll();
@@ -488,31 +494,31 @@ document.getElementById('navContact')?.addEventListener('click', () => {
   document.body.style.overflow = '';
   openEmailPanel();
 });
-document.getElementById('epCancel').addEventListener('click', closeEmailPanel);
-document.getElementById('epBackdrop').addEventListener('click', closeEmailPanel);
-document.getElementById('epConfirmBack').addEventListener('click', resetConfirm);
+document.getElementById('epCancel')?.addEventListener('click', closeEmailPanel);
+document.getElementById('epBackdrop')?.addEventListener('click', closeEmailPanel);
+document.getElementById('epConfirmBack')?.addEventListener('click', resetConfirm);
 
-document.getElementById('epSend').addEventListener('click', () => {
-  const from = epFrom.value.trim();
-  const msg  = epMessage.value.trim();
+document.getElementById('epSend')?.addEventListener('click', () => {
+  const from = epFrom?.value.trim() || '';
+  const msg  = epMessage?.value.trim() || '';
   if (!from || !msg) {
-    epStatus.classList.add('error');
-    epStatus.textContent = lang === 'ko' ? '이메일과 메시지를 입력해주세요.' : 'Please fill in all fields.';
+    if (epStatus) {
+      epStatus.classList.add('error');
+      epStatus.textContent = lang === 'ko' ? '이메일과 메시지를 입력해주세요.' : 'Please fill in all fields.';
+    }
     return;
   }
-  epActions.style.display = 'none';
-  epConfirm.classList.add('show');
-  epStatus.textContent = '';
-  epStatus.classList.remove('error');
+  if (epActions) epActions.style.display = 'none';
+  epConfirm?.classList.add('show');
+  if (epStatus) { epStatus.textContent = ''; epStatus.classList.remove('error'); }
 });
 
-document.getElementById('epConfirmSend').addEventListener('click', async () => {
-  const from = epFrom.value.trim();
-  const msg  = epMessage.value.trim();
-  epConfirm.classList.remove('show');
-  epActions.style.display = '';
-  epStatus.classList.remove('error');
-  epStatus.textContent = lang === 'ko' ? '보내는 중...' : 'Sending...';
+document.getElementById('epConfirmSend')?.addEventListener('click', async () => {
+  const from = epFrom?.value.trim() || '';
+  const msg  = epMessage?.value.trim() || '';
+  epConfirm?.classList.remove('show');
+  if (epActions) epActions.style.display = '';
+  if (epStatus) { epStatus.classList.remove('error'); epStatus.textContent = lang === 'ko' ? '보내는 중...' : 'Sending...'; }
   try {
     const res = await fetch('https://formspree.io/f/xgodzyjr', {
       method: 'POST',
@@ -520,15 +526,17 @@ document.getElementById('epConfirmSend').addEventListener('click', async () => {
       body: JSON.stringify({ _replyto: from, message: msg }),
     });
     if (res.ok) {
-      epStatus.textContent = lang === 'ko' ? '보내졌어요! 감사합니다 :)' : 'Sent! Thank you :)';
-      epFrom.value = '';
-      epMessage.value = '';
+      if (epStatus) epStatus.textContent = lang === 'ko' ? '보내졌어요! 감사합니다 :)' : 'Sent! Thank you :)';
+      if (epFrom)    epFrom.value = '';
+      if (epMessage) epMessage.value = '';
     } else { throw new Error(); }
   } catch {
-    epStatus.classList.add('error');
-    epStatus.textContent = lang === 'ko'
-      ? '오류가 발생했어요. chigi225@gmail.com으로 직접 보내주세요.'
-      : 'Something went wrong. Please email chigi225@gmail.com directly.';
+    if (epStatus) {
+      epStatus.classList.add('error');
+      epStatus.textContent = lang === 'ko'
+        ? '오류가 발생했어요. chigi225@gmail.com으로 직접 보내주세요.'
+        : 'Something went wrong. Please email chigi225@gmail.com directly.';
+    }
   }
 });
 
@@ -613,6 +621,16 @@ const activeTab = document.querySelector('.works-tab.active');
 if (activeTab) applyWorksFilter(activeTab.dataset.filter, false);
 
 /* ─── Carousel ──────────────────────────────────────────────── */
+// resize 이벤트를 캐러셀별로 중복 등록하지 않고 단일 핸들러로 통합
+const _carouselResizeCallbacks = [];
+let _carouselResizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(_carouselResizeTimer);
+  _carouselResizeTimer = setTimeout(() => {
+    _carouselResizeCallbacks.forEach(fn => fn());
+  }, 100);
+});
+
 document.querySelectorAll('.proj-carousel').forEach(carousel => {
   const track   = carousel.querySelector('.proj-carousel-track');
   const originals = [...track.querySelectorAll('img:not(.vimeo-thumb), video, .proj-carousel-vimeo')];
@@ -702,11 +720,7 @@ document.querySelectorAll('.proj-carousel').forEach(carousel => {
     unlock();
   });
 
-  let _carResizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(_carResizeTimer);
-    _carResizeTimer = setTimeout(() => setPos(cur, false), 100);
-  });
+  _carouselResizeCallbacks.push(() => setPos(cur, false));
 
   carousel.querySelector('.proj-carousel-prev').addEventListener('click', () => goTo(cur - 1));
   carousel.querySelector('.proj-carousel-next').addEventListener('click', () => goTo(cur + 1));
@@ -1092,24 +1106,39 @@ function closeYtModal() {
 if (ytModalClose) ytModalClose.addEventListener('click', closeYtModal);
 if (ytModalBackdrop) ytModalBackdrop.addEventListener('click', closeYtModal);
 
-/* 캐러셀 Vimeo 썸네일 — iframe 로드 후 1.5초 뒤 페이드아웃, 최대 8초 fallback */
+/* 캐러셀 Vimeo 썸네일 — 실제 재생 확인 후 페이드아웃
+   - Vimeo play 이벤트 수신 시 즉시 페이드 (가장 정확)
+   - iframe load 후 Vimeo 신호 없으면 2초 뒤 페이드 (autoplay 환경)
+   - iframe 로드 실패 / 네트워크 오류 → 썸네일 영구 유지 (페이드 안 함) */
 document.querySelectorAll('.proj-carousel-vimeo').forEach(wrap => {
   const thumb = wrap.querySelector('.vimeo-thumb');
   const iframe = wrap.querySelector('iframe');
   if (!thumb || !iframe) return;
   let done = false;
+  let iframeLoaded = false;
+
   const fadeThumb = () => {
     if (done) return;
     done = true;
     thumb.style.opacity = '0';
-    setTimeout(() => thumb.remove(), 700);
+    setTimeout(() => { if (thumb.parentNode) thumb.remove(); }, 700);
   };
-  // iframe 로드 후 Vimeo에 play 이벤트 구독 요청 + 빠른 환경 1.5초 페이드
+
+  // iframe 로드 성공 시
   iframe.addEventListener('load', () => {
+    iframeLoaded = true;
     try { iframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'play'}), 'https://player.vimeo.com'); } catch(e) {}
-    setTimeout(fadeThumb, 1500);
+    // 로드됐지만 Vimeo play 신호 없으면 2초 뒤 페이드 (autoplay 정상 환경)
+    setTimeout(() => { if (!done) fadeThumb(); }, 2000);
   });
-  // Vimeo play 이벤트 수신 → 실제 재생 시작 시 썸네일 페이드 (페이드 후 리스너 제거)
+
+  // iframe 로드 자체 실패 → 썸네일 유지 (done을 true로 잠금)
+  iframe.addEventListener('error', () => {
+    done = true; // fadeThumb 차단 — 썸네일 그대로 유지
+    if (iframe.parentNode) iframe.remove();
+  });
+
+  // Vimeo play 이벤트 수신 → 실제 재생 확인 시 즉시 페이드
   const _onVimeoMsg = (e) => {
     if (e.origin !== 'https://player.vimeo.com') return;
     try {
@@ -1120,11 +1149,20 @@ document.querySelectorAll('.proj-carousel-vimeo').forEach(wrap => {
     } catch (err) {}
   };
   window.addEventListener('message', _onVimeoMsg);
-  // 느린 환경 fallback
-  setTimeout(fadeThumb, 6000);
+
+  // 8초 내 iframe 로드 자체가 없으면 썸네일 유지
+  setTimeout(() => {
+    if (!iframeLoaded) {
+      done = true; // 썸네일 영구 유지
+      if (iframe.parentNode) iframe.remove();
+    }
+  }, 8000);
 });
 
-/* hero video cover — play/timeupdate 감지 후 페이드아웃 (최대 3초 fallback) */
+/* hero video cover — play/timeupdate 감지 후 페이드아웃
+   - Vimeo 재생 확인 시 즉시 페이드
+   - 로드 실패/autoplay 차단/느린 네트워크 → 5초 후 썸네일 그대로 유지하며 cover 페이드
+   - iframe 자체 오류(ERR_NETWORK 등) → cover를 thumbnail 이미지로 교체 후 유지 */
 const heroCover = document.getElementById('heroVideoCover');
 if (heroCover) {
   let coverGone = false;
@@ -1133,14 +1171,30 @@ if (heroCover) {
     coverGone = true;
     heroCover.style.opacity = '0';
   };
+
+  // 로드 실패 시 썸네일 폴백: iframe을 제거하고 cover를 영구 유지
+  const fallbackToThumbnail = () => {
+    const iframe = document.getElementById('heroVideoIframe');
+    if (iframe) iframe.remove();
+    // cover는 그대로 표시 (opacity:1 유지, 썸네일 이미지가 보임)
+    coverGone = true; // fadeHeroCover 재호출 방지
+  };
+
   const _heroIframe = document.getElementById('heroVideoIframe');
   if (_heroIframe) {
+    let iframeLoaded = false;
+
     _heroIframe.addEventListener('load', () => {
+      iframeLoaded = true;
       try {
         _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'play'}), 'https://player.vimeo.com');
         _heroIframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener',value:'timeupdate'}), 'https://player.vimeo.com');
       } catch(e) {}
     });
+
+    // iframe 자체 에러 (네트워크 차단 등)
+    _heroIframe.addEventListener('error', fallbackToThumbnail);
+
     window.addEventListener('message', (e) => {
       if (e.origin !== 'https://player.vimeo.com') return;
       if (e.source !== _heroIframe.contentWindow) return;
@@ -1149,8 +1203,20 @@ if (heroCover) {
         if (ev === 'play' || ev === 'timeupdate') fadeHeroCover();
       } catch(e) {}
     });
+
+    // 5초 안에 재생 신호 없으면 커버 제거 (autoplay 차단 환경에서도 UI 진행)
+    setTimeout(() => {
+      if (!coverGone) fadeHeroCover();
+    }, 5000);
+
+    // 10초 안에 iframe 로드 자체가 안 되면 썸네일 폴백
+    setTimeout(() => {
+      if (!iframeLoaded) fallbackToThumbnail();
+    }, 10000);
+  } else {
+    // iframe이 없으면 즉시 썸네일 표시
+    setTimeout(fadeHeroCover, 100);
   }
-  setTimeout(fadeHeroCover, 3000);
 }
 
 /* ─── 페이지 전환 로더 ──────────────────────────────────────── */
@@ -1256,7 +1322,8 @@ if (worksSection) {
   if (document.readyState === 'complete') { afterLoad(); }
   else {
     window.addEventListener('load', afterLoad);
-    setTimeout(afterLoad, 3000);
+    // 느린 네트워크에서도 로더가 영원히 남지 않도록 8초 강제 해제
+    setTimeout(afterLoad, 8000);
   }
 
   // bfcache 복원 시 (뒤로가기) 로더 즉시 숨김
@@ -1290,7 +1357,7 @@ if (emailFloatBtn) {
 /* ─── 이메일 패널 포커스 트랩 ────────────────────────────────── */
 emailPanel?.addEventListener('keydown', e => {
   if (e.key !== 'Tab') return;
-  const confirmVisible = epConfirm.classList.contains('show');
+  const confirmVisible = epConfirm?.classList.contains('show');
   const focusable = confirmVisible
     ? [document.getElementById('epConfirmSend'), document.getElementById('epConfirmBack')]
     : [epFrom, epMessage, document.getElementById('epSend'), document.getElementById('epCancel')];
@@ -1325,6 +1392,19 @@ document.querySelectorAll('img[loading="lazy"]').forEach(img => {
   img.addEventListener('load', () => img.classList.add('loaded'));
 });
 
+/* ─── 이미지 onerror 폴백 ───────────────────────────────────── */
+// 모든 img 태그에 로드 실패 시 img-error 클래스 부여
+document.querySelectorAll('img').forEach(img => {
+  // 이미 실패한 이미지(src 없거나 broken) 처리
+  if (img.complete && img.naturalWidth === 0 && img.src && !img.src.endsWith('/')) {
+    img.classList.add('img-error');
+  }
+  img.addEventListener('error', () => {
+    img.classList.add('img-error');
+    img.classList.remove('img-lazy');
+  }, { once: true });
+});
+
 /* ─── 앨범커버 오버레이 아티스트명 주입 ─────────────────────── */
 document.querySelectorAll('.work-card[data-category="album-cover"]').forEach((card, i) => {
   const overlay = card.querySelector('.work-overlay');
@@ -1344,6 +1424,7 @@ if (!document.body.classList.contains('history-page') && !document.body.classLis
   document.body.appendChild(scrollProgress);
   window.addEventListener('scroll', () => {
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (docHeight <= 0) return;
     scrollProgress.style.width = (window.scrollY / docHeight * 100) + '%';
   }, { passive: true });
 }
