@@ -1754,7 +1754,7 @@ img.img-error[alt=""] {
 
 /* ─── 커스텀 커서 ────────────────────────────────────────────── */
 @media (hover: hover) {
-  body { cursor: none; }
+  *, *::before, *::after { cursor: none !important; }
   .cursor-dot {
     position: fixed; top: 0; left: 0;
     width: 7px; height: 7px;

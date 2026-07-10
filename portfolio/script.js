@@ -151,9 +151,8 @@ const dict = {
 };
 
 /* ─── 언어 전환 ─────────────────────────────────────────── */
-// Safari private 모드에서 sessionStorage 접근 실패 대응
 let lang = 'ko';
-try { lang = sessionStorage.getItem('lang') || 'ko'; } catch(e) {}
+try { lang = localStorage.getItem('lang') || 'ko'; } catch(e) {}
 
 function applyLang() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -168,7 +167,7 @@ function applyLang() {
 document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     lang = lang === 'ko' ? 'en' : 'ko';
-    try { sessionStorage.setItem('lang', lang); } catch(e) {}
+    try { localStorage.setItem('lang', lang); } catch(e) {}
     applyLang();
   });
 });
@@ -929,7 +928,7 @@ if (projLightbox) {
       tapX = e.touches[0].clientX; tapY = e.touches[0].clientY;
     }, { passive: true });
     imgs.forEach((img, i) => {
-      img.style.cursor = 'zoom-in';
+      img.style.cursor = '';
       img.addEventListener('click', e => {
         e.stopPropagation();
         plOpen(imgs.map(im => im.src), i);
@@ -968,7 +967,7 @@ if (projLightbox) {
   const journalAllImgs = [...document.querySelectorAll('.journal-img, .relay-strip img')];
   if (journalAllImgs.length) {
     journalAllImgs.forEach((img, i) => {
-      img.style.cursor = 'zoom-in';
+      img.style.cursor = '';
       img.addEventListener('click', e => {
         e.stopPropagation();
         plOpen(journalAllImgs.map(im => im.src), i);
