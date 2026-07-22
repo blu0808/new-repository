@@ -251,6 +251,7 @@ const worksData = [
   { title: 'Hidden Things',           artist: '김소연',          year: '2025', desc: '', link: '' },
   { title: 'Dark of Fantasy',         artist: '윤혜문',          year: '2024', desc: '', link: '' },
   { title: 'JUMP',                    artist: '밴드기린',         year: '2023', desc: '', link: '' },
+  { title: 'Constant',               artist: 'MoodShame',       year: '2026', desc: '', link: '' },
   { title: 'hikari.',                 artist: 'Gonhee',          year: '2025', desc: '', link: '' },
   { title: 'SICK',                    artist: '정재승',          year: '2023', desc: '', link: '' },
   { title: 'Wave',                    artist: 'Sayma',           year: '2022', desc: '', link: '' },
