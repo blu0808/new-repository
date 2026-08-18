@@ -248,6 +248,7 @@ document.querySelectorAll('.work-card').forEach((el, i) => {
 /* ─── Works 모달 데이터 ─────────────────────────────────────── */
 /* 나중에 desc(설명)와 link(음악 링크)를 여기서 채워넣으세요 */
 const worksData = [
+  { title: 'Sunburn',                 artist: 'SumMerSH!Rts',    year: '2026', desc: '', link: '' },
   { title: '낮잠',                     artist: '이미블루',        year: '2024', desc: '', link: '' },
   { title: '그 여름',                  artist: '이미블루',        year: '2024', desc: '', link: '' },
   { title: '못났어',                   artist: '이미블루',        year: '2024', desc: '', link: '' },
