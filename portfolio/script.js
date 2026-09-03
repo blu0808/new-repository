@@ -251,6 +251,7 @@ const worksData = [
   { title: 'Sunburn',                 artist: 'SumMerSH!Rts',    year: '2026', desc: '', link: '' },
   { title: '낮잠',                     artist: '이미블루',        year: '2024', desc: '', link: '' },
   { title: '그 여름',                  artist: '이미블루',        year: '2024', desc: '', link: '' },
+  { title: 'Runner',                  artist: 'D’sc',            year: '2026', desc: '', link: '' },
   { title: '못났어',                   artist: '이미블루',        year: '2024', desc: '', link: '' },
   { title: 'Cinema',                  artist: '조주현',          year: '2023', desc: '', link: '' },
   { title: 'Hidden Things',           artist: '김소연',          year: '2025', desc: '', link: '' },
